@@ -131,12 +131,32 @@
     border:1px solid var(--line);
     border-radius:12px;
     padding:22px 24px 22px;
+    overflow:hidden;
     transition:border-color .15s ease,box-shadow .18s ease;
   }
   .card:hover{
     border-color:#cbc0ae;
     box-shadow:0 6px 22px -14px rgba(70,55,35,.32);
   }
+
+  /* preview thumbnail (full-bleed top of card) */
+  .thumb{
+    display:block;
+    margin:-22px -24px 18px;
+    aspect-ratio:16/10;
+    overflow:hidden;
+    border-radius:12px 12px 0 0;
+    border-bottom:1px solid var(--line);
+    background:var(--parchment);
+  }
+  .thumb img{
+    width:100%;height:100%;
+    object-fit:cover;
+    object-position:top center;
+    display:block;
+    transition:transform .3s ease;
+  }
+  .card:hover .thumb img{transform:scale(1.03);}
 
   /* headline row (live link + status) */
   .card-head{
@@ -302,6 +322,7 @@
     .page{padding:20px 18px 56px;}
     header.hero{padding-bottom:16px;}
     .card{padding:18px 18px;border-radius:11px;}
+    .thumb{margin:-18px -18px 14px;border-radius:11px 11px 0 0;}
     .card-head{flex-direction:column;gap:10px;}
     .status{align-self:flex-start;}
     .card-head .print-pill{align-self:flex-start;}
@@ -312,7 +333,7 @@
   @media print{
     body{background:#fff;}
     .page{max-width:100%;padding:0 6mm;}
-    .home,.print-pill{display:none !important;}
+    .home,.print-pill,.thumb{display:none !important;}
     .card{
       border-color:#c9beac;
       box-shadow:none;
@@ -351,6 +372,7 @@
 
     <!-- 1 · Social Media Posting Plan -->
     <li class="card">
+      <a class="thumb" href="https://trashpanda62.github.io/tapestry-area-map/social-plan.html"><img loading="lazy" src="previews/social.jpg" alt="Preview of the Social Media Posting Plan"></a>
       <div class="card-head">
         <a class="primary" href="https://trashpanda62.github.io/tapestry-area-map/social-plan.html">Social Media Posting Plan</a>
         <span class="status"><span class="dot" aria-hidden="true"></span>Home</span>
@@ -361,30 +383,17 @@
 
     <!-- 2 · Tapestry Acres Website (new site, in progress) -->
     <li class="card">
+      <a class="thumb" href="https://trashpanda62.github.io/tapestry-game/"><img loading="lazy" src="previews/website.jpg" alt="Preview of the new Tapestry Acres website"></a>
       <div class="card-head">
         <a class="primary" href="https://trashpanda62.github.io/tapestry-game/">Tapestry Acres — Website</a>
         <span class="status"><span class="dot" aria-hidden="true"></span>In progress · not live yet</span>
       </div>
       <p class="card-note">The new Tapestry Acres website — &ldquo;Come Meet the Herd.&rdquo; This is the preview build; not the launched public site yet.</p>
-      <ul class="files">
-        <li class="file">
-          <a class="file-link" href="https://trashpanda62.github.io/book-library/">Books Library</a>
-          <span class="file-desc">The searchable book-collection database that lives inside the site.</span>
-        </li>
-      </ul>
-    </li>
-
-    <!-- 3 · Freeze-Dried Raspberries -->
-    <li class="card">
-      <div class="card-head">
-        <a class="primary" href="https://trashpanda62.github.io/plans/tapestry-freeze-dried-raspberries.html">Freeze-Dried Raspberries — Launch Playbook</a>
-        <a class="print-pill" href="https://trashpanda62.github.io/plans/tapestry-freeze-dried-raspberries.html?print=1" target="_blank" rel="noopener" aria-label="Print the Freeze-Dried Raspberries playbook">🖨 Print</a>
-      </div>
-      <p class="card-note">Step-by-step to get the first batch labeled, listed, and selling — nutrition exemption, store setup, and launch.</p>
     </li>
 
     <!-- 3 · Best Hair Contest — Viral Poll -->
     <li class="card">
+      <a class="thumb" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/"><img loading="lazy" src="previews/haircontest.jpg" alt="Preview of the Best Hair Contest poll"></a>
       <div class="card-head">
         <a class="primary" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/">Best Hair Contest — Viral Poll</a>
         <span class="status live"><span class="dot" aria-hidden="true"></span>Live · shared voting</span>
@@ -402,6 +411,26 @@
           <span class="file-desc">Dani fills in each animal's real name, nickname &amp; personality.</span>
         </li>
       </ul>
+    </li>
+
+    <!-- 4 · Books Library -->
+    <li class="card">
+      <a class="thumb" href="https://trashpanda62.github.io/book-library/"><img loading="lazy" src="previews/books.jpg" alt="Preview of the Books Library database"></a>
+      <div class="card-head">
+        <a class="primary" href="https://trashpanda62.github.io/book-library/">Books Library</a>
+        <span class="status live"><span class="dot" aria-hidden="true"></span>Live</span>
+      </div>
+      <p class="card-note">A searchable database of the book collection — Libib-style, with covers, series tracking, and local buy links.</p>
+    </li>
+
+    <!-- 5 · Freeze-Dried Raspberries -->
+    <li class="card">
+      <a class="thumb" href="https://trashpanda62.github.io/plans/tapestry-freeze-dried-raspberries.html"><img loading="lazy" src="previews/raspberries.jpg" alt="Preview of the Freeze-Dried Raspberries playbook"></a>
+      <div class="card-head">
+        <a class="primary" href="https://trashpanda62.github.io/plans/tapestry-freeze-dried-raspberries.html">Freeze-Dried Raspberries — Launch Playbook</a>
+        <a class="print-pill" href="https://trashpanda62.github.io/plans/tapestry-freeze-dried-raspberries.html?print=1" target="_blank" rel="noopener" aria-label="Print the Freeze-Dried Raspberries playbook">🖨 Print</a>
+      </div>
+      <p class="card-note">Step-by-step to get the first batch labeled, listed, and selling — nutrition exemption, store setup, and launch.</p>
     </li>
 
   </ul>
