@@ -1,14 +1,401 @@
-<!doctype html><meta charset="utf-8"><title>Tapestry Plans</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<body style="font-family:system-ui,-apple-system,sans-serif;max-width:640px;margin:40px auto;padding:0 20px;color:#2A1B21">
-<h1 style="font-family:Georgia,serif">Tapestry Acres — Plans</h1>
-<ul style="font-size:18px;line-height:2.1;padding-left:20px">
-<li><a href="https://trashpanda62.github.io/tapestry-area-map/social-plan.html">Social Media Posting Plan</a> <span style="font-size:13px;color:#12805a">(home)</span></li>
-<li><a href="tapestry-freeze-dried-raspberries.html">Freeze-Dried Raspberries — Launch Playbook</a></li>
-<li><a href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/">Best Hair Contest — Viral Poll</a> <span style="font-size:13px;color:#12805a">(live · shared voting)</span>
-  <div style="font-size:14px;color:#777;line-height:1.8;padding:4px 0 6px">
-    · <a href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/kit.html">Posting kit for Dani</a> — cards, captions, hashtags, checklist<br>
-    · <a href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/animals.html">Animal details</a> — Dani fills in real names, nicknames &amp; personalities
-  </div></li>
-</ul>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tapestry Acres — Plans</title>
+<style>
+  :root{
+    --ink:#2b2620;
+    --soft:#6b6258;
+    --line:#d8cfc2;
+    --sage:#7a8b5a;        /* primary accent */
+    --sage-deep:#5f6f44;   /* darker sage for link text contrast */
+    --clay:#b9824f;        /* secondary accent */
+    --clay-deep:#9c6a3c;
+    --parchment:#f3efe7;   /* soft band */
+    --ground:#faf8f3;      /* warm off-white page */
+    --card:#fffdf9;
+    --serif:Georgia,"Palatino Linotype",Palatino,"Book Antiqua",serif;
+    --sans:"Segoe UI",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--ground);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  a{color:inherit;}
+
+  :focus-visible{
+    outline:2.5px solid var(--clay);
+    outline-offset:3px;
+    border-radius:3px;
+  }
+
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    padding:26px 32px 72px;
+  }
+
+  /* ---- top bar / home link ---- */
+  .topbar{
+    margin-bottom:30px;
+  }
+  .home{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.2px;
+    color:var(--soft);
+    text-decoration:none;
+    padding:6px 12px 6px 10px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    background:var(--card);
+    transition:color .15s ease,border-color .15s ease,background .15s ease;
+  }
+  .home:hover{
+    color:var(--sage-deep);
+    border-color:var(--sage);
+    background:#fff;
+  }
+  .home .arrow{font-size:15px;line-height:1;transform:translateY(-.5px);}
+
+  /* ---- hero ---- */
+  header.hero{
+    padding-bottom:20px;
+    border-bottom:1px solid var(--sage);
+    margin-bottom:8px;
+  }
+  .eyebrow{
+    font-size:11px;
+    letter-spacing:2.6px;
+    text-transform:uppercase;
+    color:var(--clay-deep);
+    font-weight:700;
+    margin:0 0 10px;
+  }
+  h1.brand{
+    font-family:var(--serif);
+    font-weight:700;
+    font-size:clamp(36px,7vw,52px);
+    line-height:1.03;
+    letter-spacing:-.5px;
+    margin:0;
+    color:var(--ink);
+    text-wrap:balance;
+  }
+  h1.brand .amp{color:var(--sage);font-style:italic;}
+  .subtitle{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:clamp(16px,2.4vw,19px);
+    color:var(--soft);
+    margin:12px 0 0;
+    max-width:52ch;
+  }
+
+  .intro{
+    font-size:14px;
+    color:var(--soft);
+    margin:22px 0 34px;
+    max-width:60ch;
+    line-height:1.6;
+  }
+
+  /* ---- plan list ---- */
+  .plans{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+
+  .card{
+    position:relative;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:22px 24px 22px;
+    transition:border-color .15s ease,box-shadow .18s ease;
+  }
+  .card:hover{
+    border-color:#cbc0ae;
+    box-shadow:0 6px 22px -14px rgba(70,55,35,.32);
+  }
+
+  /* headline row (live link + status) */
+  .card-head{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:14px;
+  }
+
+  .primary{
+    font-family:var(--serif);
+    font-weight:700;
+    font-size:clamp(20px,3.4vw,25px);
+    line-height:1.18;
+    letter-spacing:-.2px;
+    color:var(--sage-deep);
+    text-decoration:none;
+    text-wrap:balance;
+    display:inline-block;
+  }
+  .primary::after{
+    content:"↗";
+    font-family:var(--sans);
+    font-size:.62em;
+    font-weight:600;
+    margin-left:.4em;
+    color:var(--sage);
+    vertical-align:top;
+    position:relative;
+    top:.15em;
+    opacity:.7;
+    transition:transform .15s ease,opacity .15s ease;
+  }
+  .primary:hover{color:var(--sage);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px;}
+  .primary:hover::after{opacity:1;transform:translate(2px,-2px);}
+
+  .status{
+    flex:0 0 auto;
+    align-self:center;
+    font-size:10.5px;
+    font-weight:700;
+    letter-spacing:.7px;
+    text-transform:uppercase;
+    color:var(--clay-deep);
+    background:var(--parchment);
+    border:1px solid #e3d8c5;
+    border-radius:999px;
+    padding:4px 11px;
+    white-space:nowrap;
+  }
+  .status.live{
+    color:#3c6b4c;
+    background:#eef3e8;
+    border-color:#d4e0c4;
+  }
+  .status .dot{
+    display:inline-block;
+    width:6px;height:6px;
+    border-radius:50%;
+    background:currentColor;
+    margin-right:5px;
+    vertical-align:middle;
+    position:relative;
+    top:-1px;
+  }
+
+  .card-note{
+    font-size:13.5px;
+    color:var(--soft);
+    margin:8px 0 0;
+    line-height:1.55;
+    max-width:62ch;
+  }
+
+  /* file list — indented, below the primary link */
+  .files{
+    list-style:none;
+    margin:16px 0 0;
+    padding:14px 0 0 18px;
+    border-top:1px dashed #e0d6c6;
+    display:flex;
+    flex-direction:column;
+    gap:11px;
+    position:relative;
+  }
+  .files::before{
+    content:"";
+    position:absolute;
+    left:2px;top:15px;bottom:3px;
+    width:2px;
+    background:var(--line);
+    border-radius:2px;
+  }
+  .file{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:baseline;
+    gap:6px 10px;
+  }
+  .file-link{
+    font-size:14.5px;
+    font-weight:600;
+    color:var(--ink);
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+    transition:color .15s ease,border-color .15s ease;
+  }
+  .file-link:hover{
+    color:var(--sage-deep);
+    border-bottom-color:var(--sage);
+  }
+  .file-desc{
+    font-size:13px;
+    color:var(--soft);
+    line-height:1.5;
+    flex-basis:100%;
+    margin-top:-2px;
+  }
+
+  /* print pill */
+  .print-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.4px;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--clay-deep);
+    background:#fff;
+    border:1px solid #e7d8c2;
+    border-radius:999px;
+    padding:3px 10px;
+    line-height:1.4;
+    white-space:nowrap;
+    transition:background .15s ease,border-color .15s ease,color .15s ease;
+  }
+  .print-pill:hover{
+    background:var(--clay);
+    border-color:var(--clay);
+    color:#fff;
+  }
+  /* print pill sitting on the primary row */
+  .card-head .print-pill{align-self:center;}
+
+  footer{
+    margin-top:44px;
+    padding-top:16px;
+    border-top:1px solid var(--line);
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 16px;
+    justify-content:space-between;
+    font-size:11.5px;
+    color:var(--soft);
+    letter-spacing:.2px;
+  }
+  footer .mark{font-family:var(--serif);font-style:italic;color:var(--sage-deep);}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:560px){
+    .page{padding:20px 18px 56px;}
+    header.hero{padding-bottom:16px;}
+    .card{padding:18px 18px;border-radius:11px;}
+    .card-head{flex-direction:column;gap:10px;}
+    .status{align-self:flex-start;}
+    .card-head .print-pill{align-self:flex-start;}
+    .files{padding-left:14px;}
+  }
+
+  /* ---------- print ---------- */
+  @media print{
+    body{background:#fff;}
+    .page{max-width:100%;padding:0 6mm;}
+    .home,.print-pill{display:none !important;}
+    .card{
+      border-color:#c9beac;
+      box-shadow:none;
+      break-inside:avoid;
+    }
+    .card:hover{box-shadow:none;}
+    header.hero{border-bottom-color:var(--sage);}
+    .primary::after{display:none;}
+    a{text-decoration:none;}
+  }
+  @page{margin:14mm;}
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <a class="home" href="https://trashpanda62.github.io/tapestry-area-map/social-plan.html">
+      <span class="arrow" aria-hidden="true">←</span> Home
+    </a>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">Tapestry Acres</p>
+    <h1 class="brand">Plans <span class="amp">&amp;</span> playbooks</h1>
+    <p class="subtitle">The working library — every live page and the files that back it, in one place.</p>
+  </header>
+
+  <p class="intro">Each entry opens the live page at the top. The supporting files — posting kits, guides, and printables — sit just beneath it.</p>
+
+  <ul class="plans">
+
+    <!-- 1 · Social Media Posting Plan -->
+    <li class="card">
+      <div class="card-head">
+        <a class="primary" href="https://trashpanda62.github.io/tapestry-area-map/social-plan.html">Social Media Posting Plan</a>
+        <span class="status"><span class="dot" aria-hidden="true"></span>Home</span>
+        <a class="print-pill" href="https://trashpanda62.github.io/tapestry-area-map/social-plan.html?print=1" target="_blank" rel="noopener" aria-label="Print the Social Media Posting Plan">🖨 Print</a>
+      </div>
+      <p class="card-note">The Facebook &amp; Instagram content mix, cadence, and a two-week starter calendar for alpacas, glamping &amp; RV sites.</p>
+    </li>
+
+    <!-- 2 · Freeze-Dried Raspberries -->
+    <li class="card">
+      <div class="card-head">
+        <a class="primary" href="https://trashpanda62.github.io/plans/tapestry-freeze-dried-raspberries.html">Freeze-Dried Raspberries — Launch Playbook</a>
+        <a class="print-pill" href="https://trashpanda62.github.io/plans/tapestry-freeze-dried-raspberries.html?print=1" target="_blank" rel="noopener" aria-label="Print the Freeze-Dried Raspberries playbook">🖨 Print</a>
+      </div>
+      <p class="card-note">Step-by-step to get the first batch labeled, listed, and selling — nutrition exemption, store setup, and launch.</p>
+    </li>
+
+    <!-- 3 · Best Hair Contest — Viral Poll -->
+    <li class="card">
+      <div class="card-head">
+        <a class="primary" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/">Best Hair Contest — Viral Poll</a>
+        <span class="status live"><span class="dot" aria-hidden="true"></span>Live · shared voting</span>
+      </div>
+      <p class="card-note">The public voting page for the herd's best-hair showdown — one week, one winner.</p>
+
+      <ul class="files">
+        <li class="file">
+          <a class="file-link" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/kit.html">Posting kit for Dani</a>
+          <a class="print-pill" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/kit.html?print=1" target="_blank" rel="noopener" aria-label="Print the posting kit">🖨 Print</a>
+          <span class="file-desc">Cards, captions, hashtags &amp; the day-by-day checklist.</span>
+        </li>
+        <li class="file">
+          <a class="file-link" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/animals.html">Animal details</a>
+          <span class="file-desc">Dani fills in each animal's real name, nickname &amp; personality.</span>
+        </li>
+      </ul>
+    </li>
+
+  </ul>
+
+  <footer>
+    <span class="mark">Tapestry Acres — Plans</span>
+    <span>Monroe, TN · alpacas · glamping · RV sites</span>
+  </footer>
+
+</div>
 </body>
+</html>
