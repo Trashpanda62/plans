@@ -1,0 +1,413 @@
+<title>Freeze-Dried Raspberries — Launch Playbook</title>
+<style>
+  :root{
+    --paper:#FAF6F4; --card:#FFFFFF; --ink:#2A1B21; --ink-soft:#6B5158;
+    --line:#EEDFE3; --line-soft:#F4EAED;
+    --berry:#A61E4D; --berry-deep:#7C1638; --berry-tint:#F7E8ED;
+    --sage:#5E7254; --sage-tint:#EEF1E9;
+    --amber:#B5761F; --amber-tint:#FBEFD9;
+    --green:#3F7A4E; --green-tint:#E6F1E8;
+    --shadow:0 1px 2px rgba(42,27,33,.05), 0 6px 22px -12px rgba(124,22,56,.20);
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Charter,Georgia,serif;
+    --mono:"SF Mono",ui-monospace,"Cascadia Mono","Segoe UI Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+    line-height:1.55;-webkit-font-smoothing:antialiased;font-size:16px}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px 72px}
+  a{color:var(--berry-deep)}
+  h1,h2,h3{text-wrap:balance;font-family:var(--serif);font-weight:600;letter-spacing:.1px}
+  .eyebrow{font-family:var(--sans);text-transform:uppercase;letter-spacing:.14em;
+    font-size:12px;font-weight:700;color:var(--berry)}
+
+  /* HERO */
+  .hero{background:
+      radial-gradient(120% 140% at 88% -10%, #C0396A 0%, var(--berry) 42%, var(--berry-deep) 100%);
+    color:#fff;border-radius:0 0 26px 26px;padding:44px 34px 34px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-40px;top:-40px;width:260px;height:260px;
+    background:radial-gradient(circle,rgba(255,255,255,.16),transparent 60%);pointer-events:none}
+  .hero .eyebrow{color:#F7CBD9}
+  .hero h1{color:#fff;font-size:clamp(30px,5vw,46px);margin:.28em 0 .1em;line-height:1.05}
+  .hero p.lede{max-width:60ch;color:#FBE7EE;font-size:17px;margin:.2em 0 0}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .chip{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);
+    color:#fff;padding:7px 13px;border-radius:999px;font-size:13px;font-weight:600;
+    display:inline-flex;align-items:center;gap:7px;backdrop-filter:blur(2px)}
+
+  /* STATUS BAND */
+  .status{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+  @media(max-width:640px){.status{grid-template-columns:1fr}}
+  .status .box{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:16px 18px;box-shadow:var(--shadow)}
+  .status h3{margin:0 0 8px;font-size:15px;font-family:var(--sans);font-weight:700;
+    display:flex;align-items:center;gap:8px}
+  .status ul{margin:0;padding-left:2px;list-style:none}
+  .status li{position:relative;padding:3px 0 3px 24px;font-size:14.5px;color:var(--ink-soft)}
+  .status li::before{position:absolute;left:0;top:2px;font-size:14px}
+  .done li::before{content:"✓";color:var(--green);font-weight:800}
+  .todo li::before{content:"→";color:var(--amber);font-weight:800}
+
+  section{margin-top:44px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+    border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:22px}
+  .sec-head h2{font-size:26px;margin:0}
+  .sec-head .note{font-size:14px;color:var(--ink-soft)}
+  .track-tag{font-family:var(--sans);font-size:12px;font-weight:800;letter-spacing:.1em;
+    text-transform:uppercase;padding:4px 10px;border-radius:6px}
+  .tag-a{background:var(--amber-tint);color:#8A5713}
+  .tag-b{background:var(--sage-tint);color:#3F5235}
+
+  /* STEP CARDS */
+  .steps{display:flex;flex-direction:column;gap:14px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:18px 20px;display:grid;grid-template-columns:44px 1fr auto;gap:16px;
+    align-items:start;box-shadow:var(--shadow)}
+  @media(max-width:640px){.step{grid-template-columns:36px 1fr;}
+    .step .go,.step .gostack{grid-column:1 / -1;justify-self:stretch}}
+  .gostack{display:flex;flex-direction:column;gap:8px;align-items:stretch;min-width:172px}
+  .gostack .go{justify-content:center}
+  .rec-tag{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+    background:#fff;color:var(--green);border-radius:5px;padding:1px 6px;margin-left:6px}
+  .num{width:44px;height:44px;border-radius:12px;background:var(--berry-tint);
+    color:var(--berry-deep);font-family:var(--serif);font-size:20px;font-weight:700;
+    display:flex;align-items:center;justify-content:center}
+  @media(max-width:640px){.num{width:36px;height:36px;font-size:16px}}
+  .step h3{margin:0 0 5px;font-size:17px;font-family:var(--sans);font-weight:700}
+  .step p{margin:0;font-size:14.5px;color:var(--ink-soft)}
+  .meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+  .pill{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;
+    letter-spacing:.02em;border:1px solid transparent}
+  .p-you{background:var(--amber-tint);color:#8A5713}
+  .p-time{background:#F1ECEE;color:#6B5158}
+  .p-free{background:var(--green-tint);color:#2E6B3E}
+  .go{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+    background:var(--berry);color:#fff;text-decoration:none;font-weight:700;font-size:13.5px;
+    padding:9px 15px;border-radius:10px;box-shadow:0 2px 10px -3px rgba(124,22,56,.5);
+    transition:transform .12s ease, background .12s ease}
+  .go:hover{background:var(--berry-deep);transform:translateY(-1px)}
+  .go.ghost{background:#fff;color:var(--berry-deep);border:1px solid var(--line)}
+  .go.ghost:hover{background:var(--berry-tint)}
+
+  .callout{background:var(--sage-tint);border:1px solid #DCE4D3;border-left:4px solid var(--sage);
+    border-radius:12px;padding:14px 18px;font-size:14.5px;color:#3E4C36;margin-top:16px}
+  .callout strong{color:#2F3B29}
+
+  /* COPY BLOCKS */
+  .copycard{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    overflow:hidden;box-shadow:var(--shadow)}
+  .copycard .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:12px 16px;background:linear-gradient(var(--berry-tint),#FBF1F4);border-bottom:1px solid var(--line)}
+  .copycard .bar h3{margin:0;font-size:14px;font-family:var(--sans);font-weight:800;
+    text-transform:uppercase;letter-spacing:.06em;color:var(--berry-deep)}
+  .copytext{margin:0;padding:16px;font-family:var(--mono);font-size:13px;line-height:1.6;
+    white-space:pre-wrap;color:#33232a;background:#fff}
+  .copy{cursor:pointer;border:1px solid var(--berry);background:#fff;color:var(--berry-deep);
+    font-weight:700;font-size:12.5px;padding:6px 12px;border-radius:8px;font-family:var(--sans);
+    display:inline-flex;gap:6px;align-items:center;transition:all .12s ease}
+  .copy:hover{background:var(--berry);color:#fff}
+  .copy.ok{background:var(--green);border-color:var(--green);color:#fff}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+
+  /* TABLE */
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+  table{border-collapse:collapse;width:100%;min-width:520px;background:#fff;font-size:14px}
+  th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  thead th{background:var(--berry-deep);color:#fff;font-family:var(--sans);font-size:12px;
+    text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:nth-child(even){background:#FCF8F9}
+  .wk{font-weight:800;color:var(--berry-deep);white-space:nowrap}
+  td.num-col{font-variant-numeric:tabular-nums;font-weight:700}
+
+  /* PILLARS + SUPPLIES */
+  .cards3{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:820px){.cards3{grid-template-columns:1fr 1fr}}
+  @media(max-width:460px){.cards3{grid-template-columns:1fr}}
+  .mini{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px;
+    box-shadow:var(--shadow)}
+  .mini .k{font-size:22px}
+  .mini h4{margin:8px 0 4px;font-size:14.5px;font-family:var(--sans)}
+  .mini p{margin:0;font-size:13px;color:var(--ink-soft)}
+  .supply{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 15px;
+    box-shadow:var(--shadow)}
+  .supply span{font-size:14px;font-weight:600}
+  .supply small{display:block;font-weight:400;color:var(--ink-soft);font-size:12.5px}
+  .supplies{display:flex;flex-direction:column;gap:10px}
+
+  footer{margin-top:52px;padding-top:20px;border-top:2px solid var(--line);
+    font-size:13px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:13.5px;
+    font-weight:600;opacity:0;pointer-events:none;transition:all .22s ease;z-index:50}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important}}
+  a.go:focus-visible,.copy:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+</style>
+
+<div class="hero">
+  <div class="wrap" style="padding-bottom:0;padding-left:0;padding-right:0;max-width:none">
+    <div class="eyebrow">Tapestry Acres · New Product Line</div>
+    <h1>Freeze-Dried Raspberries</h1>
+    <p class="lede">Everything you need to make it legal to ship across state lines and launch it on social — with the exact links to click and the text to copy. Built for Dani &amp; Steve.</p>
+    <div class="chips">
+      <span class="chip">🫐 One ingredient</span>
+      <span class="chip">🚫 No sugar added</span>
+      <span class="chip">🗓️ ~2-year shelf life</span>
+      <span class="chip">📦 Ships to all 50 states</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="status">
+    <div class="box done">
+      <h3>✅ Already handled</h3>
+      <ul>
+        <li>Commercial kitchen — the food truck carries the TN manufacturing license</li>
+        <li>Farm &amp; property insured</li>
+        <li>Plan, label text, food-safety plan &amp; social calendar drafted (this page)</li>
+      </ul>
+    </div>
+    <div class="box todo">
+      <h3>🎯 What&rsquo;s left before we can sell</h3>
+      <ul>
+        <li>Register with the FDA + add product-liability coverage</li>
+        <li>One of us takes the PCQI food-safety course</li>
+        <li>Print the label + open the online store</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TRACK A -->
+  <section>
+    <div class="sec-head">
+      <span class="track-tag tag-a">Track A</span>
+      <h2>Get legal to ship</h2>
+      <span class="note">Mostly Steve · about a week, most of it just waiting on approvals</span>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <div>
+          <h3>Register the facility with the FDA</h3>
+          <p>Free &ldquo;Food Facility Registration&rdquo; in the FDA&rsquo;s FURLS portal. Required before shipping; renews in even years. You&rsquo;ll need the business name + EIN.</p>
+          <div class="meta"><span class="pill p-you">You · Steve</span><span class="pill p-time">~30 min</span><span class="pill p-free">$0</span></div>
+        </div>
+        <a class="go" href="https://www.access.fda.gov/" target="_blank" rel="noopener">Open FDA portal →</a>
+      </div>
+
+      <div class="step">
+        <div class="num">2</div>
+        <div>
+          <h3>Get product-liability coverage</h3>
+          <p>This is the coverage that pays if a shipped bag makes someone sick — separate from any farm/property policy. Two paths: <strong>if you already carry a business policy</strong>, ask that carrier to add product liability for packaged food; <strong>otherwise buy a standalone food policy online</strong> (below — often done in ~10 min). Standard limits are $1M per claim / $2M/yr; small food runs about <strong>$25–$250/mo</strong> (FLIP&rsquo;s food plan is ~$299/yr).</p>
+          <div class="meta"><span class="pill p-you">You · Steve</span><span class="pill p-time">~10–15 min online</span></div>
+        </div>
+        <div class="gostack">
+          <a class="go" href="https://www.fliprogram.com/food-manufacturers-insurance" target="_blank" rel="noopener">FLIP quote<span class="rec-tag">Best fit</span></a>
+          <a class="go ghost" href="https://www.nextinsurance.com/industry/restaurant-food-and-bar-insurance/" target="_blank" rel="noopener">Next Insurance →</a>
+          <a class="go ghost" href="https://www.insureon.com/manufacturers-business-insurance/food-beverage" target="_blank" rel="noopener">Compare (Insureon) →</a>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">3</div>
+        <div>
+          <h3>Confirm the truck license covers this product</h3>
+          <p>You said it does — get it noted on the account with TN Dept. of Agriculture so it&rsquo;s in writing for a food-manufacturing SKU.</p>
+          <div class="meta"><span class="pill p-you">You · Steve</span><span class="pill p-time">1 call</span></div>
+        </div>
+        <a class="go ghost" href="https://www.tn.gov/agriculture/businesses/food-safety.html" target="_blank" rel="noopener">TN Ag food safety →</a>
+      </div>
+
+      <div class="step">
+        <div class="num">4</div>
+        <div>
+          <h3>Take the PCQI food-safety course</h3>
+          <p>One of us becomes the trained &ldquo;qualified person.&rdquo; Online, ~1 day. It backs the simple food-safety plan below. <strong>Key fact:</strong> freeze-drying removes water but does <strong>not</strong> kill germs — so our safety story is clean berries + a wash/inspect step + verifying dryness.</p>
+          <div class="meta"><span class="pill p-you">You or Dani</span><span class="pill p-time">~½–1 day</span></div>
+        </div>
+        <a class="go" href="https://www.google.com/search?q=FSPCA+PCQI+Preventive+Controls+for+Human+Food+online+course" target="_blank" rel="noopener">Find a course →</a>
+      </div>
+
+      <div class="step">
+        <div class="num">5</div>
+        <div>
+          <h3>Print the label + file the nutrition exemption</h3>
+          <p>Design the label (text is ready to copy below), then file the FDA <strong>small-business nutrition-labeling exemption</strong> (food sales under $50k/yr) so we can skip lab testing.</p>
+          <div class="meta"><span class="pill p-you">Dani design · Steve file</span><span class="pill p-time">~1 hr</span></div>
+        </div>
+        <a class="go" href="https://www.google.com/search?q=FDA+small+business+nutrition+labeling+exemption+online+notice" target="_blank" rel="noopener">Exemption info →</a>
+      </div>
+
+      <div class="step">
+        <div class="num">6</div>
+        <div>
+          <h3>Open the online store (handles sales tax)</h3>
+          <p>A simple Shopify page linked from tapestryacres.com. Shopify&rsquo;s tax setting auto-handles which states we owe as we grow — no spreadsheet.</p>
+          <div class="meta"><span class="pill p-you">You · Steve</span><span class="pill p-time">~1–2 hrs</span></div>
+        </div>
+        <a class="go ghost" href="https://www.shopify.com/" target="_blank" rel="noopener">Start Shopify →</a>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>The one safety point that matters:</strong> freeze-drying is not a &ldquo;kill step.&rdquo; It dehydrates; dormant germs can survive. So the plan leans on clean, fresh farm berries + a rinse-and-inspect step + confirming the finished product is bone-dry. That&rsquo;s the whole control — copy it below.
+    </div>
+  </section>
+
+  <!-- REFERENCE / COPY BLOCKS -->
+  <section>
+    <div class="sec-head">
+      <h2>Copy &amp; paste kit</h2>
+      <span class="note">Everything below has a Copy button — nothing to retype</span>
+    </div>
+
+    <div class="grid2">
+      <div class="copycard">
+        <div class="bar"><h3>Label text</h3><button class="copy" data-copy="lbl">⧉ Copy</button></div>
+        <pre class="copytext" id="lbl">TAPESTRY ACRES
+Freeze-Dried Raspberries
+
+NET WT 1 oz (28 g)
+
+INGREDIENTS: Raspberries.
+
+Grown &amp; freeze-dried on our family farm.
+Made by Tapestry Acres, Monroe, TN [ZIP]
+
+Best within 2 years. Reseal after opening.
+LOT: [date]</pre>
+      </div>
+
+      <div class="copycard">
+        <div class="bar"><h3>1-page food-safety plan</h3><button class="copy" data-copy="fsp">⧉ Copy</button></div>
+        <pre class="copytext" id="fsp">1. SOURCE — our own farm raspberries; harvest clean, chill promptly.
+2. WASH &amp; INSPECT — gentle potable-water rinse; discard any mushy/moldy berries. (control step)
+3. FREEZE-DRY — run full cycle to completion.
+4. VERIFY DRY — must be crisp/brittle all the way through (log water activity &lt; 0.6 if we get a meter).
+5. PACKAGE — food-grade mylar pouch + oxygen absorber, heat-sealed. Lot code = date.
+6. RECORD — one line per batch: date, lot, weight in/out, pass-fail on crispness.</pre>
+      </div>
+    </div>
+
+    <div class="copycard" style="margin-top:14px">
+      <div class="bar"><h3>Product description — for Shopify / Etsy</h3><button class="copy" data-copy="desc">⧉ Copy</button></div>
+      <pre class="copytext" id="desc">Tapestry Acres Freeze-Dried Raspberries
+
+Grown on our family farm in Tennessee and freeze-dried whole, so nothing is added and nothing is lost but the water. One ingredient: raspberries. No sugar, no preservatives.
+
+Light, crisp, and intensely tart-sweet — eat them by the handful or drop them into oatmeal, yogurt, smoothies, granola, and baking. Shelf-stable for up to 2 years in a resealable pouch. Small-batch, harvested and packed by us.</pre>
+    </div>
+  </section>
+
+  <!-- TRACK B -->
+  <section>
+    <div class="sec-head">
+      <span class="track-tag tag-b">Track B</span>
+      <h2>Brand &amp; sell it</h2>
+      <span class="note">Dani&rsquo;s wheelhouse · teaser content can start today</span>
+    </div>
+
+    <p style="max-width:65ch;color:var(--ink-soft);margin-top:-6px">
+      The story isn&rsquo;t &ldquo;a snack&rdquo; — it&rsquo;s <strong>a jar of summer from our farm</strong>. We grew these, and freeze-drying locks in the exact fruit so you can taste July in January. It plugs straight into the homestead content you already run.
+    </p>
+
+    <div class="cards3" style="margin-top:18px">
+      <div class="mini"><div class="k">🌱</div><h4>Farm-to-pouch</h4><p>Picking, the freeze-dryer running, sealing pouches. People love the machine.</p></div>
+      <div class="mini"><div class="k">🔊</div><h4>The taste moment</h4><p>The crunch / ASMR, kids trying them, &ldquo;it dissolves.&rdquo;</p></div>
+      <div class="mini"><div class="k">🥣</div><h4>Use it</h4><p>Oatmeal, yogurt, smoothies, baking, trail mix, crushed as a topping.</p></div>
+      <div class="mini"><div class="k">✨</div><h4>Why it&rsquo;s different</h4><p>One ingredient, no sugar, 2-yr shelf life, grown here.</p></div>
+    </div>
+
+    <h3 style="font-size:18px;margin:30px 0 12px">3-week launch runway</h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>When</th><th>Post</th><th>Where</th></tr></thead>
+        <tbody>
+          <tr><td class="wk">Wk 1 · Tease</td><td>&ldquo;We&rsquo;re turning our raspberry harvest into something that lasts. Guess what.&rdquo; Freeze-dryer B-roll, no reveal.</td><td>TikTok + IG Reel</td></tr>
+          <tr><td class="wk">Wk 1</td><td>Behind-the-scenes: picking → trays → machine door closing.</td><td>IG Stories + FB</td></tr>
+          <tr><td class="wk">Wk 2 · Reveal</td><td>The reveal + first crunch taste-test. &ldquo;Freeze-dried raspberries, grown on our farm. Coming this week.&rdquo;</td><td>TikTok + Reel</td></tr>
+          <tr><td class="wk">Wk 2</td><td>&ldquo;One ingredient. Zero sugar. Two-year shelf life.&rdquo; Text-on-screen explainer over the taste moment.</td><td>All channels</td></tr>
+          <tr><td class="wk">Wk 3 · Sell</td><td><strong>Launch day:</strong> &ldquo;They&rsquo;re live — link in bio.&rdquo; + 3 ways to use them.</td><td>All + FB w/ link</td></tr>
+          <tr><td class="wk">Wk 3</td><td>First-order unboxing; restock tease if they move fast.</td><td>Stories + Reel</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid2" style="margin-top:18px">
+      <div class="copycard">
+        <div class="bar"><h3>Caption starters</h3><button class="copy" data-copy="caps">⧉ Copy</button></div>
+        <pre class="copytext" id="caps">We grew these. Then we took all the water out and left all the flavor.
+
+Ingredient list: raspberries. That's it. That's the whole thing.
+
+Summer, in a pouch, that lasts two years. Grown on our family farm in Tennessee.</pre>
+      </div>
+      <div class="copycard">
+        <div class="bar"><h3>Hashtags</h3><button class="copy" data-copy="tags">⧉ Copy</button></div>
+        <pre class="copytext" id="tags">#freezedried #freezedriedfruit #farmfresh #homestead #tennesseefarm #raspberries #smallbatch #oneingredient #snackideas #farmtotable</pre>
+      </div>
+    </div>
+
+    <h3 style="font-size:18px;margin:30px 0 12px">Pricing — starting point</h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Size</th><th>Suggested price</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>1 oz pouch</td><td class="num-col">$8–9</td><td>Hero / try-me SKU for launch</td></tr>
+          <tr><td>2 oz pouch</td><td class="num-col">$14–16</td><td>Better value + better margin</td></tr>
+          <tr><td>3-pack (1 oz)</td><td class="num-col">$22–24</td><td>Ships well; the gift / bundle SKU</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13.5px;color:var(--ink-soft);margin-top:10px">Freeze-drying shrinks fruit to ~10–15% of fresh weight, so a small pouch = a lot of berries — customers get that and pay for it. We&rsquo;ll lock exact margins once we log real yield (lbs fresh → oz dried) + pouch &amp; label cost.</p>
+  </section>
+
+  <!-- SUPPLIES -->
+  <section>
+    <div class="sec-head">
+      <h2>Supply shopping list</h2>
+      <span class="note">Direct search links — pick what fits the freeze-dryer</span>
+    </div>
+    <div class="supplies">
+      <div class="supply"><span>Stand-up mylar pouches<small>Resealable, food-grade, with a window if you want to show the fruit</small></span><a class="go ghost" href="https://www.amazon.com/s?k=stand+up+mylar+pouch+resealable+food+grade" target="_blank" rel="noopener">Find →</a></div>
+      <div class="supply"><span>Oxygen absorbers<small>Keeps it crisp + hits the 2-year shelf life</small></span><a class="go ghost" href="https://www.amazon.com/s?k=oxygen+absorbers+100cc+food+storage" target="_blank" rel="noopener">Find →</a></div>
+      <div class="supply"><span>Impulse heat sealer<small>Seals the pouches; get one sized to your pouch width</small></span><a class="go ghost" href="https://www.amazon.com/s?k=impulse+heat+sealer+8+inch" target="_blank" rel="noopener">Find →</a></div>
+      <div class="supply"><span>Water-activity meter <em>(optional)</em><small>Logs dryness &lt; 0.6 as proof for the food-safety file</small></span><a class="go ghost" href="https://www.amazon.com/s?k=water+activity+meter" target="_blank" rel="noopener">Find →</a></div>
+      <div class="supply"><span>Design the label<small>Free templates — drop the copy text above straight in</small></span><a class="go ghost" href="https://www.canva.com/create/labels/" target="_blank" rel="noopener">Open Canva →</a></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Tapestry Acres · Freeze-Dried Raspberries — Launch Playbook</span>
+    <span>Drafted 2026-07-06 · questions → Steve / Claude</span>
+  </footer>
+</div>
+
+<div class="toast" id="toast">Copied to clipboard ✓</div>
+
+<script>
+  (function(){
+    var toast=document.getElementById('toast'),t;
+    function showToast(){toast.classList.add('show');clearTimeout(t);t=setTimeout(function(){toast.classList.remove('show')},1400)}
+    document.querySelectorAll('.copy').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var el=document.getElementById(btn.getAttribute('data-copy'));
+        if(!el)return;
+        var text=el.innerText;
+        function done(){var o=btn.textContent;btn.textContent='Copied ✓';btn.classList.add('ok');showToast();
+          setTimeout(function(){btn.textContent=o;btn.classList.remove('ok')},1400)}
+        if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,function(){fallback(text);done()})}
+        else{fallback(text);done()}
+      });
+    });
+    function fallback(text){var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta)}
+  })();
+</script>
