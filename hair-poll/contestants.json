@@ -1,0 +1,79 @@
+[
+ {
+  "rank": 1,
+  "frame": 7029,
+  "name": "Joey",
+  "tag": "our cover boy - buck-tooth royalty",
+  "bonus": false
+ },
+ {
+  "rank": 2,
+  "frame": 7140,
+  "name": "Ginger Snap",
+  "tag": "windswept and worth it",
+  "bonus": false
+ },
+ {
+  "rank": 3,
+  "frame": 7057,
+  "name": "The Diva",
+  "tag": "mid-yell, maximum volume, unmatched hair",
+  "bonus": false
+ },
+ {
+  "rank": 4,
+  "frame": 7148,
+  "name": "Rusty",
+  "tag": "serving side profile, serving hair",
+  "bonus": false
+ },
+ {
+  "rank": 5,
+  "frame": 7150,
+  "name": "Fluffernutter",
+  "tag": "a marshmallow that learned to walk",
+  "bonus": false
+ },
+ {
+  "rank": 6,
+  "frame": 7136,
+  "name": "Bandit",
+  "tag": "two-tone floof with a built-in mask",
+  "bonus": false
+ },
+ {
+  "rank": 7,
+  "frame": 7039,
+  "name": "Einstein",
+  "tag": "the topknot achieved sentience",
+  "bonus": false
+ },
+ {
+  "rank": 8,
+  "frame": 7027,
+  "name": "Puddles",
+  "tag": "found the water tub. not sorry.",
+  "bonus": false
+ },
+ {
+  "rank": 9,
+  "frame": 7128,
+  "name": "Sunny",
+  "tag": "background extra turned main character",
+  "bonus": false
+ },
+ {
+  "rank": 10,
+  "frame": 7055,
+  "name": "Mohawk",
+  "tag": "punk rock lives on the farm",
+  "bonus": false
+ },
+ {
+  "rank": 0,
+  "frame": 7012,
+  "name": "Name Me!",
+  "tag": "the bonus star - vote on her name below!",
+  "bonus": true
+ }
+]
