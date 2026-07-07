@@ -57,13 +57,21 @@
     <div class="lw">
       <div class="mark">Harris Photography</div>
       <div class="rule"></div>
-      <div class="tag">Family Day &middot; July 2026</div>
+      <div class="tag">Audrey's Birthday &middot; June 2026</div>
       <div class="dots"><i></i><i></i><i></i></div>
     </div>
   </div>
   <iframe id="app" title="Harris Photography — Your Gallery"
     allow="fullscreen"
-    src="https://script.google.com/macros/s/AKfycbwsFzE34mU2x9Wii4gAzhO2iw2jwoMt43TY82z5hstlUjnUE7wcyrVH8-jo_31u8C-V/exec?g=familyday"
     onload="document.getElementById('load').classList.add('hide')"></iframe>
+  <script>
+    /* Forward a shared-favorites ?fav=... param into the Apps Script gallery
+       (the iframe is cross-origin, so it can't read our URL itself). */
+    (function(){
+      var base="https://script.google.com/macros/s/AKfycbwsFzE34mU2x9Wii4gAzhO2iw2jwoMt43TY82z5hstlUjnUE7wcyrVH8-jo_31u8C-V/exec?g=familyday";
+      var fav=null; try{ fav=new URLSearchParams(location.search).get('fav'); }catch(e){}
+      document.getElementById('app').src = base + (fav ? ('&fav='+encodeURIComponent(fav)) : '');
+    })();
+  </script>
 </body>
 </html>
