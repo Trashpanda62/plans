@@ -61,17 +61,28 @@
       <div class="dots"><i></i><i></i><i></i></div>
     </div>
   </div>
-  <iframe id="app" title="Harris Photography — Your Gallery"
-    allow="fullscreen"
-    onload="document.getElementById('load').classList.add('hide')"></iframe>
+  <a id="go" class="enter" href="#">Enter your gallery</a>
   <script>
-    /* Forward a shared-favorites ?fav=... param into the Apps Script gallery
-       (the iframe is cross-origin, so it can't read our URL itself). */
+    /* Google blocks script.google.com from being iframed (X-Frame-Options), so
+       this branded splash forwards to the gallery with a TOP-LEVEL redirect
+       instead of embedding it. The Harris cover still greets the client on the
+       gallery itself. The ?fav shared-favorites param is carried through. */
     (function(){
       var base="https://script.google.com/macros/s/AKfycbwsFzE34mU2x9Wii4gAzhO2iw2jwoMt43TY82z5hstlUjnUE7wcyrVH8-jo_31u8C-V/exec?g=familyday";
       var fav=null; try{ fav=new URLSearchParams(location.search).get('fav'); }catch(e){}
-      document.getElementById('app').src = base + (fav ? ('&fav='+encodeURIComponent(fav)) : '');
+      var url=base + (fav ? ('&fav='+encodeURIComponent(fav)) : '');
+      document.getElementById('go').setAttribute('href', url);   // fallback if the auto-redirect is blocked
+      var reduce=false; try{ reduce=matchMedia('(prefers-reduced-motion:reduce)').matches; }catch(e){}
+      setTimeout(function(){ location.replace(url); }, reduce?200:1500);  // let the splash play, then go
     })();
   </script>
+  <style>
+    .enter{position:fixed;left:50%;bottom:38px;transform:translateX(-50%);z-index:3;
+      opacity:0;animation:fade 1s 1.6s ease forwards;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:12.5px;
+      letter-spacing:.16em;text-transform:uppercase;color:#1a1206;text-decoration:none;
+      background:linear-gradient(100deg,#e6c583,#fbf4de);padding:11px 22px;border-radius:999px}
+    @media(prefers-reduced-motion:reduce){.enter{animation:none;opacity:.95}}
+  </style>
 </body>
 </html>
