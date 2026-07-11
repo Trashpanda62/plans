@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Steve — Lean Bulk Plan &amp; Diet</title>
+<style>
+  :root {
+    --bg: #f6f5f2; --panel: #ffffff; --ink: #171b21; --muted: #6b7280;
+    --hair: #e4e2dc; --grid: #ecebe6;
+    --accent: #0f766e; --accent-soft: rgba(15,118,110,.10);
+    --carb: #c67c30; --now: #b3391f;
+    --good: #4f8a5b; --good-bg: #dcecdd; --warn: #b98a1e; --warn-bg: #f7ecc9;
+    --shadow: 0 1px 2px rgba(20,25,35,.05), 0 8px 24px rgba(20,25,35,.05);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#10141a; --panel:#171c24; --ink:#eef1f5; --muted:#8b95a3;
+      --hair:#262d38; --grid:#1e242d;
+      --accent:#2dd4bf; --accent-soft:rgba(45,212,191,.12);
+      --carb:#e0a458; --now:#f06a4c;
+      --good:#7fc08c; --good-bg:#1c2c20; --warn:#d8b850; --warn-bg:#322c14;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#f6f5f2;--panel:#fff;--ink:#171b21;--muted:#6b7280;--hair:#e4e2dc;--grid:#ecebe6;
+    --accent:#0f766e;--accent-soft:rgba(15,118,110,.10);--carb:#c67c30;--now:#b3391f;
+    --good:#4f8a5b;--good-bg:#dcecdd;--warn:#b98a1e;--warn-bg:#f7ecc9;
+    --shadow:0 1px 2px rgba(20,25,35,.05),0 8px 24px rgba(20,25,35,.05);
+  }
+  :root[data-theme="dark"]{
+    --bg:#10141a;--panel:#171c24;--ink:#eef1f5;--muted:#8b95a3;--hair:#262d38;--grid:#1e242d;
+    --accent:#2dd4bf;--accent-soft:rgba(45,212,191,.12);--carb:#e0a458;--now:#f06a4c;
+    --good:#7fc08c;--good-bg:#1c2c20;--warn:#d8b850;--warn-bg:#322c14;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.55;}
+  .wrap{max-width:880px;margin:0 auto;padding:40px 22px 72px;}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:0 0 6px;}
+  h1{font-size:clamp(28px,5.5vw,42px);line-height:1.04;margin:0 0 10px;letter-spacing:-.02em;font-weight:800;text-wrap:balance;}
+  .lede{color:var(--muted);font-size:15.5px;max-width:60ch;margin:0 0 14px;}
+  .lede b{color:var(--ink);}
+  .verdict{display:inline-flex;align-items:center;gap:8px;background:var(--accent-soft);color:var(--accent);
+    font-weight:700;font-size:13.5px;padding:8px 14px;border-radius:999px;margin-bottom:34px;letter-spacing:.01em;}
+
+  h2{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;
+    margin:40px 0 16px;padding-bottom:9px;border-bottom:1px solid var(--hair);}
+
+  /* timeline */
+  .phase{display:grid;grid-template-columns:132px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--grid);}
+  .phase:last-child{border-bottom:none;}
+  .when{font-weight:800;font-size:15px;letter-spacing:-.01em;}
+  .when .dur{display:block;font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.02em;margin-top:2px;}
+  .phase .body h3{margin:0 0 4px;font-size:16px;letter-spacing:-.01em;}
+  .phase .body p{margin:0;color:var(--muted);font-size:14px;}
+  .phase.now{background:linear-gradient(90deg,var(--accent-soft),transparent);border-radius:12px;padding:18px 16px;margin:0 -16px;}
+  .chip{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.03em;padding:2px 8px;border-radius:6px;vertical-align:middle;margin-left:8px;}
+  .chip.here{background:var(--now);color:#fff;}
+  .chip.goal{background:var(--good-bg);color:var(--good);}
+
+  /* macro band */
+  .macros{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:6px 0 8px;}
+  @media(max-width:560px){.macros{grid-template-columns:repeat(2,1fr);}}
+  .macro{background:var(--panel);border:1px solid var(--hair);border-radius:13px;padding:15px 16px;box-shadow:var(--shadow);}
+  .macro .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+  .macro .v{font-size:27px;font-weight:800;letter-spacing:-.02em;margin-top:3px;font-variant-numeric:tabular-nums;line-height:1;}
+  .macro .v small{font-size:14px;font-weight:600;color:var(--muted);}
+  .macro.kcal .v{color:var(--accent);}
+  .macro.p .v{color:var(--ink);}
+  .macro.f .v{color:var(--muted);}
+  .macro.c .v{color:var(--carb);}
+
+  /* meal table */
+  .card{background:var(--panel);border:1px solid var(--hair);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;}
+  .scroll{overflow-x:auto;}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px;}
+  thead th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;
+    padding:14px 16px;border-bottom:1px solid var(--hair);background:var(--bg);}
+  thead th.num{text-align:right;}
+  tbody td{padding:14px 16px;border-bottom:1px solid var(--grid);vertical-align:top;}
+  tbody tr:last-child td{border-bottom:none;}
+  .meal{font-weight:700;font-size:14.5px;white-space:nowrap;}
+  .meal small{display:block;font-weight:600;color:var(--muted);font-size:11.5px;letter-spacing:.02em;text-transform:uppercase;margin-top:2px;}
+  .foods{color:var(--muted);font-size:13.5px;line-height:1.5;}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600;}
+  tfoot td{padding:14px 16px;font-weight:800;border-top:2px solid var(--hair);font-variant-numeric:tabular-nums;}
+  tfoot td.num{text-align:right;}
+  tfoot .accent{color:var(--accent);}
+
+  .rules{display:grid;gap:10px;margin-top:16px;}
+  .rule{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;font-size:14px;color:var(--muted);}
+  .rule .mk{font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums;}
+  .rule b{color:var(--ink);font-weight:600;}
+  .callout{background:var(--warn-bg);border-radius:12px;padding:14px 16px;font-size:13.5px;color:var(--ink);margin-top:16px;}
+  .callout b{color:var(--warn);}
+
+  /* poses */
+  .poses{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  @media(max-width:640px){.poses{grid-template-columns:1fr;}}
+  .poselabel{font-size:15px;font-weight:800;letter-spacing:-.01em;margin-bottom:10px;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;}
+  .pri{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--now);background:var(--warn-bg);padding:2px 8px;border-radius:6px;}
+  .pri.strong{color:var(--good);background:var(--good-bg);}
+  .poselist{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:11px;}
+  .poselist li{font-size:13.5px;color:var(--muted);line-height:1.5;padding-left:3px;}
+  .poselist li b{color:var(--ink);font-weight:600;}
+  .poselist em{color:var(--accent);font-style:italic;font-weight:600;}
+  td.code{font-weight:800;color:var(--accent);letter-spacing:.02em;}
+  .lede em{font-style:italic;color:var(--ink);}
+  .foods u,.meal u{text-decoration:underline;text-underline-offset:2px;}
+  .foot{font-size:12px;color:var(--muted);margin-top:34px;text-align:center;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <p class="eyebrow">Offseason → 2027 show · NPC Classic Physique</p>
+  <h1>Lean bulk, then prep</h1>
+  <p class="lede">You're <b>~180 lb lean at 5'11", 15 lb under the 207 cap</b>, on a TRT-base cycle. You don't need to dirty bulk — you'd just buy back fat in prep. Add size in a controlled surplus, bring the back up to match your chest and legs, then cut in.</p>
+  <div class="verdict">◆ Verdict: controlled lean bulk — not an aggressive bulk</div>
+
+  <h2>The timeline</h2>
+
+  <div class="phase now">
+    <div class="when">Jul – Aug 2026<span class="dur">now · ~6 wk</span></div>
+    <div class="body">
+      <h3>Reset &amp; launch <span class="chip here">YOU ARE HERE</span></h3>
+      <p>Finish the anadrol block (end by ~Aug 1–14, stays under the 4–6 wk ceiling). Re-onboard MacroFactor at your real current weight so it recomputes your true expenditure. Get baseline bloodwork this week — ALT/AST, hematocrit, lipids, BP, E2.</p>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="when">Aug 2026 – Feb 2027<span class="dur">~7 months</span></div>
+    <div class="body">
+      <h3>Lean bulk + back specialization</h3>
+      <p>Small surplus (~+300–400 over maintenance). Push <b>back &amp; rear delts to MRV</b> — that's the one bodypart that lags your strong chest and legs. Maintain everything else. Hold body fat ≤ ~18–19%; if it climbs, hold calories, don't chase the surplus.</p>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="when">~Mar 2027<span class="dur">checkpoint</span></div>
+    <div class="body">
+      <h3>Prep gate — re-DEXA</h3>
+      <p>Arrive here at ~15% body fat with more back. Re-scan at Live Lean Rx to confirm lean mass held. If body fat drifted high, a short mini-cut first. This is where the bulk ends and the diet flips.</p>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="when">Mar – Jul 2027<span class="dur">20 weeks</span></div>
+    <div class="body">
+      <h3>Contest prep</h3>
+      <p>20-week cut at 0.5–1% bodyweight/week to spare muscle. Drop from ~15% toward stage condition. Land near <b>188–192 lb at 6–8%</b> — 15 lb under the cap, so this is about conditioning, never making weight. Start posing day one.</p>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="when">Jul – Aug 2027<span class="dur">show</span></div>
+    <div class="body">
+      <h3>Stage <span class="chip goal">GOAL</span></h3>
+      <p>NPC Tennessee State (~late Jul) or Knox Classic (~Aug). Drop anadrol ≥2 wk before to clear its water. Peak week stays simple for show #1 — good conditioning + clean posing beats a gambled water manipulation.</p>
+    </div>
+  </div>
+
+  <h2>The day — dolphin chronotype · your actual foods · macros from your own log</h2>
+  <div class="macros">
+    <div class="macro kcal"><div class="k">Calories</div><div class="v">~3,400</div></div>
+    <div class="macro p"><div class="k">Protein</div><div class="v">~320<small>g</small></div></div>
+    <div class="macro f"><div class="k">Fat</div><div class="v">~93<small>g</small></div></div>
+    <div class="macro c"><div class="k">Carbs</div><div class="v">~280<small>g</small></div></div>
+  </div>
+  <p class="lede" style="margin-bottom:16px;"><b>The backbone: ½ gallon Fairlife skim sipped through the day = 640 kcal · 104P · 0F · 48C</b> — the cheapest protein you own, plus hydration. Everything below is a food you already eat, macros pulled from your MacroFactor log. Dolphin timing: light sleeper, groggy start, sharpest 10am–2pm, physical peak early evening → train 5:30pm, protein every 3–4h, kitchen closed 2h before bed.</p>
+  <div class="card">
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Time</th><th>Meal — your staples (rotate within slots)</th><th class="num">P</th><th class="num">F</th><th class="num">C</th><th class="num">kcal</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="meal">6:30<small>Wake</small></td>
+            <td class="foods">Up at the alarm, no snooze (dolphin rule #1) — sunlight + first glass of the milk. Kills the groggy start.</td>
+            <td class="num">13</td><td class="num">0</td><td class="num">6</td><td class="num">80</td>
+          </tr>
+          <tr>
+            <td class="meal">7:30<small>Meal 1</small></td>
+            <td class="foods">4 eggs scrambled + 300 g roasted yukon/russet potatoes (or mashed)</td>
+            <td class="num">31</td><td class="num">28</td><td class="num">55</td><td class="num">620</td>
+          </tr>
+          <tr>
+            <td class="meal">12:30<small>Meal 2</small></td>
+            <td class="foods">8 oz chicken breast + 2 cups cooked rice · seafood swap: salmon fillet or ½ lb shrimp over the same rice</td>
+            <td class="num">76</td><td class="num">10</td><td class="num">88</td><td class="num">775</td>
+          </tr>
+          <tr>
+            <td class="meal">4:45<small>Pre-lift</small></td>
+            <td class="foods">Core Power Elite (your 373-times-logged bottle)</td>
+            <td class="num">42</td><td class="num">3</td><td class="num">8</td><td class="num">230</td>
+          </tr>
+          <tr>
+            <td class="meal">5:30<small>Train</small></td>
+            <td class="foods">Lift (program below) — milk through the evening covers post-workout</td>
+            <td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td>
+          </tr>
+          <tr>
+            <td class="meal">7:00<small>Meal 3</small></td>
+            <td class="foods">Taco night: 6 oz 90/10 beef + 2 keto flour tortillas + 1 oz shredded cheddar + 200 g potatoes on the side · alt nights: chicken or seafood + potatoes</td>
+            <td class="num">63</td><td class="num">35</td><td class="num">50</td><td class="num">790</td>
+          </tr>
+          <tr>
+            <td class="meal">9:00<small>Snack</small></td>
+            <td class="foods">Peanut-butter putty (2 tbsp PB base) — then kitchen closed</td>
+            <td class="num">7</td><td class="num">16</td><td class="num">8</td><td class="num">190</td>
+          </tr>
+          <tr>
+            <td class="meal">rest of<small>the ½ gal</small></td>
+            <td class="foods">Remaining Fairlife skim spread across the day (~7 cups after the wake-up glass)</td>
+            <td class="num">91</td><td class="num">0</td><td class="num">42</td><td class="num">560</td>
+          </tr>
+          <tr>
+            <td class="meal">11:00<small>Wind-down</small></td>
+            <td class="foods">Screens dim, room cool — dolphins need the runway. Lights out ~11:30.</td>
+            <td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr><td colspan="2">Daily total (training day)</td><td class="num">~323</td><td class="num">~92</td><td class="num">~257</td><td class="num accent">~3,245</td></tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+  <div class="rules" style="margin-top:16px;">
+    <div class="rule"><span class="mk">+</span><span><b>Training-day top-up:</b> add ~1 cup rice at Meal 2 or 150 g potatoes at Meal 3 (+200 kcal) to land ~3,450. Rest days: run it as written (~3,250). MacroFactor's Gain program fine-tunes from there.</span></div>
+    <div class="rule"><span class="mk">✓</span><span><b>Protein lands ~320g — over the 270 target, on purpose.</b> The milk backbone makes it cheap and automatic; the floor (230g) is now nearly impossible to miss. If grocery cost matters more later, drop the shake, keep the milk.</span></div>
+  </div>
+
+  <h2>The training week — your lifts · 5:30pm · restart ramp first</h2>
+  <p class="lede" style="margin-bottom:16px;"><b>You've been mostly off for 6 months — do not jump back to 12 sets.</b> Weeks 1–2: 6–8 sets/day at RPE 6–7 (2–3 reps left in the tank), weeks 3–4: 8–10 sets, week 5+: your normal 8–12. Muscle memory brings it back fast; tendons need the runway. All movements are from your own pool. Back appears twice — it's the one bring-up.</p>
+  <div class="card">
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Day</th><th>Focus</th><th>Movements (sets × reps @ week 5+)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="meal">Mon</td><td class="foods"><b>Back — thickness</b></td><td class="foods">Smith rows 4×8–10 · Pull-ups 3×AMRAP · Rear-delt flies 3×15 · Deadlift 2×5 (heavy top sets)</td></tr>
+          <tr><td class="meal">Tue</td><td class="foods"><b>Legs — quad</b></td><td class="foods">Leg press 4×10–12 (your 1,000 lb wheelhouse) · Smith squat 3×8 · Leg extension 3×12–15</td></tr>
+          <tr><td class="meal">Wed</td><td class="foods"><b>Push — chest</b></td><td class="foods">Smith bench 4×8–10 · Shoulder press 3×10 · Tricep pulls 3×12 · Push-ups 1×AMRAP finisher</td></tr>
+          <tr><td class="meal">Thu</td><td class="foods"><b>Back — width</b></td><td class="foods">Pull-ups 4×AMRAP (add weight when 10+) · Smith rows (wider grip) 3×10 · Rear-delt flies 3×15</td></tr>
+          <tr><td class="meal">Fri</td><td class="foods"><b>Delts + arms</b></td><td class="foods">Overhead press 4×8 · Lateral flies 4×12–15 · Tricep pulls 3×12 · Push-ups 1×AMRAP</td></tr>
+          <tr><td class="meal">Sat</td><td class="foods"><b>Legs — hinge</b></td><td class="foods">Deadlift 3×5 · Leg press (feet high, hams) 3×12 · Leg extension 2×15</td></tr>
+          <tr><td class="meal">Sun</td><td class="foods"><b>Off</b></td><td class="foods">Full rest — dolphins pay for skipped recovery in sleep quality first.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="rules" style="margin-top:16px;">
+    <div class="rule"><span class="mk">1</span><span><b>Back volume leads.</b> ~14 weekly sets vs ~10 for chest — that's the specialization. Rear delts 2×/wk on top; legs stay at maintenance-plus because they're already your strong suit.</span></div>
+    <div class="rule"><span class="mk">2</span><span><b>Why 5:30pm:</b> dolphin body temp and alertness peak early evening — your strongest window. If a day falls apart, a 7:30am session is the dolphin backup (it also burns off the morning cortisol edge), just not fasted: have the milk first.</span></div>
+    <div class="rule"><span class="mk">3</span><span><b>Deload week 9</b> (~50% volume), then resume. First deload after the restart ramp, not during it.</span></div>
+  </div>
+
+  <div class="rules">
+    <div class="rule"><span class="mk">1</span><span><b>Protein floor is the whole game.</b> Land 230 g minimum, ~270 target, ~90% of days. Your log hit ≥180 g only 47% of the time — closing that gap is the biggest lever you have for lean gains.</span></div>
+    <div class="rule"><span class="mk">2</span><span><b>Let MacroFactor set the exact surplus.</b> These are food templates. Log ~2 weeks, set the program to "Gain" at 0.25–0.5%/wk, and let the algorithm steer calories off your real expenditure — don't hand-tweak on top of it.</span></div>
+    <div class="rule"><span class="mk">3</span><span><b>Flex, don't binge.</b> Whole food by default; the occasional Taco Bell or Twix fits the carb budget — your data shows this works for you as long as protein and total calories land.</span></div>
+    <div class="rule"><span class="mk">4</span><span><b>Steer weekly.</b> Trend weight + waist tape + monthly back/leg photos. If body fat climbs toward the high teens, hold calories rather than pushing the surplus.</span></div>
+  </div>
+
+  <div class="callout"><b>One number to protect:</b> body fat under ~18–19% through the bulk. Stay in that band and you reach the March prep gate at ~15% with a short, muscle-sparing cut ahead — instead of a long grind that risks the 34 lb of muscle you fought for.</div>
+
+  <h2>Assessment photos — how to shoot them</h2>
+  <p class="lede" style="margin-bottom:18px;">Light from the <b>front or above</b> (window / overhead), never behind — backlight kills all detail. Plain wall, phone chest-height, full body, ~6–8 ft back. Flexed and relaxed of each. These double as your first posing practice.</p>
+  <div class="poses">
+    <div class="posecol">
+      <div class="poselabel">Back <span class="pri">priority — confirms the one open weak point</span></div>
+      <ol class="poselist">
+        <li><b>Rear double biceps.</b> Back to camera, both arms curled up, elbows ~shoulder height. Flare the lats like spreading wings, squeeze the whole back. <em>The key shot</em> — width, thickness, rear delts, hams.</li>
+        <li><b>Rear lat spread.</b> Thumbs in your waistband at the lower back, drive elbows forward, flare lats as wide as possible. Shows your V.</li>
+        <li><b>Back relaxed.</b> Stand naturally, back to camera, arms down. Resting width + any L/R imbalance.</li>
+      </ol>
+    </div>
+    <div class="posecol">
+      <div class="poselabel">Legs <span class="pri strong">confirm your strong suit</span></div>
+      <ol class="poselist">
+        <li><b>Side quad.</b> Turn side-on, front leg slightly forward and flexed, rise onto the ball of that foot to pop the quad sweep + hamstring.</li>
+        <li><b>Front quad.</b> Face camera, feet ~shoulder width, flex both quads hard with a slight lean back. Sweep + teardrop + separation.</li>
+        <li><b>Copy the look:</b> search YouTube for <em>"NPC Classic Physique rear double biceps"</em> and <em>"side quad pose classic physique"</em> (Terrence Ruffin has clean Classic breakdowns).</li>
+      </ol>
+    </div>
+  </div>
+
+  <h2>Bloodwork — exact LabCorp order (Cookeville, TN)</h2>
+  <p class="lede" style="margin-bottom:16px;">On-cycle baseline. Give these <b>test numbers</b> to whoever writes the req. Fasting 9–12 h, morning draw. Verified against LabCorp's catalog.</p>
+  <div class="card">
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Test</th><th class="num">LabCorp&nbsp;#</th><th>Why it's on the list</th></tr></thead>
+        <tbody>
+          <tr><td class="meal">Testosterone Free + Total, LC/MS-MS</td><td class="num code">070195</td><td class="foods">Total &amp; free T by the accurate method (not immunoassay).</td></tr>
+          <tr><td class="meal">Estradiol, <u>Sensitive</u>, LC/MS</td><td class="num code">140244</td><td class="foods">E2 for men. <b>Not</b> the standard estradiol (004515) — that over-reads males.</td></tr>
+          <tr><td class="meal">CBC With Differential</td><td class="num code">005009</td><td class="foods">Hematocrit + hemoglobin — the test/anadrol red-cell flag.</td></tr>
+          <tr><td class="meal">Comprehensive Metabolic Panel</td><td class="num code">322000</td><td class="foods">ALT + AST (liver — the 17aa anadrol flag) + kidney/glucose.</td></tr>
+          <tr><td class="meal">Lipid Panel w/ ratio</td><td class="num code">221010</td><td class="foods">HDL/LDL/trig — orals crush HDL.</td></tr>
+          <tr><td class="meal">PSA, Total</td><td class="num code">010322</td><td class="foods">Prostate baseline on high androgens.</td></tr>
+          <tr><td class="meal">SHBG <small style="text-transform:none;letter-spacing:0;">optional</small></td><td class="num code">082016</td><td class="foods">Pairs with free-T; last panel showed it crushed (&lt;0.8).</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="rules" style="margin-top:16px;">
+    <div class="rule"><span class="mk">↳</span><span><b>How to order:</b> if your TRT is physician-managed, ask them to add these codes to a LabCorp req. Self-pay with no doctor: Labcorp OnDemand or Marek Health — confirm the panel contains 070195, 140244, 005009, 322000.</span></div>
+    <div class="rule"><span class="mk">↻</span><span><b>Follow-up draw:</b> repeat just CMP (322000) + CBC (005009) at anadrol <b>week 3–4 (~Jul 24)</b> — that's the draw that catches the liver &amp; hematocrit trend while there's still time to act.</span></div>
+  </div>
+
+  <p class="foot">Built on your MacroFactor data (TDEE ~3,151) + June 2025 DEXA (180.5 lb FFM). Personal plan — not medical advice. Tune to your live numbers once re-onboarded.</p>
+</div>
+
+</body>
+</html>
