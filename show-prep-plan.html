@@ -113,14 +113,28 @@
   td.code{font-weight:800;color:var(--accent);letter-spacing:.02em;}
   .lede em{font-style:italic;color:var(--ink);}
   .foods u,.meal u{text-decoration:underline;text-underline-offset:2px;}
+
+  /* 3-block day */
+  .blocks{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media(max-width:760px){.blocks{grid-template-columns:1fr;}}
+  .block{background:var(--panel);border:1px solid var(--hair);border-radius:16px;padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;}
+  .bhead{display:flex;flex-direction:column;gap:3px;padding-bottom:10px;border-bottom:1px solid var(--grid);}
+  .btime{font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--accent);font-variant-numeric:tabular-nums;}
+  .bwin{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+  .brow{font-size:13.5px;color:var(--muted);line-height:1.5;}
+  .brow b{color:var(--ink);font-weight:600;}
+  .blab{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);
+    background:var(--accent-soft);border-radius:5px;padding:2px 7px;margin-right:8px;vertical-align:1px;}
+  .bmac{display:block;margin-top:4px;font-size:12px;font-weight:700;color:var(--carb);font-variant-numeric:tabular-nums;letter-spacing:.01em;}
+  .bnote{font-size:12.5px;color:var(--muted);font-style:italic;border-top:1px dashed var(--grid);padding-top:10px;margin-top:auto;}
   .foot{font-size:12px;color:var(--muted);margin-top:34px;text-align:center;}
-  @media print { .homebar{display:none;} body{background:#fff;} .card{box-shadow:none;border-color:#ccc;} }
-  .homebar{max-width:1000px;margin:0 auto;padding:14px 24px 0;font-size:13px;}
+  @media print { .homebar{display:none;} body{background:#fff;} .card,.block{box-shadow:none;border-color:#ccc;} }
+  .homebar{max-width:880px;margin:0 auto;padding:14px 24px 0;font-size:13px;}
   .homebar a{color:var(--accent);text-decoration:none;font-weight:700;}
 </style>
 </head>
 <body>
-<div class="homebar"><a href="https://trashpanda62.github.io/tapestry-area-map/social-plan.html">← Home</a> &nbsp;·&nbsp; <a href="https://trashpanda62.github.io/plans/">📋 All Plans</a></div>
+<div class="homebar"><a href="https://trashpanda62.github.io/tapestry-area-map/social-plan.html">&larr; Home</a> &nbsp;&middot;&nbsp; <a href="https://trashpanda62.github.io/plans/">📋 All Plans</a></div>
 <script>if(new URLSearchParams(location.search).has('print'))addEventListener('load',()=>print());</script>
 
 <div class="wrap">
@@ -171,112 +185,67 @@
     </div>
   </div>
 
-  <h2>The day — dolphin chronotype · your actual foods · macros from your own log</h2>
+  <h2>The day — 3 short blocks · dolphin chronotype · your actual foods</h2>
   <div class="macros">
     <div class="macro kcal"><div class="k">Calories</div><div class="v">~3,400</div></div>
     <div class="macro p"><div class="k">Protein</div><div class="v">~320<small>g</small></div></div>
     <div class="macro f"><div class="k">Fat</div><div class="v">~93<small>g</small></div></div>
     <div class="macro c"><div class="k">Carbs</div><div class="v">~280<small>g</small></div></div>
   </div>
-  <p class="lede" style="margin-bottom:16px;"><b>The backbone: ½ gallon Fairlife skim sipped through the day = 640 kcal · 104P · 0F · 48C</b> — the cheapest protein you own, plus hydration. Everything below is a food you already eat, macros pulled from your MacroFactor log. Dolphin timing: light sleeper, groggy start, sharpest 10am–2pm, physical peak early evening → train 5:30pm, kitchen closed 2h before bed. <b>Protein timing doesn't matter</b> — 2024–25 meta-analyses: with total intake controlled, meal frequency and the "anabolic window" wash out. Hit the daily number; eat when it fits.</p>
-  <div class="card">
-    <div class="scroll">
-      <table>
-        <thead>
-          <tr><th>Time</th><th>Meal — your staples (rotate within slots)</th><th class="num">P</th><th class="num">F</th><th class="num">C</th><th class="num">kcal</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="meal">6:30<small>Wake</small></td>
-            <td class="foods">Up at the alarm, no snooze (dolphin rule #1) — sunlight + first glass of the milk. Kills the groggy start.</td>
-            <td class="num">13</td><td class="num">0</td><td class="num">6</td><td class="num">80</td>
-          </tr>
-          <tr>
-            <td class="meal">7:30<small>Meal 1</small></td>
-            <td class="foods">4 eggs scrambled + 300 g roasted yukon/russet potatoes (or mashed)</td>
-            <td class="num">31</td><td class="num">28</td><td class="num">55</td><td class="num">620</td>
-          </tr>
-          <tr>
-            <td class="meal">12:30<small>Meal 2</small></td>
-            <td class="foods">8 oz chicken breast + 2 cups cooked rice · seafood swap: salmon fillet or ½ lb shrimp over the same rice</td>
-            <td class="num">76</td><td class="num">10</td><td class="num">88</td><td class="num">775</td>
-          </tr>
-          <tr>
-            <td class="meal">4:45<small>Pre-lift</small></td>
-            <td class="foods">Core Power Elite (your 373-times-logged bottle)</td>
-            <td class="num">42</td><td class="num">3</td><td class="num">8</td><td class="num">230</td>
-          </tr>
-          <tr>
-            <td class="meal">5:30<small>Train</small></td>
-            <td class="foods">Lift (program below) — milk through the evening covers post-workout</td>
-            <td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td>
-          </tr>
-          <tr>
-            <td class="meal">7:00<small>Meal 3</small></td>
-            <td class="foods">Taco night: 6 oz 90/10 beef + 2 keto flour tortillas + 1 oz shredded cheddar + 200 g potatoes on the side · alt nights: chicken or seafood + potatoes</td>
-            <td class="num">63</td><td class="num">35</td><td class="num">50</td><td class="num">790</td>
-          </tr>
-          <tr>
-            <td class="meal">9:00<small>Snack</small></td>
-            <td class="foods">Peanut-butter putty (2 tbsp PB base) — then kitchen closed</td>
-            <td class="num">7</td><td class="num">16</td><td class="num">8</td><td class="num">190</td>
-          </tr>
-          <tr>
-            <td class="meal">rest of<small>the ½ gal</small></td>
-            <td class="foods">Remaining Fairlife skim spread across the day (~7 cups after the wake-up glass)</td>
-            <td class="num">91</td><td class="num">0</td><td class="num">42</td><td class="num">560</td>
-          </tr>
-          <tr>
-            <td class="meal">11:00<small>Wind-down</small></td>
-            <td class="foods">Screens dim, room cool — dolphins need the runway. Lights out ~11:30.</td>
-            <td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr><td colspan="2">Daily total (training day)</td><td class="num">~323</td><td class="num">~92</td><td class="num">~257</td><td class="num accent">~3,245</td></tr>
-        </tfoot>
-      </table>
+  <p class="lede" style="margin-bottom:20px;"><b>Three short blocks, each hitting one of a dolphin's three alert windows</b> — morning (burn the cortisol edge), midday (mental peak), evening (physical peak). Each = a ~20–30 min lift + a meal. Short sessions mean higher-quality sets while you're 6 months detrained, and they suit a light-sleeping dolphin better than one long workout. <b>Backbone: ½ gal Fairlife skim</b> sipped all day = 640 kcal · 104P (cheapest protein you own + hydration). Foods &amp; macros from your MacroFactor log. Protein timing is irrelevant — you just hit the daily total.</p>
+
+  <div class="blocks">
+    <div class="block">
+      <div class="bhead"><span class="btime">~7:00 AM</span><span class="bwin">Block 1 · cortisol burn</span></div>
+      <div class="brow"><span class="blab">Lift</span><b>Push — chest &amp; delts.</b> Smith bench 3×8–10 · shoulder press 3×10 · lateral flies 2×15</div>
+      <div class="brow"><span class="blab">Eat</span><b>4 eggs + 300 g roasted potatoes</b> + 2 cups milk <span class="bmac">62 P · 28 F · 67 C · 780</span></div>
+      <div class="bnote">Up at the alarm, no snooze. Milk before you touch a weight — never train this one fasted.</div>
+    </div>
+    <div class="block">
+      <div class="bhead"><span class="btime">~1:00 PM</span><span class="bwin">Block 2 · mental peak</span></div>
+      <div class="brow"><span class="blab">Lift</span><b>Back — the bring-up.</b> Smith rows 3×8–10 · pull-ups 3×AMRAP · rear-delt flies 3×15</div>
+      <div class="brow"><span class="blab">Eat</span><b>8 oz chicken + 2 cups rice</b> (swap: salmon / ½ lb shrimp) + 2 cups milk <span class="bmac">102 P · 10 F · 88 C · 850</span></div>
+      <div class="bnote">Biggest protein hit of the day. Back gets its own block — it's the one lagging bodypart.</div>
+    </div>
+    <div class="block">
+      <div class="bhead"><span class="btime">~5:30 PM</span><span class="bwin">Block 3 · physical peak</span></div>
+      <div class="brow"><span class="blab">Lift</span><b>Legs / arms</b> (rotates — see week). Leg press 3×10–12 · Smith squat 3×8 · leg ext 2×15</div>
+      <div class="brow"><span class="blab">Eat</span><b>Taco night:</b> 6 oz 90/10 beef + 2 keto tortillas + 1 oz cheddar + 200 g potatoes <span class="bmac">63 P · 35 F · 50 C · 790</span></div>
+      <div class="bnote">Strongest window = heaviest lower-body work. Rest of the milk through the evening.</div>
     </div>
   </div>
-  <div class="rules" style="margin-top:16px;">
-    <div class="rule"><span class="mk">+</span><span><b>Training-day top-up:</b> add ~1 cup rice at Meal 2 or 150 g potatoes at Meal 3 (+200 kcal) to land ~3,450. Rest days: run it as written (~3,250). MacroFactor's Gain program fine-tunes from there.</span></div>
-    <div class="rule"><span class="mk">✓</span><span><b>Protein lands ~320g — over the 270 target, on purpose.</b> The milk backbone makes the daily total cheap and automatic (which is the only thing that matters — see timing note above). If grocery cost matters more later, drop the shake, keep the milk.</span></div>
+
+  <div class="rules" style="margin-top:18px;">
+    <div class="rule"><span class="mk">+</span><span><b>Closer (~9 PM):</b> peanut-butter putty (~190 kcal, 7 P), then kitchen closed. Remaining ~3 cups milk anytime. Screens down 11 PM, lights out 11:30 — dolphins need the runway.</span></div>
+    <div class="rule"><span class="mk">✓</span><span><b>Totals ~3,400 kcal / ~320 P</b> on a training day. Rest day: drop Block-2 rice to 1 cup (~3,150). MacroFactor's Gain program fine-tunes the surplus once re-onboarded.</span></div>
+    <div class="rule"><span class="mk">!</span><span><b>Can't do all 3?</b> Blocks stack — miss the morning one, roll its push work into a later block. The split is for quality + schedule, not a hard rule. Total daily volume is what counts.</span></div>
   </div>
 
-  <h2>The training week — your lifts · 5:30pm · restart ramp first</h2>
-  <p class="lede" style="margin-bottom:16px;"><b>You've been mostly off for 6 months — do not jump back to 12 sets.</b> Weeks 1–2: 6–8 sets/day at RPE 6–7 (2–3 reps left in the tank), weeks 3–4: 8–10 sets, week 5+: your normal 8–12. Muscle memory brings it back fast; tendons need the runway. All movements are from your own pool. Back appears twice — it's the one bring-up.</p>
+  <h2>The training week — 3 blocks/day · restart ramp first</h2>
+  <p class="lede" style="margin-bottom:16px;"><b>6 months detrained — do NOT jump to full volume.</b> Wk 1–2: 2 sets per movement, RPE 6–7. Wk 3–4: 3 sets. Wk 5+: as listed. Each block is ~3 movements so no session runs long. Back appears most — it's the bring-up; legs (your strong suit) hold at maintenance-plus.</p>
   <div class="card">
     <div class="scroll">
       <table>
         <thead>
-          <tr><th>Day</th><th>Focus</th><th>Movements (sets × reps @ week 5+)</th></tr>
+          <tr><th>Day</th><th>Block 1 · 7 AM</th><th>Block 2 · 1 PM (back)</th><th>Block 3 · 5:30 PM</th></tr>
         </thead>
         <tbody>
-          <tr><td class="meal">Mon</td><td class="foods"><b>Back — thickness</b></td><td class="foods">Smith rows 4×8–10 · Pull-ups 3×AMRAP · Rear-delt flies 3×15 · Deadlift 2×5 (heavy top sets)</td></tr>
-          <tr><td class="meal">Tue</td><td class="foods"><b>Legs — quad</b></td><td class="foods">Leg press 4×10–12 (your 1,000 lb wheelhouse) · Smith squat 3×8 · Leg extension 3×12–15</td></tr>
-          <tr><td class="meal">Wed</td><td class="foods"><b>Push — chest</b></td><td class="foods">Smith bench 4×8–10 · Shoulder press 3×10 · Tricep pulls 3×12 · Push-ups 1×AMRAP finisher</td></tr>
-          <tr><td class="meal">Thu</td><td class="foods"><b>Back — width</b></td><td class="foods">Pull-ups 4×AMRAP (add weight when 10+) · Smith rows (wider grip) 3×10 · Rear-delt flies 3×15</td></tr>
-          <tr><td class="meal">Fri</td><td class="foods"><b>Delts + arms</b></td><td class="foods">Overhead press 4×8 · Lateral flies 4×12–15 · Tricep pulls 3×12 · Push-ups 1×AMRAP</td></tr>
-          <tr><td class="meal">Sat</td><td class="foods"><b>Legs — hinge</b></td><td class="foods">Deadlift 3×5 · Leg press (feet high, hams) 3×12 · Leg extension 2×15</td></tr>
-          <tr><td class="meal">Sun</td><td class="foods"><b>Off</b></td><td class="foods">Full rest — dolphins pay for skipped recovery in sleep quality first.</td></tr>
+          <tr><td class="meal">Mon</td><td class="foods">Smith bench · shoulder press · lateral flies</td><td class="foods"><b>thick:</b> Smith rows · pull-ups · rear-delt flies</td><td class="foods">Leg press · Smith squat · leg ext</td></tr>
+          <tr><td class="meal">Tue</td><td class="foods">OHP · push-ups · tricep pulls</td><td class="foods"><b>width:</b> pull-ups (wtd @10+) · wide rows</td><td class="foods">Deadlift 3×5 · leg press (feet high)</td></tr>
+          <tr><td class="meal">Wed</td><td class="foods">Smith bench · lateral flies</td><td class="foods"><b>thick:</b> Smith rows · rear-delt flies</td><td class="foods">Leg ext · squat · calves</td></tr>
+          <tr><td class="meal">Thu</td><td class="foods">Shoulder press · tricep pulls · push-ups</td><td class="foods"><b>width:</b> pull-ups · rows (wide)</td><td class="foods">Leg press · Smith squat</td></tr>
+          <tr><td class="meal">Fri</td><td class="foods">Smith bench · lateral flies · OHP</td><td class="foods"><b>thick:</b> Smith rows · rear-delt · deadlift 2×5</td><td class="foods">Leg ext · light leg press</td></tr>
+          <tr><td class="meal">Sat</td><td class="foods">Arms: tricep pulls · push-ups AMRAP</td><td class="foods"><b>back:</b> pull-ups AMRAP · rear-delt flies</td><td class="foods">Mobility — or full rest</td></tr>
+          <tr><td class="meal">Sun</td><td class="foods" colspan="3"><b>Off</b> — full rest. Dolphins pay for skipped recovery in sleep quality first.</td></tr>
         </tbody>
       </table>
     </div>
   </div>
   <div class="rules" style="margin-top:16px;">
-    <div class="rule"><span class="mk">1</span><span><b>Back volume leads.</b> ~14 weekly sets vs ~10 for chest — that's the specialization. Rear delts 2×/wk on top; legs stay at maintenance-plus because they're already your strong suit.</span></div>
-    <div class="rule"><span class="mk">2</span><span><b>Why 5:30pm:</b> dolphin body temp and alertness peak early evening — your strongest window. If a day falls apart, a 7:30am session is the dolphin backup (it also burns off the morning cortisol edge), just not fasted: have the milk first.</span></div>
-    <div class="rule"><span class="mk">3</span><span><b>Deload week 9</b> (~50% volume), then resume. First deload after the restart ramp, not during it.</span></div>
+    <div class="rule"><span class="mk">1</span><span><b>Back leads volume</b> — in every training day (~16 weekly sets vs ~9 chest). That's the specialization while legs &amp; chest hold as strengths.</span></div>
+    <div class="rule"><span class="mk">2</span><span><b>Each block is short by design</b> — ~3 movements, 20–30 min. Warm up the first movement, then work. No block should feel like a full workout.</span></div>
+    <div class="rule"><span class="mk">3</span><span><b>Deload week 9</b> (~50% volume across all blocks), then resume — after the restart ramp, not during it.</span></div>
   </div>
-
-  <div class="rules">
-    <div class="rule"><span class="mk">1</span><span><b>Protein floor is the whole game.</b> Land 230 g minimum, ~270 target, ~90% of days. Your log hit ≥180 g only 47% of the time — closing that gap is the biggest lever you have for lean gains.</span></div>
-    <div class="rule"><span class="mk">2</span><span><b>Let MacroFactor set the exact surplus.</b> These are food templates. Log ~2 weeks, set the program to "Gain" at 0.25–0.5%/wk, and let the algorithm steer calories off your real expenditure — don't hand-tweak on top of it.</span></div>
-    <div class="rule"><span class="mk">3</span><span><b>Flex, don't binge.</b> Whole food by default; the occasional Taco Bell or Twix fits the carb budget — your data shows this works for you as long as protein and total calories land.</span></div>
-    <div class="rule"><span class="mk">4</span><span><b>Steer weekly.</b> Trend weight + waist tape + monthly back/leg photos. If body fat climbs toward the high teens, hold calories rather than pushing the surplus.</span></div>
-  </div>
-
-  <div class="callout"><b>One number to protect:</b> body fat under ~18–19% through the bulk. Stay in that band and you reach the March prep gate at ~15% with a short, muscle-sparing cut ahead — instead of a long grind that risks the 34 lb of muscle you fought for.</div>
 
   <h2>Assessment photos — how to shoot them</h2>
   <p class="lede" style="margin-bottom:18px;">Light from the <b>front or above</b> (window / overhead), never behind — backlight kills all detail. Plain wall, phone chest-height, full body, ~6–8 ft back. Flexed and relaxed of each. These double as your first posing practice.</p>
