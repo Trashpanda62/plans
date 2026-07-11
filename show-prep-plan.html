@@ -114,9 +114,14 @@
   .lede em{font-style:italic;color:var(--ink);}
   .foods u,.meal u{text-decoration:underline;text-underline-offset:2px;}
   .foot{font-size:12px;color:var(--muted);margin-top:34px;text-align:center;}
+  @media print { .homebar{display:none;} body{background:#fff;} .card{box-shadow:none;border-color:#ccc;} }
+  .homebar{max-width:1000px;margin:0 auto;padding:14px 24px 0;font-size:13px;}
+  .homebar a{color:var(--accent);text-decoration:none;font-weight:700;}
 </style>
 </head>
 <body>
+<div class="homebar"><a href="https://trashpanda62.github.io/tapestry-area-map/social-plan.html">← Home</a> &nbsp;·&nbsp; <a href="https://trashpanda62.github.io/plans/">📋 All Plans</a></div>
+<script>if(new URLSearchParams(location.search).has('print'))addEventListener('load',()=>print());</script>
 
 <div class="wrap">
   <p class="eyebrow">Offseason → 2027 show · NPC Classic Physique</p>
