@@ -1085,20 +1085,23 @@
 
     frameMapForHandoff();
     skipBtn.style.display='block';
-    bookVid.classList.remove('gone');
+    bookVid.style.display=''; bookVid.classList.remove('gone');
     try{ openVid.currentTime=0; }catch(e){}
     var pr=openVid.play();
     if(pr&&pr.catch) pr.catch(function(){ endFly(); });   // autoplay blocked → skip to map
 
     // once the clip has settled on its final map frame, crossfade to the identical live map
+    /* The clip is 1280x720 landscape and its final ~1s HOLDS the exact live goFarmRead frame
+       (baked in via ffmpeg). We fade the video out DURING that hold, dissolving an identical
+       still into the identical live map — so there is ONE invisible transition, no second skip. */
     openVid.ontimeupdate=function(){
-      var d=openVid.duration||8.75;
-      if(!handedOff && openVid.currentTime >= d-0.75){ startHandoff(); }
+      var d=openVid.duration||8.83;
+      if(!handedOff && openVid.currentTime >= d-0.55){ startHandoff(); }
     };
     openVid.onended=function(){ endFly(); };
-    // failsafe if metadata/timeupdate never fires (clip is ~8.75s)
-    timers.push(setTimeout(function(){ if(!handedOff) startHandoff(); }, 8100));
-    timers.push(setTimeout(function(){ endFly(); }, 9800));
+    // failsafe if metadata/timeupdate never fires (clip is ~8.83s)
+    timers.push(setTimeout(function(){ if(!handedOff) startHandoff(); }, 8300));
+    timers.push(setTimeout(function(){ endFly(); }, 9900));
   }
   function startHandoff(){
     if(handedOff)return; handedOff=true;
@@ -1107,6 +1110,8 @@
     world.style.transition=''; goFarmRead();
     bookVid.classList.add('gone');             // crossfade the clip out (CSS 1s)
     timers.push(setTimeout(function(){ fadeHint(); }, 700));
+    // hard-remove after the fade so the overlay can never linger over the live map
+    timers.push(setTimeout(function(){ bookVid.style.display='none'; try{openVid.pause();}catch(e){} }, 1100));
   }
   var timers=[];
   function endFly(){
@@ -1118,9 +1123,14 @@
     goFarmRead();                              // land directly on the readable frame
     skipBtn.style.display='none';
     fadeHint();
+    timers.push(setTimeout(function(){ bookVid.style.display='none'; }, 1100));
   }
   skipBtn.onclick=endFly;
-  document.getElementById('replay').onclick=function(){hint.style.opacity='1';flythrough();};
+  document.getElementById('replay').onclick=function(){
+    hint.style.opacity='1';
+    bookVid.style.display='';                  // restore the overlay for replay
+    flythrough();
+  };
 
   /* ---------- boot ---------- */
   var booted=false;
