@@ -30,37 +30,70 @@
     touch-action:none;
   }
 
-  /* ---------- stage ---------- */
+  /* ---------- stage = a wooden desk the storybook rests on ---------- */
   #stage{
     position:fixed;
     inset:0;
     overflow:hidden;
     cursor:grab;
-    background:#c9d6a8;
+    background:
+      radial-gradient(120% 100% at 50% 30%, #6b5236, #4a3924 70%, #3a2c1b);
   }
   #stage.dragging{cursor:grabbing;}
 
-  /* the world = the farm image + hotspot layer, moved together by transform */
+  /* the world = the open storybook (both pages) + hotspot layer, moved together */
+  /* #world box === the art exactly (no padding), so hotspot %s align to the image.
+     The book cover/edges are drawn OUTSIDE via box-shadow; spine + page-shadow are
+     overlays sized to the world. */
   #world{
     position:absolute;
     top:50%;left:50%;
-    /* sized to cover; JS sets exact pixel size to preserve art aspect */
     transform:translate(-50%,-50%);
     transform-origin:center center;
     will-change:transform;
     transition:transform 0s;
+    border-radius:5px;
+    box-shadow:
+      0 0 0 3px #efe6d2,             /* cream page edge */
+      0 0 0 13px #8a6a3f,            /* leather cover */
+      0 0 0 15px #6e5230,            /* cover rim */
+      0 30px 70px -12px rgba(0,0,0,.7),
+      0 12px 26px -10px rgba(0,0,0,.55);
   }
   #world.animate{transition:transform 2.4s var(--ease);}
   #farm{
     display:block;
     width:100%;height:100%;
     object-fit:cover;
+    border-radius:5px;
     user-select:none;-webkit-user-drag:none;pointer-events:none;
   }
-  /* vignette so edges feel bounded, not cut */
+  /* book SPINE — shadow down the centre seam (also hides the farm/village art seam) */
+  #world::after{
+    content:"";
+    position:absolute;top:0;bottom:0;left:50%;
+    width:6%;
+    transform:translateX(-50%);
+    pointer-events:none;z-index:5;
+    background:linear-gradient(90deg,
+      rgba(60,44,26,0) 0%,
+      rgba(60,44,26,.30) 34%,
+      rgba(35,24,13,.48) 50%,
+      rgba(60,44,26,.30) 66%,
+      rgba(60,44,26,0) 100%);
+  }
+  /* inner page shadow around the whole spread */
+  #world::before{
+    content:"";
+    position:absolute;inset:0;
+    pointer-events:none;z-index:4;
+    border-radius:5px;
+    box-shadow:inset 0 0 70px 8px rgba(70,50,28,.32);
+  }
+  /* room vignette */
   #stage::after{
     content:"";position:fixed;inset:0;pointer-events:none;z-index:3;
-    box-shadow:inset 0 0 160px 40px rgba(40,34,26,.42);
+    box-shadow:inset 0 0 200px 60px rgba(20,14,8,.55);
   }
 
   /* ---------- hotspots ----------
@@ -73,6 +106,7 @@
     border:none;background:transparent;padding:0;
     pointer-events:none;               /* the box catches nothing */
     outline:none;
+    z-index:8;                         /* signs sit above the book spine/page overlays */
   }
   /* ---- the wooden signpost IS the clickable target ---- */
   .spot .sign{
@@ -363,12 +397,6 @@
       <span class="sign"><span class="plank">Animal Details<span class="sub">names &amp; personalities</span></span><span class="post"></span></span>
     </a>
 
-    <!-- Cabin → Show prep -->
-    <a class="spot" href="https://trashpanda62.github.io/plans/show-prep-plan.html"
-       style="left:22.5%;top:72%;" aria-label="Show Prep plan">
-      <span class="sign"><span class="plank">Show Prep<span class="sub">the cabin · playbook</span></span><span class="post"></span></span>
-    </a>
-
     <!-- ============ TOWN (right half) ============ -->
     <!-- Photographer → Obscura Studio -->
     <a class="spot" href="https://obscurastudio.design"
@@ -376,9 +404,9 @@
       <span class="sign"><span class="plank">Obscura Studio<span class="sub live">the photographer · live</span></span><span class="post"></span></span>
     </a>
 
-    <!-- Sign-painter shop → Obscura Sites -->
+    <!-- Sign-painter shop → Obscura Sites (sign lifted clear of the painted shopfront text) -->
     <a class="spot" href="https://sites.obscurastudio.design"
-       style="left:77.5%;top:12%;" aria-label="Obscura Sites website builder">
+       style="left:74%;top:7%;" aria-label="Obscura Sites website builder">
       <span class="sign"><span class="plank">Obscura Sites<span class="sub live">the sign shop · live</span></span><span class="post"></span></span>
     </a>
 
@@ -410,6 +438,12 @@
     <a class="spot mini" href="https://trashpanda62.github.io/ai-explainer/"
        style="left:84%;top:88%;" aria-label="AI Explainer">
       <span class="sign"><span class="plank">AI Explainer<span class="sub">the chalkboard</span></span><span class="post"></span></span>
+    </a>
+
+    <!-- Half-timbered cottage → Show Prep (moved into the village) -->
+    <a class="spot" href="https://trashpanda62.github.io/plans/show-prep-plan.html"
+       style="left:97%;top:74%;" aria-label="Show Prep plan">
+      <span class="sign"><span class="plank">Show Prep<span class="sub">the cottage · playbook</span></span><span class="post"></span></span>
     </a>
   </div>
 </div>
@@ -487,6 +521,10 @@
     var w=h*AR;
     world.style.width=w+'px';
     world.style.height=h+'px';
+    /* minScale = the scale that fits the WHOLE open book (both pages) on screen with
+       margin, so you can always zoom out to see the entire storybook. */
+    var fitWhole=Math.min((vw*0.92)/w,(vh*0.92)/h);
+    minScale=Math.min(0.9,fitWhole);
     clamp();
     apply();
   }
