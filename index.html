@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Tapestry Acres — The Working Library</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
 <meta name="description" content="Explore the farm. Every plan, venture, tool and playbook lives where it belongs on the land.">
 <style>
   :root{
@@ -525,7 +526,9 @@
   /* ---------- reduced motion ---------- */
   @media (prefers-reduced-motion:reduce){
     #world.animate{transition:transform .4s linear;}
-    .spot .sign{animation:none;}
+    .spot .sign{animation:none;transition:none;}
+    .spot:hover .sign,.spot:focus-visible .sign,
+    .spot.entrance:hover .sign,.spot.entrance:focus-visible .sign{transform:translate(-50%,-100%);}
   }
   /* Phones — portrait (narrow) OR landscape (short) — magnify the world to fill the
      screen, so signs must be much smaller in CSS to render a sane size. Triggering
@@ -661,7 +664,7 @@
 
 <!-- book-opening VIDEO overlay (fixed, plays once, crossfades to the live map) -->
 <div id="bookVid" aria-hidden="true">
-  <video id="openVid" muted playsinline preload="auto" poster="assets/book-open-last.jpg">
+  <video id="openVid" muted playsinline preload="metadata" poster="assets/book-open-last.jpg">
     <source src="assets/book-open.mp4" type="video/mp4">
   </video>
 </div>
@@ -701,7 +704,7 @@
 </aside>
 
 <!-- workshop panel -->
-<div class="scrim" id="scrim">
+<div class="scrim" id="scrim" aria-hidden="true">
   <div class="panel" role="dialog" aria-modal="true" aria-labelledby="wtitle">
     <div class="panel-head">
       <div class="k">Obscura Video</div>
@@ -714,7 +717,7 @@
         <div class="name">AI Explainer<span class="ext">↗</span></div>
         <div class="desc">"AI for Dummies" — a narrated, animated explainer walking through how modern AI works. Episode 1, live.</div>
       </a>
-      <span class="panel-item" style="cursor:default;opacity:.85">
+      <span class="panel-item" style="cursor:default;opacity:.85" aria-disabled="true">
         <div class="name" style="color:#9c6a3c">Dark Requiem <span class="ext" style="opacity:1;font-size:.6em;letter-spacing:.5px">· UNRELEASED</span></div>
         <div class="desc">A dark-neoclassical promo film for the Dark Requiem music pack. In production, not public yet.</div>
       </span>
@@ -910,13 +913,36 @@
   }
 
   /* ---------- Obscura Video panel (opened by the "Obscura Video" sign) ---------- */
-  var scrim=document.getElementById('scrim');
-  function closePanel(){scrim.classList.remove('open');}
+  var scrim=document.getElementById('scrim'),
+      panelEl=scrim.querySelector('.panel'),
+      pcl=document.getElementById('pclose'),
+      panelLastFocus=null;
+  function panelFocusables(){ return panelEl.querySelectorAll('a[href],button:not([disabled])'); }
+  function openPanel(){
+    panelLastFocus=document.activeElement;
+    scrim.classList.add('open');
+    scrim.setAttribute('aria-hidden','false');
+    if(pcl) pcl.focus();
+  }
+  function closePanel(){
+    if(!scrim.classList.contains('open'))return;
+    scrim.classList.remove('open');
+    scrim.setAttribute('aria-hidden','true');
+    if(panelLastFocus&&panelLastFocus.focus) panelLastFocus.focus();
+  }
   var wsBtn=document.querySelector('[data-panel="workshop"]');
-  if(wsBtn){ wsBtn.addEventListener('click',function(e){ e.preventDefault(); if(moved>8)return; scrim.classList.add('open'); }); }
-  var pcl=document.getElementById('pclose'); if(pcl){pcl.onclick=closePanel;}
+  if(wsBtn){ wsBtn.addEventListener('click',function(e){ e.preventDefault(); if(moved>8)return; openPanel(); }); }
+  if(pcl){pcl.onclick=closePanel;}
   scrim.addEventListener('click',function(e){if(e.target===scrim)closePanel();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')closePanel();});
+  /* focus trap while the panel is open */
+  panelEl.addEventListener('keydown',function(e){
+    if(e.key!=='Tab')return;
+    var f=panelFocusables(); if(!f.length)return;
+    var first=f[0], last=f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+  });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closePanel(); });
 
   /* ---------- hint auto-fade ---------- */
   var hintTimer;
@@ -942,16 +968,26 @@
       var wrap=document.createElement('div'); wrap.className='drawer-group';
       var h=document.createElement('h3'); h.textContent=g.name; wrap.appendChild(h);
       g.items.forEach(function(s){
+        var href=s.getAttribute('href');
+        var panel=s.getAttribute('data-panel');          // multi-link sign (opens a panel)
         var a=document.createElement('a');
-        a.className='place'; a.href=s.getAttribute('href');
-        if(/^https?:/.test(a.getAttribute('href'))){ a.target='_blank'; a.rel='noopener'; }
+        a.className='place'; a.href = panel ? '#' : href;
+        if(!panel && /^https?:/.test(href)){ a.target='_blank'; a.rel='noopener'; }
         var live=s.getAttribute('data-tag')==='live';
         var tag=live?'Live':(s.getAttribute('data-tag')||'');
         a.innerHTML='<span class="pn"></span><span class="pd'+(live?' live':'')+'"></span>';
         a.querySelector('.pn').textContent=s.getAttribute('data-name')||s.getAttribute('aria-label')||'Open';
         a.querySelector('.pd').textContent=tag;
-        /* tap = fly the map to that sign first, then let the link open it */
-        a.addEventListener('click',function(){ flyToSpot(s); closeDrawer(); });
+        a.addEventListener('click',function(e){
+          if(panel){                                     // fly there, close drawer, open the panel
+            e.preventDefault(); flyToSpot(s); closeDrawer(); openPanel();
+          } else if(!/^https?:/.test(href)){             // same-tab link: fly first, then navigate
+            e.preventDefault(); flyToSpot(s); closeDrawer();
+            setTimeout(function(){ location.href=href; }, 650);
+          } else {                                       // external: fly + close, new tab opens
+            flyToSpot(s); closeDrawer();
+          }
+        });
         wrap.appendChild(a);
       });
       drawerBody.appendChild(wrap);
@@ -1003,16 +1039,6 @@
     if(leftPageW<2||worldH<2) return isPhone?2.4:2.6;   // fallback before layout
     return Math.max(vw/leftPageW, vh/worldH)*1.02;
   }
-  /* Default framing: page one, full-bleed, centred so the MAJORITY of the farm signs
-     (which cluster in the top band, y≈4-20%) sit comfortably in view under the title
-     chrome — not cropped off the top. fy≈.26 lifts that cluster into frame. */
-  /* frame page one exactly as the opening video's final frame: farm page, full art height,
-     centred at fx≈.26 / fy≈.49 — so the video→live crossfade is seamless. clamp() keeps it
-     in-bounds on any viewport. */
-  /* The video ends on the full farm page (fy≈.49); goFarm lands there so the crossfade is
-     seamless. */
-  function goFarm(){ scale=farmCoverScale(); tx=txFor(0.26,scale); ty=tyFor(0.49,scale); clamp(); apply(); }
-
   /* The READABLE resting frame: after the seamless handoff we ease UP to bring the top farm
      signs (cluster at art y≈4-15%) fully into view below the title chrome. We zoom in a
      touch past cover scale so there's real vertical pan headroom (cover scale alone can be
@@ -1027,11 +1053,10 @@
     clamp(); apply();
   }
 
-  /* ---------- opening sequence (skippable, plays every visit) ----------
-     1) a CLOSED storybook swings its front cover open, revealing the first pages;
-     2) the book overlay fades and a slow cloud push-in eases onto the farm page;
-     3) it settles with PAGE ONE (the farm) filling the whole screen (full-bleed).
-     Reduced-motion → skip straight to the full-screen farm, no book, no clouds. */
+  /* ---------- opening sequence (skippable, once per session) ----------
+     Play the generated book-opening video fullscreen; near its end, crossfade to the live
+     interactive map framed identically (goFarmRead), so the handoff is seamless.
+     Reduced-motion (or ?admin=1, or a prior visit this session) → skip straight to the map. */
   var bookVid=document.getElementById('bookVid'),
       openVid=document.getElementById('openVid');
 
