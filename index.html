@@ -254,12 +254,7 @@
     0%,100%{transform:translate(-50%,-100%) rotate(-1.3deg);}
     50%{transform:translate(-50%,-100%) rotate(1.3deg);}
   }
-  /* stagger the sway so they don't move in unison */
-  .spot:nth-child(2) .sign{animation-delay:-.6s;}
-  .spot:nth-child(3) .sign{animation-delay:-1.4s;}
-  .spot:nth-child(4) .sign{animation-delay:-2.1s;}
-  .spot:nth-child(5) .sign{animation-delay:-2.8s;}
-  .spot:nth-child(6) .sign{animation-delay:-3.5s;}
+  /* sway is staggered per-sign in JS (varied delay + duration) so no two move in unison */
 
   /* ---- mini sub-document sign: smaller, sage-tinted, on a little stake ---- */
   .spot.mini .sign{animation-duration:6s;}
@@ -955,6 +950,19 @@
       drawerBody=document.getElementById('drawerBody'),
       drawerClose=document.getElementById('drawerClose');
   var spots=Array.prototype.slice.call(document.querySelectorAll('.spot'));
+
+  /* stagger every sign's sway so none move in unison — varied phase + duration by index.
+     (Deterministic: no Math.random, just spread values across the set.) */
+  if(!reduce){
+    spots.forEach(function(s,i){
+      var sign=s.querySelector('.sign'); if(!sign)return;
+      var base=parseFloat(getComputedStyle(sign).animationDuration)||5;   // honors mini/entrance overrides
+      var delay=-((i*0.83)%base).toFixed(2);                              // spread phases across the cycle
+      var dur=(base + ((i*0.37)%1.4) - 0.5).toFixed(2);                   // ±~0.7s duration variance
+      sign.style.animationDelay=delay+'s';
+      sign.style.animationDuration=dur+'s';
+    });
+  }
 
   /* group the signs in DOM order (Farm → Forest → Village) and render the list */
   (function buildDrawer(){
