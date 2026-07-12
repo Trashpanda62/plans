@@ -250,152 +250,24 @@
     border-color:#c48f4e;
   }
 
-  /* ---------- book-opening overlay ----------
-     A closed storybook that swings its cover open to reveal the map, then fades away.
-     Fixed, above everything (z-index 30), self-removes after the sequence. The cover is a
-     leaf hinged at the CENTRE spine that rotates open (rotateY) in 3D. */
-  #bookOpen{
-    position:fixed;inset:0;z-index:30;
+  /* ---------- book-opening VIDEO overlay ----------
+     A generated cinematic clip of the leather storybook opening and its pages flipping to
+     reveal the map. Plays once (fullscreen, object-fit:cover), then crossfades to the live
+     interactive map beneath. Self-removes; reduced-motion + no-video-support skip it. */
+  #bookVid{
+    position:fixed;inset:0;z-index:30;background:#211a12;
     display:flex;align-items:center;justify-content:center;
-    background:radial-gradient(120% 100% at 50% 30%, #6b5236, #4a3924 70%, #322517);
-    perspective:2200px;
-    transition:opacity .8s ease;
+    transition:opacity 1s ease;
   }
-  #bookOpen.gone{opacity:0;pointer-events:none;}
-  #bookOpen .book{
-    position:relative;
-    transform-style:preserve-3d;
-    perspective:1600px;                 /* depth for the turning page's 3D rotation */
-    border-radius:9px;
-    box-shadow:0 40px 90px -20px rgba(0,0,0,.7);
+  #bookVid.gone{opacity:0;pointer-events:none;}
+  #bookVid video{
+    width:100%;height:100%;object-fit:cover;display:block;background:#211a12;
   }
-  /* the PAGES underneath the cover.
-     LEFT half = map page 1 (the farm) — revealed as the blank leaf lifts off it.
-     RIGHT half = blank cream paper — the resting spot the turning leaf's map-back drops onto.
-     paper texture via faint ruled lines. */
-  #bookOpen .pages{
-    position:absolute;inset:0;
-    border-radius:9px;overflow:hidden;
-    background:#f2ecdd;
-    box-shadow:inset 0 0 60px rgba(120,95,55,.32);
+  /* soft vignette to blend the clip edges into the frame */
+  #bookVid::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    box-shadow:inset 0 0 160px 40px rgba(20,14,8,.6);
   }
-  /* left page = farm half of the map (left 50% of world-map, shown in the left 50% box) */
-  #bookOpen .pages .p1{
-    position:absolute;top:0;bottom:0;left:0;width:50%;
-    background:url("world-map.jpg") no-repeat;
-    background-size:200% 100%;background-position:left center;
-  }
-  /* right page = blank cream until the leaf's map-back lands on it */
-  #bookOpen .pages .p2blank{
-    position:absolute;top:0;bottom:0;right:0;width:50%;
-    background:
-      repeating-linear-gradient(0deg, rgba(150,120,75,.07) 0 1px, rgba(0,0,0,0) 1px 7px),
-      linear-gradient(90deg,#efe8d6,#f4eede);
-  }
-  #bookOpen .pages::after{  /* centre gutter shading over the open spread */
-    content:"";position:absolute;top:0;bottom:0;left:50%;width:7%;transform:translateX(-50%);
-    background:linear-gradient(90deg,rgba(60,44,26,0),rgba(30,20,10,.5),rgba(60,44,26,0));
-    pointer-events:none;z-index:4;
-  }
-  /* the FRONT COVER = full-size leaf hinged on its LEFT edge; swings open (rotateY -170°).
-     Real burgundy leather: dyed grain, worn edges, a raised gold-tooled frame, embossed
-     title, and a stitched spine band on the hinge side. */
-  #bookOpen .cover{
-    position:absolute;inset:0;
-    transform-origin:left center;
-    transform:rotateY(0deg);
-    transition:transform 1.6s cubic-bezier(.45,.03,.25,1), box-shadow 1.6s ease;
-    backface-visibility:hidden;
-    border-radius:4px 10px 10px 4px;
-    /* the generated photoreal leather cover fills the leaf */
-    background:#43101a url("assets/book-cover.png") center/cover no-repeat;
-    box-shadow:
-      inset -2px 0 6px rgba(0,0,0,.4),
-      0 24px 60px -14px rgba(0,0,0,.7);
-    overflow:hidden;
-  }
-  #bookOpen .cover.turning{transform:rotateY(-170deg);box-shadow:none;}
-  /* subtle inner shadow toward the hinge so the leaf reads as a 3D board as it swings */
-  #bookOpen .cover::after{
-    content:"";position:absolute;inset:0;pointer-events:none;border-radius:4px 10px 10px 4px;
-    box-shadow:inset 14px 0 26px -10px rgba(0,0,0,.55);
-  }
-
-  /* ---------- turning PAGE leaf (plays after the cover opens) ----------
-     A real double-sided page occupying the LEFT half, hinged on its RIGHT edge (the centre
-     spine). At rest it lies flat over the left page showing a BLANK cream sheet. It swings
-     up and over to the right (rotateY 0° → -180°): its BACK — map page 2, the town — comes
-     down onto the right page, while the FARM page beneath (.pages .p1) is revealed. You
-     literally watch a white page turn and the map appear. */
-  #bookOpen .flip{
-    position:absolute;top:0;bottom:0;left:0;width:50%;   /* the LEFT half-page */
-    transform-origin:right center;                        /* hinge at the centre spine */
-    transform:rotateY(0deg);
-    transition:transform 1.15s cubic-bezier(.45,.05,.2,1);
-    transform-style:preserve-3d;
-    z-index:3;
-  }
-  #bookOpen .flip .pg{
-    position:absolute;inset:0;
-    backface-visibility:hidden;
-    border-radius:9px 0 0 9px;
-    overflow:hidden;
-  }
-  /* FRONT = blank cream page (what you see resting) */
-  #bookOpen .flip .pg.front{
-    background:
-      repeating-linear-gradient(0deg, rgba(150,120,75,.07) 0 1px, rgba(0,0,0,0) 1px 7px),
-      linear-gradient(90deg,#f4eede,#eae2cf);
-    box-shadow:inset 0 0 34px rgba(120,95,55,.2);
-  }
-  #bookOpen .flip .pg.front::after{ /* edge shade + subtle sheen so it reads as paper */
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(90deg, rgba(60,44,26,.16), rgba(0,0,0,0) 14%, rgba(0,0,0,0) 86%, rgba(255,250,238,.3));
-  }
-  /* BACK = map page 2 (town). It's the mirror side, so flip it and show the RIGHT map half */
-  #bookOpen .flip .pg.back{
-    transform:rotateY(180deg);
-    border-radius:0 9px 9px 0;
-    background:url("world-map.jpg") no-repeat;
-    background-size:200% 100%;background-position:right center;
-    box-shadow:inset 0 0 34px rgba(120,95,55,.2);
-  }
-  /* a sweeping shadow the lifting page casts across the spread as it stands up */
-  #bookOpen .flip::before{
-    content:"";position:absolute;top:0;bottom:0;right:-2px;width:60%;
-    background:linear-gradient(90deg, rgba(30,20,10,0), rgba(30,20,10,.32));
-    opacity:0;transition:opacity 1.15s ease;z-index:5;pointer-events:none;
-  }
-  #bookOpen .flip.flipping{transform:rotateY(-180deg);}
-  #bookOpen .flip.flipping::before{opacity:0;}
-  /* shadow peaks mid-turn */
-  @keyframes pageShadow{0%{opacity:0;}45%{opacity:1;}100%{opacity:0;}}
-  #bookOpen .flip.flipping{animation:none;}
-
-  /* ---------- cloud opener layer ----------
-     A FIXED overlay that floats OVER the world (between the art and the chrome) but is
-     NOT inside #world, so it never scales with the zoom — the clouds read as drifting
-     between the map and the camera (the lens). Dense at load, then clears as the push-in
-     settles. Gated behind prefers-reduced-motion. */
-  #clouds{
-    position:fixed;inset:-10% -20%;
-    pointer-events:none;z-index:5;      /* above world(1)/spine(5)… sits under fixed chrome(6) */
-    opacity:0;transition:opacity 1.6s ease;
-  }
-  #clouds.show{opacity:1;}
-  .cloud{
-    position:absolute;
-    border-radius:50%;
-    background:radial-gradient(closest-side, rgba(255,253,248,.95), rgba(252,248,240,.7) 55%, rgba(250,246,236,0) 75%);
-    filter:blur(6px);
-    will-change:transform;
-  }
-  .cloud.c1{width:52vw;height:34vh;top:8%;left:-18%; animation:drift1 26s linear infinite;}
-  .cloud.c2{width:44vw;height:30vh;top:44%;left:22%;  animation:drift2 32s linear infinite;}
-  .cloud.c3{width:60vw;height:40vh;top:-6%;left:40%;  animation:drift1 38s linear infinite;}
-  .cloud.c4{width:40vw;height:26vh;top:60%;left:-10%; animation:drift2 30s linear infinite;}
-  @keyframes drift1{from{transform:translateX(0);}to{transform:translateX(46vw);}}
-  @keyframes drift2{from{transform:translateX(0);}to{transform:translateX(-40vw);}}
 
   /* ---- big ENTRANCE sign: the hero marker at the farm lane, carries the logo ---- */
   .spot.entrance .sign{animation-duration:6.5s;}
@@ -790,21 +662,11 @@
   </div>
 </div>
 
-<!-- book-opening overlay (fixed, above everything, self-removes) -->
-<div id="bookOpen" aria-hidden="true">
-  <div class="book" id="bookBox">
-    <div class="pages"><div class="p1"></div><div class="p2blank"></div></div>
-    <div class="flip" id="bookFlip"><div class="pg back"></div><div class="pg front"></div></div>
-    <div class="cover" id="bookLeaf"></div>
-  </div>
-</div>
-
-<!-- cloud opener layer (fixed, floats over the world, under the chrome) -->
-<div id="clouds" aria-hidden="true">
-  <div class="cloud c1"></div>
-  <div class="cloud c2"></div>
-  <div class="cloud c3"></div>
-  <div class="cloud c4"></div>
+<!-- book-opening VIDEO overlay (fixed, plays once, crossfades to the live map) -->
+<div id="bookVid" aria-hidden="true">
+  <video id="openVid" muted playsinline preload="auto" poster="assets/book-open-last.jpg">
+    <source src="assets/book-open.mp4" type="video/mp4">
+  </video>
 </div>
 
 <!-- fixed chrome -->
@@ -1075,91 +937,72 @@
      2) the book overlay fades and a slow cloud push-in eases onto the farm page;
      3) it settles with PAGE ONE (the farm) filling the whole screen (full-bleed).
      Reduced-motion → skip straight to the full-screen farm, no book, no clouds. */
-  var clouds=document.getElementById('clouds'),
-      bookOpen=document.getElementById('bookOpen'),
-      bookBox=document.getElementById('bookBox'),
-      bookLeaf=document.getElementById('bookLeaf'),
-      bookFlip=document.getElementById('bookFlip');
-  var PUSH_MS=3400;
+  var bookVid=document.getElementById('bookVid'),
+      openVid=document.getElementById('openVid');
 
-  function sizeBook(){
-    /* size the closed-book overlay to the same box as the world so the reveal aligns */
-    var vh=window.innerHeight, h=vh*0.86, w=h*AR;
-    if(w>window.innerWidth*0.94){ w=window.innerWidth*0.94; h=w/AR; }
-    bookBox.style.width=w+'px'; bookBox.style.height=h+'px';
+  /* frame the farm underneath the video so the crossfade lands on the map, not a jump */
+  function frameMapForHandoff(){
+    world.classList.remove('animate'); world.style.transition='';
+    /* start a hair zoomed-out; ease in as the video fades → gentle continuation of the
+       clip's final push onto the map. */
+    var startScale=Math.max(minScale, farmCoverScale()*0.82);
+    scale=startScale; tx=txFor(0.26,scale); ty=tyFor(0.27,scale); clamp(); apply();
   }
 
+  /* the opening: play the generated book-opening clip fullscreen, then crossfade to the
+     live interactive map with a soft continued push-in. */
+  var handedOff=false;
   function flythrough(){                       // kept name: called by boot + replay
     timers.forEach(clearTimeout);timers=[];
-    // frame the farm underneath NOW so when the book fades the map is already there
-    world.classList.remove('animate'); world.style.transition='';
-    if(reduce){ bookOpen.classList.add('gone'); goFarm(); fadeHint(); return; }
+    handedOff=false;
+    if(reduce){ bookVid.classList.add('gone'); goFarm(); fadeHint(); return; }
 
+    frameMapForHandoff();
     skipBtn.style.display='block';
-    /* Pre-position the world just BEHIND where the open book sits — a hair zoomed-out and
-       already framed on the farm — so when the book zooms+fades, the live map beneath is
-       continuous, not a cut. */
-    var startScale=Math.max(minScale, farmCoverScale()*0.62);
-    scale=startScale; tx=txFor(0.26,scale); ty=tyFor(0.28,scale); clamp(); apply();
+    bookVid.classList.remove('gone');
+    try{ openVid.currentTime=0; }catch(e){}
+    var pr=openVid.play();
+    if(pr&&pr.catch) pr.catch(function(){ endFly(); });   // autoplay blocked → skip to map
 
-    // reset the book to closed, centred
-    sizeBook();
-    bookOpen.classList.remove('gone');
-    bookOpen.style.transition='opacity .9s ease';
-    bookBox.style.transition='transform 1.3s cubic-bezier(.33,.02,.28,1)';
-    bookBox.style.transform='';
-    bookLeaf.classList.remove('turning');
-    bookFlip.classList.remove('flipping');
-    clouds.classList.remove('show');
-
-    // (1) cover swings open (CSS 1.6s) — reveals the BLANK cream page resting on the left
-    timers.push(setTimeout(function(){ bookLeaf.classList.add('turning'); }, 400));
-
-    // (2) once the cover is clear, the blank page physically turns in 3D: its map-back
-    //     drops onto the right, the farm is revealed on the left (CSS 1.15s)
-    timers.push(setTimeout(function(){ bookFlip.classList.add('flipping'); }, 1900));
-
-    // (3) HANDOFF: after the page has landed and the full map spread is visible for a beat,
-    //     the book zooms toward the lens + fades while the live map push-in starts beneath.
-    var HAND=3350;
-    timers.push(setTimeout(function(){
-      bookBox.style.transform='scale(1.14)';         // book eases toward the lens
-      world.style.transition='transform '+(PUSH_MS/1000)+'s cubic-bezier(.33,.02,.28,1)';
-      goFarm();                                      // map push-in begins now, under the book
-      clouds.classList.add('show');
-    }, HAND));
-    // book fades out over the first part of the push-in (crossfade, not a cut)
-    timers.push(setTimeout(function(){ bookOpen.classList.add('gone'); }, HAND+250));
-    timers.push(setTimeout(function(){ clouds.classList.remove('show'); }, HAND+PUSH_MS*0.55));
-    timers.push(setTimeout(function(){ endFly(); }, HAND+PUSH_MS+150));
+    // when the clip is near its end, begin the push-in so it continues under the fade
+    openVid.ontimeupdate=function(){
+      var d=openVid.duration||8;
+      if(!handedOff && openVid.currentTime >= d-1.2){ startHandoff(); }
+    };
+    openVid.onended=function(){ endFly(); };
+    // failsafe if metadata/timeupdate never fires
+    timers.push(setTimeout(function(){ if(!handedOff) startHandoff(); }, 7000));
+    timers.push(setTimeout(function(){ endFly(); }, 8600));
+  }
+  function startHandoff(){
+    if(handedOff)return; handedOff=true;
+    world.style.transition='transform 2.2s cubic-bezier(.33,.02,.28,1)';
+    goFarm();                                  // ease the live map inward
+    bookVid.classList.add('gone');             // crossfade the clip out (CSS 1s)
   }
   var timers=[];
   function endFly(){
     timers.forEach(clearTimeout);timers=[];
-    bookOpen.classList.add('gone');
-    bookFlip.classList.remove('flipping');
-    bookBox.style.transition=''; bookBox.style.transform='';
-    clouds.classList.remove('show');
-    world.style.transition='';               // hand transitions back to the .animate class
+    openVid.ontimeupdate=null; openVid.onended=null;
+    try{ openVid.pause(); }catch(e){}
+    bookVid.classList.add('gone');
+    world.style.transition='';
     goFarm();
     skipBtn.style.display='none';
     fadeHint();
   }
   skipBtn.onclick=endFly;
   document.getElementById('replay').onclick=function(){hint.style.opacity='1';flythrough();};
-  window.addEventListener('resize',sizeBook);
 
   /* ---------- boot ---------- */
   var booted=false;
   function runBoot(){
     if(booted)return;
     sizeWorld();
-    /* if layout isn't ready yet (size 0), retry shortly via timeout (works even when the
-       tab is backgrounded, unlike requestAnimationFrame which is throttled/paused). */
     if(world.offsetWidth<2){ setTimeout(runBoot,60); return; }
     booted=true;
-    /* only play the opening once per browsing session — clicking into a project and
-       hitting back returns you straight to the map, no book, no clouds. */
+    /* play the opening once per browsing session — click into a project and hit back →
+       straight to the map, no video. */
     var seen; try{ seen=sessionStorage.getItem('ta_opened'); }catch(e){}
     if(seen){ endFly(); }
     else{
@@ -1170,9 +1013,9 @@
   window.addEventListener('resize',function(){ world.classList.remove('animate'); sizeWorld(); });
   if(farm.complete && farm.naturalWidth>0){ setTimeout(runBoot,0); }
   else { farm.addEventListener('load',runBoot); farm.addEventListener('error',runBoot); }
-  window.addEventListener('load',runBoot);   /* belt-and-suspenders: never miss boot */
-  /* hard failsafe: never leave the closed book on screen if something stalls */
-  setTimeout(function(){ if(!bookOpen.classList.contains('gone')) endFly(); }, 9000);
+  window.addEventListener('load',runBoot);
+  /* hard failsafe: never leave the video on screen if something stalls */
+  setTimeout(function(){ if(!bookVid.classList.contains('gone')) endFly(); }, 11000);
 })();
 </script>
 </body>
