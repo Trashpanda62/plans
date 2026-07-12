@@ -204,6 +204,66 @@
     background:linear-gradient(#c2d29a,#a7b884);border-color:#c48f4e;
   }
 
+  /* ---------- book-opening overlay ----------
+     A closed storybook that swings its cover open to reveal the map, then fades away.
+     Fixed, above everything (z-index 30), self-removes after the sequence. The cover is a
+     leaf hinged at the CENTRE spine that rotates open (rotateY) in 3D. */
+  #bookOpen{
+    position:fixed;inset:0;z-index:30;
+    display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(120% 100% at 50% 30%, #6b5236, #4a3924 70%, #322517);
+    perspective:2200px;
+    transition:opacity .8s ease;
+  }
+  #bookOpen.gone{opacity:0;pointer-events:none;}
+  /* the book sits at map size so the reveal lines up with the world underneath */
+  #bookOpen .book{
+    position:relative;
+    transform-style:preserve-3d;
+    box-shadow:0 40px 90px -20px rgba(0,0,0,.7);
+  }
+  /* the right-hand LEAF = the front cover, hinged on its LEFT edge (the spine) */
+  #bookOpen .leaf{
+    position:absolute;top:0;left:50%;
+    width:50%;height:100%;
+    transform-origin:left center;
+    transform-style:preserve-3d;
+    transform:rotateY(0deg);
+    transition:transform 1.5s cubic-bezier(.55,.06,.4,1);
+    backface-visibility:hidden;
+    border-radius:0 8px 8px 0;
+    background:
+      linear-gradient(135deg,#8a6a3f,#6e5230 60%,#5a431f);
+    box-shadow:inset 0 0 40px rgba(0,0,0,.35), inset -2px 0 0 rgba(255,240,210,.15);
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  #bookOpen .leaf.turning{transform:rotateY(-165deg);}
+  #bookOpen .leaf .cover-inner{
+    text-align:center;color:#f0e2c2;padding:20px;
+    transform:translateZ(1px);
+  }
+  #bookOpen .leaf .cover-inner img{width:min(38%,150px);height:auto;opacity:.95;margin-bottom:10px;-webkit-user-drag:none;}
+  #bookOpen .leaf .cover-inner .ct{
+    font-family:var(--serif);font-weight:700;font-size:clamp(16px,3vw,26px);
+    letter-spacing:.5px;text-shadow:0 2px 6px rgba(0,0,0,.5);line-height:1.1;
+  }
+  #bookOpen .leaf .cover-inner .cs{
+    font-family:var(--serif);font-style:italic;font-size:clamp(11px,1.6vw,14px);
+    opacity:.85;margin-top:6px;
+  }
+  /* faint gold border frame on the cover */
+  #bookOpen .leaf::after{
+    content:"";position:absolute;inset:10px;border:1.5px solid rgba(226,196,140,.4);border-radius:0 5px 5px 0;pointer-events:none;
+  }
+  /* the LEFT half shows the map peeking (static under the opening cover) */
+  #bookOpen .peek{
+    position:absolute;top:0;left:0;width:50%;height:100%;
+    border-radius:8px 0 0 8px;overflow:hidden;
+    box-shadow:inset 0 0 40px rgba(60,40,20,.4);
+  }
+  #bookOpen .peek img{width:200%;height:100%;object-fit:cover;object-position:left center;display:block;filter:brightness(.9);}
+
   /* ---------- cloud opener layer ----------
      A FIXED overlay that floats OVER the world (between the art and the chrome) but is
      NOT inside #world, so it never scales with the zoom — the clouds read as drifting
@@ -541,6 +601,20 @@
   </div>
 </div>
 
+<!-- book-opening overlay (fixed, above everything, self-removes) -->
+<div id="bookOpen" aria-hidden="true">
+  <div class="book" id="bookBox">
+    <div class="peek"><img src="world-map.jpg" alt=""></div>
+    <div class="leaf" id="bookLeaf">
+      <div class="cover-inner">
+        <img src="assets/logo.png" alt="">
+        <div class="ct">Tapestry&nbsp;Acres</div>
+        <div class="cs">The Working Library</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- cloud opener layer (fixed, floats over the world, under the chrome) -->
 <div id="clouds" aria-hidden="true">
   <div class="cloud c1"></div>
@@ -612,7 +686,7 @@
   var isPhone = window.matchMedia('(max-width:560px),(max-height:560px)').matches;
   var DEFAULT_SCALE = isPhone ? 1.0 : 1.15;
   var scale=DEFAULT_SCALE, tx=0, ty=0;
-  var minScale=0.85, maxScale=3.4;
+  var minScale=0.85, maxScale=5.0;   /* headroom so the full-bleed farm cover never gets clamped on wide screens */
 
   function sizeWorld(){
     var vw=window.innerWidth, vh=window.innerHeight;
@@ -719,44 +793,80 @@
      centre a little above mid (fy≈.34) to frame the farm with a little forest below. */
   function txFor(fx,sc){ return world.offsetWidth*sc*(0.5-fx); }
   function tyFor(fy,sc){ return world.offsetHeight*sc*(0.5-fy); }
-  /* frame the farm page: zoomed enough to fill the screen with the farmstead */
-  var FARM_SCALE = isPhone ? 1.45 : 1.6;
-  function goFarm(){ scale=FARM_SCALE; tx=txFor(0.25,scale); ty=tyFor(0.30,scale); clamp(); apply(); }
+  /* frame the farm page FULL-SCREEN: the left page (half the world width) COVERS the
+     viewport edge-to-edge — the book frame is pushed off-screen, so page one is full-bleed.
+     cover scale = max(vw / leftPageWidth, vh / worldHeight) with a hair of overscan. */
+  function farmCoverScale(){
+    var vw=window.innerWidth, vh=window.innerHeight;
+    var leftPageW=world.offsetWidth*0.5, worldH=world.offsetHeight;
+    if(leftPageW<2||worldH<2) return isPhone?2.4:2.6;   // fallback before layout
+    return Math.max(vw/leftPageW, vh/worldH)*1.02;
+  }
+  function goFarm(){ scale=farmCoverScale(); tx=txFor(0.25,scale); ty=tyFor(0.34,scale); clamp(); apply(); }
 
-  /* ---------- cloud-zoom opener (skippable, plays every visit) ----------
-     A slow single push-in on the LEFT (farm) page while a fixed cloud layer drifts over
-     the lens, then clears. Reduced-motion → jump straight to the farm, no clouds. */
-  var clouds=document.getElementById('clouds');
-  var OPEN_MS=3600;
-  function flythrough(){
-    if(reduce){ goFarm(); fadeHint(); return; }
+  /* ---------- opening sequence (skippable, plays every visit) ----------
+     1) a CLOSED storybook swings its front cover open, revealing the first pages;
+     2) the book overlay fades and a slow cloud push-in eases onto the farm page;
+     3) it settles with PAGE ONE (the farm) filling the whole screen (full-bleed).
+     Reduced-motion → skip straight to the full-screen farm, no book, no clouds. */
+  var clouds=document.getElementById('clouds'),
+      bookOpen=document.getElementById('bookOpen'),
+      bookBox=document.getElementById('bookBox'),
+      bookLeaf=document.getElementById('bookLeaf');
+  var PUSH_MS=3000;
+
+  function sizeBook(){
+    /* size the closed-book overlay to the same box as the world so the reveal aligns */
+    var vh=window.innerHeight, h=vh*0.86, w=h*AR;
+    if(w>window.innerWidth*0.94){ w=window.innerWidth*0.94; h=w/AR; }
+    bookBox.style.width=w+'px'; bookBox.style.height=h+'px';
+  }
+
+  function flythrough(){                       // kept name: called by boot + replay
+    timers.forEach(clearTimeout);timers=[];
+    // frame the farm underneath NOW so when the book fades the map is already there
+    world.classList.remove('animate'); world.style.transition='';
+    if(reduce){ bookOpen.classList.add('gone'); goFarm(); fadeHint(); return; }
+
     skipBtn.style.display='block';
-    // start zoomed OUT-ish, framing the whole left page, then ease IN to the farm.
-    world.classList.remove('animate');
-    scale=Math.max(minScale, FARM_SCALE*0.62);
-    tx=txFor(0.25,scale); ty=tyFor(0.40,scale); clamp(); apply();
-    // clouds in (dense), over the lens
-    clouds.classList.add('show');
-    // one smooth push-in over OPEN_MS
+    // pre-position the world at the START of the push-in (slightly zoomed out on the farm)
+    var startScale=Math.max(minScale, farmCoverScale()*0.7);
+    scale=startScale; tx=txFor(0.25,scale); ty=tyFor(0.40,scale); clamp(); apply();
+
+    // (1) show the closed book, then swing the cover open
+    sizeBook();
+    bookOpen.classList.remove('gone');
+    bookLeaf.classList.remove('turning');
+    clouds.classList.remove('show');
+    timers.push(setTimeout(function(){ bookLeaf.classList.add('turning'); }, 450));   // cover swings open (~1.5s CSS)
+
+    // (2) once the cover is open, fade the book away + bring clouds in over the lens
     timers.push(setTimeout(function(){
-      world.style.transition='transform '+(OPEN_MS/1000)+'s cubic-bezier(.33,.02,.28,1)';
-      scale=FARM_SCALE; tx=txFor(0.25,scale); ty=tyFor(0.30,scale); clamp(); apply();
-    },60));
-    // clouds start clearing partway through the zoom so the map is revealed as it settles
-    timers.push(setTimeout(function(){ clouds.classList.remove('show'); }, OPEN_MS*0.45));
-    timers.push(setTimeout(function(){ endFly(); }, OPEN_MS+200));
+      bookOpen.classList.add('gone');
+      clouds.classList.add('show');
+    }, 1950));
+
+    // (3) slow push-in onto the farm, settling FULL-SCREEN
+    timers.push(setTimeout(function(){
+      world.style.transition='transform '+(PUSH_MS/1000)+'s cubic-bezier(.33,.02,.28,1)';
+      goFarm();                               // full-bleed farm cover
+    }, 2050));
+    timers.push(setTimeout(function(){ clouds.classList.remove('show'); }, 2050+PUSH_MS*0.5));
+    timers.push(setTimeout(function(){ endFly(); }, 2050+PUSH_MS+200));
   }
   var timers=[];
   function endFly(){
     timers.forEach(clearTimeout);timers=[];
+    bookOpen.classList.add('gone');
     clouds.classList.remove('show');
-    world.style.transition='';           // hand transitions back to the .animate class
+    world.style.transition='';               // hand transitions back to the .animate class
     goFarm();
     skipBtn.style.display='none';
     fadeHint();
   }
   skipBtn.onclick=endFly;
   document.getElementById('replay').onclick=function(){hint.style.opacity='1';flythrough();};
+  window.addEventListener('resize',sizeBook);
 
   /* ---------- boot ---------- */
   var booted=false;
@@ -773,6 +883,8 @@
   if(farm.complete && farm.naturalWidth>0){ setTimeout(runBoot,0); }
   else { farm.addEventListener('load',runBoot); farm.addEventListener('error',runBoot); }
   window.addEventListener('load',runBoot);   /* belt-and-suspenders: never miss boot */
+  /* hard failsafe: never leave the closed book on screen if something stalls */
+  setTimeout(function(){ if(!bookOpen.classList.contains('gone')) endFly(); }, 9000);
 })();
 </script>
 </body>
