@@ -955,11 +955,11 @@
   var bookVid=document.getElementById('bookVid'),
       openVid=document.getElementById('openVid');
 
-  /* frame the live map UNDER the video at EXACTLY the video's final frame (goFarm), so the
-     crossfade is invisible — the same farm image sits beneath the clip's last frame. */
+  /* frame the live map UNDER the video at EXACTLY the video's final frame (goFarmRead — the
+     house/top-signs resting view), so the crossfade is invisible and there is NO pan after. */
   function frameMapForHandoff(){
     world.classList.remove('animate'); world.style.transition='';
-    goFarm();
+    goFarmRead();
   }
 
   /* the opening: play the generated book-opening clip fullscreen, then crossfade to the
@@ -989,16 +989,11 @@
   }
   function startHandoff(){
     if(handedOff)return; handedOff=true;
-    /* 1) live map framed exactly as the video's last frame — crossfade the clip out over the
-       identical map beneath it (seamless). 2) then gently ease UP to the readable resting
-       frame so the top farm signs come into view. */
-    world.style.transition=''; goFarm();
+    /* live map is framed exactly as the video's last frame (goFarmRead) — pure crossfade,
+       NO pan. The clip's final frame and the live map are the same view. */
+    world.style.transition=''; goFarmRead();
     bookVid.classList.add('gone');             // crossfade the clip out (CSS 1s)
-    timers.push(setTimeout(function(){
-      world.style.transition='transform 1.4s cubic-bezier(.33,.02,.28,1)';
-      goFarmRead();
-      timers.push(setTimeout(function(){ world.style.transition=''; fadeHint(); }, 1450));
-    }, 650));
+    timers.push(setTimeout(function(){ fadeHint(); }, 700));
   }
   var timers=[];
   function endFly(){
