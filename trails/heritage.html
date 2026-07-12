@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tapestry Acres — Heritage Trail Signs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f4ead5;
+    --parchment-light: #faf4e3;
+    --ink: #2c2418;
+    --ink-soft: #4a3f2a;
+    --forest: #3d4a2a;
+    --moss: #5a6b3f;
+    --rust: #8b4a2b;
+    --gold: #a67c2e;
+    --shadow: rgba(44, 36, 24, 0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #1a1612;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: var(--ink);
+    padding: 40px 20px;
+  }
+
+  .controls {
+    max-width: 800px;
+    margin: 0 auto 40px;
+    padding: 24px;
+    background: #2a2520;
+    border-radius: 4px;
+    color: #e8dfc8;
+    text-align: center;
+  }
+
+  .controls h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: #f4ead5;
+  }
+
+  .controls p {
+    font-size: 15px;
+    opacity: 0.8;
+    line-height: 1.5;
+  }
+
+  .controls button {
+    margin-top: 16px;
+    background: #a67c2e;
+    color: #1a1612;
+    border: none;
+    padding: 10px 24px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .controls button:hover { background: #c49538; }
+
+  .sign {
+    width: 8.5in;
+    height: 11in;
+    margin: 0 auto 30px;
+    background:
+      radial-gradient(ellipse at top left, rgba(166, 124, 46, 0.08), transparent 60%),
+      radial-gradient(ellipse at bottom right, rgba(139, 74, 43, 0.08), transparent 60%),
+      var(--parchment);
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    page-break-after: always;
+  }
+
+  /* Paper texture */
+  .sign::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(139, 74, 43, 0.04) 1px, transparent 2px),
+      radial-gradient(circle at 70% 60%, rgba(61, 74, 42, 0.03) 1px, transparent 2px),
+      radial-gradient(circle at 40% 80%, rgba(166, 124, 46, 0.04) 1px, transparent 2px);
+    background-size: 80px 80px, 120px 120px, 100px 100px;
+    pointer-events: none;
+  }
+
+  /* Aged edges */
+  .sign::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 80px rgba(139, 74, 43, 0.15);
+    pointer-events: none;
+  }
+
+  .sign-inner {
+    position: relative;
+    z-index: 2;
+    padding: 0.6in 0.7in;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Header */
+  .sign-header {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 18px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .sign-header::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--ink);
+  }
+
+  .brand-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 14px;
+  }
+
+  .brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--forest);
+  }
+
+  .marker-number {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--rust);
+    letter-spacing: 0.1em;
+  }
+
+  .marker-number .num {
+    font-size: 18px;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .eyebrow {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 1.05;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--rust);
+  }
+
+  .year-stamp {
+    position: absolute;
+    top: 0.5in;
+    right: 0.5in;
+    border: 2px solid var(--ink);
+    padding: 8px 14px;
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    background: var(--parchment-light);
+    transform: rotate(3deg);
+  }
+
+  .year-stamp .label {
+    display: block;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    color: var(--rust);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  /* Body */
+  .sign-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .lead {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.35;
+    color: var(--ink-soft);
+  }
+
+  .lead::first-letter {
+    font-family: 'Fraunces', serif;
+    font-size: 68px;
+    font-weight: 700;
+    float: left;
+    line-height: 0.85;
+    margin-right: 10px;
+    margin-top: 6px;
+    color: var(--rust);
+    font-style: normal;
+  }
+
+  .prose {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  .prose p { margin-bottom: 12px; }
+
+  .prose strong {
+    font-weight: 600;
+    color: var(--forest);
+  }
+
+  /* Divider */
+  .ornament {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 4px 0;
+  }
+
+  .ornament-line {
+    flex: 1;
+    height: 1px;
+    background: var(--ink-soft);
+    opacity: 0.4;
+  }
+
+  .ornament-glyph {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    color: var(--rust);
+  }
+
+  /* Fact box */
+  .factbox {
+    background: rgba(61, 74, 42, 0.08);
+    border-left: 3px solid var(--forest);
+    padding: 18px 22px;
+    position: relative;
+  }
+
+  .factbox .fact-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--forest);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .factbox .fact-body {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--ink);
+    font-style: italic;
+  }
+
+  /* Footer */
+  .sign-footer {
+    border-top: 1px solid var(--ink-soft);
+    padding-top: 14px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .footer-coords em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    letter-spacing: 0.05em;
+    text-transform: none;
+  }
+
+  /* Decorative corner flourishes */
+  .corner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    opacity: 0.3;
+  }
+
+  .corner-tl { top: 0.3in; left: 0.3in; border-top: 2px solid var(--rust); border-left: 2px solid var(--rust); }
+  .corner-tr { top: 0.3in; right: 0.3in; border-top: 2px solid var(--rust); border-right: 2px solid var(--rust); }
+  .corner-bl { bottom: 0.3in; left: 0.3in; border-bottom: 2px solid var(--rust); border-left: 2px solid var(--rust); }
+  .corner-br { bottom: 0.3in; right: 0.3in; border-bottom: 2px solid var(--rust); border-right: 2px solid var(--rust); }
+
+  /* Sign 1 - slightly different title treatment */
+  .sign-1 .title { font-size: 48px; }
+
+  /* Print */
+  @media print {
+    body { background: white; padding: 0; }
+    .controls { display: none; }
+    .sign {
+      box-shadow: none;
+      margin: 0;
+      width: 8.5in;
+      height: 11in;
+    }
+  }
+
+  /* Screen preview */
+  @media screen and (max-width: 900px) {
+    .sign {
+      width: 100%;
+      height: auto;
+      min-height: 0;
+    }
+    .title { font-size: 32px !important; }
+    .sign-1 .title { font-size: 36px !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <h1>Tapestry Acres Heritage Trail</h1>
+  <p>Ten interpretive signs for 396 Taylor Crossroads Road, Monroe, Tennessee.<br>Print on 8.5 × 11 cardstock. Laminate for outdoor use.</p>
+  <button onclick="window.print()">Print All Signs</button>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SIGN 1 — Welcome / The Joseph Taylor Grant -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="sign sign-1">
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <div class="year-stamp">
+    <span class="label">circa</span>
+    1805
+  </div>
+
+  <div class="sign-inner">
+    <div class="sign-header">
+      <div class="brand-row">
+        <div class="brand">Tapestry Acres · Heritage Trail</div>
+        <div class="marker-number"><span class="num">I</span> · of ten</div>
+      </div>
+      <div class="eyebrow">The Founding</div>
+      <h1 class="title">The Joseph Taylor <em>Grant</em></h1>
+    </div>
+
+    <div class="sign-body">
+      <div class="lead">
+        The land beneath your feet was part of a sprawling tract purchased by Joseph Taylor in the early 1800s — a holding so large that the crossroads, the road, and the community itself would carry his name for the next two centuries.
+      </div>
+
+      <div class="ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-glyph">❦</div>
+        <div class="ornament-line"></div>
+      </div>
+
+      <div class="prose">
+        <p>Taylor was a man of means and civic standing. After the Cherokee cessions and the organization of Overton County in 1806, settlers like Taylor received large tracts as state land grants — paid for in pennies per acre. Joseph Taylor acquired enough acreage here to constitute its own named district in state records, alongside Monroe, Oakley, Independence, and Ozone.</p>
+        <p>He deeded a portion of his land for a community school, and the little crossroads took his name in gratitude. His descendants still live on the adjoining parcels today.</p>
+      </div>
+
+      <div class="factbox">
+        <div class="fact-label">Did You Know</div>
+        <div class="fact-body">Andrew Jackson and John Sevier — Tennessee's first governor — both held land in the Taylor district during this same era.</div>
+      </div>
+    </div>
+
+    <div class="sign-footer">
+      <div>Tapestry Acres · 396 Taylor Crossroads Rd</div>
+      <div class="footer-coords"><em>Monroe, Tennessee · est. pre-1806</em></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SIGN 2 — The Overhill Cherokee -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="sign">
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <div class="year-stamp">
+    <span class="label">before</span>
+    1806
+  </div>
+
+  <div class="sign-inner">
+    <div class="sign-header">
+      <div class="brand-row">
+        <div class="brand">Tapestry Acres · Heritage Trail</div>
+        <div class="marker-number"><span class="num">II</span> · of ten</div>
+      </div>
+      <div class="eyebrow">First Peoples</div>
+      <h1 class="title">Hunting Grounds of the <em>Nettle Carrier</em></h1>
+    </div>
+
+    <div class="sign-body">
+      <div class="lead">
+        Long before Joseph Taylor, before any deed was filed in any courthouse, the hills and hollows you see were a Cherokee hunting preserve — walked by hunters from the Overhill Towns for generations.
+      </div>
+
+      <div class="ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-glyph">❧</div>
+        <div class="ornament-line"></div>
+      </div>
+
+      <div class="prose">
+        <p>The Cherokee who hunted this part of the Upper Cumberland were known in white settlement records as the <strong>"Nettle Carrier" Indians</strong>, led by a chief of the same name. They maintained friendly relations with early white explorers — including Colonel Stephen Copland, who in 1799 worked out a hospitable arrangement with Nettle Carrier himself to settle near present-day Monroe.</p>
+        <p>In 1763, a party of Long Hunters — the legendary solo woodsmen who ranged for months at a time — explored these ridges and camped along Spring Creek and the Roaring River. They were very likely the first Europeans to see this land.</p>
+      </div>
+
+      <div class="factbox">
+        <div class="fact-label">The Long Hunters</div>
+        <div class="fact-body">These early frontiersmen would disappear into the wilderness for up to a year, surviving on game, and returning with pelts worth fortunes back east.</div>
+      </div>
+    </div>
+
+    <div class="sign-footer">
+      <div>A land walked long before it was owned</div>
+      <div class="footer-coords"><em>Overhill Cherokee Territory</em></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SIGN 3 — Monroe, First County Seat -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="sign">
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <div class="year-stamp">
+    <span class="label">seat of</span>
+    1806
+  </div>
+
+  <div class="sign-inner">
+    <div class="sign-header">
+      <div class="brand-row">
+        <div class="brand">Tapestry Acres · Heritage Trail</div>
+        <div class="marker-number"><span class="num">III</span> · of ten</div>
+      </div>
+      <div class="eyebrow">A Forgotten Capital</div>
+      <h1 class="title">Monroe, The <em>First</em> County Seat</h1>
+    </div>
+
+    <div class="sign-body">
+      <div class="lead">
+        A few miles from where you stand, Monroe once held the reins of Overton County — a bustling crossroads where the Kentucky Stock Road met the wagon route to Danville.
+      </div>
+
+      <div class="ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-glyph">✦</div>
+        <div class="ornament-line"></div>
+      </div>
+
+      <div class="prose">
+        <p>When Overton County was carved out of Jackson County on <strong>September 12, 1806</strong>, Monroe was chosen as its seat of government. Benjamin Totten served as the county's first clerk. For nearly thirty years, Monroe thrived as a traffic hub — drovers pushing cattle north to Kentucky, settlers heading west, court days drawing farmers from miles around.</p>
+        <p>In 1835, the county seat was moved to Livingston. Traffic through Monroe declined; the courthouse left; but the community remained, its bones still visible in the old roads that cross this land.</p>
+      </div>
+
+      <div class="factbox">
+        <div class="fact-label">Neighbors in Name</div>
+        <div class="fact-body">Joannah Sevier — daughter of Tennessee's first governor — lived most of her life near Monroe and is buried there. Her mother "Bonnie Kate" Sevier moved to Overton County in 1815.</div>
+      </div>
+    </div>
+
+    <div class="sign-footer">
+      <div>Overton County · Established 1806</div>
+      <div class="footer-coords"><em>Seat moved to Livingston, 1835</em></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SIGN 4 — Civil War Camps -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="sign">
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <div class="year-stamp">
+    <span class="label">summer</span>
+    1861
+  </div>
+
+  <div class="sign-inner">
+    <div class="sign-header">
+      <div class="brand-row">
+        <div class="brand">Tapestry Acres · Heritage Trail</div>
+        <div class="marker-number"><span class="num">IV</span> · of ten</div>
+      </div>
+      <div class="eyebrow">The War Years</div>
+      <h1 class="title">Camp Myers <em>&</em> the Men Who Drilled Here</h1>
+    </div>
+
+    <div class="sign-body">
+      <div class="lead">
+        In the summer of 1861, Confederate recruits from across the Upper Cumberland gathered at two training camps just north of here — one of them, Camp Myers, mere minutes from this property.
+      </div>
+
+      <div class="ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-glyph">⚜</div>
+        <div class="ornament-line"></div>
+      </div>
+
+      <div class="prose">
+        <p>Camp Myers was named for <strong>Calvin Myers</strong>, a Mexican War veteran who helped recruit several companies for the 25th Tennessee Infantry. He led the regiment until he was mortally wounded in the 1864 Atlanta campaign.</p>
+        <p>Conditions at the camp were rough. Officers complained of 917 privates with only 665 guns; letters home mentioned no dishes, no soap, beef and flour bread cooked in a shared skillet. And yet from this ground went men who would fight at Perryville, Murfreesboro, Chickamauga — and surrender at Appomattox on April 9, 1865.</p>
+      </div>
+
+      <div class="factbox">
+        <div class="fact-label">A Local Guerrilla</div>
+        <div class="fact-body">Colonel John M. Hughs of the 25th Tennessee slipped back through these hills in the winter of 1863–64, leading a 300-man Confederate guerrilla band into Kentucky to raid Federal installations.</div>
+      </div>
+    </div>
+
+    <div class="sign-footer">
+      <div>Camp Myers Historical Marker · SR 111</div>
+      <div class="footer-coords"><em>Tennessee Civil War Trails</em></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SIGN 5 — The General Store -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="sign">
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <div class="year-stamp">
+    <span class="label">moved</span>
+    1919
+  </div>
+
+  <div class="sign-inner">
+    <div class="sign-header">
+      <div class="brand-row">
+        <div class="brand">Tapestry Acres · Heritage Trail</div>
+        <div class="marker-number"><span class="num">V</span> · of ten</div>
+      </div>
+      <div class="eyebrow">The Heart of the Crossroads</div>
+      <h1 class="title">Fourteen Pairs <em>of</em> Mules</h1>
+    </div>
+
+    <div class="sign-body">
+      <div class="lead">
+        In 1919, the community did something remarkable. They picked up an entire general store — building and all — and moved it across miles of swamp and field to the crossroads.
+      </div>
+
+      <div class="ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-glyph">❦</div>
+        <div class="ornament-line"></div>
+      </div>
+
+      <div class="prose">
+        <p>The original store had stood in the Hatcher Hall community, owned first by Joe D. Hatcher and later by Hardy Keisling. In 1919, the entire building was <strong>mounted on poplar poles and dragged by fourteen pairs of mules</strong> to its new home at Taylors Crossroads — passing through swampland owned by the Harris Hatcher family and across lands of Paul and William Sells.</p>
+        <p>For the next ninety-one years, this store was the beating heart of the community — until its doors closed for the last time on September 2, 2010.</p>
+      </div>
+
+      <div class="factbox">
+        <div class="fact-label">The Coleman Era</div>
+        <div class="fact-body">John Dudley Coleman bought the store in 1930. The Coleman family — Bill, Ed, Minor, J.D., and their sons — would own and operate it for the next sixty-one years.</div>
+      </div>
+    </div>
+
+    <div class="sign-footer">
+      <div>J.D. Coleman &amp; Sons General Merchandise</div>
+      <div class="footer-coords"><em>1919 · 2010</em></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SIGN 6 — The Six Corn Mills -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="sign">
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <div class="year-stamp">
+    <span class="label">est.</span>
+    19th c.
+  </div>
+
+  <div class="sign-inner">
+    <div class="sign-header">
+      <div class="brand-row">
+        <div class="brand">Tapestry Acres · Heritage Trail</div>
+        <div class="marker-number"><span class="num">VI</span> · of ten</div>
+      </div>
+      <div class="eyebrow">A Farming Community</div>
+      <h1 class="title">The <em>Six</em> Corn Mills</h1>
+    </div>
+
+    <div class="sign-body">
+      <div class="lead">
+        Six corn mills once spun within walking distance of this spot — each one run by a neighbor, each one grinding the sustenance of a community that fed itself.
+      </div>
+
+      <div class="ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-glyph">❧</div>
+        <div class="ornament-line"></div>
+      </div>
+
+      <div class="prose">
+        <p>The millers were names still familiar here: <strong>Sam Flowers. Roscoe Martin. Sherman Garrett. Billy Morgan Garrett. Virgil Stover. Bob Taylor.</strong> Each ran a small mill grinding corn into meal for cornbread and hominy, and into cracked feed for hogs and chickens.</p>
+        <p>Farmers on this land raised corn as the staple crop, with tobacco — both burley and dark-fired — as the cash crop that paid the taxes. Cattle grazed the hollows; hogs rooted in the woods; chickens scratched the dooryards. It was a landscape that asked much of its people and gave back enough, if just enough, to keep families here for two hundred years.</p>
+      </div>
+
+      <div class="factbox">
+        <div class="fact-label">Honoring the Past</div>
+        <div class="fact-body">These 110 acres continue the tradition — now with alpacas, goats, a mini donkey, and a mini horse instead of draft mules and plow oxen. Same land, different stewards.</div>
+      </div>
+    </div>
+
+    <div class="sign-footer">
+      <div>From mill wheels to fiber wheels</div>
+      <div class="footer-coords"><em>woaksyarns.com</em></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SIGN 7 — Depression Era -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="sign">
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <div class="year-stamp">
+    <span class="label">the year</span>
+    1932
+  </div>
+
+  <div class="sign-inner">
+    <div class="sign-header">
+      <div class="brand-row">
+        <div class="brand">Tapestry Acres · Heritage Trail</div>
+        <div class="marker-number"><span class="num">VII</span> · of ten</div>
+      </div>
+      <div class="eyebrow">Lean Years</div>
+      <h1 class="title">Six Cents <em>a</em> Dozen</h1>
+    </div>
+
+    <div class="sign-body">
+      <div class="lead">
+        During the Great Depression, cash disappeared from these hills almost entirely. Farmers bartered with what they had — eggs, chickens, chestnuts, ginseng, fur hides — and took "due bills" instead of dollars.
+      </div>
+
+      <div class="ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-glyph">✦</div>
+        <div class="ornament-line"></div>
+      </div>
+
+      <div class="prose">
+        <p>Bill Coleman remembered the prices. <strong>Eggs were six cents a dozen. Corn, forty cents a bushel.</strong> One legendary trade at the general store: a Steel King double-bladed axe, priced at $1.60, swapped even-up for a 500-pound calf.</p>
+        <p>Children dug May Apple root to dry and sell. They scoured the woods for ginseng — worth far more than any other foraged good. They picked up glass Coke bottles along the roads and cashed them in at the store. Everyone in the community, down to the youngest child, contributed something to the family ledger.</p>
+      </div>
+
+      <div class="factbox">
+        <div class="fact-label">A Resourceful Place</div>
+        <div class="fact-body">Country hams aged on wires strung from poles in the side room of the store. To test one, the storekeeper would stick a nail into the ham and smell it to see if it was still good.</div>
+      </div>
+    </div>
+
+    <div class="sign-footer">
+      <div>The Depression reached these hills</div>
+      <div class="footer-coords"><em>1929 · 1939</em></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SIGN 8 — Cemetery -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="sign">
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <div class="year-stamp">
+    <span class="label">in memoriam</span>
+    1800s–
+  </div>
+
+  <div class="sign-inner">
+    <div class="sign-header">
+      <div class="brand-row">
+        <div class="brand">Tapestry Acres · Heritage Trail</div>
+        <div class="marker-number"><span class="num">VIII</span> · of ten</div>
+      </div>
+      <div class="eyebrow">Those Who Came Before</div>
+      <h1 class="title">The <em>Family</em> Cemetery</h1>
+    </div>
+
+    <div class="sign-body">
+      <div class="lead">
+        Please walk softly here. The small burying ground nearby is one of the eight old family cemeteries clustered around Taylors Crossroads — the quiet record of a community that lived, worked, and rested on this land.
+      </div>
+
+      <div class="ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-glyph">✝</div>
+        <div class="ornament-line"></div>
+      </div>
+
+      <div class="prose">
+        <p>The nearby Taylors Crossroads area contains the resting places of the founding families: <strong>Sells, Stover, Miller, Richardson, Conner, Taylor, Smith, and Reeder</strong>. Some markers date from the mid-1800s. Some are weathered beyond reading. Others — fieldstones with no inscription at all — mark infants and early settlers whose names never made it into any ledger.</p>
+        <p>Together, the graveyards around Taylors Crossroads hold more than two hundred souls. They were farmers, millers, storekeepers, mothers who outlived too many children, Confederate veterans, and Sunday-school teachers. They made this place what it is.</p>
+      </div>
+
+      <div class="factbox">
+        <div class="fact-label">Please Respect the Ground</div>
+        <div class="fact-body">Take only photographs. Leave flowers, not footprints on the graves. Many of these families still have descendants living within a mile of this spot.</div>
+      </div>
+    </div>
+
+    <div class="sign-footer">
+      <div>Rest in the land they loved</div>
+      <div class="footer-coords"><em>Overton County · Roll Call 1795–1975</em></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SIGN 9 — The Abandoned Church -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="sign">
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <div class="year-stamp">
+    <span class="label">sanctuary</span>
+    —
+  </div>
+
+  <div class="sign-inner">
+    <div class="sign-header">
+      <div class="brand-row">
+        <div class="brand">Tapestry Acres · Heritage Trail</div>
+        <div class="marker-number"><span class="num">IX</span> · of ten</div>
+      </div>
+      <div class="eyebrow">The Old Meetinghouse</div>
+      <h1 class="title">A Church <em>in</em> the Hollow</h1>
+    </div>
+
+    <div class="sign-body">
+      <div class="lead">
+        At the far edge of the property stands a small, weathered church — silent now, its paint long gone, its congregation scattered to newer buildings or laid down beside it in the earth.
+      </div>
+
+      <div class="ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-glyph">✧</div>
+        <div class="ornament-line"></div>
+      </div>
+
+      <div class="prose">
+        <p>Rural Overton County was once dotted with these small meetinghouses — one-room sanctuaries built by hand, using local timber, on land deeded by whichever neighbor could spare an acre. The congregations were Baptist, Methodist, Cumberland Presbyterian, and — most numerous here — Church of Christ.</p>
+        <p>Sunday mornings meant families walking in from every direction along the crossroads, children in their best clothes, men shaking hands in the churchyard, the preacher's voice carrying through open windows in warm weather. When the roads improved and the congregations merged into larger churches in town, buildings like this one simply fell quiet.</p>
+      </div>
+
+      <div class="factbox">
+        <div class="fact-label">Still Standing</div>
+        <div class="fact-body">The building itself is a piece of folk architecture — timber joinery, hand-planed siding, and a roof that has outlasted every generation of the community it served.</div>
+      </div>
+    </div>
+
+    <div class="sign-footer">
+      <div>A place of gathering, a place of memory</div>
+      <div class="footer-coords"><em>Please do not enter the structure</em></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SIGN 10 — Tapestry Acres Today -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="sign">
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <div class="year-stamp">
+    <span class="label">present</span>
+    day
+  </div>
+
+  <div class="sign-inner">
+    <div class="sign-header">
+      <div class="brand-row">
+        <div class="brand">Tapestry Acres · Heritage Trail</div>
+        <div class="marker-number"><span class="num">X</span> · of ten</div>
+      </div>
+      <div class="eyebrow">The Land Today</div>
+      <h1 class="title">One Hundred <em>and</em> Three Acres</h1>
+    </div>
+
+    <div class="sign-body">
+      <div class="lead">
+        What you see is the newest chapter in a very long story — a story that stretches back through general stores and corn mills, through Civil War camps and courthouses, through Cherokee hunting grounds and into the deep quiet of the pre-colonial forest.
+      </div>
+
+      <div class="ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-glyph">❦</div>
+        <div class="ornament-line"></div>
+      </div>
+
+      <div class="prose">
+        <p>Today, Tapestry Acres raises <strong>heritage-breed alpacas, goats, a mini horse named Penelope, and a mini donkey named Murphy</strong>. The fiber is spun into yarn. The pastures are managed for both grazing and hay. The property welcomes visitors for bookable experiences — because the best way to honor a piece of land with this much history is to let it keep working, keep teaching, and keep gathering people together.</p>
+        <p>Thank you for walking with us. The Taylor family named the crossroads; the Coleman family kept the store; the Sells, Stovers, and Garretts ground the corn. We are only the latest stewards. The land remembers them all.</p>
+      </div>
+
+      <div class="factbox">
+        <div class="fact-label">Visit Again</div>
+        <div class="fact-body">Book an experience · Shop the fiber at woaksyarns.com · Follow the seasons with us. This land has two hundred more years of stories to tell.</div>
+      </div>
+    </div>
+
+    <div class="sign-footer">
+      <div>Tapestry Acres · est. in the tradition of those before</div>
+      <div class="footer-coords"><em>396 Taylor Crossroads Road · Monroe, TN</em></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tapestry Acres — Signage Dashboard</title>
+<style>
+  :root{
+    --ink:#2b2620;--soft:#6b6258;--line:#d8cfc2;--sage:#7a8b5a;--sage-deep:#5f6f44;
+    --clay:#b9824f;--clay-deep:#9c6a3c;--parchment:#f3efe7;--ground:#faf8f3;--card:#fffdf9;
+    --serif:Georgia,"Palatino Linotype",Palatino,"Book Antiqua",serif;
+    --sans:"Segoe UI",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}html,body{margin:0;padding:0;}
+  body{font-family:var(--sans);color:var(--ink);background:var(--ground);line-height:1.5;}
+  a{color:inherit;}
+  .page{max-width:1040px;margin:0 auto;padding:26px 28px 72px;}
+  .home{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--soft);
+    text-decoration:none;padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--card);margin-bottom:28px;}
+  .home:hover{color:var(--sage-deep);border-color:var(--sage);}
+  header{padding-bottom:18px;border-bottom:1px solid var(--sage);margin-bottom:8px;}
+  header img.logo{display:block;max-height:70px;width:auto;margin:0 0 16px;}
+  .eyebrow{font-size:11px;letter-spacing:2.6px;text-transform:uppercase;color:var(--clay-deep);font-weight:700;margin:0 0 10px;}
+  h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,6vw,44px);line-height:1.04;margin:0;letter-spacing:-.5px;}
+  .intro{font-size:14px;color:var(--soft);margin:18px 0 30px;max-width:60ch;line-height:1.6;}
+  h2{font-family:var(--serif);font-weight:700;font-size:clamp(20px,4vw,26px);color:var(--sage-deep);
+    margin:44px 0 4px;letter-spacing:-.3px;}
+  .sec-note{font-size:12.5px;color:var(--soft);margin:0 0 18px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;margin:0;padding:0;list-style:none;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 16px 18px;
+    transition:border-color .15s,box-shadow .18s;display:flex;flex-direction:column;}
+  .card:hover{border-color:#cbc0ae;box-shadow:0 6px 22px -14px rgba(70,55,35,.32);}
+  .card img{width:100%;border-radius:8px;display:block;background:var(--parchment);}
+  .cap{font-family:var(--serif);font-weight:700;font-size:15.5px;color:var(--ink);margin:12px 0 0;}
+  .card p{font-size:12.5px;color:var(--soft);margin:6px 0 0;line-height:1.5;}
+  .card.text{justify-content:flex-start;}
+  .card.text .cap{margin-top:0;}
+  .tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--clay-deep);
+    background:var(--parchment);border:1px solid #e3d8c5;border-radius:999px;padding:2px 9px;margin-top:10px;align-self:flex-start;}
+  .card.pdf{justify-content:center;align-items:flex-start;min-height:150px;}
+  .pdf-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--serif);font-weight:700;font-size:16px;
+    color:var(--sage-deep);text-decoration:none;margin-top:10px;}
+  .pdf-link:hover{color:var(--sage);text-decoration:underline;}
+  footer{margin-top:52px;padding-top:16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--soft);}
+  footer .mark{font-family:var(--serif);font-style:italic;color:var(--sage-deep);}
+</style>
+</head>
+<body>
+<div class="page">
+  <a class="home" href="https://trashpanda62.github.io/plans/"><span aria-hidden="true">←</span> The Map</a>
+  <header>
+    <img class="logo" src="assets/logo.png" alt="Tapestry Acres logo">
+    <p class="eyebrow">Tapestry Acres</p>
+    <h1>Signage Dashboard</h1>
+  </header>
+  <p class="intro">Every sign, ad, and flyer for the farm, gathered in one place for printing and reference.</p>
+
+  <h2>Property Signs</h2>
+  <p class="sec-note">Animal, pasture, and interpretive signs posted around the farm — plus the printable info-sign text.</p>
+  <ul class="grid">
+    <li class="card"><img src="assets/tapestry-acres-alpaca-sign.png" alt="Alpaca sign"><p class="cap">Alpacas</p></li>
+    <li class="card"><img src="assets/tapestry-acres-alpaca-fiber-sign.png" alt="Alpaca fiber sign"><p class="cap">Alpaca Fiber</p></li>
+    <li class="card"><img src="assets/tapestry-acres-alpaca-uses-sign.png" alt="Alpaca uses sign"><p class="cap">Alpaca Uses</p></li>
+    <li class="card"><img src="assets/tapestry-acres-highland-sign.png" alt="Highland cattle sign"><p class="cap">Highland Cattle</p></li>
+    <li class="card"><img src="assets/tapestry-acres-goats-sign.png" alt="Goats sign"><p class="cap">Goats</p></li>
+    <li class="card"><img src="assets/tapestry-acres-nigerian-dwarves-sign.png" alt="Nigerian Dwarf goats sign"><p class="cap">Nigerian Dwarf Goats</p></li>
+    <li class="card"><img src="assets/tapestry-acres-kunekune-sign.png" alt="KuneKune pig sign"><p class="cap">KuneKune Pigs</p></li>
+    <li class="card"><img src="assets/tapestry-acres-mules-sign.png" alt="Mules sign"><p class="cap">Mules</p></li>
+    <li class="card"><img src="assets/tapestry-acres-murphy-sign.png" alt="Murphy sign"><p class="cap">Murphy</p></li>
+    <li class="card"><img src="assets/tapestry-acres-penelope-sign.png" alt="Penelope sign"><p class="cap">Penelope</p></li>
+    <li class="card"><img src="assets/tapestry-acres-drylot-sign.png" alt="Drylot sign"><p class="cap">The Drylot</p></li>
+    <li class="card"><img src="assets/tapestry-acres-poison-ivy-sign.png" alt="Poison ivy warning sign"><p class="cap">Poison Ivy Warning</p></li>
+
+    <li class="card text"><p class="cap">Animal Feed</p><p>$1 each — Alpaca &amp; Goat Feed, Animal Crackers for cows &amp; goats, Chicken Feed. Please feed gently: hands flat. Thank you!</p><span class="tag">Info sign</span></li>
+    <li class="card text"><p class="cap">Guest Wi-Fi</p><p>Network: <strong>Tapestry Acres</strong> · Password: <strong>maxfield</strong>. Scan to connect, or enter manually. tapestryacres.com</p><span class="tag">Info sign</span></li>
+    <li class="card text"><p class="cap">Alpaca Rental</p><p>$25 for 30 minutes · $40 for 1 hour. Need one longer? Ask our staff about bringing alpacas to your next event.</p><span class="tag">Info sign</span></li>
+    <li class="card text"><p class="cap">Walking Your Alpaca — Safe Handling Rules</p><p>Approach from the side, keep the lead loose (never around your hand), no pulling, hands off the head/face, no treats from your pocket, stay calm and quiet. If something feels off, stop and bring the alpaca back to staff.</p><span class="tag">Rules sign</span></li>
+    <li class="card text"><p class="cap">Sorghum — The Roller Mill</p><p>Juice-extraction press: the first stop in making sorghum syrup. Heavy iron rollers, traditionally mule-powered, crush the cane and squeeze out the raw green juice. Spent cane (bagasse) is piled aside.</p><span class="tag">Interpretive</span></li>
+    <li class="card text"><p class="cap">Sorghum — The Cooker</p><p>The evaporating pan: a long shallow pan over open fire where raw juice becomes golden syrup. The cook skims green foam and reads doneness by how the syrup sheets off a wooden paddle.</p><span class="tag">Interpretive</span></li>
+    <li class="card text"><p class="cap">Loved Your Visit? Leave a Review</p><p>Scan with your phone's camera to leave a Google review. Thank you from the herd — Monroe, Tennessee · woaksyarns.com</p><span class="tag">Review sign</span></li>
+
+    <li class="card pdf"><p class="cap">Alpaca Walks</p><a class="pdf-link" href="assets/Alpaca_Walks_Sign.pdf">Open PDF ↗</a><span class="tag">PDF sign</span></li>
+    <li class="card pdf"><p class="cap">Alpaca Parking</p><a class="pdf-link" href="assets/alpaca_parking_sign.pdf">Open PDF ↗</a><span class="tag">PDF sign</span></li>
+  </ul>
+
+  <h2>Ads &amp; Flyers</h2>
+  <p class="sec-note">Food-truck menu ads, promo flyers, and printable handouts.</p>
+  <ul class="grid">
+    <li class="card"><img src="assets/tapestry-acres-smashburger-ad.png" alt="Smashburger ad"><p class="cap">Smashburger</p></li>
+    <li class="card"><img src="assets/tapestry-acres-brats-ad-v2.png" alt="Bratwurst ad"><p class="cap">Bratwurst</p></li>
+    <li class="card"><img src="assets/tapestry-acres-queso-ad.png" alt="Queso ad"><p class="cap">Queso</p></li>
+    <li class="card"><img src="assets/tapestry-acres-drinks-ad.png" alt="Drinks ad"><p class="cap">Drinks</p></li>
+    <li class="card"><img src="assets/Bratwurst.jpg" alt="Bratwurst photo"><p class="cap">Bratwurst (Photo)</p></li>
+    <li class="card"><img src="assets/smashburger-flyer.jpg" alt="Smashburger flyer"><p class="cap">Smashburger Flyer</p></li>
+    <li class="card"><img src="assets/tapestry-acres-flyer-letter.jpg" alt="Tapestry Acres letter flyer"><p class="cap">Farm Flyer (Letter)</p></li>
+    <li class="card"><img src="assets/tapestry-acres-food-truck-saturdays.jpg" alt="Food Truck Saturdays flyer"><p class="cap">Food Truck Saturdays</p></li>
+    <li class="card"><img src="assets/tapestry-acres-may-rv-promo.jpg" alt="May RV promo"><p class="cap">May RV Promo</p></li>
+
+    <li class="card pdf"><p class="cap">Smashburger Flyer</p><a class="pdf-link" href="assets/smashburger-flyer.pdf">Open PDF ↗</a><span class="tag">PDF flyer</span></li>
+    <li class="card pdf"><p class="cap">Farm Flyer (Letter)</p><a class="pdf-link" href="assets/tapestry-acres-flyer-letter.pdf">Open PDF ↗</a><span class="tag">PDF flyer</span></li>
+    <li class="card pdf"><p class="cap">Food Truck Saturdays</p><a class="pdf-link" href="assets/tapestry-acres-food-truck-saturdays.pdf">Open PDF ↗</a><span class="tag">PDF flyer</span></li>
+  </ul>
+
+  <footer><span class="mark">Signage Dashboard</span> · Tapestry Acres &amp; Dale Hollow</footer>
+</div>
+</body>
+</html>

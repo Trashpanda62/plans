@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Livingston Local Services</title>
+<style>
+  :root{
+    --ink:#2b2620;--soft:#6b6258;--line:#d8cfc2;--sage:#7a8b5a;--sage-deep:#5f6f44;
+    --clay:#b9824f;--clay-deep:#9c6a3c;--parchment:#f3efe7;--ground:#faf8f3;--card:#fffdf9;
+    --serif:Georgia,"Palatino Linotype",Palatino,"Book Antiqua",serif;
+    --sans:"Segoe UI",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}html,body{margin:0;padding:0;}
+  body{font-family:var(--sans);color:var(--ink);background:var(--ground);line-height:1.5;}
+  a{color:inherit;}
+  .page{max-width:720px;margin:0 auto;padding:26px 28px 72px;}
+  .home{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--soft);
+    text-decoration:none;padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--card);margin-bottom:28px;}
+  .home:hover{color:var(--sage-deep);border-color:var(--sage);}
+  header{padding-bottom:18px;border-bottom:1px solid var(--sage);margin-bottom:8px;}
+  .eyebrow{font-size:11px;letter-spacing:2.6px;text-transform:uppercase;color:var(--clay-deep);font-weight:700;margin:0 0 10px;}
+  h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,6vw,44px);line-height:1.04;margin:0;letter-spacing:-.5px;}
+  .intro{font-size:14px;color:var(--soft);margin:18px 0 30px;max-width:60ch;line-height:1.6;}
+  .cards{display:flex;flex-direction:column;gap:18px;list-style:none;margin:0;padding:0;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;transition:border-color .15s,box-shadow .18s;}
+  .card:hover{border-color:#cbc0ae;box-shadow:0 6px 22px -14px rgba(70,55,35,.32);}
+  .card .primary{font-family:var(--serif);font-weight:700;font-size:clamp(18px,3vw,22px);color:var(--sage-deep);}
+  .card p{font-size:13.5px;color:var(--soft);margin:8px 0 0;line-height:1.55;}
+  .tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--clay-deep);
+    background:var(--parchment);border:1px solid #e3d8c5;border-radius:999px;padding:3px 10px;margin-left:8px;vertical-align:middle;}
+  .closing{font-size:14px;color:var(--soft);margin:34px 0 0;max-width:60ch;line-height:1.6;}
+  footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--soft);}
+  footer .mark{font-family:var(--serif);font-style:italic;color:var(--sage-deep);}
+</style>
+</head>
+<body>
+<div class="page">
+  <a class="home" href="https://trashpanda62.github.io/plans/"><span aria-hidden="true">←</span> The Map</a>
+  <header>
+    <p class="eyebrow">Livingston, Tennessee</p>
+    <h1>Local Services</h1>
+  </header>
+  <p class="intro">A local shop helping Livingston folks and small businesses get online and look good &mdash; custom websites, photography sessions, and hands-on help with the odd jobs in between. Coming soon.</p>
+
+  <ul class="cards">
+    <li class="card">
+      <span class="primary">Websites<span class="tag">Coming soon</span></span>
+      <p>Clean, fast sites for local businesses, churches, and events. Built and maintained here in town.</p>
+    </li>
+    <li class="card">
+      <span class="primary">Photography<span class="tag">Coming soon</span></span>
+      <p>Portraits, small business branding shoots, events, and real-estate photos around Livingston.</p>
+    </li>
+    <li class="card">
+      <span class="primary">Odd Jobs &amp; Extras<span class="tag">Coming soon</span></span>
+      <p>Signage, flyers, print, digital cleanup, and the small tech jobs nobody else wants.</p>
+    </li>
+  </ul>
+
+  <p class="closing">Still getting the doors open &mdash; check back soon, and we&rsquo;ll be glad to help.</p>
+
+  <footer><span class="mark">Livingston Local Services</span> · Livingston, TN</footer>
+</div>
+</body>
+</html>
