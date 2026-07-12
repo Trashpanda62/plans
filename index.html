@@ -313,7 +313,7 @@
     position:absolute;top:0;bottom:0;left:50%;right:0;   /* the right half-page */
     transform-origin:left center;
     transform:rotateY(0deg);
-    transition:transform 1.15s cubic-bezier(.4,.05,.25,1);
+    transition:transform .9s cubic-bezier(.45,.02,.2,1);
     transform-style:preserve-3d;
     backface-visibility:hidden;
     border-radius:0 9px 9px 0;
@@ -342,7 +342,7 @@
     opacity:0;transition:opacity 1.15s ease;z-index:3;
   }
   #bookOpen .flip.flipping{transform:rotateY(-172deg);}
-  #bookOpen .flip.flipping::before{opacity:1;}
+  #bookOpen .flip.flipping::before{opacity:1;transition:opacity .9s ease;}
 
   /* ---------- cloud opener layer ----------
      A FIXED overlay that floats OVER the world (between the art and the chrome) but is
@@ -1052,7 +1052,7 @@
       bookBox=document.getElementById('bookBox'),
       bookLeaf=document.getElementById('bookLeaf'),
       bookFlip=document.getElementById('bookFlip');
-  var PUSH_MS=3000;
+  var PUSH_MS=3400;
 
   function sizeBook(){
     /* size the closed-book overlay to the same box as the world so the reveal aligns */
@@ -1068,40 +1068,48 @@
     if(reduce){ bookOpen.classList.add('gone'); goFarm(); fadeHint(); return; }
 
     skipBtn.style.display='block';
-    // pre-position the world at the START of the push-in (slightly zoomed out on the farm)
-    var startScale=Math.max(minScale, farmCoverScale()*0.7);
-    scale=startScale; tx=txFor(0.25,scale); ty=tyFor(0.40,scale); clamp(); apply();
+    /* Pre-position the world just BEHIND where the open book sits — a hair zoomed-out and
+       already framed on the farm — so when the book zooms+fades, the live map beneath is
+       continuous, not a cut. */
+    var startScale=Math.max(minScale, farmCoverScale()*0.62);
+    scale=startScale; tx=txFor(0.26,scale); ty=tyFor(0.28,scale); clamp(); apply();
 
-    // (1) show the closed leather book, then swing the cover open
+    // reset the book to closed, centred
     sizeBook();
     bookOpen.classList.remove('gone');
+    bookOpen.style.transition='opacity .9s ease';
+    bookBox.style.transition='transform 1.3s cubic-bezier(.33,.02,.28,1)';
+    bookBox.style.transform='';
     bookLeaf.classList.remove('turning');
     bookFlip.classList.remove('flipping');
     clouds.classList.remove('show');
-    timers.push(setTimeout(function(){ bookLeaf.classList.add('turning'); }, 450));   // cover swings open (~1.6s CSS)
 
-    // (2) with the cover open, flip the first PAGE over (reveals the map beneath)
-    timers.push(setTimeout(function(){ bookFlip.classList.add('flipping'); }, 1700));  // page turn (~1.1s CSS)
+    // (1) cover swings open (CSS 1.6s)
+    timers.push(setTimeout(function(){ bookLeaf.classList.add('turning'); }, 400));
 
-    // (3) once the page has turned, fade the book away + bring clouds in over the lens
+    // (2) page turns just as the cover swings clear — a clear sweep (CSS .9s)
+    timers.push(setTimeout(function(){ bookFlip.classList.add('flipping'); }, 1150));
+
+    // (3) HANDOFF: the whole book gently zooms toward the camera AND the live map push-in
+    //     starts underneath at the same instant, so the book dissolves INTO the moving map.
+    var HAND=2250;
     timers.push(setTimeout(function(){
-      bookOpen.classList.add('gone');
-      clouds.classList.add('show');
-    }, 2900));
-
-    // (4) slow push-in onto the farm, settling FULL-SCREEN
-    timers.push(setTimeout(function(){
+      bookBox.style.transform='scale(1.14)';         // book eases toward the lens
       world.style.transition='transform '+(PUSH_MS/1000)+'s cubic-bezier(.33,.02,.28,1)';
-      goFarm();                               // full-bleed farm cover
-    }, 3000));
-    timers.push(setTimeout(function(){ clouds.classList.remove('show'); }, 3000+PUSH_MS*0.5));
-    timers.push(setTimeout(function(){ endFly(); }, 3000+PUSH_MS+200));
+      goFarm();                                      // map push-in begins now, under the book
+      clouds.classList.add('show');
+    }, HAND));
+    // book fades out over the first part of the push-in (crossfade, not a cut)
+    timers.push(setTimeout(function(){ bookOpen.classList.add('gone'); }, HAND+250));
+    timers.push(setTimeout(function(){ clouds.classList.remove('show'); }, HAND+PUSH_MS*0.55));
+    timers.push(setTimeout(function(){ endFly(); }, HAND+PUSH_MS+150));
   }
   var timers=[];
   function endFly(){
     timers.forEach(clearTimeout);timers=[];
     bookOpen.classList.add('gone');
     bookFlip.classList.remove('flipping');
+    bookBox.style.transition=''; bookBox.style.transform='';
     clouds.classList.remove('show');
     world.style.transition='';               // hand transitions back to the .animate class
     goFarm();
