@@ -1092,13 +1092,13 @@
 
     // once the clip has settled on its final map frame, crossfade to the identical live map
     openVid.ontimeupdate=function(){
-      var d=openVid.duration||7.8;
-      if(!handedOff && openVid.currentTime >= d-0.7){ startHandoff(); }
+      var d=openVid.duration||8.75;
+      if(!handedOff && openVid.currentTime >= d-0.75){ startHandoff(); }
     };
     openVid.onended=function(){ endFly(); };
-    // failsafe if metadata/timeupdate never fires
-    timers.push(setTimeout(function(){ if(!handedOff) startHandoff(); }, 7200));
-    timers.push(setTimeout(function(){ endFly(); }, 8800));
+    // failsafe if metadata/timeupdate never fires (clip is ~8.75s)
+    timers.push(setTimeout(function(){ if(!handedOff) startHandoff(); }, 8100));
+    timers.push(setTimeout(function(){ endFly(); }, 9800));
   }
   function startHandoff(){
     if(handedOff)return; handedOff=true;
