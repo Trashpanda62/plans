@@ -1121,13 +1121,13 @@
        frame the live map identically (goFarmFull) BEHIND the still-opaque clip, fade the clip
        away over that identical picture, THEN gently ease in to the readable farm-top view. */
     openVid.ontimeupdate=function(){
-      var d=openVid.duration||8.75;
-      if(!handedOff && openVid.currentTime >= d-0.5){ startHandoff(); }
+      var d=openVid.duration||6.12;
+      if(!handedOff && openVid.currentTime >= d-0.4){ startHandoff(); }
     };
     openVid.onended=function(){ if(!handedOff) startHandoff(); };
-    // failsafe if metadata/timeupdate never fires (clip is ~8.75s, ends held on the whole book)
-    timers.push(setTimeout(function(){ if(!handedOff) startHandoff(); }, 8300));
-    timers.push(setTimeout(function(){ endFly(); }, 9900));
+    // failsafe if metadata/timeupdate never fires (clip is ~6.12s, ends held on the whole book)
+    timers.push(setTimeout(function(){ if(!handedOff) startHandoff(); }, 5900));
+    timers.push(setTimeout(function(){ endFly(); }, 7200));
   }
   function startHandoff(){
     if(handedOff)return; handedOff=true;
