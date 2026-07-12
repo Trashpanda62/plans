@@ -286,7 +286,7 @@
   #bookVid{
     position:fixed;inset:0;z-index:30;background:#211a12;
     display:flex;align-items:center;justify-content:center;
-    transition:opacity 1s ease;
+    transition:opacity .35s ease;
   }
   #bookVid.gone{opacity:0;pointer-events:none;}
   #bookVid video{
@@ -1105,13 +1105,18 @@
   }
   function startHandoff(){
     if(handedOff)return; handedOff=true;
-    /* live map is framed exactly as the video's last frame (goFarmRead) — pure crossfade,
-       NO pan. The clip's final frame and the live map are the same view. */
-    world.style.transition=''; goFarmRead();
-    bookVid.classList.add('gone');             // crossfade the clip out (CSS 1s)
-    timers.push(setTimeout(function(){ fadeHint(); }, 700));
+    /* Re-frame the map to goFarmRead INSTANTLY (no animate, transition:0) while the opaque clip
+       still fully covers it — so the map is guaranteed to sit at the correct farm-top frame for
+       THIS viewport before any pixel of it is revealed. The snap happens behind the video, then
+       we fade the video away over the identical view. No visible jump on any screen size. */
+    world.classList.remove('animate'); world.style.transition='none';
+    goFarmRead();
+    /* force the snap to paint before the fade starts */
+    void world.offsetWidth;
+    bookVid.classList.add('gone');             // crossfade the clip out (CSS)
+    timers.push(setTimeout(function(){ fadeHint(); }, 500));
     // hard-remove after the fade so the overlay can never linger over the live map
-    timers.push(setTimeout(function(){ bookVid.style.display='none'; try{openVid.pause();}catch(e){} }, 1100));
+    timers.push(setTimeout(function(){ bookVid.style.display='none'; try{openVid.pause();}catch(e){} }, 900));
   }
   var timers=[];
   function endFly(){
