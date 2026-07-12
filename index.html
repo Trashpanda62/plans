@@ -738,12 +738,19 @@
   var scale=DEFAULT_SCALE, tx=0, ty=0;
   var minScale=0.85, maxScale=5.0;   /* headroom so the full-bleed farm cover never gets clamped on wide screens */
 
+  /* Hard cap on the open-book size so it never stretches unbounded on ultrawide screens.
+     The whole spread (both pages) is capped to MAX_BOOK_W; above that the book stays put and
+     the leather desk fills the extra width. Height cap follows from the page AR. */
+  var MAX_BOOK_W = 1520;                       // px — max width of the full open book
+  var MAX_BOOK_H = MAX_BOOK_W / AR;            // ≈ 1140
   function sizeWorld(){
     var vw=window.innerWidth, vh=window.innerHeight;
     var margin=0.98;
-    /* fill height (cover vertically); width follows the wide AR and overflows → pannable */
-    var h=vh*margin;
+    /* fill height (cover vertically); width follows the wide AR and overflows → pannable.
+       CAP both so the book can't grow past MAX_BOOK_W/H on big screens. */
+    var h=Math.min(vh*margin, MAX_BOOK_H);
     var w=h*AR;
+    if(w>MAX_BOOK_W){ w=MAX_BOOK_W; h=w/AR; }
     world.style.width=w+'px';
     world.style.height=h+'px';
     /* minScale = the scale that fits the WHOLE open book (both pages) on screen with
@@ -1073,6 +1080,13 @@
     ty=0;                                   // centred vertically
     clamp(); apply();
   }
+  /* The RESTING frame: the WHOLE open book (both pages) centred on the desk — this is exactly
+     what the opening clip now ends on, so the handoff has NO zoom. minScale already = fit-whole. */
+  function goWhole(){
+    scale=minScale;
+    tx=0; ty=0;
+    clamp(); apply();
+  }
 
   /* ---------- opening sequence (skippable, once per session) ----------
      Play the generated book-opening video fullscreen; near its end, crossfade to the live
@@ -1085,7 +1099,7 @@
      house/top-signs resting view), so the crossfade is invisible and there is NO pan after. */
   function frameMapForHandoff(){
     world.classList.remove('animate'); world.style.transition='';
-    goFarmRead();
+    goWhole();
   }
 
   /* the opening: play the generated book-opening clip fullscreen, then crossfade to the
@@ -1094,7 +1108,7 @@
   function flythrough(){                       // kept name: called by boot + replay
     timers.forEach(clearTimeout);timers=[];
     handedOff=false;
-    if(reduce){ bookVid.classList.add('gone'); goFarmRead(); fadeHint(); return; }
+    if(reduce){ bookVid.classList.add('gone'); goWhole(); fadeHint(); return; }
 
     frameMapForHandoff();
     skipBtn.style.display='block';
@@ -1107,30 +1121,24 @@
        frame the live map identically (goFarmFull) BEHIND the still-opaque clip, fade the clip
        away over that identical picture, THEN gently ease in to the readable farm-top view. */
     openVid.ontimeupdate=function(){
-      var d=openVid.duration||7.83;
-      if(!handedOff && openVid.currentTime >= d-0.45){ startHandoff(); }
+      var d=openVid.duration||8.75;
+      if(!handedOff && openVid.currentTime >= d-0.5){ startHandoff(); }
     };
     openVid.onended=function(){ if(!handedOff) startHandoff(); };
-    // failsafe if metadata/timeupdate never fires (clip is ~7.83s)
-    timers.push(setTimeout(function(){ if(!handedOff) startHandoff(); }, 7500));
-    timers.push(setTimeout(function(){ endFly(); }, 9200));
+    // failsafe if metadata/timeupdate never fires (clip is ~8.75s, ends held on the whole book)
+    timers.push(setTimeout(function(){ if(!handedOff) startHandoff(); }, 8300));
+    timers.push(setTimeout(function(){ endFly(); }, 9900));
   }
   function startHandoff(){
     if(handedOff)return; handedOff=true;
-    /* 1) SNAP the live map to the clip's final framing (whole left page) INSTANTLY, behind the
-          still-opaque clip, so the reveal lands on the same picture — no pop on any screen. */
+    /* The clip now ENDS on the whole open book. Snap the live map to that SAME whole-book rest
+       (goWhole) INSTANTLY behind the still-opaque clip, then fade the clip away over the identical
+       picture. No zoom, no pan, no pop — the reveal is the clip's own final frame going live. */
     world.classList.remove('animate'); world.style.transition='none';
-    goFarmFull();
+    goWhole();
     void world.offsetWidth;                    // force the snap to paint
-    /* 2) fade the clip away over that identical view (CSS .35s) */
-    bookVid.classList.add('gone');
-    /* 3) once revealed, ease from the full-page view IN to the readable farm-top rest — this is
-          an intentional zoom-in, not a jump. */
-    timers.push(setTimeout(function(){
-      world.classList.add('animate');          // #world.animate = smooth transform ease
-      goFarmRead();
-      fadeHint();
-    }, 420));
+    bookVid.classList.add('gone');             // fade the clip out (CSS .35s)
+    timers.push(setTimeout(function(){ fadeHint(); }, 300));
     // hard-remove the overlay after its fade so it can never linger over the live map
     timers.push(setTimeout(function(){ bookVid.style.display='none'; try{openVid.pause();}catch(e){} }, 500));
   }
@@ -1141,7 +1149,7 @@
     try{ openVid.pause(); }catch(e){}
     bookVid.classList.add('gone');
     world.style.transition='';
-    goFarmRead();                              // land directly on the readable frame
+    goWhole();                                 // land directly on the whole-book rest
     skipBtn.style.display='none';
     fadeHint();
     timers.push(setTimeout(function(){ bookVid.style.display='none'; }, 1100));
