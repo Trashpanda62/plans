@@ -1060,6 +1060,19 @@
     ty=(scaledH-vh)/2 + vh*0.16;
     clamp(); apply();
   }
+  /* The frame that matches the OPENING VIDEO's final held frame: the whole LEFT page (farm at
+     top blending down into forest+pond) shown top-to-bottom, cover-fit like the clip. The clip
+     is portrait and ends here, so framing the live map identically makes the crossfade land on
+     the same picture — then goFarmRead eases in for the readable resting view. */
+  function goFarmFull(){
+    /* Match the OPENING CLIP's final frame. The clip is object-fit:cover, so on the live map we
+       use the SAME cover math as farmCoverScale (max of the two fit ratios) and centre on the
+       left page — the reveal then lands on the same picture the clip ended on, any screen. */
+    scale=farmCoverScale();
+    tx=txFor(0.25,scale);
+    ty=0;                                   // centred vertically
+    clamp(); apply();
+  }
 
   /* ---------- opening sequence (skippable, once per session) ----------
      Play the generated book-opening video fullscreen; near its end, crossfade to the live
@@ -1090,33 +1103,36 @@
     var pr=openVid.play();
     if(pr&&pr.catch) pr.catch(function(){ endFly(); });   // autoplay blocked → skip to map
 
-    // once the clip has settled on its final map frame, crossfade to the identical live map
-    /* The clip is 1280x720 landscape and its final ~1s HOLDS the exact live goFarmRead frame
-       (baked in via ffmpeg). We fade the video out DURING that hold, dissolving an identical
-       still into the identical live map — so there is ONE invisible transition, no second skip. */
+    /* Near the clip's end, hand off. The clip ends on the WHOLE left page (farm->forest); we
+       frame the live map identically (goFarmFull) BEHIND the still-opaque clip, fade the clip
+       away over that identical picture, THEN gently ease in to the readable farm-top view. */
     openVid.ontimeupdate=function(){
-      var d=openVid.duration||8.83;
-      if(!handedOff && openVid.currentTime >= d-0.55){ startHandoff(); }
+      var d=openVid.duration||7.83;
+      if(!handedOff && openVid.currentTime >= d-0.45){ startHandoff(); }
     };
-    openVid.onended=function(){ endFly(); };
-    // failsafe if metadata/timeupdate never fires (clip is ~8.83s)
-    timers.push(setTimeout(function(){ if(!handedOff) startHandoff(); }, 8300));
-    timers.push(setTimeout(function(){ endFly(); }, 9900));
+    openVid.onended=function(){ if(!handedOff) startHandoff(); };
+    // failsafe if metadata/timeupdate never fires (clip is ~7.83s)
+    timers.push(setTimeout(function(){ if(!handedOff) startHandoff(); }, 7500));
+    timers.push(setTimeout(function(){ endFly(); }, 9200));
   }
   function startHandoff(){
     if(handedOff)return; handedOff=true;
-    /* Re-frame the map to goFarmRead INSTANTLY (no animate, transition:0) while the opaque clip
-       still fully covers it — so the map is guaranteed to sit at the correct farm-top frame for
-       THIS viewport before any pixel of it is revealed. The snap happens behind the video, then
-       we fade the video away over the identical view. No visible jump on any screen size. */
+    /* 1) SNAP the live map to the clip's final framing (whole left page) INSTANTLY, behind the
+          still-opaque clip, so the reveal lands on the same picture — no pop on any screen. */
     world.classList.remove('animate'); world.style.transition='none';
-    goFarmRead();
-    /* force the snap to paint before the fade starts */
-    void world.offsetWidth;
-    bookVid.classList.add('gone');             // crossfade the clip out (CSS)
-    timers.push(setTimeout(function(){ fadeHint(); }, 500));
-    // hard-remove after the fade so the overlay can never linger over the live map
-    timers.push(setTimeout(function(){ bookVid.style.display='none'; try{openVid.pause();}catch(e){} }, 900));
+    goFarmFull();
+    void world.offsetWidth;                    // force the snap to paint
+    /* 2) fade the clip away over that identical view (CSS .35s) */
+    bookVid.classList.add('gone');
+    /* 3) once revealed, ease from the full-page view IN to the readable farm-top rest — this is
+          an intentional zoom-in, not a jump. */
+    timers.push(setTimeout(function(){
+      world.classList.add('animate');          // #world.animate = smooth transform ease
+      goFarmRead();
+      fadeHint();
+    }, 420));
+    // hard-remove the overlay after its fade so it can never linger over the live map
+    timers.push(setTimeout(function(){ bookVid.style.display='none'; try{openVid.pause();}catch(e){} }, 500));
   }
   var timers=[];
   function endFly(){
