@@ -314,62 +314,102 @@
 
 <div id="stage">
   <div id="world">
-    <img id="farm" src="farm-map.jpg" alt="An illustrated bird's-eye map of Tapestry Acres farm">
+    <img id="farm" src="world-map.jpg" alt="An illustrated bird's-eye map of Tapestry Acres — the farm and the village beyond">
 
-    <!-- hotspots: each .spot is a POINT (left/top %) above its building; only the
-         wooden sign inside it is clickable, so the click target = the sign you see. -->
+    <!-- hotspots: each .spot is a POINT (left/top %) above its object; only the wooden
+         sign inside it is clickable. World is a 3200x900 panorama: FARM = left half
+         (x 0-50%), TOWN = right half (x 50-100%). -->
+
+    <!-- ============ FARM (left half) ============ -->
     <!-- Roadside sign → Social plan -->
     <a class="spot" href="https://trashpanda62.github.io/tapestry-area-map/social-plan.html"
-       style="left:8%;top:34%;" aria-label="Social Media Posting Plan">
+       style="left:4%;top:34%;" aria-label="Social Media Posting Plan">
       <span class="sign"><span class="plank">Social Plan<span class="sub">roadside sign</span></span><span class="post"></span></span>
     </a>
 
     <!-- Farmhouse → Website -->
     <a class="spot" href="https://trashpanda62.github.io/tapestry-game/"
-       style="left:50%;top:31%;" aria-label="Tapestry Acres Website">
+       style="left:25%;top:31%;" aria-label="Tapestry Acres Website">
       <span class="sign"><span class="plank">The Website<span class="sub live">farmhouse · live</span></span><span class="post"></span></span>
     </a>
 
-    <!-- Website sub-doc: Name the Herd admin (by the garden plot) -->
+    <!-- Website sub-doc: Name the Herd admin -->
     <a class="spot mini" href="https://script.google.com/macros/s/AKfycbwZV6h4w5j_K1n4aCO-Cp1w_ZbFGl6caMHS39SKxC0WM0ZQU0GGhhqmHr0LZvQZb5K6/exec?admin=1"
-       style="left:60%;top:50%;" aria-label="Name the Herd — owner admin">
+       style="left:30%;top:50%;" aria-label="Name the Herd — owner admin">
       <span class="sign"><span class="plank">Name the Herd<span class="sub">owner admin</span></span><span class="post"></span></span>
     </a>
 
     <!-- Berry field → Raspberries -->
     <a class="spot" href="https://trashpanda62.github.io/plans/tapestry-freeze-dried-raspberries.html"
-       style="left:76%;top:14%;" aria-label="Freeze-Dried Raspberries Launch Playbook">
+       style="left:38%;top:14%;" aria-label="Freeze-Dried Raspberries Launch Playbook">
       <span class="sign"><span class="plank">Freeze-Dried Berries<span class="sub">berry field · playbook</span></span><span class="post"></span></span>
     </a>
 
-    <!-- Barn workshop → Software panel -->
-    <button class="spot" data-panel="workshop"
-       style="left:84%;top:40%;" aria-label="Software and tools workshop">
-      <span class="sign"><span class="plank">The Workshop<span class="sub">software &amp; tools · 3</span></span><span class="post"></span></span>
-    </button>
-
     <!-- Pasture → Hair contest -->
     <a class="spot" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/"
-       style="left:19%;top:53%;" aria-label="Best Hair Contest Viral Poll">
+       style="left:9.5%;top:53%;" aria-label="Best Hair Contest Viral Poll">
       <span class="sign"><span class="plank">Best Hair Contest<span class="sub live">the pasture · live</span></span><span class="post"></span></span>
     </a>
 
-    <!-- Hair contest sub-doc: Posting kit for Dani (near the goats) -->
+    <!-- Hair contest sub-doc: Posting kit -->
     <a class="spot mini" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/kit.html"
-       style="left:30%;top:70%;" aria-label="Posting kit for Dani">
+       style="left:15%;top:70%;" aria-label="Posting kit for Dani">
       <span class="sign"><span class="plank">Posting Kit<span class="sub">for Dani</span></span><span class="post"></span></span>
     </a>
 
-    <!-- Hair contest sub-doc: Animal details (near the alpacas) -->
+    <!-- Hair contest sub-doc: Animal details -->
     <a class="spot mini" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/animals.html"
-       style="left:12%;top:76%;" aria-label="Animal details">
+       style="left:6%;top:76%;" aria-label="Animal details">
       <span class="sign"><span class="plank">Animal Details<span class="sub">names &amp; personalities</span></span><span class="post"></span></span>
     </a>
 
     <!-- Cabin → Show prep -->
     <a class="spot" href="https://trashpanda62.github.io/plans/show-prep-plan.html"
-       style="left:45%;top:72%;" aria-label="Show Prep plan">
+       style="left:22.5%;top:72%;" aria-label="Show Prep plan">
       <span class="sign"><span class="plank">Show Prep<span class="sub">the cabin · playbook</span></span><span class="post"></span></span>
+    </a>
+
+    <!-- ============ TOWN (right half) ============ -->
+    <!-- Photographer → Obscura Studio -->
+    <a class="spot" href="https://obscurastudio.design"
+       style="left:62.5%;top:20%;" aria-label="Obscura Studio photo suite">
+      <span class="sign"><span class="plank">Obscura Studio<span class="sub live">the photographer · live</span></span><span class="post"></span></span>
+    </a>
+
+    <!-- Sign-painter shop → Obscura Sites -->
+    <a class="spot" href="https://sites.obscurastudio.design"
+       style="left:77.5%;top:12%;" aria-label="Obscura Sites website builder">
+      <span class="sign"><span class="plank">Obscura Sites<span class="sub live">the sign shop · live</span></span><span class="post"></span></span>
+    </a>
+
+    <!-- Arcade building → browse -->
+    <a class="spot" href="https://arcade.retrogaming.win/"
+       style="left:93%;top:13%;" aria-label="Retro Arcade browse">
+      <span class="sign"><span class="plank">Retro Arcade<span class="sub live">browse · live</span></span><span class="post"></span></span>
+    </a>
+
+    <!-- Arcade cabinet → play -->
+    <a class="spot mini" href="https://play.retrogaming.win/"
+       style="left:95%;top:38%;" aria-label="Play the Retro Arcade">
+      <span class="sign"><span class="plank">Play Arcade<span class="sub">the cabinet</span></span><span class="post"></span></span>
+    </a>
+
+    <!-- Grandparents porch → Family Tree -->
+    <a class="spot" href="https://trashpanda62.github.io/family-tree/"
+       style="left:63%;top:70%;" aria-label="Family Tree Bloodlines game">
+      <span class="sign"><span class="plank">Family Tree<span class="sub live">Bloodlines game · live</span></span><span class="post"></span></span>
+    </a>
+
+    <!-- Library → Books -->
+    <a class="spot" href="https://trashpanda62.github.io/book-library/"
+       style="left:79%;top:76%;" aria-label="Books Library">
+      <span class="sign"><span class="plank">Books Library<span class="sub live">the library · live</span></span><span class="post"></span></span>
+    </a>
+
+    <!-- Chalkboard → AI Explainer -->
+    <a class="spot mini" href="https://trashpanda62.github.io/ai-explainer/"
+       style="left:84%;top:88%;" aria-label="AI Explainer">
+      <span class="sign"><span class="plank">AI Explainer<span class="sub">the chalkboard</span></span><span class="post"></span></span>
     </a>
   </div>
 </div>
@@ -390,7 +430,7 @@
     <button class="ctrl" id="reset" aria-label="Recenter the map" style="font-size:17px;">⌂</button>
     <button class="ctrl" id="replay" aria-label="Replay the flythrough" style="font-size:16px;">↻</button>
   </div>
-  <div class="hint" id="hint">Drag to roam · scroll to zoom · click a place to open it</div>
+  <div class="hint" id="hint">Drag to roam → the village is east · scroll to zoom · click a sign to open it</div>
 </div>
 
 <button class="skip" id="skip" style="display:none;">Skip ↓</button>
@@ -430,21 +470,21 @@
       hint=document.getElementById('hint'),
       skipBtn=document.getElementById('skip');
 
-  var AR = 1600/900;
-  /* Scale 1 = whole map fits (contain). DEFAULT_SCALE starts zoomed IN like a
-     cover view; minScale lets you pull WAY out to see the entire farm + margin.
-     On phones the world is already magnified to fill a narrow screen, so start
-     less zoomed-in to keep signs a sane size. */
+  var AR = 3200/900;   /* wide panorama: farm (left half) + town (right half) */
+  /* The world FILLS the viewport HEIGHT; its width is much wider than the screen,
+     so you pan left/right between the farm and the town. Scale 1 = one screen-height
+     slice. DEFAULT_SCALE frames a comfortable view; you start over the FARM (left). */
   var isPhone = window.matchMedia('(max-width:560px),(max-height:560px)').matches;
-  var DEFAULT_SCALE = isPhone ? 1.15 : 1.5;
+  var DEFAULT_SCALE = isPhone ? 1.0 : 1.15;
   var scale=DEFAULT_SCALE, tx=0, ty=0;
-  var minScale=1.0, maxScale=3.4;
+  var minScale=0.85, maxScale=3.4;
 
   function sizeWorld(){
     var vw=window.innerWidth, vh=window.innerHeight;
-    var margin=0.96;
-    var w,h;
-    if(vw/vh > AR){ h=vh*margin; w=h*AR; } else { w=vw*margin; h=w/AR; }
+    var margin=0.98;
+    /* fill height (cover vertically); width follows the wide AR and overflows → pannable */
+    var h=vh*margin;
+    var w=h*AR;
     world.style.width=w+'px';
     world.style.height=h+'px';
     clamp();
@@ -496,7 +536,7 @@
   }
   document.getElementById('zin').onclick=function(){world.classList.add('animate');zoomBy(0.3);};
   document.getElementById('zout').onclick=function(){world.classList.add('animate');zoomBy(-0.3);};
-  document.getElementById('reset').onclick=function(){world.classList.add('animate');scale=DEFAULT_SCALE;tx=0;ty=0;clamp();apply();};
+  document.getElementById('reset').onclick=function(){world.classList.add('animate');goFarm();};
 
   /* ---------- pinch zoom (2-finger) ---------- */
   var pts={},pd=0;
@@ -521,14 +561,12 @@
     s.addEventListener('click',function(e){ if(moved>8){e.preventDefault();} });
   });
 
-  /* ---------- workshop panel ---------- */
+  /* ---------- workshop panel (retained but unused: software links now live in town) ---------- */
   var scrim=document.getElementById('scrim');
-  function openPanel(){scrim.classList.add('open');}
   function closePanel(){scrim.classList.remove('open');}
-  document.querySelector('[data-panel="workshop"]').addEventListener('click',function(e){
-    if(moved>8)return; openPanel();
-  });
-  document.getElementById('pclose').onclick=closePanel;
+  var wsBtn=document.querySelector('[data-panel="workshop"]');
+  if(wsBtn){ wsBtn.addEventListener('click',function(e){ if(moved>8)return; scrim.classList.add('open'); }); }
+  var pcl=document.getElementById('pclose'); if(pcl){pcl.onclick=closePanel;}
   scrim.addEventListener('click',function(e){if(e.target===scrim)closePanel();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closePanel();});
 
@@ -536,22 +574,25 @@
   var hintTimer;
   function fadeHint(){ if(hint.style.opacity==='0')return; clearTimeout(hintTimer); hintTimer=setTimeout(function(){hint.style.opacity='0';},2600); }
 
+  /* focus helpers: fx is the world-x fraction (0=far left/farm edge, .25=farm centre,
+     .75=town centre) to bring to screen centre at the given scale. */
+  function txFor(fx,sc){ return world.offsetWidth*sc*(0.5-fx); }
+  function goFarm(){ scale=DEFAULT_SCALE; tx=txFor(0.25,scale); ty=0; clamp(); apply(); }
+
   /* ---------- flythrough on load (skippable, plays every time) ---------- */
   function flythrough(){
-    if(reduce){ scale=DEFAULT_SCALE;tx=0;ty=0;clamp();apply(); fadeHint(); return; }
+    if(reduce){ goFarm(); fadeHint(); return; }
     skipBtn.style.display='block';
-    // start zoomed into the lane entrance (upper-left), drift across, settle zoomed-in
     world.classList.add('animate');
-    scale=2.1; tx=world.offsetWidth*0.28; ty=world.offsetHeight*0.20; clamp(); apply();
+    // begin zoomed onto the farm's lane entrance, drift across the farm, settle on the farm
+    scale=1.9; tx=txFor(0.10,1.9); ty=world.offsetHeight*0.12; clamp(); apply();
     var steps=[
-      [2.1,-world.offsetWidth*0.22, world.offsetHeight*0.14, 700],    // sweep toward center
-      [1.8,-world.offsetWidth*0.12,-world.offsetHeight*0.06,1700],    // rise over the fields
-      [DEFAULT_SCALE, 0,0, 2900]                                      // settle zoomed in
+      [1.9, txFor(0.20,1.9), world.offsetHeight*0.06, 700],   // sweep across the farm
+      [1.6, txFor(0.26,1.6), -world.offsetHeight*0.04, 1700], // rise over the fields
+      [DEFAULT_SCALE, txFor(0.25,DEFAULT_SCALE), 0, 2900]     // settle framing the farm
     ];
     steps.forEach(function(s){
-      timers.push(setTimeout(function(){
-        scale=s[0];tx=s[1];ty=s[2];clamp();apply();
-      },s[3]));
+      timers.push(setTimeout(function(){ scale=s[0];tx=s[1];ty=s[2];clamp();apply(); },s[3]));
     });
     timers.push(setTimeout(function(){ endFly(); },3400));
   }
@@ -559,7 +600,7 @@
   function endFly(){
     timers.forEach(clearTimeout);timers=[];
     world.classList.add('animate');
-    scale=DEFAULT_SCALE;tx=0;ty=0;clamp();apply();
+    goFarm();
     setTimeout(function(){world.classList.remove('animate');},500);
     skipBtn.style.display='none';
     fadeHint();
