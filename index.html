@@ -100,11 +100,11 @@
   .spot .sign .plank{
     position:relative;
     background:linear-gradient(#c79a5f,#b07f45);
-    border:2px solid #8a5f31;
-    border-radius:7px;
-    padding:5px 12px 6px;
+    border:1.5px solid #8a5f31;
+    border-radius:5px;
+    padding:3px 8px 3px;
     font-family:var(--serif);font-weight:700;
-    font-size:14px;line-height:1.05;
+    font-size:9px;line-height:1.05;
     color:#3d2a15;
     text-align:center;
     white-space:nowrap;
@@ -112,20 +112,20 @@
   }
   /* two little "nails" */
   .spot .sign .plank::before,.spot .sign .plank::after{
-    content:"";position:absolute;top:4px;width:4px;height:4px;border-radius:50%;
+    content:"";position:absolute;top:2.5px;width:2.5px;height:2.5px;border-radius:50%;
     background:#6e4a26;box-shadow:inset 0 1px 0 rgba(255,240,220,.4);
   }
-  .spot .sign .plank::before{left:5px;}
-  .spot .sign .plank::after{right:5px;}
+  .spot .sign .plank::before{left:3px;}
+  .spot .sign .plank::after{right:3px;}
   .spot .sign .sub{
-    display:block;font-family:var(--sans);font-size:9.5px;font-weight:700;
-    letter-spacing:.5px;text-transform:uppercase;color:#5c3f20;margin-top:1px;
+    display:block;font-family:var(--sans);font-size:6.5px;font-weight:700;
+    letter-spacing:.3px;text-transform:uppercase;color:#5c3f20;margin-top:1px;
   }
   .spot .sign .sub.live{color:#2f6b3d;}
   .spot .sign .sub.live::before{content:"● ";color:#3c8a52;}
   /* the wooden post below the plank */
   .spot .sign .post{
-    width:5px;height:18px;
+    width:3px;height:11px;
     background:linear-gradient(90deg,#7a5228,#a06e39 40%,#7a5228);
     border-radius:0 0 2px 2px;
     margin-top:-1px;
@@ -290,9 +290,9 @@
   }
   /* small screens: smaller signs so they don't crowd the little map */
   @media (max-width:560px){
-    .spot .sign .plank{font-size:12px;padding:4px 9px 5px;}
-    .spot .sign .sub{font-size:8.5px;}
-    .spot .sign .post{height:13px;}
+    .spot .sign .plank{font-size:8px;padding:2px 6px;}
+    .spot .sign .sub{font-size:6px;}
+    .spot .sign .post{height:9px;}
     .titlecard{top:16px;left:16px;}
     .home{top:16px;right:16px;}
   }
@@ -407,15 +407,15 @@
       skipBtn=document.getElementById('skip');
 
   var AR = 1600/900;
-  var scale=1, tx=0, ty=0;          // current transform
-  var minScale=0.9, maxScale=3.0;
+  /* Scale 1 = whole map fits (contain). DEFAULT_SCALE starts zoomed IN like a
+     cover view; minScale lets you pull WAY out to see the entire farm + margin. */
+  var DEFAULT_SCALE=1.5;
+  var scale=DEFAULT_SCALE, tx=0, ty=0;
+  var minScale=1.0, maxScale=3.4;
 
-  /* Size the world so that AT SCALE 1 the WHOLE map fits inside the viewport
-     (contain), with a little margin. That makes "zoom all the way out" show the
-     entire farm. Hotspots are % of the world, so they stay aligned at any zoom. */
   function sizeWorld(){
     var vw=window.innerWidth, vh=window.innerHeight;
-    var margin=0.94;                 // leave a frame of breathing room at full view
+    var margin=0.96;
     var w,h;
     if(vw/vh > AR){ h=vh*margin; w=h*AR; } else { w=vw*margin; h=w/AR; }
     world.style.width=w+'px';
@@ -469,7 +469,7 @@
   }
   document.getElementById('zin').onclick=function(){world.classList.add('animate');zoomBy(0.3);};
   document.getElementById('zout').onclick=function(){world.classList.add('animate');zoomBy(-0.3);};
-  document.getElementById('reset').onclick=function(){world.classList.add('animate');scale=1;tx=0;ty=0;clamp();apply();};
+  document.getElementById('reset').onclick=function(){world.classList.add('animate');scale=DEFAULT_SCALE;tx=0;ty=0;clamp();apply();};
 
   /* ---------- pinch zoom (2-finger) ---------- */
   var pts={},pd=0;
@@ -511,15 +511,15 @@
 
   /* ---------- flythrough on load (skippable, plays every time) ---------- */
   function flythrough(){
-    if(reduce){ scale=1;tx=0;ty=0;clamp();apply(); fadeHint(); return; }
+    if(reduce){ scale=DEFAULT_SCALE;tx=0;ty=0;clamp();apply(); fadeHint(); return; }
     skipBtn.style.display='block';
-    // start zoomed into the lane entrance (upper-left), drift across, settle
+    // start zoomed into the lane entrance (upper-left), drift across, settle zoomed-in
     world.classList.add('animate');
-    scale=1.55; tx=world.offsetWidth*0.22; ty=world.offsetHeight*0.14; clamp(); apply();
+    scale=2.1; tx=world.offsetWidth*0.28; ty=world.offsetHeight*0.20; clamp(); apply();
     var steps=[
-      [1.55,-world.offsetWidth*0.18, world.offsetHeight*0.10, 700],   // sweep toward center
-      [1.35,-world.offsetWidth*0.10,-world.offsetHeight*0.06,1700],   // rise over the fields
-      [1.0, 0,0, 2900]                                                // settle to full view
+      [2.1,-world.offsetWidth*0.22, world.offsetHeight*0.14, 700],    // sweep toward center
+      [1.8,-world.offsetWidth*0.12,-world.offsetHeight*0.06,1700],    // rise over the fields
+      [DEFAULT_SCALE, 0,0, 2900]                                      // settle zoomed in
     ];
     steps.forEach(function(s){
       timers.push(setTimeout(function(){
@@ -532,7 +532,7 @@
   function endFly(){
     timers.forEach(clearTimeout);timers=[];
     world.classList.add('animate');
-    scale=1;tx=0;ty=0;clamp();apply();
+    scale=DEFAULT_SCALE;tx=0;ty=0;clamp();apply();
     setTimeout(function(){world.classList.remove('animate');},500);
     skipBtn.style.display='none';
     fadeHint();
