@@ -527,35 +527,35 @@
     <!-- ============ LEFT PAGE — FARM → FOREST (x 0-50%) ============ -->
     <!-- HERO: big entrance sign at the farm lane → the farm website -->
     <a class="spot entrance" href="https://trashpanda62.github.io/tapestry-game/"
-       style="left:8%;top:9%;" data-group="The Farm" data-name="Tapestry Acres" data-tag="live"
+       style="left:8%;top:13%;" data-group="The Farm" data-name="Tapestry Acres" data-tag="live"
        aria-label="Tapestry Acres — the farm">
       <span class="sign"><span class="plank"><img class="logo" src="assets/logo.png" alt=""><span class="big">Tapestry Acres</span></span><span class="post"></span></span>
     </a>
 
     <!-- Signage dashboard sign near the farmhouse → all property signs & flyers -->
     <a class="spot mini" href="signage/"
-       style="left:33%;top:10%;" data-group="The Farm" data-name="Signage Dashboard" data-tag="signs &amp; flyers"
+       style="left:33%;top:13%;" data-group="The Farm" data-name="Signage Dashboard" data-tag="signs &amp; flyers"
        aria-label="Signage Dashboard — all farm signs & flyers">
       <span class="sign"><span class="plank">Signage Dashboard<span class="sub">signs &amp; flyers</span></span><span class="post"></span></span>
     </a>
 
     <!-- Roadside sign → Social plan -->
     <a class="spot" href="https://trashpanda62.github.io/tapestry-area-map/social-plan.html"
-       style="left:13%;top:6%;" data-group="The Farm" data-name="Social Plan" data-tag="roadside sign"
+       style="left:13%;top:11%;" data-group="The Farm" data-name="Social Plan" data-tag="roadside sign"
        aria-label="Social Media Posting Plan">
       <span class="sign"><span class="plank">Social Plan<span class="sub">roadside sign</span></span><span class="post"></span></span>
     </a>
 
     <!-- Farmhouse → Website -->
     <a class="spot" href="https://trashpanda62.github.io/tapestry-game/"
-       style="left:26%;top:7%;" data-group="The Farm" data-name="The Website" data-tag="live"
+       style="left:26%;top:12%;" data-group="The Farm" data-name="The Website" data-tag="live"
        aria-label="Tapestry Acres Website">
       <span class="sign"><span class="plank">The Website<span class="sub live">farmhouse · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Berry field → Raspberries -->
     <a class="spot" href="https://trashpanda62.github.io/plans/tapestry-freeze-dried-raspberries.html"
-       style="left:39%;top:4%;" data-group="The Farm" data-name="Freeze-Dried Berries" data-tag="playbook"
+       style="left:39%;top:10%;" data-group="The Farm" data-name="Freeze-Dried Berries" data-tag="playbook"
        aria-label="Freeze-Dried Raspberries Launch Playbook">
       <span class="sign"><span class="plank">Freeze-Dried Berries<span class="sub">berry field · playbook</span></span><span class="post"></span></span>
     </a>
@@ -599,21 +599,21 @@
     <!-- ============ RIGHT PAGE — LIVINGSTON DOWNTOWN (x 50-100%) ============ -->
     <!-- Photo-studio storefront → Obscura Studio -->
     <a class="spot" href="https://obscurastudio.design"
-       style="left:55%;top:11%;" data-group="The Village" data-name="Obscura Studio" data-tag="live"
+       style="left:55%;top:13%;" data-group="The Village" data-name="Obscura Studio" data-tag="live"
        aria-label="Obscura Studio photo suite">
       <span class="sign"><span class="plank">Obscura Studio<span class="sub live">the photo shop · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Sign-shop storefront → Obscura Sites -->
     <a class="spot" href="https://sites.obscurastudio.design"
-       style="left:80%;top:7%;" data-group="The Village" data-name="Obscura Sites" data-tag="live"
+       style="left:80%;top:11%;" data-group="The Village" data-name="Obscura Sites" data-tag="live"
        aria-label="Obscura Sites website builder">
       <span class="sign"><span class="plank">Obscura Sites<span class="sub live">the sign shop · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Arcade storefront → browse -->
     <a class="spot" href="https://arcade.retrogaming.win/"
-       style="left:93%;top:7%;" data-group="The Village" data-name="Retro Arcade" data-tag="live"
+       style="left:93%;top:11%;" data-group="The Village" data-name="Retro Arcade" data-tag="live"
        aria-label="Retro Arcade browse">
       <span class="sign"><span class="plank">Retro Arcade<span class="sub live">browse · live</span></span><span class="post"></span></span>
     </a>
@@ -769,8 +769,12 @@
     /* only allow panning on an axis when the map is larger than the viewport there */
     var mx=Math.max(0,(w-vw)/2);
     var my=Math.max(0,(h-vh)/2);
+    /* EXTRA top headroom: let the map be pulled DOWN past its top edge (positive ty) so the
+       top-row farm signs — whose boards stick UP above the art's top edge — can always be
+       scrolled fully into view and never sit clipped against the viewport top. */
+    var topExtra=vh*0.16;
     tx=Math.max(-mx,Math.min(mx,tx));
-    ty=Math.max(-my,Math.min(my,ty));
+    ty=Math.max(-my,Math.min(my+topExtra,ty));
   }
   function apply(){
     world.style.transform='translate(-50%,-50%) translate('+tx+'px,'+ty+'px) scale('+scale+')';
@@ -808,7 +812,7 @@
   }
   document.getElementById('zin').onclick=function(){world.classList.add('animate');zoomBy(0.3);};
   document.getElementById('zout').onclick=function(){world.classList.add('animate');zoomBy(-0.3);};
-  document.getElementById('reset').onclick=function(){world.classList.add('animate');goFarm();};
+  document.getElementById('reset').onclick=function(){world.classList.add('animate');goFarmRead();};
 
   /* ---------- pinch zoom (2-finger) ---------- */
   var pts={},pd=0;
@@ -933,7 +937,23 @@
   /* frame page one exactly as the opening video's final frame: farm page, full art height,
      centred at fx≈.26 / fy≈.49 — so the video→live crossfade is seamless. clamp() keeps it
      in-bounds on any viewport. */
+  /* The video ends on the full farm page (fy≈.49); goFarm lands there so the crossfade is
+     seamless. */
   function goFarm(){ scale=farmCoverScale(); tx=txFor(0.26,scale); ty=tyFor(0.49,scale); clamp(); apply(); }
+
+  /* The READABLE resting frame: after the seamless handoff we ease UP to bring the top farm
+     signs (cluster at art y≈4-15%) fully into view below the title chrome. We zoom in a
+     touch past cover scale so there's real vertical pan headroom (cover scale alone can be
+     too tight to scroll on wide desktops), then centre high (fy≈.20). clamp() keeps bounds. */
+  function goFarmRead(){
+    scale=farmCoverScale();
+    tx=txFor(0.26,scale);
+    /* pull the map DOWN to its very top plus the extra top headroom, so the whole top farm-
+       sign row sits fully in view below the title chrome. clamp caps at my+topExtra. */
+    var scaledH=world.offsetHeight*scale, vh=window.innerHeight;
+    ty=(scaledH-vh)/2 + vh*0.16;
+    clamp(); apply();
+  }
 
   /* ---------- opening sequence (skippable, plays every visit) ----------
      1) a CLOSED storybook swings its front cover open, revealing the first pages;
@@ -956,7 +976,7 @@
   function flythrough(){                       // kept name: called by boot + replay
     timers.forEach(clearTimeout);timers=[];
     handedOff=false;
-    if(reduce){ bookVid.classList.add('gone'); goFarm(); fadeHint(); return; }
+    if(reduce){ bookVid.classList.add('gone'); goFarmRead(); fadeHint(); return; }
 
     frameMapForHandoff();
     skipBtn.style.display='block';
@@ -977,10 +997,16 @@
   }
   function startHandoff(){
     if(handedOff)return; handedOff=true;
-    /* live map is already framed exactly as the video's last frame — no motion, just
-       crossfade the clip out over the identical map beneath it. Seamless. */
+    /* 1) live map framed exactly as the video's last frame — crossfade the clip out over the
+       identical map beneath it (seamless). 2) then gently ease UP to the readable resting
+       frame so the top farm signs come into view. */
     world.style.transition=''; goFarm();
     bookVid.classList.add('gone');             // crossfade the clip out (CSS 1s)
+    timers.push(setTimeout(function(){
+      world.style.transition='transform 1.4s cubic-bezier(.33,.02,.28,1)';
+      goFarmRead();
+      timers.push(setTimeout(function(){ world.style.transition=''; fadeHint(); }, 1450));
+    }, 650));
   }
   var timers=[];
   function endFly(){
@@ -989,7 +1015,7 @@
     try{ openVid.pause(); }catch(e){}
     bookVid.classList.add('gone');
     world.style.transition='';
-    goFarm();
+    goFarmRead();                              // land directly on the readable frame
     skipBtn.style.display='none';
     fadeHint();
   }
