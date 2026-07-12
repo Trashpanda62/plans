@@ -295,11 +295,15 @@
     #world.animate{transition:transform .4s linear;}
     .spot .sign{animation:none;}
   }
-  /* small screens: smaller signs so they don't crowd the little map */
+  /* small screens: the world is scaled up to fill a narrow phone, so signs must be
+     much smaller in CSS to render a sane size on screen */
   @media (max-width:560px){
-    .spot .sign .plank{font-size:8px;padding:2px 6px;}
-    .spot .sign .sub{font-size:6px;}
-    .spot .sign .post{height:9px;}
+    .spot .sign .plank{font-size:5px;padding:1.5px 4px;border-width:1px;border-radius:3px;}
+    .spot .sign .sub{font-size:4px;letter-spacing:.2px;margin-top:0;}
+    .spot .sign .plank::before,.spot .sign .plank::after{width:1.5px;height:1.5px;top:1.5px;}
+    .spot .sign .post{height:6px;width:2px;}
+    .spot.mini .sign .plank{font-size:4.5px;padding:1px 3px;}
+    .spot.mini .sign .post{height:5px;}
     .titlecard{top:16px;left:16px;}
     .home{top:16px;right:16px;}
   }
@@ -427,8 +431,11 @@
 
   var AR = 1600/900;
   /* Scale 1 = whole map fits (contain). DEFAULT_SCALE starts zoomed IN like a
-     cover view; minScale lets you pull WAY out to see the entire farm + margin. */
-  var DEFAULT_SCALE=1.5;
+     cover view; minScale lets you pull WAY out to see the entire farm + margin.
+     On phones the world is already magnified to fill a narrow screen, so start
+     less zoomed-in to keep signs a sane size. */
+  var isPhone = window.matchMedia('(max-width:560px)').matches;
+  var DEFAULT_SCALE = isPhone ? 1.15 : 1.5;
   var scale=DEFAULT_SCALE, tx=0, ty=0;
   var minScale=1.0, maxScale=3.4;
 
