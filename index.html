@@ -131,51 +131,71 @@
     pointer-events:auto;               /* only the sign is clickable */
     cursor:pointer;
     animation:sway 5s var(--ease) infinite;
-    filter:drop-shadow(0 4px 6px rgba(40,30,15,.4));
-    transition:transform .25s var(--ease);
+    /* soft dark halo so the sign always separates from the busy illustration */
+    filter:drop-shadow(0 2px 3px rgba(30,20,8,.5)) drop-shadow(0 5px 9px rgba(20,14,6,.4));
+    transition:transform .25s var(--ease),filter .25s var(--ease);
     z-index:2;
+    /* enlarge the tap target beyond the visible plank without moving the art */
+    padding:4px;
   }
   .spot:focus-visible .sign{outline:2.5px solid #fff;outline-offset:3px;border-radius:6px;}
   .spot .sign .plank{
     position:relative;
-    background:linear-gradient(#c79a5f,#b07f45);
-    border:1.5px solid #8a5f31;
-    border-radius:5px;
-    padding:3px 8px 3px;
+    /* carved wooden board: layered grain + rounded routed edge */
+    background:
+      linear-gradient(180deg, rgba(255,246,224,.35), rgba(0,0,0,0) 30%, rgba(70,44,18,.28)),
+      repeating-linear-gradient(90deg, rgba(120,80,38,.10) 0 3px, rgba(150,105,55,.06) 3px 7px),
+      linear-gradient(#caa063,#b3823f);
+    border:1.5px solid #7c5324;
+    border-radius:7px;
+    padding:5px 11px 6px;
     font-family:var(--serif);font-weight:700;
-    font-size:9px;line-height:1.05;
-    color:#3d2a15;
+    font-size:11px;line-height:1.08;
+    color:#31200e;
     text-align:center;
-    white-space:nowrap;
-    box-shadow:inset 0 1px 0 rgba(255,244,224,.5),inset 0 -2px 3px rgba(90,60,25,.35);
+    /* wrap to two lines instead of overflowing; cap the width so long names stack */
+    white-space:normal;
+    max-width:130px;
+    text-wrap:balance;
+    letter-spacing:.1px;
+    /* routed inner bevel + a crisp cream keyline so the edge is unmistakable */
+    box-shadow:
+      inset 0 1.5px 0 rgba(255,248,230,.65),
+      inset 0 -3px 4px rgba(80,52,20,.4),
+      0 0 0 1px rgba(255,248,230,.25);
   }
   /* two little "nails" */
   .spot .sign .plank::before,.spot .sign .plank::after{
-    content:"";position:absolute;top:2.5px;width:2.5px;height:2.5px;border-radius:50%;
-    background:#6e4a26;box-shadow:inset 0 1px 0 rgba(255,240,220,.4);
+    content:"";position:absolute;top:4px;width:3px;height:3px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #a9814b, #5b3c1c);
+    box-shadow:inset 0 1px 0 rgba(255,240,220,.5);
   }
-  .spot .sign .plank::before{left:3px;}
-  .spot .sign .plank::after{right:3px;}
+  .spot .sign .plank::before{left:4px;}
+  .spot .sign .plank::after{right:4px;}
   .spot .sign .sub{
-    display:block;font-family:var(--sans);font-size:6.5px;font-weight:700;
-    letter-spacing:.3px;text-transform:uppercase;color:#5c3f20;margin-top:1px;
+    display:block;font-family:var(--sans);font-size:8px;font-weight:800;
+    letter-spacing:.4px;text-transform:uppercase;color:#6a4a24;margin-top:2px;
   }
-  .spot .sign .sub.live{color:#2f6b3d;}
-  .spot .sign .sub.live::before{content:"● ";color:#3c8a52;}
+  .spot .sign .sub.live{color:#2c6b3c;}
+  .spot .sign .sub.live::before{content:"● ";color:#39a659;}
   /* the wooden post below the plank */
   .spot .sign .post{
-    width:3px;height:11px;
-    background:linear-gradient(90deg,#7a5228,#a06e39 40%,#7a5228);
+    width:4px;height:13px;
+    background:linear-gradient(90deg,#6f4a22,#9c6a34 40%,#6f4a22);
     border-radius:0 0 2px 2px;
+    box-shadow:0 0 0 .5px rgba(255,246,224,.2);
     margin-top:-1px;
   }
   .spot:hover .sign,.spot:focus-visible .sign{
-    transform:translate(-50%,-100%) scale(1.09);
+    transform:translate(-50%,-100%) scale(1.1);
     animation-play-state:paused;
-    filter:drop-shadow(0 6px 10px rgba(40,30,15,.55));
+    filter:drop-shadow(0 3px 4px rgba(30,20,8,.55)) drop-shadow(0 9px 16px rgba(20,14,6,.5));
+    z-index:9;
   }
   .spot:hover .sign .plank,.spot:focus-visible .sign .plank{
-    background:linear-gradient(#e0b06a,#c48f4e);
+    background:
+      linear-gradient(180deg, rgba(255,250,232,.4), rgba(0,0,0,0) 32%, rgba(70,44,18,.24)),
+      linear-gradient(#e6be78,#cd9a54);
     border-color:#7a8b5a;
   }
   @keyframes sway{
@@ -192,16 +212,24 @@
   /* ---- mini sub-document sign: smaller, sage-tinted, on a little stake ---- */
   .spot.mini .sign{animation-duration:6s;}
   .spot.mini .sign .plank{
-    background:linear-gradient(#a7b884,#8ea169);
-    border-color:#5f6f44;
-    font-size:7.5px;
-    padding:2px 6px;
-    color:#2c3a17;
+    background:
+      linear-gradient(180deg, rgba(240,248,224,.4), rgba(0,0,0,0) 32%, rgba(50,60,30,.25)),
+      linear-gradient(#aec08a,#93a56d);
+    border-color:#556533;
+    font-size:9.5px;
+    padding:4px 9px 5px;
+    color:#24310f;
   }
-  .spot.mini .sign .plank::before,.spot.mini .sign .plank::after{background:#4c5a30;}
-  .spot.mini .sign .post{height:8px;background:linear-gradient(90deg,#5f6f44,#7c8a54 40%,#5f6f44);}
+  .spot.mini .sign .plank::before,.spot.mini .sign .plank::after{
+    background:radial-gradient(circle at 35% 30%, #6f7f48, #3a481f);
+  }
+  .spot.mini .sign .sub{color:#41521f;}
+  .spot.mini .sign .post{height:10px;background:linear-gradient(90deg,#556533,#748452 40%,#556533);}
   .spot.mini:hover .sign .plank,.spot.mini:focus-visible .sign .plank{
-    background:linear-gradient(#c2d29a,#a7b884);border-color:#c48f4e;
+    background:
+      linear-gradient(180deg, rgba(244,250,230,.45), rgba(0,0,0,0) 32%, rgba(50,60,30,.2)),
+      linear-gradient(#c8d8a2,#aec08a);
+    border-color:#c48f4e;
   }
 
   /* ---------- book-opening overlay ----------
@@ -347,15 +375,74 @@
   .home{
     position:absolute;top:24px;right:24px;
     pointer-events:auto;
-    display:inline-flex;align-items:center;gap:7px;
-    font-size:13px;font-weight:600;
+    display:inline-flex;align-items:center;gap:9px;
+    font-family:var(--sans);font-size:13.5px;font-weight:700;
     color:var(--ink);text-decoration:none;
-    padding:8px 15px;border-radius:999px;
-    background:rgba(255,253,249,.92);
-    box-shadow:0 4px 16px -6px rgba(0,0,0,.4);
-    transition:background .18s var(--ease),transform .18s var(--ease);
+    padding:9px 16px 9px 13px;border-radius:999px;border:none;cursor:pointer;
+    background:rgba(255,253,249,.94);
+    box-shadow:0 4px 16px -6px rgba(0,0,0,.45),inset 0 0 0 1px rgba(120,95,55,.16);
+    transition:background .18s var(--ease),transform .1s var(--ease),box-shadow .18s var(--ease);
   }
-  .home:hover{background:#fff;transform:translateX(2px);}
+  .home:hover{background:#fff;box-shadow:0 6px 20px -6px rgba(0,0,0,.5),inset 0 0 0 1px rgba(120,95,55,.24);}
+  .home:active{transform:scale(.97);}
+  .home .home-ico{display:flex;flex-direction:column;justify-content:center;gap:3px;width:15px;}
+  .home .home-ico span{display:block;height:2px;border-radius:2px;background:var(--sage-deep);transition:transform .25s var(--ease),opacity .2s var(--ease);}
+  .home .home-ico span:nth-child(1){width:15px;}
+  .home .home-ico span:nth-child(2){width:11px;}
+  .home .home-ico span:nth-child(3){width:13px;}
+  .home[aria-expanded="true"] .home-ico span:nth-child(1){transform:translateY(5px) rotate(45deg);width:15px;}
+  .home[aria-expanded="true"] .home-ico span:nth-child(2){opacity:0;}
+  .home[aria-expanded="true"] .home-ico span:nth-child(3){transform:translateY(-5px) rotate(-45deg);width:15px;}
+
+  /* ---------- Places drawer: the map's table of contents ---------- */
+  .drawer-scrim{
+    position:fixed;inset:0;z-index:14;
+    background:rgba(28,22,14,.4);backdrop-filter:blur(2px);
+    opacity:0;pointer-events:none;transition:opacity .3s var(--ease);
+  }
+  .drawer-scrim.open{opacity:1;pointer-events:auto;}
+  .drawer{
+    position:fixed;top:0;right:0;bottom:0;z-index:15;
+    width:min(340px,86vw);
+    background:linear-gradient(#fdfbf6,#f5efe3);
+    box-shadow:-16px 0 50px -18px rgba(0,0,0,.6),inset 1px 0 0 rgba(120,95,55,.18);
+    transform:translateX(100%);
+    transition:transform .38s var(--ease);
+    display:flex;flex-direction:column;
+    pointer-events:auto;
+  }
+  .drawer.open{transform:none;}
+  .drawer-head{
+    padding:20px 22px 16px;
+    background:linear-gradient(135deg,#5f6f44,#9c6a3c);
+    color:#fff;position:relative;flex:0 0 auto;
+  }
+  .drawer-head .eyebrow{font-size:10.5px;letter-spacing:2.6px;text-transform:uppercase;font-weight:800;opacity:.85;}
+  .drawer-head h2{font-family:var(--serif);font-size:23px;margin-top:3px;font-weight:700;}
+  .drawer-head p{font-size:12.5px;opacity:.94;margin-top:6px;line-height:1.5;max-width:34ch;}
+  .drawer-close{
+    position:absolute;top:14px;right:14px;width:32px;height:32px;border:none;border-radius:50%;
+    background:rgba(255,255,255,.2);color:#fff;font-size:17px;cursor:pointer;line-height:1;
+    transition:background .15s var(--ease);
+  }
+  .drawer-close:hover{background:rgba(255,255,255,.36);}
+  .drawer-body{overflow-y:auto;padding:6px 10px 22px;flex:1 1 auto;-webkit-overflow-scrolling:touch;}
+  .drawer-group{margin-top:14px;}
+  .drawer-group > h3{
+    font-family:var(--sans);font-size:10.5px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;
+    color:var(--clay-deep);padding:0 12px 4px;margin-top:6px;
+  }
+  .place{
+    display:flex;align-items:baseline;gap:8px;width:100%;text-align:left;
+    background:none;border:none;cursor:pointer;
+    padding:9px 12px;border-radius:10px;text-decoration:none;color:var(--ink);
+    transition:background .14s var(--ease);
+  }
+  .place:hover,.place:focus-visible{background:#efe7d6;outline:none;}
+  .place .pn{font-family:var(--serif);font-weight:700;font-size:15px;color:var(--ink);line-height:1.2;}
+  .place .pd{font-family:var(--sans);font-size:11px;color:#7a6f60;margin-left:auto;white-space:nowrap;flex:0 0 auto;font-weight:600;}
+  .place .pd.live{color:#2c6b3c;}
+  .place .pd.live::before{content:"● ";color:#39a659;}
 
   /* zoom + replay controls */
   .controls{
@@ -457,14 +544,15 @@
      screen, so signs must be much smaller in CSS to render a sane size. Triggering
      on short height too catches landscape phones (e.g. 844x390). */
   @media (max-width:560px),(max-height:560px){
-    .spot .sign .plank{font-size:5px;padding:1.5px 4px;border-width:1px;border-radius:3px;}
-    .spot .sign .sub{font-size:4px;letter-spacing:.2px;margin-top:0;}
-    .spot .sign .plank::before,.spot .sign .plank::after{width:1.5px;height:1.5px;top:1.5px;}
-    .spot .sign .post{height:6px;width:2px;}
-    .spot.mini .sign .plank{font-size:4.5px;padding:1px 3px;}
-    .spot.mini .sign .post{height:5px;}
-    .titlecard{top:16px;left:16px;}
-    .home{top:16px;right:16px;}
+    .spot .sign .plank{font-size:7px;padding:3px 6px;border-width:1px;border-radius:5px;max-width:82px;}
+    .spot .sign .sub{font-size:5.5px;letter-spacing:.2px;margin-top:1px;}
+    .spot .sign .plank::before,.spot .sign .plank::after{width:2px;height:2px;top:2.5px;}
+    .spot .sign .plank::before{left:2.5px;} .spot .sign .plank::after{right:2.5px;}
+    .spot .sign .post{height:8px;width:2.5px;}
+    .spot.mini .sign .plank{font-size:6px;padding:2.5px 5px;max-width:74px;}
+    .spot.mini .sign .post{height:7px;}
+    .titlecard{top:14px;left:14px;max-width:56vw;}
+    .home{top:14px;right:14px;}
   }
 </style>
 </head>
@@ -483,117 +571,136 @@
     <!-- ============ LEFT PAGE — FARM → FOREST (x 0-50%) ============ -->
     <!-- HERO: big entrance sign at the farm lane → the farm website -->
     <a class="spot entrance" href="https://trashpanda62.github.io/tapestry-game/"
-       style="left:8%;top:9%;" aria-label="Tapestry Acres — the farm">
+       style="left:8%;top:9%;" data-group="The Farm" data-name="Tapestry Acres" data-tag="live"
+       aria-label="Tapestry Acres — the farm">
       <span class="sign"><span class="plank"><img class="logo" src="assets/logo.png" alt=""><span class="big">Tapestry Acres</span></span><span class="post"></span></span>
     </a>
 
     <!-- Signage dashboard sign near the farmhouse → all property signs & flyers -->
     <a class="spot mini" href="signage/"
-       style="left:33%;top:10%;" aria-label="Signage Dashboard — all farm signs & flyers">
+       style="left:33%;top:10%;" data-group="The Farm" data-name="Signage Dashboard" data-tag="signs &amp; flyers"
+       aria-label="Signage Dashboard — all farm signs & flyers">
       <span class="sign"><span class="plank">Signage Dashboard<span class="sub">signs &amp; flyers</span></span><span class="post"></span></span>
     </a>
 
     <!-- Roadside sign → Social plan -->
     <a class="spot" href="https://trashpanda62.github.io/tapestry-area-map/social-plan.html"
-       style="left:13%;top:6%;" aria-label="Social Media Posting Plan">
+       style="left:13%;top:6%;" data-group="The Farm" data-name="Social Plan" data-tag="roadside sign"
+       aria-label="Social Media Posting Plan">
       <span class="sign"><span class="plank">Social Plan<span class="sub">roadside sign</span></span><span class="post"></span></span>
     </a>
 
     <!-- Farmhouse → Website -->
     <a class="spot" href="https://trashpanda62.github.io/tapestry-game/"
-       style="left:26%;top:7%;" aria-label="Tapestry Acres Website">
+       style="left:26%;top:7%;" data-group="The Farm" data-name="The Website" data-tag="live"
+       aria-label="Tapestry Acres Website">
       <span class="sign"><span class="plank">The Website<span class="sub live">farmhouse · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Berry field → Raspberries -->
     <a class="spot" href="https://trashpanda62.github.io/plans/tapestry-freeze-dried-raspberries.html"
-       style="left:39%;top:4%;" aria-label="Freeze-Dried Raspberries Launch Playbook">
+       style="left:39%;top:4%;" data-group="The Farm" data-name="Freeze-Dried Berries" data-tag="playbook"
+       aria-label="Freeze-Dried Raspberries Launch Playbook">
       <span class="sign"><span class="plank">Freeze-Dried Berries<span class="sub">berry field · playbook</span></span><span class="post"></span></span>
     </a>
 
     <!-- Pasture → Hair contest -->
     <a class="spot" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/"
-       style="left:11%;top:15%;" aria-label="Best Hair Contest Viral Poll">
+       style="left:11%;top:15%;" data-group="The Farm" data-name="Best Hair Contest" data-tag="live"
+       aria-label="Best Hair Contest Viral Poll">
       <span class="sign"><span class="plank">Best Hair Contest<span class="sub live">the pasture · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Hair contest sub-doc: Posting kit (by the animals) -->
     <a class="spot mini" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/kit.html"
-       style="left:18%;top:20%;" aria-label="Posting kit for Dani">
+       style="left:18%;top:20%;" data-group="The Farm" data-name="Posting Kit" data-tag="for Dani"
+       aria-label="Posting kit for Dani">
       <span class="sign"><span class="plank">Posting Kit<span class="sub">for Dani</span></span><span class="post"></span></span>
     </a>
 
     <!-- Garden plot → Name the Herd admin -->
     <a class="spot mini" href="https://script.google.com/macros/s/AKfycbwZV6h4w5j_K1n4aCO-Cp1w_ZbFGl6caMHS39SKxC0WM0ZQU0GGhhqmHr0LZvQZb5K6/exec?admin=1"
-       style="left:11%;top:32%;" aria-label="Name the Herd — owner admin">
+       style="left:11%;top:32%;" data-group="The Farm" data-name="Name the Herd" data-tag="owner admin"
+       aria-label="Name the Herd — owner admin">
       <span class="sign"><span class="plank">Name the Herd<span class="sub">owner admin</span></span><span class="post"></span></span>
     </a>
 
     <!-- Log cabin → Animal details -->
     <a class="spot mini" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/animals.html"
-       style="left:40%;top:14%;" aria-label="Animal details">
+       style="left:40%;top:14%;" data-group="The Farm" data-name="Animal Details" data-tag="names"
+       aria-label="Animal details">
       <span class="sign"><span class="plank">Animal Details<span class="sub">names &amp; personalities</span></span><span class="post"></span></span>
     </a>
 
     <!-- ===== FOREST (bottom of the left page) ===== -->
     <!-- Trailhead → Trail Signs -->
     <a class="spot" href="https://trashpanda62.github.io/plans/trails/"
-       style="left:22%;top:50%;" aria-label="Trail Signs — forest trail signage">
+       style="left:22%;top:50%;" data-group="The Forest" data-name="Trail Signs" data-tag="trail signage"
+       aria-label="Trail Signs — forest trail signage">
       <span class="sign"><span class="plank">Trail Signs<span class="sub">the forest trails</span></span><span class="post"></span></span>
     </a>
 
     <!-- ============ RIGHT PAGE — LIVINGSTON DOWNTOWN (x 50-100%) ============ -->
     <!-- Photo-studio storefront → Obscura Studio -->
     <a class="spot" href="https://obscurastudio.design"
-       style="left:55%;top:11%;" aria-label="Obscura Studio photo suite">
+       style="left:55%;top:11%;" data-group="The Village" data-name="Obscura Studio" data-tag="live"
+       aria-label="Obscura Studio photo suite">
       <span class="sign"><span class="plank">Obscura Studio<span class="sub live">the photo shop · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Sign-shop storefront → Obscura Sites -->
     <a class="spot" href="https://sites.obscurastudio.design"
-       style="left:80%;top:7%;" aria-label="Obscura Sites website builder">
+       style="left:80%;top:7%;" data-group="The Village" data-name="Obscura Sites" data-tag="live"
+       aria-label="Obscura Sites website builder">
       <span class="sign"><span class="plank">Obscura Sites<span class="sub live">the sign shop · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Arcade storefront → browse -->
     <a class="spot" href="https://arcade.retrogaming.win/"
-       style="left:93%;top:7%;" aria-label="Retro Arcade browse">
+       style="left:93%;top:7%;" data-group="The Village" data-name="Retro Arcade" data-tag="live"
+       aria-label="Retro Arcade browse">
       <span class="sign"><span class="plank">Retro Arcade<span class="sub live">browse · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Arcade cabinet → play -->
     <a class="spot mini" href="https://play.retrogaming.win/"
-       style="left:93%;top:13%;" aria-label="Play the Retro Arcade">
+       style="left:93%;top:13%;" data-group="The Village" data-name="Play Arcade" data-tag="the cabinet"
+       aria-label="Play the Retro Arcade">
       <span class="sign"><span class="plank">Play Arcade<span class="sub">the cabinet</span></span><span class="post"></span></span>
     </a>
 
     <!-- Records-office storefront → Family Tree -->
     <a class="spot" href="https://trashpanda62.github.io/family-tree/"
-       style="left:54%;top:33%;" aria-label="Family Tree Bloodlines game">
+       style="left:54%;top:33%;" data-group="The Village" data-name="Family Tree" data-tag="live"
+       aria-label="Family Tree Bloodlines game">
       <span class="sign"><span class="plank">Family Tree<span class="sub live">records office · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Local-services HQ (the prominent corner block) → Livingston HQ -->
     <a class="spot" href="livingston.html"
-       style="left:66%;top:34%;" aria-label="Livingston Local Services">
+       style="left:66%;top:34%;" data-group="The Village" data-name="Livingston Local" data-tag="web · photo · jobs"
+       aria-label="Livingston Local Services">
       <span class="sign"><span class="plank">Livingston Local<span class="sub">web · photo · jobs</span></span><span class="post"></span></span>
     </a>
 
     <!-- Bookshop storefront → Books -->
     <a class="spot" href="https://trashpanda62.github.io/book-library/"
-       style="left:85%;top:40%;" aria-label="Books Library">
+       style="left:85%;top:40%;" data-group="The Village" data-name="Books Library" data-tag="live"
+       aria-label="Books Library">
       <span class="sign"><span class="plank">Books Library<span class="sub live">the bookshop · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Schoolhouse storefront → AI Explainer -->
     <a class="spot mini" href="https://trashpanda62.github.io/ai-explainer/"
-       style="left:90%;top:47%;" aria-label="AI Explainer">
+       style="left:90%;top:47%;" data-group="The Village" data-name="AI Explainer" data-tag="the schoolhouse"
+       aria-label="AI Explainer">
       <span class="sign"><span class="plank">AI Explainer<span class="sub">the schoolhouse</span></span><span class="post"></span></span>
     </a>
 
     <!-- Gym storefront → Show Prep -->
     <a class="spot" href="https://trashpanda62.github.io/plans/show-prep-plan.html"
-       style="left:95%;top:20%;" aria-label="Show Prep plan">
+       style="left:95%;top:20%;" data-group="The Village" data-name="Show Prep" data-tag="playbook"
+       aria-label="Show Prep plan">
       <span class="sign"><span class="plank">Show Prep<span class="sub">the gym · playbook</span></span><span class="post"></span></span>
     </a>
   </div>
@@ -628,9 +735,10 @@
     <h1>Tapestry&nbsp;Acres</h1>
     <p>Explore the farm. Every plan lives where it belongs.</p>
   </div>
-  <a class="home" href="https://trashpanda62.github.io/tapestry-area-map/social-plan.html">
-    <span aria-hidden="true">←</span> Home
-  </a>
+  <button class="home" id="placesBtn" aria-haspopup="true" aria-expanded="false" aria-controls="places">
+    <span class="home-ico" aria-hidden="true"><span></span><span></span><span></span></span>
+    <span>Places</span>
+  </button>
   <div class="controls">
     <button class="ctrl" id="zin" aria-label="Zoom in">+</button>
     <button class="ctrl" id="zout" aria-label="Zoom out">−</button>
@@ -641,6 +749,18 @@
 </div>
 
 <button class="skip" id="skip" style="display:none;">Skip ↓</button>
+
+<!-- Places drawer — the map's table of contents, built from the signs at runtime -->
+<div class="drawer-scrim" id="drawerScrim"></div>
+<aside class="drawer" id="places" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
+  <div class="drawer-head">
+    <div class="eyebrow">The Working Library</div>
+    <h2 id="drawerTitle">Places</h2>
+    <p>Every plan, tool and playbook on the land. Tap one to fly there.</p>
+    <button class="drawer-close" id="drawerClose" aria-label="Close">✕</button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+</aside>
 
 <!-- workshop panel -->
 <div class="scrim" id="scrim">
@@ -784,6 +904,72 @@
   /* ---------- hint auto-fade ---------- */
   var hintTimer;
   function fadeHint(){ if(hint.style.opacity==='0')return; clearTimeout(hintTimer); hintTimer=setTimeout(function(){hint.style.opacity='0';},2600); }
+
+  /* ---------- Places drawer: table of contents built from the signs ---------- */
+  var placesBtn=document.getElementById('placesBtn'),
+      drawer=document.getElementById('places'),
+      drawerScrim=document.getElementById('drawerScrim'),
+      drawerBody=document.getElementById('drawerBody'),
+      drawerClose=document.getElementById('drawerClose');
+  var spots=Array.prototype.slice.call(document.querySelectorAll('.spot'));
+
+  /* group the signs in DOM order (Farm → Forest → Village) and render the list */
+  (function buildDrawer(){
+    var groups=[], byName={};
+    spots.forEach(function(s){
+      var g=s.getAttribute('data-group')||'Places';
+      if(!byName[g]){ byName[g]={name:g,items:[]}; groups.push(byName[g]); }
+      byName[g].items.push(s);
+    });
+    groups.forEach(function(g){
+      var wrap=document.createElement('div'); wrap.className='drawer-group';
+      var h=document.createElement('h3'); h.textContent=g.name; wrap.appendChild(h);
+      g.items.forEach(function(s){
+        var a=document.createElement('a');
+        a.className='place'; a.href=s.getAttribute('href');
+        if(/^https?:/.test(a.getAttribute('href'))){ a.target='_blank'; a.rel='noopener'; }
+        var live=s.getAttribute('data-tag')==='live';
+        var tag=live?'Live':(s.getAttribute('data-tag')||'');
+        a.innerHTML='<span class="pn"></span><span class="pd'+(live?' live':'')+'"></span>';
+        a.querySelector('.pn').textContent=s.getAttribute('data-name')||s.getAttribute('aria-label')||'Open';
+        a.querySelector('.pd').textContent=tag;
+        /* tap = fly the map to that sign first, then let the link open it */
+        a.addEventListener('click',function(){ flyToSpot(s); closeDrawer(); });
+        wrap.appendChild(a);
+      });
+      drawerBody.appendChild(wrap);
+    });
+  })();
+
+  /* left/top % of a spot → world fractions, then centre it on screen and zoom in a touch */
+  function flyToSpot(s){
+    var fx=parseFloat(s.style.left)/100, fy=parseFloat(s.style.top)/100;
+    world.classList.add('animate');
+    scale=Math.min(maxScale, Math.max(farmCoverScale()*0.9, isPhone?1.4:1.7));
+    tx=txFor(fx,scale); ty=tyFor(fy+0.04,scale);   /* nudge down so the sign clears the top chrome */
+    clamp(); apply();
+    /* briefly pulse the target sign so the eye lands on it */
+    var sign=s.querySelector('.sign'); if(sign){ sign.style.transition='transform .3s'; sign.style.transform='translate(-50%,-100%) scale(1.22)';
+      setTimeout(function(){ sign.style.transform=''; sign.style.transition=''; },650); }
+  }
+
+  var lastFocus=null;
+  function openDrawer(){
+    lastFocus=document.activeElement;
+    drawer.classList.add('open'); drawerScrim.classList.add('open');
+    drawer.setAttribute('aria-hidden','false'); placesBtn.setAttribute('aria-expanded','true');
+    drawerClose.focus();
+  }
+  function closeDrawer(){
+    drawer.classList.remove('open'); drawerScrim.classList.remove('open');
+    drawer.setAttribute('aria-hidden','true'); placesBtn.setAttribute('aria-expanded','false');
+    if(lastFocus&&lastFocus.focus)lastFocus.focus();
+  }
+  function toggleDrawer(){ drawer.classList.contains('open')?closeDrawer():openDrawer(); }
+  placesBtn.addEventListener('click',toggleDrawer);
+  drawerClose.addEventListener('click',closeDrawer);
+  drawerScrim.addEventListener('click',closeDrawer);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&drawer.classList.contains('open'))closeDrawer(); });
 
   /* focus helpers: fx/fy are world fractions (0-1) to bring to screen centre at scale sc.
      Each page fills the FULL height now: farm = LEFT half (fx≈.25), town = RIGHT half
