@@ -265,21 +265,37 @@
   #bookOpen .book{
     position:relative;
     transform-style:preserve-3d;
+    perspective:1600px;                 /* depth for the turning page's 3D rotation */
     border-radius:9px;
     box-shadow:0 40px 90px -20px rgba(0,0,0,.7);
   }
-  /* the PAGES underneath the cover — the REAL map spread (both pages), so when the cover
-     opens and the page flips, it settles seamlessly onto the actual map, never blank. */
+  /* the PAGES underneath the cover.
+     LEFT half = map page 1 (the farm) — revealed as the blank leaf lifts off it.
+     RIGHT half = blank cream paper — the resting spot the turning leaf's map-back drops onto.
+     paper texture via faint ruled lines. */
   #bookOpen .pages{
     position:absolute;inset:0;
     border-radius:9px;overflow:hidden;
-    background:#f3efe7 url("world-map.jpg") center/100% 100% no-repeat;
-    box-shadow:inset 0 0 60px rgba(120,95,55,.3);
+    background:#f2ecdd;
+    box-shadow:inset 0 0 60px rgba(120,95,55,.32);
+  }
+  /* left page = farm half of the map (left 50% of world-map, shown in the left 50% box) */
+  #bookOpen .pages .p1{
+    position:absolute;top:0;bottom:0;left:0;width:50%;
+    background:url("world-map.jpg") no-repeat;
+    background-size:200% 100%;background-position:left center;
+  }
+  /* right page = blank cream until the leaf's map-back lands on it */
+  #bookOpen .pages .p2blank{
+    position:absolute;top:0;bottom:0;right:0;width:50%;
+    background:
+      repeating-linear-gradient(0deg, rgba(150,120,75,.07) 0 1px, rgba(0,0,0,0) 1px 7px),
+      linear-gradient(90deg,#efe8d6,#f4eede);
   }
   #bookOpen .pages::after{  /* centre gutter shading over the open spread */
     content:"";position:absolute;top:0;bottom:0;left:50%;width:7%;transform:translateX(-50%);
     background:linear-gradient(90deg,rgba(60,44,26,0),rgba(30,20,10,.5),rgba(60,44,26,0));
-    pointer-events:none;
+    pointer-events:none;z-index:4;
   }
   /* the FRONT COVER = full-size leaf hinged on its LEFT edge; swings open (rotateY -170°).
      Real burgundy leather: dyed grain, worn edges, a raised gold-tooled frame, embossed
@@ -306,43 +322,55 @@
   }
 
   /* ---------- turning PAGE leaf (plays after the cover opens) ----------
-     The right half of the leaf shows PAGE-2 of the map (the town); it flips left over
-     the spine to sit atop PAGE-1, so the reveal is the real map spread, never blank
-     cream. Behind it, .pages already shows the map via #flipMap layers. */
+     A real double-sided page occupying the LEFT half, hinged on its RIGHT edge (the centre
+     spine). At rest it lies flat over the left page showing a BLANK cream sheet. It swings
+     up and over to the right (rotateY 0° → -180°): its BACK — map page 2, the town — comes
+     down onto the right page, while the FARM page beneath (.pages .p1) is revealed. You
+     literally watch a white page turn and the map appear. */
   #bookOpen .flip{
-    position:absolute;top:0;bottom:0;left:50%;right:0;   /* the right half-page */
-    transform-origin:left center;
+    position:absolute;top:0;bottom:0;left:0;width:50%;   /* the LEFT half-page */
+    transform-origin:right center;                        /* hinge at the centre spine */
     transform:rotateY(0deg);
-    transition:transform .9s cubic-bezier(.45,.02,.2,1);
+    transition:transform 1.15s cubic-bezier(.45,.05,.2,1);
     transform-style:preserve-3d;
-    backface-visibility:hidden;
-    border-radius:0 9px 9px 0;
-    overflow:hidden;
-    box-shadow:inset 0 0 40px rgba(120,95,55,.25);
-    z-index:2;
+    z-index:3;
   }
-  /* front face of the turning page = the RIGHT half of the map (town), so as the cover
-     opens you already see real map, and the page peels away to the farm beneath */
-  #bookOpen .flip .face{
+  #bookOpen .flip .pg{
     position:absolute;inset:0;
-    background:url("world-map.jpg") no-repeat;
-    /* leaf is the RIGHT half of the spread: stretch map to 200% and pin to the right */
-    background-size:200% 100%;
-    background-position:right center;
+    backface-visibility:hidden;
+    border-radius:9px 0 0 9px;
+    overflow:hidden;
   }
-  /* soft page edge + curl highlight so the turning leaf reads as paper */
-  #bookOpen .flip .face::after{
+  /* FRONT = blank cream page (what you see resting) */
+  #bookOpen .flip .pg.front{
+    background:
+      repeating-linear-gradient(0deg, rgba(150,120,75,.07) 0 1px, rgba(0,0,0,0) 1px 7px),
+      linear-gradient(90deg,#f4eede,#eae2cf);
+    box-shadow:inset 0 0 34px rgba(120,95,55,.2);
+  }
+  #bookOpen .flip .pg.front::after{ /* edge shade + subtle sheen so it reads as paper */
     content:"";position:absolute;inset:0;
-    background:linear-gradient(90deg, rgba(255,250,238,.35), rgba(255,250,238,0) 12%, rgba(0,0,0,0) 88%, rgba(60,44,26,.2));
-    pointer-events:none;
+    background:linear-gradient(90deg, rgba(60,44,26,.16), rgba(0,0,0,0) 14%, rgba(0,0,0,0) 86%, rgba(255,250,238,.3));
   }
-  #bookOpen .flip::before{ /* moving shadow the turning page casts on the spread */
-    content:"";position:absolute;inset:0;border-radius:0 9px 9px 0;
-    background:linear-gradient(90deg, rgba(30,20,10,.4), rgba(30,20,10,0) 45%);
-    opacity:0;transition:opacity 1.15s ease;z-index:3;
+  /* BACK = map page 2 (town). It's the mirror side, so flip it and show the RIGHT map half */
+  #bookOpen .flip .pg.back{
+    transform:rotateY(180deg);
+    border-radius:0 9px 9px 0;
+    background:url("world-map.jpg") no-repeat;
+    background-size:200% 100%;background-position:right center;
+    box-shadow:inset 0 0 34px rgba(120,95,55,.2);
   }
-  #bookOpen .flip.flipping{transform:rotateY(-172deg);}
-  #bookOpen .flip.flipping::before{opacity:1;transition:opacity .9s ease;}
+  /* a sweeping shadow the lifting page casts across the spread as it stands up */
+  #bookOpen .flip::before{
+    content:"";position:absolute;top:0;bottom:0;right:-2px;width:60%;
+    background:linear-gradient(90deg, rgba(30,20,10,0), rgba(30,20,10,.32));
+    opacity:0;transition:opacity 1.15s ease;z-index:5;pointer-events:none;
+  }
+  #bookOpen .flip.flipping{transform:rotateY(-180deg);}
+  #bookOpen .flip.flipping::before{opacity:0;}
+  /* shadow peaks mid-turn */
+  @keyframes pageShadow{0%{opacity:0;}45%{opacity:1;}100%{opacity:0;}}
+  #bookOpen .flip.flipping{animation:none;}
 
   /* ---------- cloud opener layer ----------
      A FIXED overlay that floats OVER the world (between the art and the chrome) but is
@@ -765,8 +793,8 @@
 <!-- book-opening overlay (fixed, above everything, self-removes) -->
 <div id="bookOpen" aria-hidden="true">
   <div class="book" id="bookBox">
-    <div class="pages"></div>
-    <div class="flip" id="bookFlip"><div class="face"></div></div>
+    <div class="pages"><div class="p1"></div><div class="p2blank"></div></div>
+    <div class="flip" id="bookFlip"><div class="pg back"></div><div class="pg front"></div></div>
     <div class="cover" id="bookLeaf"></div>
   </div>
 </div>
@@ -1084,15 +1112,16 @@
     bookFlip.classList.remove('flipping');
     clouds.classList.remove('show');
 
-    // (1) cover swings open (CSS 1.6s)
+    // (1) cover swings open (CSS 1.6s) — reveals the BLANK cream page resting on the left
     timers.push(setTimeout(function(){ bookLeaf.classList.add('turning'); }, 400));
 
-    // (2) page turns just as the cover swings clear — a clear sweep (CSS .9s)
-    timers.push(setTimeout(function(){ bookFlip.classList.add('flipping'); }, 1150));
+    // (2) once the cover is clear, the blank page physically turns in 3D: its map-back
+    //     drops onto the right, the farm is revealed on the left (CSS 1.15s)
+    timers.push(setTimeout(function(){ bookFlip.classList.add('flipping'); }, 1900));
 
-    // (3) HANDOFF: the whole book gently zooms toward the camera AND the live map push-in
-    //     starts underneath at the same instant, so the book dissolves INTO the moving map.
-    var HAND=2250;
+    // (3) HANDOFF: after the page has landed and the full map spread is visible for a beat,
+    //     the book zooms toward the lens + fades while the live map push-in starts beneath.
+    var HAND=3350;
     timers.push(setTimeout(function(){
       bookBox.style.transform='scale(1.14)';         // book eases toward the lens
       world.style.transition='transform '+(PUSH_MS/1000)+'s cubic-bezier(.33,.02,.28,1)';
