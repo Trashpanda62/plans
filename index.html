@@ -930,7 +930,10 @@
   /* Default framing: page one, full-bleed, centred so the MAJORITY of the farm signs
      (which cluster in the top band, y≈4-20%) sit comfortably in view under the title
      chrome — not cropped off the top. fy≈.26 lifts that cluster into frame. */
-  function goFarm(){ scale=farmCoverScale(); tx=txFor(0.26,scale); ty=tyFor(0.26,scale); clamp(); apply(); }
+  /* frame page one exactly as the opening video's final frame: farm page, full art height,
+     centred at fx≈.26 / fy≈.49 — so the video→live crossfade is seamless. clamp() keeps it
+     in-bounds on any viewport. */
+  function goFarm(){ scale=farmCoverScale(); tx=txFor(0.26,scale); ty=tyFor(0.49,scale); clamp(); apply(); }
 
   /* ---------- opening sequence (skippable, plays every visit) ----------
      1) a CLOSED storybook swings its front cover open, revealing the first pages;
@@ -940,13 +943,11 @@
   var bookVid=document.getElementById('bookVid'),
       openVid=document.getElementById('openVid');
 
-  /* frame the farm underneath the video so the crossfade lands on the map, not a jump */
+  /* frame the live map UNDER the video at EXACTLY the video's final frame (goFarm), so the
+     crossfade is invisible — the same farm image sits beneath the clip's last frame. */
   function frameMapForHandoff(){
     world.classList.remove('animate'); world.style.transition='';
-    /* start a hair zoomed-out; ease in as the video fades → gentle continuation of the
-       clip's final push onto the map. */
-    var startScale=Math.max(minScale, farmCoverScale()*0.82);
-    scale=startScale; tx=txFor(0.26,scale); ty=tyFor(0.27,scale); clamp(); apply();
+    goFarm();
   }
 
   /* the opening: play the generated book-opening clip fullscreen, then crossfade to the
@@ -964,20 +965,21 @@
     var pr=openVid.play();
     if(pr&&pr.catch) pr.catch(function(){ endFly(); });   // autoplay blocked → skip to map
 
-    // when the clip is near its end, begin the push-in so it continues under the fade
+    // once the clip has settled on its final map frame, crossfade to the identical live map
     openVid.ontimeupdate=function(){
-      var d=openVid.duration||8;
-      if(!handedOff && openVid.currentTime >= d-1.2){ startHandoff(); }
+      var d=openVid.duration||7.8;
+      if(!handedOff && openVid.currentTime >= d-0.7){ startHandoff(); }
     };
     openVid.onended=function(){ endFly(); };
     // failsafe if metadata/timeupdate never fires
-    timers.push(setTimeout(function(){ if(!handedOff) startHandoff(); }, 7000));
-    timers.push(setTimeout(function(){ endFly(); }, 8600));
+    timers.push(setTimeout(function(){ if(!handedOff) startHandoff(); }, 7200));
+    timers.push(setTimeout(function(){ endFly(); }, 8800));
   }
   function startHandoff(){
     if(handedOff)return; handedOff=true;
-    world.style.transition='transform 2.2s cubic-bezier(.33,.02,.28,1)';
-    goFarm();                                  // ease the live map inward
+    /* live map is already framed exactly as the video's last frame — no motion, just
+       crossfade the clip out over the identical map beneath it. Seamless. */
+    world.style.transition=''; goFarm();
     bookVid.classList.add('gone');             // crossfade the clip out (CSS 1s)
   }
   var timers=[];
