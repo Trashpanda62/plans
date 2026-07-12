@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tapestry Acres — Trail Signs</title>
+<style>
+  :root{
+    --ink:#2b2620;--soft:#6b6258;--line:#d8cfc2;--sage:#7a8b5a;--sage-deep:#5f6f44;
+    --clay:#b9824f;--clay-deep:#9c6a3c;--parchment:#f3efe7;--ground:#faf8f3;--card:#fffdf9;
+    --serif:Georgia,"Palatino Linotype",Palatino,"Book Antiqua",serif;
+    --sans:"Segoe UI",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}html,body{margin:0;padding:0;}
+  body{font-family:var(--sans);color:var(--ink);background:var(--ground);line-height:1.5;}
+  a{color:inherit;}
+  .page{max-width:720px;margin:0 auto;padding:26px 28px 72px;}
+  .home{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--soft);
+    text-decoration:none;padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--card);margin-bottom:28px;}
+  .home:hover{color:var(--sage-deep);border-color:var(--sage);}
+  header{padding-bottom:18px;border-bottom:1px solid var(--sage);margin-bottom:8px;}
+  .eyebrow{font-size:11px;letter-spacing:2.6px;text-transform:uppercase;color:var(--clay-deep);font-weight:700;margin:0 0 10px;}
+  h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,6vw,44px);line-height:1.04;margin:0;letter-spacing:-.5px;}
+  .intro{font-size:14px;color:var(--soft);margin:18px 0 30px;max-width:60ch;line-height:1.6;}
+  .cards{display:flex;flex-direction:column;gap:18px;list-style:none;margin:0;padding:0;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;transition:border-color .15s,box-shadow .18s;}
+  .card:hover{border-color:#cbc0ae;box-shadow:0 6px 22px -14px rgba(70,55,35,.32);}
+  .card a.primary{font-family:var(--serif);font-weight:700;font-size:clamp(18px,3vw,22px);color:var(--sage-deep);text-decoration:none;}
+  .card a.primary:hover{color:var(--sage);text-decoration:underline;}
+  .card p{font-size:13.5px;color:var(--soft);margin:8px 0 0;line-height:1.55;}
+  .tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--clay-deep);
+    background:var(--parchment);border:1px solid #e3d8c5;border-radius:999px;padding:3px 10px;margin-left:8px;vertical-align:middle;}
+  footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--soft);}
+  footer .mark{font-family:var(--serif);font-style:italic;color:var(--sage-deep);}
+</style>
+</head>
+<body>
+<div class="page">
+  <a class="home" href="https://trashpanda62.github.io/plans/"><span aria-hidden="true">←</span> The Map</a>
+  <header>
+    <p class="eyebrow">Tapestry Acres</p>
+    <h1>Trail Signs</h1>
+  </header>
+  <p class="intro">Signage for the forest walking trails at Tapestry Acres &amp; Dale Hollow. Draft billboards from an earlier pass &mdash; here for review and printing.</p>
+
+  <ul class="cards">
+    <li class="card">
+      <a class="primary" href="wildlife-billboard.html">Eyes on the Trail — Wildlife Billboard<span class="tag">Screen</span></a>
+      <p>The trailside wildlife guide — nine animals of the Cumberland Plateau (deer, turkey, fox, owl, box turtle &amp; more) with photos and notes.</p>
+    </li>
+    <li class="card">
+      <a class="primary" href="wildlife-billboard-18x24.html">Wildlife Billboard — Print<span class="tag">18&times;24 poster</span></a>
+      <p>The same wildlife guide laid out for an 18&times;24 printed trailhead poster.</p>
+    </li>
+  </ul>
+
+  <footer><span class="mark">Trail Signs</span> · Tapestry Acres &amp; Dale Hollow</footer>
+</div>
+</body>
+</html>

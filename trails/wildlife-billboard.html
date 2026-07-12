@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Eyes on the Trail — Wildlife of the Cumberland Plateau</title>
+<meta name="description" content="Trail wildlife sign for Tapestry Acres, Monroe, Tennessee" />
+
+<!-- Page is designed for 24" x 36" portrait print at 300 dpi -->
+<style>
+  @page {
+    size: 24in 36in;
+    margin: 0;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400&family=IM+Fell+English+SC&family=Cormorant+Garamond:wght@400;500;600&display=swap');
+
+  :root {
+    --parchment: #f1e6cc;
+    --parchment-deep: #e8d9b3;
+    --cream: #fbf4e0;
+    --ink: #2a1e12;
+    --forest: #2d4a2b;
+    --forest-deep: #1d3520;
+    --moss: #6b7d3a;
+    --sienna: #a24b1f;
+    --rust: #7a2c10;
+    --gold: #b8892d;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #3a3126;
+  }
+
+  body {
+    font-family: 'Fraunces', Georgia, serif;
+    color: var(--ink);
+    display: flex;
+    justify-content: center;
+    padding: 30px 0;
+  }
+
+  /* The poster itself — 24" x 36" at 96 dpi screen preview (approximate) */
+  .poster {
+    width: 24in;
+    height: 36in;
+    background:
+      radial-gradient(ellipse at top left, rgba(255, 248, 220, .6), transparent 55%),
+      radial-gradient(ellipse at bottom right, rgba(120, 80, 30, .15), transparent 60%),
+      linear-gradient(180deg, #f4eacf 0%, #ecdfbf 100%);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,.4);
+    color: var(--ink);
+  }
+
+  /* Paper grain texture via repeating subtle noise */
+  .poster::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 12% 20%, rgba(90,60,30,.05) 0, transparent 2%),
+      radial-gradient(circle at 78% 35%, rgba(90,60,30,.05) 0, transparent 2%),
+      radial-gradient(circle at 45% 70%, rgba(90,60,30,.04) 0, transparent 2%),
+      radial-gradient(circle at 88% 88%, rgba(90,60,30,.05) 0, transparent 2%),
+      radial-gradient(circle at 22% 92%, rgba(90,60,30,.04) 0, transparent 2%);
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+
+  /* Inner hairline border frame — field-guide style */
+  .frame {
+    position: absolute;
+    inset: 0.55in;
+    border: 2px solid var(--forest-deep);
+    padding: 0.45in 0.55in 0.55in;
+  }
+  .frame::before {
+    content: "";
+    position: absolute;
+    inset: 0.12in;
+    border: 1px solid var(--forest-deep);
+    opacity: .55;
+    pointer-events: none;
+  }
+
+  /* ===== Header ===== */
+  .header {
+    text-align: center;
+    padding-bottom: 0.35in;
+    border-bottom: 1px solid var(--forest-deep);
+    position: relative;
+  }
+
+  .eyebrow {
+    font-family: 'IM Fell English SC', serif;
+    font-size: 0.28in;
+    letter-spacing: 0.12em;
+    color: var(--forest-deep);
+    margin-bottom: 0.15in;
+  }
+
+  .eyebrow::before,
+  .eyebrow::after {
+    content: "✦";
+    color: var(--sienna);
+    margin: 0 0.25em;
+    font-size: 0.7em;
+    position: relative;
+    top: -0.06em;
+  }
+
+  .title {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-size: 1.55in;
+    line-height: 0.95;
+    color: var(--forest-deep);
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-transform: none;
+  }
+
+  .title em {
+    font-style: italic;
+    color: var(--sienna);
+    font-weight: 500;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.36in;
+    font-style: italic;
+    color: var(--ink);
+    margin-top: 0.18in;
+    opacity: .85;
+  }
+
+  .flourish {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2in;
+    margin-top: 0.2in;
+    color: var(--forest-deep);
+  }
+  .flourish .line {
+    height: 1px;
+    background: var(--forest-deep);
+    opacity: .5;
+    width: 2.5in;
+  }
+  .flourish .dot {
+    width: 0.12in; height: 0.12in; border-radius: 50%;
+    background: var(--sienna);
+  }
+
+  /* ===== Grid of animals ===== */
+  .grid {
+    margin-top: 0.45in;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.35in 0.3in;
+  }
+
+  .card {
+    background: var(--cream);
+    border: 1px solid var(--forest-deep);
+    padding: 0.18in 0.18in 0.22in;
+    position: relative;
+    box-shadow: 4px 5px 0 rgba(45,74,43,.18);
+  }
+
+  /* Small corner ornaments, like a field guide plate */
+  .card::before, .card::after {
+    content: "";
+    position: absolute;
+    width: 0.22in; height: 0.22in;
+    border: 1.5px solid var(--sienna);
+  }
+  .card::before { top: -0.06in; left: -0.06in; border-right: none; border-bottom: none; }
+  .card::after  { bottom: -0.06in; right: -0.06in; border-left: none; border-top: none; }
+
+  .photo-wrap {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, #d8c99e, #b09a65);
+    border: 1px solid var(--forest-deep);
+  }
+  .photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(0.95) contrast(1.03);
+  }
+  /* Fallback card look if image fails to load */
+  .photo-wrap .fallback {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    font-family: 'IM Fell English SC', serif;
+    color: var(--forest-deep);
+    font-size: 0.35in;
+    letter-spacing: 0.05em;
+    padding: 0.2in;
+    background: repeating-linear-gradient(45deg,
+      #d8c99e 0px, #d8c99e 8px,
+      #cebd8a 8px, #cebd8a 16px);
+  }
+
+  .plate-number {
+    position: absolute;
+    top: -0.15in;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--parchment);
+    padding: 0 0.12in;
+    font-family: 'IM Fell English SC', serif;
+    font-size: 0.2in;
+    letter-spacing: 0.15em;
+    color: var(--forest-deep);
+  }
+
+  .common-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 0.42in;
+    line-height: 1.05;
+    margin: 0.2in 0 0.04in;
+    color: var(--forest-deep);
+    letter-spacing: -0.005em;
+  }
+
+  .sci-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.23in;
+    color: var(--sienna);
+    margin-bottom: 0.12in;
+  }
+
+  .fact {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 0.2in;
+    line-height: 1.35;
+    color: var(--ink);
+    opacity: .88;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.08in;
+    margin-top: 0.12in;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-family: 'IM Fell English SC', serif;
+    font-size: 0.15in;
+    letter-spacing: 0.1em;
+    padding: 0.04in 0.13in;
+    border: 1px solid var(--forest-deep);
+    color: var(--forest-deep);
+    background: var(--parchment);
+    border-radius: 999px;
+  }
+  .tag.caution {
+    border-color: var(--rust);
+    color: var(--rust);
+    background: #f4e1d1;
+  }
+
+  /* ===== Footer ===== */
+  .footer {
+    margin-top: 0.55in;
+    padding-top: 0.35in;
+    border-top: 1px solid var(--forest-deep);
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 0.45in;
+  }
+
+  .footer h3 {
+    font-family: 'IM Fell English SC', serif;
+    font-size: 0.28in;
+    letter-spacing: 0.1em;
+    margin: 0 0 0.14in;
+    color: var(--forest-deep);
+  }
+  .footer h3::after {
+    content: "";
+    display: block;
+    width: 0.6in; height: 1px;
+    background: var(--sienna);
+    margin-top: 0.06in;
+  }
+  .footer p, .footer li {
+    font-family: 'Fraunces', serif;
+    font-size: 0.2in;
+    line-height: 1.4;
+    color: var(--ink);
+    opacity: .9;
+  }
+  .footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer li {
+    padding-left: 0.25in;
+    position: relative;
+    margin-bottom: 0.08in;
+  }
+  .footer li::before {
+    content: "❧";
+    position: absolute;
+    left: 0;
+    color: var(--sienna);
+  }
+
+  .brand {
+    text-align: center;
+    padding: 0.2in;
+    border: 1px solid var(--forest-deep);
+    background: var(--cream);
+  }
+  .brand .mark {
+    font-family: 'IM Fell English SC', serif;
+    font-size: 0.25in;
+    letter-spacing: 0.2em;
+    color: var(--sienna);
+  }
+  .brand .name {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 0.52in;
+    line-height: 1;
+    color: var(--forest-deep);
+    margin: 0.08in 0;
+  }
+  .brand .name em {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--sienna);
+  }
+  .brand .address {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.2in;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  /* Bottom ribbon */
+  .ribbon {
+    margin-top: 0.5in;
+    text-align: center;
+    font-family: 'IM Fell English SC', serif;
+    font-size: 0.2in;
+    letter-spacing: 0.25em;
+    color: var(--forest-deep);
+    padding-top: 0.2in;
+    border-top: 2px double var(--forest-deep);
+  }
+  .ribbon span { color: var(--sienna); }
+
+  /* Side decorative motif — tracks */
+  .tracks {
+    position: absolute;
+    top: 3.5in;
+    font-size: 0.35in;
+    color: var(--forest-deep);
+    opacity: .22;
+    font-family: 'Fraunces', serif;
+    writing-mode: vertical-rl;
+    letter-spacing: 0.3em;
+  }
+  .tracks.left { left: 0.22in; }
+  .tracks.right { right: 0.22in; }
+</style>
+</head>
+<body>
+  <div class="poster">
+    <div class="frame">
+
+      <!-- Side vertical tag lines -->
+      <div class="tracks left">OVERTON COUNTY · TENNESSEE · CUMBERLAND PLATEAU</div>
+      <div class="tracks right">A FIELD GUIDE FOR WANDERERS &amp; WATCHERS</div>
+
+      <!-- ======= HEADER ======= -->
+      <header class="header">
+        <div class="eyebrow">A Pocket Almanac of Common Sightings</div>
+        <h1 class="title">Eyes on<br/><em>the</em> Trail</h1>
+        <div class="subtitle">Wildlife you may meet along the paths of Tapestry Acres &amp; the woodlands of the Cumberland Plateau</div>
+        <div class="flourish">
+          <span class="line"></span>
+          <span class="dot"></span>
+          <span class="line"></span>
+        </div>
+      </header>
+
+      <!-- ======= GRID ======= -->
+      <section class="grid">
+
+        <!-- 1. White-tailed Deer -->
+        <article class="card">
+          <span class="plate-number">PLATE · I</span>
+          <div class="photo-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/White-tailed_deer.jpg/1200px-White-tailed_deer.jpg"
+                 alt="White-tailed Deer"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="fallback" style="display:none;">White-tailed Deer</div>
+          </div>
+          <h2 class="common-name">White-tailed Deer</h2>
+          <div class="sci-name">Odocoileus virginianus</div>
+          <p class="fact">The flash of a white tail is your signal they've spotted you first. Most active at dawn &amp; dusk. Look for heart-shaped tracks in soft soil.</p>
+          <div class="tags"><span class="tag">Dawn · Dusk</span><span class="tag">Meadows · Edges</span></div>
+        </article>
+
+        <!-- 2. Wild Turkey -->
+        <article class="card">
+          <span class="plate-number">PLATE · II</span>
+          <div class="photo-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Wild_turkey_eastern_us.jpg/1200px-Wild_turkey_eastern_us.jpg"
+                 alt="Wild Turkey"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="fallback" style="display:none;">Wild Turkey</div>
+          </div>
+          <h2 class="common-name">Wild Turkey</h2>
+          <div class="sci-name">Meleagris gallopavo</div>
+          <p class="fact">Travels the forest floor in small flocks. Listen for the spring gobble; watch for scratched-up leaf litter where they've been feeding.</p>
+          <div class="tags"><span class="tag">Morning</span><span class="tag">Hardwood Forest</span></div>
+        </article>
+
+        <!-- 3. Red Fox -->
+        <article class="card">
+          <span class="plate-number">PLATE · III</span>
+          <div class="photo-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Vulpes_vulpes_laying_in_grass.jpg/1200px-Vulpes_vulpes_laying_in_grass.jpg"
+                 alt="Red Fox"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="fallback" style="display:none;">Red Fox</div>
+          </div>
+          <h2 class="common-name">Red Fox</h2>
+          <div class="sci-name">Vulpes vulpes</div>
+          <p class="fact">Rust-colored coat, black stockings, white-tipped tail. Curious but cautious. A glimpse is a gift — they rarely linger.</p>
+          <div class="tags"><span class="tag">Dusk · Night</span><span class="tag">Field Edges</span></div>
+        </article>
+
+        <!-- 4. Eastern Gray Squirrel -->
+        <article class="card">
+          <span class="plate-number">PLATE · IV</span>
+          <div class="photo-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Eastern_Grey_Squirrel.jpg/1200px-Eastern_Grey_Squirrel.jpg"
+                 alt="Eastern Gray Squirrel"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="fallback" style="display:none;">Gray Squirrel</div>
+          </div>
+          <h2 class="common-name">Eastern Gray Squirrel</h2>
+          <div class="sci-name">Sciurus carolinensis</div>
+          <p class="fact">The busy cacher of the canopy. Acorns buried and forgotten become next year's oaks — every walk, you're seeing a forest plant itself.</p>
+          <div class="tags"><span class="tag">All Day</span><span class="tag">Oaks · Hickories</span></div>
+        </article>
+
+        <!-- 5. Raccoon -->
+        <article class="card">
+          <span class="plate-number">PLATE · V</span>
+          <div class="photo-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Common_raccoon_%28Procyon_lotor%29.jpg/1200px-Common_raccoon_%28Procyon_lotor%29.jpg"
+                 alt="Raccoon"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="fallback" style="display:none;">Raccoon</div>
+          </div>
+          <h2 class="common-name">Raccoon</h2>
+          <div class="sci-name">Procyon lotor</div>
+          <p class="fact">Masked, ringed-tail, and wonderfully clever. Look for hand-like prints near creek banks where they forage for crayfish and frogs.</p>
+          <div class="tags"><span class="tag">Nocturnal</span><span class="tag">Water · Woods</span></div>
+        </article>
+
+        <!-- 6. Eastern Cottontail -->
+        <article class="card">
+          <span class="plate-number">PLATE · VI</span>
+          <div class="photo-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Sylvilagus_floridanus.JPG/1200px-Sylvilagus_floridanus.JPG"
+                 alt="Eastern Cottontail"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="fallback" style="display:none;">Cottontail</div>
+          </div>
+          <h2 class="common-name">Eastern Cottontail</h2>
+          <div class="sci-name">Sylvilagus floridanus</div>
+          <p class="fact">A puff of white disappearing into the brush. Freezes before it flees — scan low, still shapes at the edge of the trail.</p>
+          <div class="tags"><span class="tag">Dawn · Dusk</span><span class="tag">Brushy Edges</span></div>
+        </article>
+
+        <!-- 7. Pileated Woodpecker -->
+        <article class="card">
+          <span class="plate-number">PLATE · VII</span>
+          <div class="photo-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Pileated_Woodpecker_MnMS.jpg/1200px-Pileated_Woodpecker_MnMS.jpg"
+                 alt="Pileated Woodpecker"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="fallback" style="display:none;">Pileated Woodpecker</div>
+          </div>
+          <h2 class="common-name">Pileated Woodpecker</h2>
+          <div class="sci-name">Dryocopus pileatus</div>
+          <p class="fact">Crow-sized with a flaming red crest. Listen for a slow, deliberate drumming and a wild, laughing call echoing through the trees.</p>
+          <div class="tags"><span class="tag">All Day</span><span class="tag">Old Hardwoods</span></div>
+        </article>
+
+        <!-- 8. Barred Owl -->
+        <article class="card">
+          <span class="plate-number">PLATE · VIII</span>
+          <div class="photo-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Strix-varia-005.jpg/1200px-Strix-varia-005.jpg"
+                 alt="Barred Owl"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="fallback" style="display:none;">Barred Owl</div>
+          </div>
+          <h2 class="common-name">Barred Owl</h2>
+          <div class="sci-name">Strix varia</div>
+          <p class="fact">"Who cooks for you? Who cooks for you-all?" The deep hollow call is unmistakable — often heard before seen, roosting on mossy branches.</p>
+          <div class="tags"><span class="tag">Twilight · Night</span><span class="tag">Deep Woods</span></div>
+        </article>
+
+        <!-- 9. Eastern Box Turtle -->
+        <article class="card">
+          <span class="plate-number">PLATE · IX</span>
+          <div class="photo-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Eastern_Box_Turtle_-_Flickr_-_GregTheBusker.jpg/1200px-Eastern_Box_Turtle_-_Flickr_-_GregTheBusker.jpg"
+                 alt="Eastern Box Turtle"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="fallback" style="display:none;">Box Turtle</div>
+          </div>
+          <h2 class="common-name">Eastern Box Turtle</h2>
+          <div class="sci-name">Terrapene carolina carolina</div>
+          <p class="fact">A slow, living mosaic of orange &amp; black. Please leave them where you find them — they may live a century within a few hundred yards.</p>
+          <div class="tags"><span class="tag">After Rain</span><span class="tag caution">Do Not Move</span></div>
+        </article>
+
+      </section>
+
+      <!-- ======= FOOTER ======= -->
+      <footer class="footer">
+
+        <div>
+          <h3>Walk Gently</h3>
+          <ul>
+            <li>Observe from a distance — if an animal changes its behavior, you are too close.</li>
+            <li>Stay on marked trails to protect nests, burrows, and fragile ground cover.</li>
+            <li>Pack out what you pack in. Leaves alone are a meal to someone.</li>
+            <li>Keep dogs leashed — scent trails echo for hours after you're gone.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>The Quiet Hours</h3>
+          <p>The trail is liveliest in the hush of early morning and the gold of late afternoon. Walk slow. Stop often. Most sightings reward the patient wanderer.</p>
+          <p style="margin-top:.2in;"><em>Bring binoculars. Leave the phone in your pocket for a while.</em></p>
+        </div>
+
+        <div class="brand">
+          <div class="mark">— EST. ON HERITAGE LAND —</div>
+          <div class="name">Tapestry <em>Acres</em></div>
+          <div class="address">396 Taylor Crossroads Road<br/>Monroe · Tennessee<br/>Overton County</div>
+        </div>
+
+      </footer>
+
+      <div class="ribbon">
+        <span>✦</span>&nbsp;&nbsp;TREAD SOFTLY&nbsp;&nbsp;·&nbsp;&nbsp;WATCH CLOSELY&nbsp;&nbsp;·&nbsp;&nbsp;LEAVE ONLY FOOTPRINTS&nbsp;&nbsp;<span>✦</span>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
