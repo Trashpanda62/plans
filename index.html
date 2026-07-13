@@ -762,7 +762,10 @@
   /* ---- SLICE 1: whole-scene colour grade. Filter the ART itself so each season reads
      as a different time of year, not just a tint film. Smooth cross-fade via transition. */
   #farm{transition:filter 1.2s ease;}
-  body[data-season="spring"] #farm{filter:saturate(1.14) brightness(1.04) hue-rotate(-6deg) contrast(1.02);}
+  /* spring = THUNDERSTORM: dark, cool, rain-lashed, lightning flashes */
+  body[data-season="spring"] #farm{filter:saturate(.72) brightness(.6) contrast(1.08) hue-rotate(6deg);
+    transition:filter 1.2s ease, brightness .12s;}
+  body[data-season="spring"].lightning #farm{filter:saturate(.85) brightness(1.35) contrast(1.05);}
   body[data-season="summer"] #farm{filter:saturate(1.2) brightness(1.1) contrast(1.05);}
   body[data-season="autumn"] #farm{filter:sepia(.28) saturate(1.28) brightness(.98) hue-rotate(-12deg) contrast(1.04);}
   body[data-season="winter"] #farm{filter:saturate(.34) brightness(1.18) contrast(.92) hue-rotate(6deg);}
@@ -798,12 +801,17 @@
     -webkit-mask:inherit;mask:inherit;background:inherit;
     animation:leafsway var(--sway,2.4s) ease-in-out infinite alternate;}
 
-  .fx.petal{width:.9%;height:.9%;border-radius:50% 50% 50% 0;background:var(--lc,#f0c4d2);opacity:.9;
-    top:var(--y0,-8%);left:var(--x0,0%);animation:petalcross var(--dur,9s) linear var(--delay,0s) infinite;}
-  @keyframes petalcross{
-    0%{transform:translate(0,0) rotate(0);opacity:0;}
-    8%{opacity:.9;}
-    100%{transform:translate(var(--dx,24vw),var(--dy,105%)) rotate(300deg);opacity:.15;}
+  /* RAIN — slanted streaks driven fast down the whole scene (thunderstorm). */
+  .fx.rain{width:1.5px;height:var(--len,7%);left:var(--x0,0%);top:var(--y0,-12%);
+    background:linear-gradient(180deg, rgba(200,220,245,0), rgba(198,216,240,.75));
+    transform:rotate(14deg);border-radius:1px;
+    animation:raindrop var(--dur,.9s) linear var(--delay,0s) infinite;}
+  .fx.rain.s2{opacity:.5;width:1px;}       /* far, faint */
+  .fx.rain.s3{opacity:.95;width:2px;}      /* near, bold */
+  @keyframes raindrop{
+    0%{transform:translate(0,0) rotate(14deg);opacity:0;}
+    8%{opacity:1;}
+    100%{transform:translate(28vh,118vh) rotate(14deg);opacity:.8;}
   }
 
   .fx.flake{width:1.1%;height:1.1%;border-radius:50%;
@@ -815,8 +823,9 @@
   .fx.flake.s3{width:1.5%;}                 /* near layer bigger */
   @keyframes flakefall{
     0%{transform:translate(0,0);opacity:0;}
-    10%{opacity:.9;}
-    100%{transform:translate(var(--dx,8vw),var(--dy,110%));opacity:.2;}
+    10%{opacity:.95;}
+    90%{opacity:.95;}
+    100%{transform:translate(var(--dx,8vw),var(--dy,105vh));opacity:.2;}
   }
   @keyframes leafsway{from{transform:translateX(-15%);}to{transform:translateX(15%);}}
 
@@ -857,11 +866,17 @@
   body[data-season="winter"] .sc.winter-frost{opacity:1;}
 
   /* --- SLICE 4 SPRING: blossom pops on the orchard/trees + bright bloom haze --- */
-  .sc.spring-haze{inset:0;background:
-      radial-gradient(120% 80% at 30% 20%, rgba(255,228,240,.22), rgba(255,228,240,0) 44%),
-      radial-gradient(100% 80% at 65% 30%, rgba(230,255,220,.18), rgba(230,255,220,0) 46%);
-      mix-blend-mode:soft-light;}
-  body[data-season="spring"] .sc.spring-haze{opacity:1;}
+  /* storm gloom + rolling dark cloud shadow across the top */
+  .sc.storm-gloom{inset:0;background:
+      linear-gradient(180deg, rgba(30,38,55,.5), rgba(40,50,70,.28) 40%, rgba(40,50,70,.12) 100%),
+      radial-gradient(140% 90% at 50% -10%, rgba(18,24,38,.55), rgba(18,24,38,0) 55%);
+      mix-blend-mode:multiply;}
+  body[data-season="spring"] .sc.storm-gloom{opacity:1;}
+  /* lightning flash — a full-scene white/blue pop toggled by JS via body.lightning */
+  .sc.storm-flash{inset:0;background:
+      radial-gradient(120% 80% at 60% 15%, rgba(226,238,255,.85), rgba(200,220,255,.25) 40%, rgba(200,220,255,0) 65%);
+      mix-blend-mode:screen;opacity:0 !important;transition:opacity .08s ease;}
+  body[data-season="spring"].lightning .sc.storm-flash{opacity:1 !important;}
   /* blossom clusters — soft pink dot-groups that breathe in/out on tree crowns (JS-placed) */
   /* A flowering-canopy: many TINY 5-petal blossoms speckled over a crown, not big blobs.
      Each .blossom is a small soft-pink flower (radial dot) that gently sways/twinkles. */
@@ -972,7 +987,7 @@
     <div id="seasonscene" aria-hidden="true">
       <div class="sc autumn-glow"></div>
       <div class="sc winter-ground"></div><div class="sc winter-blanket"></div><div class="sc winter-frost"></div>
-      <div class="sc spring-haze"></div>
+      <div class="sc storm-gloom"></div><div class="sc storm-flash"></div>
       <div class="sc summer-rays"></div>
       <div id="blossoms"></div>
       <div id="fireflies"></div>
@@ -1738,7 +1753,7 @@
 
   /* ---- #10 seasons: cycle spring → summer → autumn → winter, tint + falling particles ---- */
   var SEASONS=['spring','summer','autumn','winter'];
-  var seasonIcon={spring:'✿',summer:'☀',autumn:'🍂',winter:'❄'};
+  var seasonIcon={spring:'⛈',summer:'☀',autumn:'🍂',winter:'❄'};
   var seasonBtn=document.getElementById('season'), seasonFx=document.getElementById('seasonfx');
   // maple-leaf silhouette as a data-URI mask (fill comes from background-color)
   var LEAFMASK="url('data:image/svg+xml;utf8,"+encodeURIComponent(
@@ -1791,21 +1806,46 @@
     }
   }
 
+  // lightning: schedule irregular flashes (double-strike) while spring/storm is active.
+  var lightningTimer=null, lightningSeed=0;
+  function flashOnce(){
+    document.body.classList.add('lightning');
+    setTimeout(function(){ document.body.classList.remove('lightning'); }, 110);
+    // occasional quick second strike
+    lightningSeed++;
+    if(rnd(lightningSeed,31) > 0.55){
+      setTimeout(function(){
+        document.body.classList.add('lightning');
+        setTimeout(function(){ document.body.classList.remove('lightning'); }, 90);
+      }, 180);
+    }
+  }
+  function scheduleLightning(){
+    lightningSeed++;
+    var gap = 2600 + rnd(lightningSeed,32)*6000;         // 2.6s..8.6s between strikes
+    lightningTimer=setTimeout(function(){ flashOnce(); scheduleLightning(); }, gap);
+  }
+  function startLightning(on){
+    if(lightningTimer){ clearTimeout(lightningTimer); lightningTimer=null; }
+    document.body.classList.remove('lightning');
+    if(on && !reduce){ setTimeout(flashOnce, 700); scheduleLightning(); }
+  }
+
   function spawnSeasonFx(season){
     seasonFx.innerHTML='';
-    // scene extras: blossoms for spring, fireflies for summer — cleared/rebuilt each switch
+    // scene extras: fireflies for summer; spring is a thunderstorm (rain + lightning)
     blossomsEl.innerHTML=''; firefliesEl.innerHTML='';
-    if(season==='spring') spawnBlossoms();
+    startLightning(season==='spring');
     if(season==='summer') spawnFireflies();
     if(reduce) return;
-    var kind = season==='autumn'?'leaf' : season==='spring'?'petal' : season==='winter'?'flake' : null;
+    var kind = season==='autumn'?'leaf' : season==='spring'?'rain' : season==='winter'?'flake' : null;
     if(!kind) return;                                  // summer = scene-only particles
     // denser fields; cap on small screens for perf
-    var n = kind==='leaf'?(isSmall?45:90) : kind==='flake'?(isSmall?70:140) : (isSmall?28:55);
+    var n = kind==='leaf'?(isSmall?45:90) : kind==='flake'?(isSmall?70:140) : kind==='rain'?(isSmall?90:170) : (isSmall?28:55);
     for(var i=0;i<n;i++){
       var layer = i%3;                                 // 0=mid 1=far 2=near depth layers
       var f=document.createElement('div');
-      f.className='fx '+kind+((kind==='leaf'||kind==='flake')?(layer===1?' s2':layer===2?' s3':''):'');
+      f.className='fx '+kind+((kind==='leaf'||kind==='flake'||kind==='rain')?(layer===1?' s2':layer===2?' s3':''):'');
       // start off-screen or high up, staggered spread across the top + left edge
       var x0=(rnd(i,1)*130-30);                         // -30%..100% start (some enter from left edge)
       var y0=(-8-rnd(i,2)*30);                          // start above the top
@@ -1821,17 +1861,17 @@
         f.style.setProperty('--sway',(1.8+rnd(i,6)*2.4).toFixed(2)+'s');
         var base = layer===2?7:layer===1?13:10;        // near=fast, far=slow
         f.style.setProperty('--dur',(base+rnd(i,7)*6).toFixed(1)+'s');
-      } else if(kind==='petal'){
-        f.style.setProperty('--lc',i%2?'#f0c4d2':'#f6d6e0');
-        f.style.setProperty('--dx',(12+rnd(i,3)*28).toFixed(0)+'vw');
-        f.style.setProperty('--dy',(95+rnd(i,4)*20).toFixed(0)+'%');
-        f.style.setProperty('--dur',(8+rnd(i,7)*6).toFixed(1)+'s');
+      } else if(kind==='rain'){ // thunderstorm — fast slanted streaks filling the scene
+        f.style.setProperty('--x0',(rnd(i,1)*120-15).toFixed(1)+'%');
+        f.style.setProperty('--y0',(rnd(i,2)*100-15).toFixed(1)+'%');  // spread top-to-bottom
+        f.style.setProperty('--len',(5+rnd(i,5)*5).toFixed(1)+'%');
+        f.style.setProperty('--dur',(0.6+rnd(i,7)*0.5).toFixed(2)+'s'); // fast
       } else { // flake — spread starting height across the whole scene so snow fills it at once
         f.style.setProperty('--x0',(rnd(i,1)*104-2).toFixed(1)+'%');
         f.style.setProperty('--y0',(rnd(i,2)*95-5).toFixed(1)+'%');   // -5%..90% : already on screen
         f.style.setProperty('--dx',(-6+rnd(i,3)*16).toFixed(0)+'vw');
-        f.style.setProperty('--dy',(100+rnd(i,4)*18).toFixed(0)+'%');
-        f.style.setProperty('--dur',(8+rnd(i,7)*7).toFixed(1)+'s');
+        f.style.setProperty('--dy',(95+rnd(i,4)*25).toFixed(0)+'vh');   // vh = real fall, not self-height
+        f.style.setProperty('--dur',(6+rnd(i,7)*5).toFixed(1)+'s');
       }
       f.style.setProperty('--delay',(-(rnd(i,8)*14)).toFixed(1)+'s');
       seasonFx.appendChild(f);
