@@ -760,18 +760,53 @@
   body[data-season="autumn"] #seasonwash{opacity:1;background:linear-gradient(180deg,rgba(224,150,70,.2),rgba(180,96,40,.16));}
   body[data-season="winter"] #seasonwash{opacity:1;background:linear-gradient(180deg,rgba(206,224,240,.28),rgba(224,232,244,.2));}
   #seasonfx{position:absolute;inset:0;pointer-events:none;z-index:7;overflow:hidden;border-radius:5px;}
-  .fx{position:absolute;top:-4%;will-change:transform;}
-  .fx.leaf{width:1%;height:1.2%;border-radius:50% 0 50% 50%;background:#c8752f;opacity:.85;
-    animation:fall linear infinite;}
-  .fx.leaf.alt{background:#a85a2a;border-radius:0 50% 50% 50%;}
-  .fx.petal{width:.8%;height:.8%;border-radius:50% 50% 50% 0;background:#f0c4d2;opacity:.85;animation:fall linear infinite;}
-  .fx.flake{width:.6%;height:.6%;border-radius:50%;background:#fff;opacity:.9;
-    box-shadow:0 0 3px rgba(255,255,255,.9);animation:fall linear infinite;}
-  @keyframes fall{
+  .fx{position:absolute;top:-6%;will-change:transform;}
+
+  /* ---- AUTUMN: real maple-leaf shapes that sweep clear across the whole page ----
+     Each leaf is an SVG-mask fill so it reads as a leaf, not a blob. The wind
+     carries it fully across the screen (translateX ~120vw worth via --dx) while it
+     tumbles + spins. Per-leaf CSS vars (set in JS) give every leaf its own arc,
+     duration, spin and sway so no two move alike. */
+  .fx.leaf{
+    width:2.1%;aspect-ratio:1/1;top:var(--y0,-8%);left:var(--x0,0%);
+    background:var(--lc,#c8752f);
+    -webkit-mask:var(--leafmask) center/contain no-repeat;
+            mask:var(--leafmask) center/contain no-repeat;
+    filter:drop-shadow(0 1px 1px rgba(60,30,0,.25));
+    animation:leafcross var(--dur,11s) linear var(--delay,0s) infinite;
+  }
+  .fx.leaf.s2{width:1.5%;opacity:.9;}      /* far layer — smaller, slightly faded */
+  .fx.leaf.s3{width:2.7%;}                 /* near layer — bigger, faster */
+  /* wind sweep across + fall + tumble. --dx/--dy carry it right across the page. */
+  @keyframes leafcross{
+    0%  {transform:translate(0,0) rotate(0deg);opacity:0;}
+    6%  {opacity:1;}
+    50% {transform:translate(calc(var(--dx,60vw) * .5), calc(var(--dy,70vh) * .5)) rotate(var(--spin,540deg));}
+    94% {opacity:1;}
+    100%{transform:translate(var(--dx,60vw), var(--dy,72vh)) rotate(calc(var(--spin,540deg) * 2));opacity:0;}
+  }
+  /* gentle side-to-side flutter layered on top of the cross-sweep */
+  .fx.leaf::after{content:"";position:absolute;inset:0;
+    -webkit-mask:inherit;mask:inherit;background:inherit;
+    animation:leafsway var(--sway,2.4s) ease-in-out infinite alternate;}
+
+  .fx.petal{width:.9%;height:.9%;border-radius:50% 50% 50% 0;background:var(--lc,#f0c4d2);opacity:.9;
+    top:var(--y0,-8%);left:var(--x0,0%);animation:petalcross var(--dur,9s) linear var(--delay,0s) infinite;}
+  @keyframes petalcross{
     0%{transform:translate(0,0) rotate(0);opacity:0;}
     8%{opacity:.9;}
-    100%{transform:translate(6%,108%) rotate(320deg);opacity:.1;}
+    100%{transform:translate(var(--dx,24vw),var(--dy,105%)) rotate(300deg);opacity:.15;}
   }
+
+  .fx.flake{width:.7%;height:.7%;border-radius:50%;background:#fff;opacity:.9;
+    box-shadow:0 0 3px rgba(255,255,255,.9);top:var(--y0,-6%);left:var(--x0,0%);
+    animation:flakefall var(--dur,10s) linear var(--delay,0s) infinite;}
+  @keyframes flakefall{
+    0%{transform:translate(0,0);opacity:0;}
+    10%{opacity:.9;}
+    100%{transform:translate(var(--dx,8vw),var(--dy,110%));opacity:.2;}
+  }
+  @keyframes leafsway{from{transform:translateX(-15%);}to{transform:translateX(15%);}}
   @media (prefers-reduced-motion: reduce){ #seasonfx *{animation:none !important;opacity:0 !important;} }
 
   @media (prefers-reduced-motion: reduce){
@@ -1607,17 +1642,50 @@
   var SEASONS=['spring','summer','autumn','winter'];
   var seasonIcon={spring:'✿',summer:'☀',autumn:'🍂',winter:'❄'};
   var seasonBtn=document.getElementById('season'), seasonFx=document.getElementById('seasonfx');
+  // maple-leaf silhouette as a data-URI mask (fill comes from background-color)
+  var LEAFMASK="url('data:image/svg+xml;utf8,"+encodeURIComponent(
+    '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\">'
+    +'<path fill=\"#000\" d=\"M16 1c1 3 2 5 5 6-2 1-3 1-4 2 3 0 5-1 8-3-1 3-2 5-5 7 2 0 4-1 6-2-2 3-4 5-7 6 2 1 4 1 6 1-3 2-6 3-9 3l1 4-2 0 1-4c-3 0-6-1-9-3 2 0 4 0 6-1-3-1-5-3-7-6 2 1 4 2 6 2-3-2-4-4-5-7 3 2 5 3 8 3-1-1-2-1-4-2 3-1 4-3 5-6z\"/>'
+    +'</svg>')+"')";
+  // deterministic pseudo-random (no Math.random — banned) seeded per index
+  function rnd(i,s){ var x=Math.sin((i+1)*12.9898+s*78.233)*43758.5453; return x-Math.floor(x); }
+  var LEAFCOLORS=['#c8752f','#a8501f','#d98a2b','#8f3d18','#e0a23a','#b5621f'];
   function spawnSeasonFx(season){
     seasonFx.innerHTML='';
     if(reduce) return;
     var kind = season==='autumn'?'leaf' : season==='spring'?'petal' : season==='winter'?'flake' : null;
     if(!kind) return;                                  // summer = tint only, no particles
-    var n = kind==='flake'?34 : 22;
+    var n = kind==='leaf'?40 : kind==='flake'?46 : 30;
     for(var i=0;i<n;i++){
-      var f=document.createElement('div'); f.className='fx '+kind+((kind==='leaf'&&i%2)?' alt':'');
-      f.style.left=((i*137)%100)+'%';                 // deterministic spread (no Math.random)
-      f.style.animationDuration=(7+((i*0.7)%8))+'s';
-      f.style.animationDelay=(-(i*0.9)%10)+'s';
+      var layer = i%3;                                 // 0=mid 1=far 2=near depth layers
+      var f=document.createElement('div');
+      f.className='fx '+kind+(kind==='leaf'?(layer===1?' s2':layer===2?' s3':''):'');
+      // start off-screen or high up, staggered spread across the top + left edge
+      var x0=(rnd(i,1)*130-30);                         // -30%..100% start (some enter from left edge)
+      var y0=(-8-rnd(i,2)*30);                          // start above the top
+      f.style.setProperty('--x0',x0.toFixed(1)+'%');
+      f.style.setProperty('--y0',y0.toFixed(1)+'%');
+      if(kind==='leaf'){
+        f.style.setProperty('--leafmask',LEAFMASK);
+        f.style.setProperty('--lc',LEAFCOLORS[i%LEAFCOLORS.length]);
+        // WIND: carry each leaf fully across the page — 70..130% of viewport width to the right
+        f.style.setProperty('--dx',(70+rnd(i,3)*60).toFixed(0)+'vw');
+        f.style.setProperty('--dy',(60+rnd(i,4)*50).toFixed(0)+'vh');
+        f.style.setProperty('--spin',(360+rnd(i,5)*720).toFixed(0)+'deg');
+        f.style.setProperty('--sway',(1.8+rnd(i,6)*2.4).toFixed(2)+'s');
+        var base = layer===2?7:layer===1?13:10;        // near=fast, far=slow
+        f.style.setProperty('--dur',(base+rnd(i,7)*6).toFixed(1)+'s');
+      } else if(kind==='petal'){
+        f.style.setProperty('--lc',i%2?'#f0c4d2':'#f6d6e0');
+        f.style.setProperty('--dx',(12+rnd(i,3)*28).toFixed(0)+'vw');
+        f.style.setProperty('--dy',(95+rnd(i,4)*20).toFixed(0)+'%');
+        f.style.setProperty('--dur',(8+rnd(i,7)*6).toFixed(1)+'s');
+      } else { // flake
+        f.style.setProperty('--dx',(-6+rnd(i,3)*16).toFixed(0)+'vw');
+        f.style.setProperty('--dy',(100+rnd(i,4)*18).toFixed(0)+'%');
+        f.style.setProperty('--dur',(8+rnd(i,7)*7).toFixed(1)+'s');
+      }
+      f.style.setProperty('--delay',(-(rnd(i,8)*14)).toFixed(1)+'s');
       seasonFx.appendChild(f);
     }
   }
@@ -1636,7 +1704,9 @@
     else if(idx>=SEASONS.length-1) setSeason(null);
     else setSeason(SEASONS[idx+1]);
   });
-  try{ var ss=localStorage.getItem('ta_season'); if(ss) setSeason(ss); }catch(e){}
+  var qseason=/[?&]season=(spring|summer|autumn|winter)/i.exec(location.search);
+  if(qseason){ setSeason(qseason[1].toLowerCase()); }
+  else { try{ var ss=localStorage.getItem('ta_season'); if(ss) setSeason(ss); }catch(e){} }
 
   /* ---- #6 deep-link: ?sign=slug flies there on load (and open its panel if any) ---- */
   (function deeplink(){
