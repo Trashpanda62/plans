@@ -658,13 +658,15 @@
   @keyframes ripple{0%{transform:scale(.3);opacity:.55;}100%{transform:scale(3.4);opacity:0;}}
 
   /* ---- grazing animals: a soft head-bob on the pasture critters (left page) ---- */
-  .graze{width:2.2%;aspect-ratio:1;transform-origin:50% 90%;}
-  .graze .dot{position:absolute;inset:0;border-radius:50%;
-    background:radial-gradient(circle at 50% 42%, rgba(70,52,32,.0), rgba(70,52,32,.0));}
-  .graze.g1{left:11.5%;top:29%;animation:bob 4.2s ease-in-out infinite;}
-  .graze.g2{left:9%;top:31.5%;animation:bob 4.2s ease-in-out infinite;animation-delay:-1.5s;}
-  .graze.g3{left:13.5%;top:30%;animation:bob 4.2s ease-in-out infinite;animation-delay:-3s;}
-  @keyframes bob{0%,100%{transform:rotate(0);}50%{transform:rotate(-9deg) translateY(1%);}}
+  /* grazing alpacas — real painted sprite, gentle head-bob */
+  .graze{width:2.6%;aspect-ratio:1;transform-origin:50% 92%;
+    background:url(assets/sprite-alpaca.png) center/contain no-repeat;
+    filter:drop-shadow(0 1px 1px rgba(40,28,14,.35));}
+  .graze.g1{left:11%;top:28%;animation:bob 4.2s ease-in-out infinite;}
+  .graze.g2{left:8.4%;top:31%;animation:bobflip 4.2s ease-in-out infinite;animation-delay:-1.5s;}
+  .graze.g3{left:13.4%;top:29.5%;animation:bob 4.2s ease-in-out infinite;animation-delay:-3s;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6%);}}          /* head-dip graze */
+  @keyframes bobflip{0%,100%{transform:scaleX(-1) translateY(0);}50%{transform:scaleX(-1) translateY(6%);}}
 
   /* ---- butterflies over the garden (~7%,55%) ---- */
   .flit{width:.9%;aspect-ratio:1;opacity:.85;color:#c96a3a;
@@ -682,19 +684,24 @@
   @keyframes flutter{0%,100%{transform:skewY(0) scaleX(1);}50%{transform:skewY(-8deg) scaleX(.86);}}
 
   /* ---- village: cars rolling along Main Street ---- */
-  .car{width:1.6%;height:.9%;border-radius:2px;opacity:0;
-    box-shadow:0 1px 2px rgba(0,0,0,.4);}
-  .car.cv1{top:24.5%;background:#5a6b52;animation:carright 22s linear infinite;}
-  .car.cv2{top:27%;background:#4a5560;animation:carleft 28s linear infinite;animation-delay:-10s;}
-  @keyframes carright{0%{left:56%;opacity:0;}6%{opacity:.9;}94%{opacity:.9;}100%{left:99%;opacity:0;}}
-  @keyframes carleft{0%{left:99%;opacity:0;}6%{opacity:.9;}94%{opacity:.9;}100%{left:56%;opacity:0;}}
+  /* cars — real painted sprite rolling along Main Street */
+  .car{width:3.2%;aspect-ratio:256/180;opacity:0;
+    background:url(assets/sprite-car.png) center/contain no-repeat;
+    filter:drop-shadow(0 1px 1.5px rgba(40,28,14,.4));}
+  .car.cv1{top:23.5%;animation:carright 24s linear infinite;}
+  .car.cv2{top:27%;animation:carleft 30s linear infinite;animation-delay:-12s;}
+  @keyframes carright{0%{left:55%;opacity:0;transform:scaleX(1);}6%{opacity:1;}94%{opacity:1;}100%{left:99%;opacity:0;transform:scaleX(1);}}
+  @keyframes carleft{0%{left:99%;opacity:0;transform:scaleX(-1);}6%{opacity:1;}94%{opacity:1;}100%{left:55%;opacity:0;transform:scaleX(-1);}}
 
   /* ---- villagers: tiny figures ambling the square ---- */
-  .walker{width:.7%;height:1.6%;border-radius:40% 40% 0 0;background:#4a3c2c;opacity:.8;}
-  .walker.w1{top:47%;background:#5b4636;animation:walkr 24s linear infinite;}
-  .walker.w2{top:49%;background:#40506a;animation:walkl 30s linear infinite;animation-delay:-14s;}
-  @keyframes walkr{0%{left:70%;opacity:0;}8%{opacity:.8;}92%{opacity:.8;}100%{left:90%;opacity:0;}}
-  @keyframes walkl{0%{left:90%;opacity:0;}8%{opacity:.8;}92%{opacity:.8;}100%{left:70%;opacity:0;}}
+  /* villagers — real painted sprite ambling the square */
+  .walker{width:1.3%;aspect-ratio:1;opacity:0;
+    background:url(assets/sprite-villager.png) center/contain no-repeat;
+    filter:drop-shadow(0 1px 1px rgba(40,28,14,.35));}
+  .walker.w1{top:46%;animation:walkr 26s linear infinite;}
+  .walker.w2{top:49.5%;animation:walkl 32s linear infinite;animation-delay:-15s;}
+  @keyframes walkr{0%{left:69%;opacity:0;transform:scaleX(1);}8%{opacity:1;}92%{opacity:1;}100%{left:90%;opacity:0;transform:scaleX(1);}}
+  @keyframes walkl{0%{left:90%;opacity:0;transform:scaleX(-1);}8%{opacity:1;}92%{opacity:1;}100%{left:69%;opacity:0;transform:scaleX(-1);}}
 
   /* ---- foreground trees + grass sway (whole scene breathes) ---- */
   .sway{width:6%;height:10%;transform-origin:50% 100%;animation:sway 6s ease-in-out infinite;}
@@ -818,7 +825,7 @@
       <!-- pond -->
       <div class="pond-glint"></div><div class="ripple"></div><div class="ripple r2"></div>
       <!-- grazing animals -->
-      <div class="graze g1"><div class="dot"></div></div><div class="graze g2"><div class="dot"></div></div><div class="graze g3"><div class="dot"></div></div>
+      <div class="graze g1"></div><div class="graze g2"></div><div class="graze g3"></div>
       <!-- garden butterflies -->
       <div class="flit t1"></div><div class="flit t2"></div>
       <!-- flags on tents + gazebo -->
