@@ -765,7 +765,7 @@
   body[data-season="spring"] #farm{filter:saturate(1.14) brightness(1.04) hue-rotate(-6deg) contrast(1.02);}
   body[data-season="summer"] #farm{filter:saturate(1.2) brightness(1.1) contrast(1.05);}
   body[data-season="autumn"] #farm{filter:sepia(.28) saturate(1.28) brightness(.98) hue-rotate(-12deg) contrast(1.04);}
-  body[data-season="winter"] #farm{filter:saturate(.62) brightness(1.12) contrast(.96) hue-rotate(8deg);}
+  body[data-season="winter"] #farm{filter:saturate(.34) brightness(1.18) contrast(.92) hue-rotate(6deg);}
 
   #seasonfx{position:absolute;inset:0;pointer-events:none;z-index:7;overflow:hidden;border-radius:5px;}
   .fx{position:absolute;top:-6%;will-change:transform;}
@@ -806,9 +806,13 @@
     100%{transform:translate(var(--dx,24vw),var(--dy,105%)) rotate(300deg);opacity:.15;}
   }
 
-  .fx.flake{width:.7%;height:.7%;border-radius:50%;background:#fff;opacity:.9;
-    box-shadow:0 0 3px rgba(255,255,255,.9);top:var(--y0,-6%);left:var(--x0,0%);
+  .fx.flake{width:1.1%;height:1.1%;border-radius:50%;
+    background:radial-gradient(circle at 50% 50%, #fff 0 40%, #dbe8fb 62%, #b9d0ee 100%);opacity:1;
+    box-shadow:0 0 4px 1px rgba(255,255,255,.85), 0 1px 2px rgba(70,100,150,.55);
+    top:var(--y0,-6%);left:var(--x0,0%);
     animation:flakefall var(--dur,10s) linear var(--delay,0s) infinite;}
+  .fx.flake.s2{width:.7%;opacity:.85;}     /* far layer smaller */
+  .fx.flake.s3{width:1.5%;}                 /* near layer bigger */
   @keyframes flakefall{
     0%{transform:translate(0,0);opacity:0;}
     10%{opacity:.9;}
@@ -834,14 +838,22 @@
   body[data-season="autumn"] .sc.autumn-glow{opacity:1;}
 
   /* --- SLICE 3 WINTER: snow blanket (top-lit white wash) + frost vignette --- */
+  /* top-lit haze — reads as snow catching light on roofs + treetops */
   .sc.winter-blanket{inset:0;background:
-      linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,255,255,.10) 34%, rgba(255,255,255,0) 60%),
+      linear-gradient(180deg, rgba(255,255,255,.5), rgba(255,255,255,.12) 30%, rgba(255,255,255,0) 55%),
       radial-gradient(150% 100% at 50% -10%, rgba(255,255,255,.5), rgba(255,255,255,0) 50%);
       mix-blend-mode:screen;}
-  .sc.winter-frost{inset:0;box-shadow:inset 0 0 140px 40px rgba(200,224,246,.55),
-      inset 0 0 60px 10px rgba(255,255,255,.4);
-      background:radial-gradient(130% 120% at 50% 50%, rgba(255,255,255,0) 58%, rgba(206,228,248,.4));}
+  /* GROUND SNOW — a heavy white settle over the whole scene, strongest low + edges,
+     so grass/paths/fields read as snow-covered. Slight blue in the shadows. */
+  .sc.winter-ground{inset:0;background:
+      linear-gradient(0deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,.8) 16%, rgba(255,255,255,.5) 36%, rgba(255,255,255,.22) 56%, rgba(255,255,255,.05) 74%, rgba(255,255,255,0) 88%),
+      radial-gradient(120% 90% at 50% 120%, rgba(230,242,255,.6), rgba(230,242,255,0) 55%);
+      mix-blend-mode:screen;}
+  .sc.winter-frost{inset:0;box-shadow:inset 0 0 150px 50px rgba(200,224,246,.6),
+      inset 0 0 70px 12px rgba(255,255,255,.5);
+      background:radial-gradient(130% 120% at 50% 45%, rgba(255,255,255,0) 55%, rgba(206,228,248,.45));}
   body[data-season="winter"] .sc.winter-blanket,
+  body[data-season="winter"] .sc.winter-ground,
   body[data-season="winter"] .sc.winter-frost{opacity:1;}
 
   /* --- SLICE 4 SPRING: blossom pops on the orchard/trees + bright bloom haze --- */
@@ -851,11 +863,15 @@
       mix-blend-mode:soft-light;}
   body[data-season="spring"] .sc.spring-haze{opacity:1;}
   /* blossom clusters — soft pink dot-groups that breathe in/out on tree crowns (JS-placed) */
+  /* A flowering-canopy: many TINY 5-petal blossoms speckled over a crown, not big blobs.
+     Each .blossom is a small soft-pink flower (radial dot) that gently sways/twinkles. */
   .blossom{position:absolute;aspect-ratio:1;border-radius:50%;
-    background:radial-gradient(circle at 42% 38%, rgba(255,226,240,.98), rgba(255,196,224,.78) 50%, rgba(255,182,214,.25) 74%, rgba(255,182,214,0) 82%);
-    filter:blur(.3px);opacity:0;transition:none;
-    animation:bloom var(--dur,5s) ease-in-out var(--delay,0s) infinite;}
-  @keyframes bloom{0%,100%{opacity:.7;transform:scale(.92);}50%{opacity:1;transform:scale(1.06);}}
+    background:
+      radial-gradient(circle at 50% 50%, #fff 0 14%, rgba(255,255,255,0) 15%),
+      radial-gradient(circle at 50% 50%, rgba(255,205,224,.98) 0 55%, rgba(255,188,214,.55) 62%, rgba(255,188,214,0) 74%);
+    box-shadow:0 0 1px rgba(210,120,150,.35);opacity:0;transition:none;
+    animation:bloom var(--dur,4s) ease-in-out var(--delay,0s) infinite;}
+  @keyframes bloom{0%,100%{opacity:.82;transform:scale(.9) rotate(0);}50%{opacity:1;transform:scale(1.05) rotate(8deg);}}
 
   /* --- SLICE 5 SUMMER: god-rays sweep + heat shimmer + fireflies(night) --- */
   .sc.summer-rays{inset:-10% 0 0 0;height:70%;background:
@@ -955,7 +971,7 @@
     <!-- per-season scene overlays (glow/snow/haze/rays + JS-placed blossoms & fireflies) -->
     <div id="seasonscene" aria-hidden="true">
       <div class="sc autumn-glow"></div>
-      <div class="sc winter-blanket"></div><div class="sc winter-frost"></div>
+      <div class="sc winter-ground"></div><div class="sc winter-blanket"></div><div class="sc winter-frost"></div>
       <div class="sc spring-haze"></div>
       <div class="sc summer-rays"></div>
       <div id="blossoms"></div>
@@ -1734,8 +1750,9 @@
   var LEAFCOLORS=['#c8752f','#a8501f','#d98a2b','#8f3d18','#e0a23a','#b5621f'];
   // tree-crown anchors on the map (%) — where spring blossoms cluster. Real crowns in the art.
   // % anchors on real leafy (deciduous) tree crowns in the art — blossoms cluster here.
+  // measured crown centres of the big LEAFY trees in the art (px→% off world-map.jpg)
   var TREE_CROWNS=[
-    [26.5,14.5],[28.5,25],[24,49],[16,52],[35,58],                   // farm side leafy trees
+    [21.5,8],[23.5,23],[31.7,33],[16,52],[35,58],                    // farm side leafy trees
     [58,40],[63.5,55],[75.5,64],[88,52],[70,72]                      // village side leafy trees
   ];
   var blossomsEl=document.getElementById('blossoms'), firefliesEl=document.getElementById('fireflies');
@@ -1745,14 +1762,17 @@
     blossomsEl.innerHTML='';
     if(reduce) return;
     TREE_CROWNS.forEach(function(c,ci){
-      var per = isSmall?4:7;                              // small pink pops per crown
+      var per = isSmall?10:18;                            // many tiny flowers speckling the crown
       for(var k=0;k<per;k++){
+        var s=ci*40+k;
         var b=document.createElement('div'); b.className='blossom';
-        b.style.left=(c[0]+ (rnd(ci*7+k,11)*3.2-1.6)).toFixed(1)+'%';   // tight cluster
-        b.style.top =(c[1]+ (rnd(ci*7+k,12)*3.0-1.5)).toFixed(1)+'%';
-        b.style.width=(0.7+rnd(ci*7+k,13)*0.9).toFixed(2)+'%';          // small dabs, not bubbles
-        b.style.setProperty('--dur',(4+rnd(ci*7+k,14)*4).toFixed(1)+'s');
-        b.style.setProperty('--delay',(-(rnd(ci*7+k,15)*5)).toFixed(1)+'s');
+        // gaussian-ish tight scatter over the crown radius (~crown is small)
+        var ang=rnd(s,11)*6.283, rad=rnd(s,16)*2.3;      // polar spread, radius up to 2.3%
+        b.style.left=(c[0]+Math.cos(ang)*rad).toFixed(2)+'%';
+        b.style.top =(c[1]+Math.sin(ang)*rad*0.8).toFixed(2)+'%';
+        b.style.width=(0.35+rnd(s,13)*0.45).toFixed(2)+'%';   // tiny flowers
+        b.style.setProperty('--dur',(3+rnd(s,14)*3).toFixed(1)+'s');
+        b.style.setProperty('--delay',(-(rnd(s,15)*4)).toFixed(1)+'s');
         blossomsEl.appendChild(b);
       }
     });
@@ -1781,11 +1801,11 @@
     var kind = season==='autumn'?'leaf' : season==='spring'?'petal' : season==='winter'?'flake' : null;
     if(!kind) return;                                  // summer = scene-only particles
     // denser fields; cap on small screens for perf
-    var n = kind==='leaf'?(isSmall?45:90) : kind==='flake'?(isSmall?40:80) : (isSmall?28:55);
+    var n = kind==='leaf'?(isSmall?45:90) : kind==='flake'?(isSmall?70:140) : (isSmall?28:55);
     for(var i=0;i<n;i++){
       var layer = i%3;                                 // 0=mid 1=far 2=near depth layers
       var f=document.createElement('div');
-      f.className='fx '+kind+(kind==='leaf'?(layer===1?' s2':layer===2?' s3':''):'');
+      f.className='fx '+kind+((kind==='leaf'||kind==='flake')?(layer===1?' s2':layer===2?' s3':''):'');
       // start off-screen or high up, staggered spread across the top + left edge
       var x0=(rnd(i,1)*130-30);                         // -30%..100% start (some enter from left edge)
       var y0=(-8-rnd(i,2)*30);                          // start above the top
@@ -1806,7 +1826,9 @@
         f.style.setProperty('--dx',(12+rnd(i,3)*28).toFixed(0)+'vw');
         f.style.setProperty('--dy',(95+rnd(i,4)*20).toFixed(0)+'%');
         f.style.setProperty('--dur',(8+rnd(i,7)*6).toFixed(1)+'s');
-      } else { // flake
+      } else { // flake — spread starting height across the whole scene so snow fills it at once
+        f.style.setProperty('--x0',(rnd(i,1)*104-2).toFixed(1)+'%');
+        f.style.setProperty('--y0',(rnd(i,2)*95-5).toFixed(1)+'%');   // -5%..90% : already on screen
         f.style.setProperty('--dx',(-6+rnd(i,3)*16).toFixed(0)+'vw');
         f.style.setProperty('--dy',(100+rnd(i,4)*18).toFixed(0)+'%');
         f.style.setProperty('--dur',(8+rnd(i,7)*7).toFixed(1)+'s');
@@ -1825,14 +1847,12 @@
   }
   seasonBtn.addEventListener('click',function(){
     var cur=document.body.getAttribute('data-season');
-    var idx=SEASONS.indexOf(cur);                      // none → spring → … → winter → none
-    if(idx<0) setSeason(SEASONS[0]);
-    else if(idx>=SEASONS.length-1) setSeason(null);
-    else setSeason(SEASONS[idx+1]);
+    var idx=SEASONS.indexOf(cur);                      // always cycle within the 4 real seasons
+    setSeason(SEASONS[(idx+1)%SEASONS.length]);
   });
   var qseason=/[?&]season=(spring|summer|autumn|winter)/i.exec(location.search);
   if(qseason){ setSeason(qseason[1].toLowerCase()); }
-  else { try{ var ss=localStorage.getItem('ta_season'); if(ss) setSeason(ss); }catch(e){} }
+  else { try{ var ss=localStorage.getItem('ta_season'); setSeason(ss||'spring'); }catch(e){ setSeason('spring'); } }
 
   /* ---- #6 deep-link: ?sign=slug flies there on load (and open its panel if any) ---- */
   (function deeplink(){
