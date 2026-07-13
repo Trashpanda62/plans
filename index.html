@@ -613,12 +613,15 @@
   #ambient{position:absolute;inset:0;pointer-events:none;z-index:7;overflow:hidden;border-radius:5px;}
   #ambient > *{position:absolute;will-change:transform,opacity;}
 
-  /* ---- chimney smoke: farmhouse (~25.5%,7%) + forest cabin (~40%,72%) ---- */
-  .smoke{width:1.5%;aspect-ratio:1;border-radius:50%;
+  /* ---- chimney smoke: every chimney on the map ---- */
+  .smoke{width:1.4%;aspect-ratio:1;border-radius:50%;
     background:radial-gradient(circle at 50% 55%, rgba(232,228,220,.85), rgba(232,228,220,0) 70%);
     filter:blur(2px);opacity:0;animation:puff 6s ease-in infinite;}
-  .sm-farm{left:25.4%;top:6.5%;}
-  .sm-cabin{left:40%;top:71.5%;}
+  /* anchored on each real chimney in the art */
+  .sm-farm  {left:28.2%;top:5.5%;}    /* red-roof farmhouse */
+  .sm-cabin {left:40.1%;top:18%;}     /* smoking log cabin */
+  .sm-white {left:56.3%;top:25%;}     /* town white house (left of shops) */
+  .sm-grey  {left:56.4%;top:46.5%;}   /* town grey/brick house (lower) */
   .smoke.d1{animation-delay:0s;} .smoke.d2{animation-delay:2s;} .smoke.d3{animation-delay:4s;}
   @keyframes puff{
     0%{transform:translate(0,0) scale(.4);opacity:0;}
@@ -662,9 +665,10 @@
   .graze{width:2.6%;aspect-ratio:1;transform-origin:50% 92%;
     background:url(assets/sprite-alpaca.png) center/contain no-repeat;
     filter:drop-shadow(0 1px 1px rgba(40,28,14,.35));}
-  .graze.g1{left:11%;top:28%;animation:bob 4.2s ease-in-out infinite;}
-  .graze.g2{left:8.4%;top:31%;animation:bobflip 4.2s ease-in-out infinite;animation-delay:-1.5s;}
-  .graze.g3{left:13.4%;top:29.5%;animation:bob 4.2s ease-in-out infinite;animation-delay:-3s;}
+  /* placed INSIDE the fenced pasture, beside the painted herd (art: alpacas ~7-9%, 24-27%) */
+  .graze.g1{left:6.5%;top:25%;animation:bob 4.2s ease-in-out infinite;}
+  .graze.g2{left:4.2%;top:26.5%;animation:bobflip 4.2s ease-in-out infinite;animation-delay:-1.5s;}
+  .graze.g3{left:9%;top:24%;animation:bob 4.2s ease-in-out infinite;animation-delay:-3s;}
   @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6%);}}          /* head-dip graze */
   @keyframes bobflip{0%,100%{transform:scaleX(-1) translateY(0);}50%{transform:scaleX(-1) translateY(6%);}}
 
@@ -683,15 +687,6 @@
   .flag.fl1{left:3%;top:22%;} .flag.fl2{left:16.5%;top:41.5%;} .flag.fl3{left:79%;top:56%;background:linear-gradient(90deg,#7a8b5a,rgba(122,139,90,0));}
   @keyframes flutter{0%,100%{transform:skewY(0) scaleX(1);}50%{transform:skewY(-8deg) scaleX(.86);}}
 
-  /* ---- village: cars rolling along Main Street ---- */
-  /* cars — real painted sprite rolling along Main Street */
-  .car{width:3.2%;aspect-ratio:256/180;opacity:0;
-    background:url(assets/sprite-car.png) center/contain no-repeat;
-    filter:drop-shadow(0 1px 1.5px rgba(40,28,14,.4));}
-  .car.cv1{top:23.5%;animation:carright 24s linear infinite;}
-  .car.cv2{top:27%;animation:carleft 30s linear infinite;animation-delay:-12s;}
-  @keyframes carright{0%{left:55%;opacity:0;transform:scaleX(1);}6%{opacity:1;}94%{opacity:1;}100%{left:99%;opacity:0;transform:scaleX(1);}}
-  @keyframes carleft{0%{left:99%;opacity:0;transform:scaleX(-1);}6%{opacity:1;}94%{opacity:1;}100%{left:55%;opacity:0;transform:scaleX(-1);}}
 
   /* ---- villagers: tiny figures ambling the square ---- */
   /* villagers — real painted sprite ambling the square */
@@ -785,7 +780,7 @@
 
   @media (prefers-reduced-motion: reduce){
     #ambient *{animation:none !important;}
-    .bird,.car,.walker,.flit,.ripple{opacity:0 !important;}
+    .bird,.walker,.flit,.ripple{opacity:0 !important;}
   }
 
   /* one seamless slow pass: off the left edge → off the right edge, then loops */
@@ -818,7 +813,9 @@
     <div id="ambient" aria-hidden="true">
       <!-- chimney smoke -->
       <div class="smoke sm-farm d1"></div><div class="smoke sm-farm d2"></div><div class="smoke sm-farm d3"></div>
-      <div class="smoke sm-cabin d1"></div><div class="smoke sm-cabin d2"></div>
+      <div class="smoke sm-cabin d1"></div><div class="smoke sm-cabin d2"></div><div class="smoke sm-cabin d3"></div>
+      <div class="smoke sm-white d1"></div><div class="smoke sm-white d2"></div><div class="smoke sm-white d3"></div>
+      <div class="smoke sm-grey d1"></div><div class="smoke sm-grey d2"></div><div class="smoke sm-grey d3"></div>
       <!-- birds -->
       <div class="bird bf1"><i></i></div><div class="bird bf2"><i></i></div>
       <div class="bird bf3"><i></i></div><div class="bird bslow"><i></i></div>
@@ -831,7 +828,6 @@
       <!-- flags on tents + gazebo -->
       <div class="flag fl1"></div><div class="flag fl2"></div><div class="flag fl3"></div>
       <!-- village cars -->
-      <div class="car cv1"></div><div class="car cv2"></div>
       <!-- villagers -->
       <div class="walker w1"></div><div class="walker w2"></div>
       <!-- gentle tree/grass sway -->
