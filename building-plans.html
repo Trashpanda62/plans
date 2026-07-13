@@ -1,0 +1,379 @@
+<title>Building Plans — Tapestry Acres</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{
+    --paper:#F6F2EA; --card:#FFFFFF; --ink:#2b2620; --ink-soft:#6c6357;
+    --line:#E7DECF; --line-soft:#F1EADD;
+    --clay:#b9824f; --clay-deep:#8a5a2e; --clay-tint:#F5E9DA;
+    --sage:#7a8b5a; --sage-deep:#586642; --sage-tint:#ECF0E1;
+    --wood:#8a5a2e; --wood-deep:#5f3d1e;
+    --amber:#B5761F; --amber-tint:#FBEFD9;
+    --green:#3F7A4E; --green-tint:#E6F1E8;
+    --shadow:0 1px 2px rgba(43,38,32,.05), 0 6px 22px -12px rgba(138,90,46,.28);
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Charter,Georgia,serif;
+    --mono:"SF Mono",ui-monospace,"Cascadia Mono","Segoe UI Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+    line-height:1.55;-webkit-font-smoothing:antialiased;font-size:16px}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px 72px}
+  a{color:var(--clay-deep)}
+  h1,h2,h3{text-wrap:balance;font-family:var(--serif);font-weight:600;letter-spacing:.1px}
+  .eyebrow{font-family:var(--sans);text-transform:uppercase;letter-spacing:.14em;
+    font-size:12px;font-weight:700;color:var(--clay)}
+
+  /* HERO */
+  .hero{background:
+      radial-gradient(120% 140% at 88% -10%, #A9743F 0%, var(--wood) 42%, var(--wood-deep) 100%);
+    color:#fff;border-radius:0 0 26px 26px;padding:44px 34px 34px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-40px;top:-40px;width:260px;height:260px;
+    background:radial-gradient(circle,rgba(255,255,255,.14),transparent 60%);pointer-events:none}
+  .hero .eyebrow{color:#EFD8BE}
+  .hero h1{color:#fff;font-size:clamp(30px,5vw,46px);margin:.28em 0 .1em;line-height:1.05}
+  .hero p.lede{max-width:60ch;color:#F4E6D4;font-size:17px;margin:.2em 0 0}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .chip{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);
+    color:#fff;padding:7px 13px;border-radius:999px;font-size:13px;font-weight:600;
+    display:inline-flex;align-items:center;gap:7px}
+
+  section{margin-top:44px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+    border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:22px}
+  .sec-head h2{font-size:26px;margin:0}
+  .sec-head .note{font-size:14px;color:var(--ink-soft)}
+
+  /* PLAN CARD (the roster of plans) */
+  .plans{display:flex;flex-direction:column;gap:16px}
+  .plan{background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:20px 22px;box-shadow:var(--shadow)}
+  .plan h3{margin:0 0 4px;font-size:20px}
+  .plan h3::before{content:"🪚 ";font-size:16px}
+  .plan .tagline{margin:0 0 14px;font-size:14.5px;color:var(--ink-soft)}
+  .specs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+  .spec{font-size:12px;font-weight:700;padding:4px 11px;border-radius:999px;
+    background:var(--clay-tint);color:var(--clay-deep);letter-spacing:.02em}
+  .spec.sage{background:var(--sage-tint);color:var(--sage-deep)}
+  .spec.cost{background:var(--green-tint);color:#2E6B3E}
+  .planlinks{display:flex;flex-wrap:wrap;gap:10px}
+  .go{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+    background:var(--clay);color:#fff;text-decoration:none;font-weight:700;font-size:13.5px;
+    padding:9px 15px;border-radius:10px;box-shadow:0 2px 10px -3px rgba(138,90,46,.5);
+    transition:transform .12s ease, background .12s ease}
+  .go:hover{background:var(--clay-deep);transform:translateY(-1px)}
+  .go.ghost{background:#fff;color:var(--clay-deep);border:1px solid var(--line)}
+  .go.ghost:hover{background:var(--clay-tint)}
+
+  /* STEP LIST (the build sequence) */
+  .steps{display:flex;flex-direction:column;gap:12px;margin-top:6px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:16px 18px;display:grid;grid-template-columns:40px 1fr;gap:15px;
+    align-items:start;box-shadow:var(--shadow)}
+  .num{width:40px;height:40px;border-radius:11px;background:var(--clay-tint);
+    color:var(--clay-deep);font-family:var(--serif);font-size:18px;font-weight:700;
+    display:flex;align-items:center;justify-content:center}
+  .step h4{margin:0 0 4px;font-size:16px;font-family:var(--sans);font-weight:700}
+  .step p{margin:0;font-size:14px;color:var(--ink-soft)}
+  .step .cues{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+  .cue{font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px;
+    background:var(--sage-tint);color:var(--sage-deep)}
+
+  .callout{background:var(--amber-tint);border:1px solid #ECD9AE;border-left:4px solid var(--amber);
+    border-radius:12px;padding:14px 18px;font-size:14.5px;color:#5c451b;margin-top:18px}
+  .callout strong{color:#432f0f}
+
+  /* TABLE (cost / cut list) */
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+  table{border-collapse:collapse;width:100%;min-width:560px;background:#fff;font-size:14px}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  thead th{background:var(--wood-deep);color:#fff;font-family:var(--sans);font-size:12px;
+    text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:nth-child(even){background:#FBF7F0}
+  td.num-col{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+  tr.subtotal td{font-weight:800;background:var(--clay-tint);color:var(--clay-deep)}
+  tr.grand td{font-weight:800;background:var(--wood-deep);color:#fff;font-size:15px}
+
+  details{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    box-shadow:var(--shadow);margin-top:14px;overflow:hidden}
+  details summary{cursor:pointer;padding:16px 20px;font-weight:700;font-size:15px;
+    font-family:var(--sans);list-style:none;display:flex;align-items:center;gap:10px}
+  details summary::-webkit-details-marker{display:none}
+  details summary::before{content:"▸";color:var(--clay);font-size:13px;transition:transform .15s}
+  details[open] summary::before{transform:rotate(90deg)}
+  details .body{padding:0 20px 20px}
+
+  .empty{background:var(--sage-tint);border:1px dashed #C4CFA9;border-radius:16px;
+    padding:22px;text-align:center;color:var(--sage-deep);font-size:14.5px}
+
+  footer{margin-top:52px;padding-top:20px;border-top:2px solid var(--line);
+    font-size:13px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important}}
+  a.go:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+  @media print{.np{display:none!important}}
+</style>
+
+<div class="np" style="padding:0 20px">
+  <a href="https://trashpanda62.github.io/plans/" style="display:inline-block;margin:16px 0 0;color:#8a5a2e;font-weight:700;text-decoration:none;font-family:-apple-system,Segoe UI,sans-serif;font-size:14px">← The Map</a>
+  <button onclick="window.print()" style="margin:6px 0 0 10px;background:#8a5a2e;color:#fff;border:0;border-radius:8px;padding:7px 14px;font-weight:700;font-size:13px;cursor:pointer;font-family:-apple-system,Segoe UI,sans-serif">🖨 Print</button>
+</div>
+
+<div class="hero">
+  <div class="wrap" style="padding-bottom:0;padding-left:0;padding-right:0;max-width:none">
+    <div class="eyebrow">Tapestry Acres · The Workshop</div>
+    <h1>Building Plans</h1>
+    <p class="lede">Every structure we build on the farm — full DIY plans, cut lists, and shopping sheets. Print it, take it to the yard, build it.</p>
+    <div class="chips">
+      <span class="chip">🪚 DIY build plans</span>
+      <span class="chip">📐 Cut lists + fasteners</span>
+      <span class="chip">🧾 Priced shopping sheets</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ROSTER -->
+  <section style="margin-top:34px">
+    <div class="sec-head">
+      <h2>The plans</h2>
+      <span class="note">Jump to a full plan below, or grab the source PDF / order sheet</span>
+    </div>
+    <div class="plans">
+
+      <div class="plan">
+        <h3>Farm Stand</h3>
+        <p class="tagline">Roadside farm-stand shed — double barn doors, three-tier shelving, sloped metal roof. Brele's professional DIY plan, Rev 1.0.</p>
+        <div class="specs">
+          <span class="spec">96" W × 48" D × 133½" ridge</span>
+          <span class="spec sage">Intermediate · 2–3 weekends</span>
+          <span class="spec sage">13 assembly steps</span>
+          <span class="spec cost">≈ $2,250–$2,370 materials</span>
+        </div>
+        <div class="planlinks">
+          <a class="go" href="#farmstand">Read the full plan ↓</a>
+          <a class="go ghost" href="assets/breles-farm-shed-stand-professional.pdf" target="_blank" rel="noopener">Source PDF (13 pp) ↗</a>
+          <a class="go ghost" href="assets/Tapestry_Acres_Farmstand_BOM.xlsx">Shopping sheet (xlsx) ↓</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FARM STAND FULL PLAN -->
+  <section id="farmstand">
+    <div class="sec-head">
+      <h2>Farm Stand — full build plan</h2>
+      <span class="note">Outdoor garden-storage / farm-stand structure with double doors, shelving system &amp; metal roof</span>
+    </div>
+
+    <div class="tablewrap" style="margin-bottom:6px">
+      <table>
+        <thead><tr><th>Spec</th><th>Value</th><th>Spec</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Width</td><td class="num-col">96 in</td><td>Roof span</td><td class="num-col">120 in</td></tr>
+          <tr><td>Depth</td><td class="num-col">48 in</td><td>Skill level</td><td>Intermediate</td></tr>
+          <tr><td>Ridge height</td><td class="num-col">133½ in</td><td>Build time</td><td>2–3 weekends</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <strong>Read before cutting anything.</strong> Verify every measurement against the plan before each cut — measure twice, cut once. Label each piece immediately after cutting. Apply exterior primer to all cut ends before assembly. Pre-drill any connection within 2" of a board end (bit 1/64" under the screw shank) to stop splitting, especially in the 4×4 posts.
+    </div>
+
+    <h3 style="font-size:19px;margin:30px 0 10px">Build sequence — 13 steps</h3>
+    <div class="steps">
+
+      <div class="step"><div class="num">1</div><div>
+        <h4>Post &amp; beam frame</h4>
+        <p>Stand 4×4 Post A (120") and Post B (108") in front/back pairs. Attach 4×4 Beam C (96") across each pair's top — Posts B are shorter to create the roof slope. Brace diagonally with a temporary 2×4 to keep it square while fastening.</p>
+        <div class="cues"><span class="cue">3" screws · 3 per joint</span><span class="cue">pre-drill</span><span class="cue">check square</span></div>
+      </div></div>
+
+      <div class="step"><div class="num">2</div><div>
+        <h4>Bottom support frame (joists)</h4>
+        <p>Assemble the floor frame: Joist A (89") front-to-back, Joist B (41") side-to-side. Install 4 Brace Support C at the inside corners (both ends cut 45°) for racking resistance. Use joist hangers at the beam connections.</p>
+        <div class="cues"><span class="cue">2½" screws</span><span class="cue">45° brace cuts</span><span class="cue">verify diagonal = square</span></div>
+      </div></div>
+
+      <div class="step"><div class="num">3</div><div>
+        <h4>Middle shelf support frame</h4>
+        <p>Connect Shelf Frame A (38") cross-members to Shelf Frame B (96") rails. Set the lower cross-member 18½" off the floor, the upper at 37". Toe-screw to posts at 45°.</p>
+        <div class="cues"><span class="cue">2½" screws</span><span class="cue">lower @ 18½"</span><span class="cue">upper @ 37"</span></div>
+      </div></div>
+
+      <div class="step"><div class="num">4</div><div>
+        <h4>Top shelf support frame</h4>
+        <p>Frame with Top Shelf Frame A (19¼") cross-members + Top Shelf Frame B (96") rails. Add Top Shelf Brace C (29⅜", 45° both ends) diagonally — one per end — to stop racking. Keep the sloped-roof geometry.</p>
+        <div class="cues"><span class="cue">2½" screws</span><span class="cue">brace sits flush</span></div>
+      </div></div>
+
+      <div class="step"><div class="num">5</div><div>
+        <h4>Bottom shelf panel</h4>
+        <p>Cut Bottom Shelf Panel A (96"×48"×¾") with 3½"×3½" notches at all 4 corners to clear the posts (offset 10-11/16" horizontal, 9-3/8" vertical). Jigsaw the inside corners. Drop onto the joist frame; secure with 1⅝" screws every 8".</p>
+        <div class="cues"><span class="cue">1⅝" screws @ 8" o/c</span><span class="cue">jigsaw notches</span><span class="cue">test-fit first</span></div>
+      </div></div>
+
+      <div class="step"><div class="num">6</div><div>
+        <h4>Middle shelf panel</h4>
+        <p>Cut Middle Shelf Panel B (96"×41"×¾") — no notching; it sits between the posts at the 18½" position. Bead exterior glue on the rails, then fasten 1⅝" screws every 8".</p>
+        <div class="cues"><span class="cue">1⅝" screws @ 8" o/c</span><span class="cue">glue on rails</span></div>
+      </div></div>
+
+      <div class="step"><div class="num">7</div><div>
+        <h4>Top shelf panel</h4>
+        <p>Cut Top Shelf Panel C (96"×22¼"×¾"), install on the upper frame against the rear. Front edge aligns to the inner face of the Top Shelf Frame A cross-members — check from the front before final fastening.</p>
+        <div class="cues"><span class="cue">1⅝" screws @ 8" o/c</span><span class="cue">align front edge</span></div>
+      </div></div>
+
+      <div class="step"><div class="num">8</div><div>
+        <h4>Roof rafter assembly</h4>
+        <p>Build the rafter panel flat: 2 Roof Face Board B (120") as front/rear fascias, then 7 Roof Rafter A + 2 Roof Rafter B (85½") between them, spaced 16-15/16" c/c (Rafter B at the far edges). Lift onto the posts — roof projects 12" beyond the front. 2-person lift.</p>
+        <div class="cues"><span class="cue">2½" assembly · 3" to posts</span><span class="cue">16-15/16" c/c</span><span class="cue">2-person lift</span></div>
+      </div></div>
+
+      <div class="step"><div class="num">9</div><div>
+        <h4>Wall siding — L / R / back</h4>
+        <p>Start from the bottom. Side Panels A (48"×5") horizontal, 2 screws per post, 1/8" reveal gap between boards for drainage. Angle-cut the top pieces (Panel C) to the roof pitch. Back wall uses full-width Back Siding Panel A (97½").</p>
+        <div class="cues"><span class="cue">1⅝" screws</span><span class="cue">1/8" gap between boards</span><span class="cue">measure pitch before Panel C</span></div>
+      </div></div>
+
+      <div class="step"><div class="num">10</div><div>
+        <h4>Inner trim</h4>
+        <p>Install Inner Trim A (89") horizontally as the inside header over the door opening, then 2× Inner Trim B (93¾") vertically as inside jambs. Flush to the inside framing face — this is the hinge-backing surface.</p>
+        <div class="cues"><span class="cue">2½" screws · 3 per stud</span><span class="cue">flush to inside</span></div>
+      </div></div>
+
+      <div class="step"><div class="num">11</div><div>
+        <h4>Face trim (door surround)</h4>
+        <p>Door Trims A (105") vertical on both exterior sides of the opening, flush to the siding front; Door Trim B (90½") horizontal across the top with 45° mitered corners. Overlap the raw panel edges, fill holes, caulk seams before painting.</p>
+        <div class="cues"><span class="cue">2½" screws</span><span class="cue">45° miter corners</span><span class="cue">caulk seams</span></div>
+      </div></div>
+
+      <div class="step"><div class="num">12</div><div>
+        <h4>Metal roofing sheets</h4>
+        <p>Install 3× 4'×8' corrugated galvanized sheets. Start from the low (rear) side, work to the high front, overlapping one full corrugation (~2"). 1½" self-tapping hex-head screws with EPDM washers through the crown, 2 per rafter crossing — compress the washer, don't crush it. Overhang the front fascia 1½"+ for a drip edge.</p>
+        <div class="cues"><span class="cue">1½" roofing screws</span><span class="cue">start low side</span><span class="cue">don't over-tighten</span></div>
+      </div></div>
+
+      <div class="step"><div class="num">13</div><div>
+        <h4>Door assembly &amp; hanging (×2)</h4>
+        <p>Build each door flat: 2× Door Frame A (90-11/16") stiles + 2× Door Frame B (42-15/16") rails, 3 screws per corner. Face with 2× Door Panel A (4-5/8") at the edges + 6× Door Panel B (6") between (bottom gap 6¼", side setback 2-5/16", top gap 1-9/16"). Hang with 4 heavy hinges per door on the inner jambs, 1/8" reveal all around; handles at ~42"; barrel bolt / hasp at the meeting edge. Doors swing outward.</p>
+        <div class="cues"><span class="cue">2½" frame · 1⅝" panels</span><span class="cue">4 hinges/door</span><span class="cue">shim for even gap</span></div>
+      </div></div>
+
+    </div>
+
+    <!-- CUT LIST -->
+    <details style="margin-top:26px">
+      <summary>Complete cut list — all pieces</summary>
+      <div class="body">
+        <p style="font-size:13.5px;color:var(--ink-soft);margin:2px 0 14px">Length × Width × Thickness in inches. Nominal lumber in the Material column.</p>
+
+        <h4 style="font-family:var(--sans);font-size:14px;margin:16px 0 8px">A — Structural framing</h4>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Mark</th><th>Part</th><th>Qty</th><th>Length</th><th>Material</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td>4×4 Post A</td><td>2</td><td>120"</td><td>4×4</td><td>Front tall posts</td></tr>
+            <tr><td>B</td><td>4×4 Post B</td><td>2</td><td>108"</td><td>4×4</td><td>Rear shorter posts</td></tr>
+            <tr><td>C</td><td>4×4 Beam C</td><td>2</td><td>96"</td><td>4×4</td><td>Top cross-beams</td></tr>
+            <tr><td>A</td><td>Joist A</td><td>2</td><td>89"</td><td>2×6</td><td>Long floor joists</td></tr>
+            <tr><td>B</td><td>Joist B</td><td>2</td><td>41"</td><td>2×6</td><td>Short floor joists</td></tr>
+            <tr><td>C</td><td>Brace Support C</td><td>4</td><td>14⅜"</td><td>2×4</td><td>45° both ends</td></tr>
+            <tr><td>A</td><td>Shelf Frame A</td><td>2</td><td>38"</td><td>2×4</td><td>Mid-shelf cross members</td></tr>
+            <tr><td>B</td><td>Shelf Frame B</td><td>2</td><td>96"</td><td>2×4</td><td>Mid-shelf long rails</td></tr>
+            <tr><td>A</td><td>Top Shelf Frame A</td><td>2</td><td>19¼"</td><td>2×4</td><td>Upper shelf cross members</td></tr>
+            <tr><td>B</td><td>Top Shelf Frame B</td><td>2</td><td>96"</td><td>2×4</td><td>Upper shelf long rails</td></tr>
+            <tr><td>C</td><td>Top Shelf Brace C</td><td>2</td><td>29⅜"</td><td>2×4</td><td>45° both ends</td></tr>
+            <tr><td>A</td><td>Roof Rafter A</td><td>7</td><td>85½"</td><td>2×4</td><td>Spaced 16-15/16" c/c</td></tr>
+            <tr><td>B</td><td>Roof Rafter B</td><td>2</td><td>85½"</td><td>2×4</td><td>Edge rafters</td></tr>
+            <tr><td>B</td><td>Roof Face Board B</td><td>2</td><td>120"</td><td>2×4</td><td>Front &amp; back fascia</td></tr>
+          </tbody>
+        </table></div>
+
+        <h4 style="font-family:var(--sans);font-size:14px;margin:20px 0 8px">B — Shelf panels (¾" plywood)</h4>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Mark</th><th>Part</th><th>Qty</th><th>Length × Width</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td>Bottom Shelf Panel A</td><td>1</td><td>96" × 48"</td><td>Notch corners for posts</td></tr>
+            <tr><td>B</td><td>Middle Shelf Panel B</td><td>1</td><td>96" × 41"</td><td>No notching</td></tr>
+            <tr><td>C</td><td>Top Shelf Panel C</td><td>1</td><td>96" × 22¼"</td><td>No notching</td></tr>
+          </tbody>
+        </table></div>
+
+        <h4 style="font-family:var(--sans);font-size:14px;margin:20px 0 8px">C — Wall siding &amp; trim</h4>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Mark</th><th>Part</th><th>Qty</th><th>Length × Width</th><th>Material</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td>L/R Side Panel A</td><td>38</td><td>48" × 5"</td><td>¾" ply</td><td>Horizontal siding boards</td></tr>
+            <tr><td>B</td><td>L/R Side Panel B</td><td>2</td><td>48" × 5"</td><td>¾" ply</td><td>Fill-in at top angle</td></tr>
+            <tr><td>C</td><td>L/R Side Panel C</td><td>2</td><td>32-3/16" × 5"</td><td>¾" ply</td><td>Angle-cut top per side</td></tr>
+            <tr><td>A</td><td>Back Siding Panel A</td><td>18</td><td>97½" × 5"</td><td>¾" ply</td><td>Needs 10' sheets</td></tr>
+            <tr><td>A</td><td>Door Trims A</td><td>2</td><td>105" × 3½"</td><td>¾" ply</td><td>Vertical door surround</td></tr>
+            <tr><td>B</td><td>Door Trims B</td><td>1</td><td>90½" × 3½"</td><td>¾" ply</td><td>Horizontal door surround</td></tr>
+            <tr><td>A</td><td>Inner Trim A</td><td>1</td><td>89" × 3½"</td><td>2×4</td><td>Inside header</td></tr>
+            <tr><td>B</td><td>Inner Trim B</td><td>2</td><td>93¾" × 3½"</td><td>2×4</td><td>Inside door jambs</td></tr>
+          </tbody>
+        </table></div>
+
+        <h4 style="font-family:var(--sans);font-size:14px;margin:20px 0 8px">D — Door assemblies</h4>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Mark</th><th>Part</th><th>Qty</th><th>Length × Width</th><th>Material</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td>Door Panel A</td><td>4</td><td>101½" × 4⅝"</td><td>¾" ply</td><td>Narrow edge boards, 2/door</td></tr>
+            <tr><td>B</td><td>Door Panel B</td><td>12</td><td>101½" × 6"</td><td>¾" ply</td><td>Main verticals, 6/door</td></tr>
+            <tr><td>A</td><td>Door Frame A</td><td>4</td><td>90-11/16" × 3½"</td><td>2×4</td><td>Vertical stiles, 2/door</td></tr>
+            <tr><td>B</td><td>Door Frame B</td><td>4</td><td>42-15/16" × 3½"</td><td>2×4</td><td>Horizontal rails, 2/door</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </details>
+
+    <!-- COST -->
+    <h3 style="font-size:19px;margin:30px 0 10px">Material &amp; cost estimate</h3>
+    <p style="font-size:13.5px;color:var(--ink-soft);margin:0 0 14px">Approximate US retail averages from the BOM order sheet — verify at your local yard. Quantities include ~10% waste overage.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Category</th><th>Item</th><th>Qty</th><th class="num-col">Est. total</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="3">Structural lumber</td><td>4×4 ×10' PT posts</td><td>6</td><td class="num-col">$111</td></tr>
+          <tr><td>2×6 ×8' joists</td><td>6</td><td class="num-col">$53</td></tr>
+          <tr><td>2×4 ×8' framing</td><td>67</td><td class="num-col">$352</td></tr>
+          <tr><td>Plywood</td><td>¾" 4×8 sheets</td><td>15</td><td class="num-col">$780</td></tr>
+          <tr><td rowspan="2">Roofing</td><td>Corrugated metal 4'×8'</td><td>4</td><td class="num-col">$168</td></tr>
+          <tr><td>Roofing screws + foam closure</td><td>—</td><td class="num-col">$21</td></tr>
+          <tr><td>Fasteners &amp; hardware</td><td>Screws, hinges, ties, post bases, hangers, hooks, rod</td><td>—</td><td class="num-col">$306</td></tr>
+          <tr><td>Foundation</td><td>Concrete + Sonotube forms</td><td>—</td><td class="num-col">$96</td></tr>
+          <tr><td>Adhesives &amp; finishes</td><td>Glue, stain, primer, caulk</td><td>—</td><td class="num-col">$126</td></tr>
+          <tr class="subtotal"><td colspan="3">Build materials subtotal</td><td class="num-col">$2,012</td></tr>
+          <tr><td>Contingency</td><td>10% of build materials</td><td>—</td><td class="num-col">$201</td></tr>
+          <tr><td>Water / cooler station</td><td>Optional add-on (cooler, liner, spigot, gel packs)</td><td>—</td><td class="num-col">$154</td></tr>
+          <tr class="grand"><td colspan="3">Grand total (build + contingency + water station)</td><td class="num-col">$2,367</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px;color:var(--ink-soft);margin-top:10px">Note: some siding pieces (Back Siding 97½", Door Trims 105") exceed a standard 8' sheet — source 4'×10' plywood, or butt-join shorter pieces with a mid-span backing block.</p>
+
+    <div class="callout" style="margin-top:20px">
+      <strong>Finishing.</strong> Sand plywood edges with 80-grit, prime raw edges twice, then two exterior-latex finish coats (120-grit between). Roof drops 12" over 48" (~25% grade) — grade the ground away from the low rear end for runoff. Leave a 1/8" reveal around each door; if doors bind in humidity, plane the hinge side only, never the latch side (adjust hinges instead).
+    </div>
+  </section>
+
+  <!-- MORE COMING -->
+  <section>
+    <div class="sec-head">
+      <h2>More plans</h2>
+      <span class="note">Drop a build plan into the folder and it gets a card here</span>
+    </div>
+    <div class="empty">
+      🪵 &nbsp;This is the workshop shelf. As new structures get designed — coops, run-in shelters, pergolas, glamping platforms — their plans land here with the same read-it / print-it / shop-it layout.
+    </div>
+  </section>
+
+  <footer>
+    <span>Tapestry Acres · Building Plans</span>
+    <span>Farm Stand: Brele's Professional DIY Plan · Rev 1.0</span>
+  </footer>
+</div>
