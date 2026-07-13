@@ -979,7 +979,6 @@
     <button class="ctrl" id="reset" aria-label="Recenter the map" style="font-size:17px;">⌂</button>
     <button class="ctrl" id="daynight" aria-label="Toggle day and night" style="font-size:15px;">☾</button>
     <button class="ctrl" id="season" aria-label="Change the season" style="font-size:15px;">✿</button>
-    <button class="ctrl" id="sound" aria-label="Toggle ambient sound" style="font-size:15px;">🔇</button>
     <button class="ctrl" id="replay" aria-label="Replay the flythrough" style="font-size:16px;">↻</button>
   </div>
   <div id="tip" role="tooltip" aria-hidden="true"><div class="tt"></div><div class="td"></div></div>
@@ -1638,49 +1637,6 @@
     else setSeason(SEASONS[idx+1]);
   });
   try{ var ss=localStorage.getItem('ta_season'); if(ss) setSeason(ss); }catch(e){}
-
-  /* ---- #9 ambient sound: opt-in WebAudio farm bed (breeze + soft birds), off by default ----
-     No external files (CSP-safe): synthesised — a filtered-noise breeze + occasional
-     bird chirps. Muted until the user taps the speaker; state remembered. */
-  var soundBtn=document.getElementById('sound'), audioCtx=null, soundOn=false, chirpTimer=null, breezeGain=null;
-  function startSound(){
-    if(audioCtx) return;
-    try{ audioCtx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ return; }
-    // breeze: brown-ish noise through a gentle lowpass, very low level
-    var buf=audioCtx.createBuffer(1,audioCtx.sampleRate*2,audioCtx.sampleRate), d=buf.getChannelData(0), last=0;
-    for(var i=0;i<d.length;i++){ var w=(i%997)/997*2-1; last=(last+0.02*w)/1.02; d[i]=last*3.2; }
-    var src=audioCtx.createBufferSource(); src.buffer=buf; src.loop=true;
-    var lp=audioCtx.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=520;
-    breezeGain=audioCtx.createGain(); breezeGain.gain.value=0.0;
-    src.connect(lp); lp.connect(breezeGain); breezeGain.connect(audioCtx.destination); src.start();
-    breezeGain.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime+1.5);
-    // occasional bird chirp: 2-3 quick sine blips
-    function chirp(){
-      if(!soundOn) return;
-      var t0=audioCtx.currentTime, n=2+(Date.now()%2);
-      for(var k=0;k<n;k++){
-        var o=audioCtx.createOscillator(), g=audioCtx.createGain();
-        var f=1800+((Date.now()+k*311)%900); o.frequency.setValueAtTime(f,t0+k*0.12);
-        o.frequency.linearRampToValueAtTime(f*1.15,t0+k*0.12+0.06);
-        g.gain.setValueAtTime(0,t0+k*0.12); g.gain.linearRampToValueAtTime(0.04,t0+k*0.12+0.02);
-        g.gain.linearRampToValueAtTime(0,t0+k*0.12+0.1);
-        o.connect(g); g.connect(audioCtx.destination); o.start(t0+k*0.12); o.stop(t0+k*0.12+0.12);
-      }
-      chirpTimer=setTimeout(chirp, 4000+((Date.now()%5000)));
-    }
-    chirp();
-  }
-  function setSound(on){
-    soundOn=on; soundBtn.textContent=on?'🔊':'🔇';
-    soundBtn.setAttribute('aria-label',on?'Mute ambient sound':'Play ambient sound');
-    if(on){ startSound(); if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume();
-      if(breezeGain) breezeGain.gain.linearRampToValueAtTime(0.05,audioCtx.currentTime+0.8); }
-    else if(breezeGain){ breezeGain.gain.linearRampToValueAtTime(0.0,audioCtx.currentTime+0.4); }
-    try{ localStorage.setItem('ta_sound', on?'1':'0'); }catch(e){}
-  }
-  soundBtn.addEventListener('click',function(){ setSound(!soundOn); });
-  // do NOT auto-enable from storage: browsers block audio until a user gesture. Show state only.
-  try{ if(localStorage.getItem('ta_sound')==='1'){ soundBtn.textContent='🔊'; } }catch(e){}
 
   /* ---- #6 deep-link: ?sign=slug flies there on load (and open its panel if any) ---- */
   (function deeplink(){
