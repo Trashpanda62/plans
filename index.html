@@ -598,6 +598,107 @@
   #sky .c4{width:20%;height:11%;top:32%;animation-duration:126s;animation-delay:-18s; opacity:.72;}
   #sky .c5{width:26%;height:14%;top:15%;animation-duration:98s; animation-delay:-70s; opacity:.85;}
   #sky .c6{width:17%;height:10%;top:27%;animation-duration:138s;animation-delay:-96s; opacity:.66;}
+  /* ---------- ambient life: chimney smoke + a bird or two + pond shimmer ---------- */
+  /* all inside #world so they pan/scale with the art; pointer-events:none, never eat a click */
+  #ambient{position:absolute;inset:0;pointer-events:none;z-index:5;overflow:hidden;border-radius:5px;}
+  .smoke{position:absolute;width:2.4%;height:2.4%;border-radius:50%;
+    background:radial-gradient(circle at 50% 60%, rgba(240,238,232,.5), rgba(240,238,232,0) 68%);
+    filter:blur(3px);opacity:0;animation:puff 7s linear infinite;}
+  /* farmhouse chimney (left page ~26%,9%) + forest cabin (~40%,74%) — anchored on the art's smoke */
+  .smoke.f1{left:25.8%;top:9%;}
+  .smoke.f2{left:26.4%;top:9%;animation-delay:2.4s;}
+  .smoke.c1{left:40.2%;top:73.5%;animation-delay:1.2s;}
+  .smoke.c2{left:40.7%;top:73.5%;animation-delay:3.6s;}
+  @keyframes puff{
+    0%{transform:translateY(0) scale(.5);opacity:0;}
+    18%{opacity:.6;}
+    100%{transform:translateY(-320%) scale(2.2);opacity:0;}
+  }
+  .bird{position:absolute;font-size:0;color:#3a3228;opacity:.5;will-change:transform;}
+  /* a bird = two thin wing strokes via borders, drifting across the sky band */
+  .bird::before,.bird::after{content:"";position:absolute;top:0;width:9px;height:9px;
+    border-top:1.6px solid currentColor;border-radius:60% 60% 0 0;}
+  .bird::before{left:-8px;transform:rotate(18deg);}
+  .bird::after{left:0;transform:rotate(-18deg);}
+  .bird.b1{top:11%;animation:flyacross 34s linear infinite;}
+  .bird.b2{top:7%; animation:flyacross 46s linear infinite;animation-delay:-16s;transform:scale(.8);}
+  @keyframes flyacross{
+    0%{left:-4%;opacity:0;}
+    8%{opacity:.5;}
+    50%{transform:translateY(-14px);}
+    92%{opacity:.5;}
+    100%{left:104%;opacity:0;}
+  }
+  /* pond shimmer — a soft moving highlight over the forest pond (~28%,63%) */
+  .shimmer{position:absolute;left:23%;top:60%;width:9%;height:6%;border-radius:50%;
+    background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.4), rgba(255,255,255,0) 65%);
+    mix-blend-mode:screen;opacity:.5;animation:shimmer 5.5s ease-in-out infinite;}
+  @keyframes shimmer{0%,100%{opacity:.25;transform:translateX(-4%) scale(.95);}50%{opacity:.6;transform:translateX(4%) scale(1.05);}}
+
+  /* ---------- day / night ---------- */
+  /* a tint layer over the whole book; the toggle stamps body.night to warm→cool the scene */
+  #nightwash{position:absolute;inset:0;pointer-events:none;z-index:7;border-radius:5px;opacity:0;
+    transition:opacity 1.1s ease;
+    background:radial-gradient(120% 80% at 78% 74%, rgba(255,214,150,.18), rgba(255,214,150,0) 40%),
+               linear-gradient(180deg, rgba(24,30,58,.5), rgba(16,20,44,.62));}
+  body.night #nightwash{opacity:1;}
+  /* lantern glow dots that only appear at night, over the village lampposts + windows */
+  body.night .lantern{opacity:1;}
+  .lantern{position:absolute;width:1.5%;height:1.5%;border-radius:50%;pointer-events:none;z-index:8;
+    opacity:0;transition:opacity 1.1s ease;
+    background:radial-gradient(circle,rgba(255,206,120,.95),rgba(255,206,120,0) 70%);
+    filter:blur(1px);animation:flicker 3.2s ease-in-out infinite;}
+  @keyframes flicker{0%,100%{opacity:1;}45%{opacity:.7;}70%{opacity:.92;}}
+
+  /* ---------- drawer search ---------- */
+  .drawer-search{margin:12px 12px 2px;position:relative;}
+  .drawer-search input{width:100%;font-family:var(--sans);font-size:13px;color:#fff;
+    background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:9px;
+    padding:9px 32px 9px 12px;outline:none;}
+  .drawer-search input::placeholder{color:rgba(255,255,255,.6);}
+  .drawer-search input:focus{border-color:rgba(255,255,255,.6);background:rgba(255,255,255,.2);}
+  .drawer-search .sx{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:12px;opacity:.6;}
+  .place.hidden{display:none;}
+  .drawer-group.empty{display:none;}
+  .drawer-empty{padding:16px 14px;font-size:12.5px;opacity:.7;display:none;}
+  .drawer-empty.show{display:block;}
+
+  /* ---------- badges (New / status ribbon on a sign) ---------- */
+  .spot .sign .badge{position:absolute;top:-7px;right:-6px;z-index:9;
+    font-family:var(--sans);font-size:7.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;
+    color:#3a2409;background:linear-gradient(180deg,#ffd970,#e8a94a);
+    border:1px solid rgba(120,80,20,.6);border-radius:4px;padding:1px 4px;
+    box-shadow:0 2px 5px -1px rgba(0,0,0,.4);transform:rotate(6deg);}
+  .place .pnew{display:inline-block;margin-left:6px;font-size:8.5px;font-weight:800;letter-spacing:.4px;
+    text-transform:uppercase;color:#8a5a10;background:#ffd970;border-radius:4px;padding:1px 5px;vertical-align:middle;}
+
+  /* ---------- minimap ---------- */
+  #minimap{position:fixed;left:16px;bottom:16px;z-index:14;width:150px;height:112px;
+    border-radius:8px;overflow:hidden;border:1px solid rgba(120,95,55,.5);
+    box-shadow:0 8px 22px -10px rgba(0,0,0,.55);cursor:pointer;background:#ccc;
+    opacity:.9;transition:opacity .2s,transform .2s;}
+  #minimap:hover{opacity:1;transform:scale(1.03);}
+  #minimap img{width:100%;height:100%;object-fit:cover;display:block;}
+  #minimap .vp{position:absolute;border:2px solid rgba(255,255,255,.9);
+    box-shadow:0 0 0 1px rgba(0,0,0,.5);pointer-events:none;border-radius:2px;}
+  #minimap .mdot{position:absolute;width:4px;height:4px;margin:-2px 0 0 -2px;border-radius:50%;
+    background:#c69a4c;box-shadow:0 0 0 1px rgba(0,0,0,.4);}
+  @media (max-width:560px){ #minimap{width:104px;height:78px;left:10px;bottom:10px;} }
+
+  /* ---------- sign hover tooltip ---------- */
+  #tip{position:fixed;z-index:24;max-width:220px;pointer-events:none;opacity:0;transform:translateY(4px);
+    transition:opacity .16s,transform .16s;background:rgba(28,22,14,.95);color:#f2ead6;
+    border:1px solid #6d5a34;border-radius:9px;padding:9px 11px;
+    box-shadow:0 14px 34px -14px rgba(0,0,0,.7);font-family:var(--sans);}
+  #tip.show{opacity:1;transform:translateY(0);}
+  #tip .tt{font-family:var(--serif);font-weight:700;font-size:14px;}
+  #tip .td{font-size:11.5px;opacity:.85;margin-top:2px;line-height:1.4;}
+
+  @media (prefers-reduced-motion: reduce){
+    .smoke,.bird,.shimmer,.lantern{animation:none !important;}
+    .bird.b1,.bird.b2{opacity:0;}
+  }
+
   /* one seamless slow pass: off the left edge → off the right edge, then loops */
   @keyframes drift{
     from{transform:translateX(0);}
@@ -623,6 +724,27 @@
       <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
       <div class="cloud c4"></div><div class="cloud c5"></div><div class="cloud c6"></div>
     </div>
+
+    <!-- ambient life: chimney smoke, a bird or two, pond shimmer (over art, under signs) -->
+    <div id="ambient" aria-hidden="true">
+      <div class="smoke f1"></div><div class="smoke f2"></div>
+      <div class="smoke c1"></div><div class="smoke c2"></div>
+      <div class="bird b1"></div><div class="bird b2"></div>
+      <div class="shimmer"></div>
+    </div>
+
+    <!-- night lantern glows over village lampposts + windows (shown only at night) -->
+    <div id="lanterns" aria-hidden="true">
+      <span class="lantern" style="left:74.5%;top:40%;"></span>
+      <span class="lantern" style="left:82%;top:44%;"></span>
+      <span class="lantern" style="left:88%;top:52%;"></span>
+      <span class="lantern" style="left:70%;top:58%;"></span>
+      <span class="lantern" style="left:79%;top:66%;"></span>
+      <span class="lantern" style="left:63%;top:30%;"></span>
+      <span class="lantern" style="left:90%;top:34%;"></span>
+    </div>
+    <!-- day→night tint wash over the whole book -->
+    <div id="nightwash" aria-hidden="true"></div>
 
     <!-- hotspots: each .spot is a POINT (left/top %) above its object; only the wooden
          sign inside it is clickable. World is a 3200x2400 panorama, two full-height
@@ -704,7 +826,7 @@
     <!-- Records-office storefront → Family Tree -->
     <a class="spot" href="https://trashpanda62.github.io/family-tree/"
        style="left:78.2%;top:46.5%;" data-tag="live"
-       aria-label="Family Tree Bloodlines game">
+       data-new aria-label="Family Tree Bloodlines game">
       <span class="sign"><span class="plank">Bloodlines<span class="sub live">family-tree game · live</span></span><span class="post"></span></span>
     </a>
 
@@ -712,7 +834,7 @@
     <!-- Bookshop storefront → Books -->
     <a class="spot" href="https://trashpanda62.github.io/book-library/"
        style="left:59.9%;top:55.3%;" data-tag="live"
-       aria-label="Books Library">
+       data-new aria-label="Books Library">
       <span class="sign"><span class="plank">The Library<span class="sub live">ebooks &amp; reading</span></span><span class="post"></span></span>
     </a>
 
@@ -754,8 +876,14 @@
     <button class="ctrl" id="zin" aria-label="Zoom in">+</button>
     <button class="ctrl" id="zout" aria-label="Zoom out">−</button>
     <button class="ctrl" id="reset" aria-label="Recenter the map" style="font-size:17px;">⌂</button>
+    <button class="ctrl" id="daynight" aria-label="Toggle day and night" style="font-size:15px;">☾</button>
     <button class="ctrl" id="replay" aria-label="Replay the flythrough" style="font-size:16px;">↻</button>
   </div>
+  <button id="minimap" aria-label="Map overview — click to jump">
+    <img src="world-map.jpg" alt="">
+    <div class="vp" id="miniVp"></div>
+  </button>
+  <div id="tip" role="tooltip" aria-hidden="true"><div class="tt"></div><div class="td"></div></div>
   <div class="hint" id="hint">Drag to roam → the village is east · scroll to zoom · click a sign to open it</div>
 </div>
 
@@ -770,7 +898,12 @@
     <p>Every plan, tool and playbook on the land. Tap one to fly there.</p>
     <button class="drawer-close" id="drawerClose" aria-label="Close">✕</button>
   </div>
+  <div class="drawer-search">
+    <input id="placeSearch" type="search" placeholder="Search places…" aria-label="Search places" autocomplete="off">
+    <span class="sx" aria-hidden="true">⌕</span>
+  </div>
   <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-empty" id="drawerEmpty">No place by that name.</div>
 </aside>
 
 <!-- workshop panel -->
@@ -1267,6 +1400,158 @@
   window.addEventListener('load',runBoot);
   /* hard failsafe: never leave the video on screen if something stalls */
   setTimeout(function(){ if(!bookVid.classList.contains('gone')) endFly(); }, 11000);
+
+  /* ===================== storybook extras ===================== */
+  /* one shared registry: name, detail (from .sub), the spot el, group, live, isNew.
+     Everything below (search, minimap, tooltip, deep-link) reads from this. */
+  var SIGNS = spots.map(function(s){
+    var subEl=s.querySelector('.sub');
+    var big=s.querySelector('.plank .big');                       // entrance sign name node
+    var plank=s.querySelector('.plank');
+    // the plank's NAME text = its first text/img child, NOT the .sub — read the leading text node
+    var name='';
+    if(big){ name=big.textContent.trim(); }
+    else if(plank){
+      for(var i=0;i<plank.childNodes.length;i++){ var n=plank.childNodes[i];
+        if(n.nodeType===3 && n.nodeValue.trim()){ name=n.nodeValue.trim(); break; } }
+    }
+    if(!name) name=s.getAttribute('data-name')||s.getAttribute('aria-label')||'';
+    return { s:s, name:name, detail:subEl?subEl.textContent.trim():'',
+             group:s.getAttribute('data-group')||'Places',
+             live:s.getAttribute('data-tag')==='live',
+             isNew:s.hasAttribute('data-new'),
+             slug:name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') };
+  });
+
+  /* ---- #7 badges: stamp a "New" ribbon on any [data-new] sign + a pill in the drawer ---- */
+  SIGNS.forEach(function(o){
+    if(o.isNew){
+      var sign=o.s.querySelector('.sign');
+      if(sign && !sign.querySelector('.badge')){ var b=document.createElement('span'); b.className='badge'; b.textContent='New'; sign.appendChild(b); }
+    }
+  });
+
+  /* ---- #1 drawer search: filter the already-built list, hide empty groups ---- */
+  var search=document.getElementById('placeSearch'),
+      emptyMsg=document.getElementById('drawerEmpty');
+  function applyFilter(q){
+    q=(q||'').trim().toLowerCase();
+    var anyShown=false;
+    // tag each .place row: match on name or detail
+    SIGNS.forEach(function(o){
+      var row=o._row; if(!row) return;
+      var hit=!q || o.name.toLowerCase().indexOf(q)>=0 || o.detail.toLowerCase().indexOf(q)>=0;
+      row.classList.toggle('hidden', !hit);
+      if(hit) anyShown=true;
+    });
+    // hide a group whose rows are all hidden
+    Array.prototype.forEach.call(drawerBody.querySelectorAll('.drawer-group'),function(g){
+      var vis=g.querySelectorAll('.place:not(.hidden)').length;
+      g.classList.toggle('empty', vis===0);
+    });
+    if(emptyMsg) emptyMsg.classList.toggle('show', !anyShown);
+  }
+  if(search){
+    search.addEventListener('input',function(){ applyFilter(search.value); });
+    search.addEventListener('keydown',function(e){
+      if(e.key==='Enter'){ // Enter → fly to the first visible match
+        var first=drawerBody.querySelector('.place:not(.hidden)');
+        if(first) first.click();
+      }
+    });
+  }
+  // link each SIGNS entry to its rendered drawer row. The drawer is built by grouping spots
+  // in DOM order, so within each group the row order matches spot order — map by (group,index).
+  (function linkRows(){
+    var groupCursor={};
+    Array.prototype.forEach.call(drawerBody.querySelectorAll('.drawer-group'),function(g){
+      var gname=g.querySelector('h3')?g.querySelector('h3').textContent.trim():'';
+      var rows=g.querySelectorAll('.place');
+      var inGroup=SIGNS.filter(function(x){return x.group===gname;});
+      Array.prototype.forEach.call(rows,function(row,i){
+        var o=inGroup[i]; if(!o) return; o._row=row;
+        var pn=row.querySelector('.pn');
+        if(o.isNew && pn && !pn.querySelector('.pnew')){ var t=document.createElement('span'); t.className='pnew'; t.textContent='New'; pn.appendChild(t); }
+      });
+    });
+  })();
+
+  /* ---- #4 sign hover tooltip: name + detail on hover/focus ---- */
+  var tip=document.getElementById('tip'), tipT=tip.querySelector('.tt'), tipD=tip.querySelector('.td');
+  function showTip(o,x,y){
+    tipT.textContent=o.name; tipD.textContent=o.detail||(o.live?'live':'');
+    tip.classList.add('show'); tip.setAttribute('aria-hidden','false');
+    var w=tip.offsetWidth, h=tip.offsetHeight;
+    tip.style.left=Math.max(8,Math.min(window.innerWidth-w-8, x-w/2))+'px';
+    tip.style.top=Math.max(8, y-h-14)+'px';
+  }
+  function hideTip(){ tip.classList.remove('show'); tip.setAttribute('aria-hidden','true'); }
+  SIGNS.forEach(function(o){
+    o.s.addEventListener('pointerenter',function(){ if(drag)return; var r=o.s.getBoundingClientRect(); showTip(o,r.left+r.width/2,r.top); });
+    o.s.addEventListener('pointerleave',hideTip);
+    o.s.addEventListener('focus',function(){ var r=o.s.getBoundingClientRect(); showTip(o,r.left+r.width/2,r.top); },true);
+    o.s.addEventListener('blur',hideTip,true);
+  });
+  stage.addEventListener('pointerdown',hideTip);
+
+  /* ---- #5 day / night toggle ---- */
+  var dnBtn=document.getElementById('daynight');
+  function setNight(on){
+    document.body.classList.toggle('night',on);
+    dnBtn.textContent=on?'☀':'☾';
+    dnBtn.setAttribute('aria-label',on?'Switch to day':'Switch to night');
+    try{ localStorage.setItem('ta_night', on?'1':'0'); }catch(e){}
+  }
+  dnBtn.addEventListener('click',function(){ setNight(!document.body.classList.contains('night')); });
+  try{ if(localStorage.getItem('ta_night')==='1') setNight(true); }catch(e){}
+
+  /* ---- #8 minimap: overview thumb + live viewport box + click-to-jump ---- */
+  var mini=document.getElementById('minimap'), miniVp=document.getElementById('miniVp');
+  // place a dot per sign on the minimap (fx/fy already = its left/top %)
+  SIGNS.forEach(function(o){
+    var d=document.createElement('span'); d.className='mdot';
+    d.style.left=parseFloat(o.s.style.left)+'%'; d.style.top=parseFloat(o.s.style.top)+'%';
+    mini.appendChild(d);
+  });
+  function updateMini(){
+    if(!world.offsetWidth) return;
+    var mw=mini.clientWidth, mh=mini.clientHeight;
+    var ww=world.offsetWidth*scale, wh=world.offsetHeight*scale;
+    var vw=window.innerWidth, vh=window.innerHeight;
+    // world center offset from viewport center = -tx,-ty; fraction of world visible = vw/ww
+    var fx=(0.5 - tx/ww), fy=(0.5 - ty/wh);          // center of viewport in world fractions
+    var fw=Math.min(1,vw/ww), fh=Math.min(1,vh/wh);
+    miniVp.style.left=Math.max(0,(fx-fw/2))*mw+'px';
+    miniVp.style.top=Math.max(0,(fy-fh/2))*mh+'px';
+    miniVp.style.width=fw*mw+'px'; miniVp.style.height=fh*mh+'px';
+  }
+  mini.addEventListener('click',function(e){
+    var r=mini.getBoundingClientRect();
+    var fx=(e.clientX-r.left)/r.width, fy=(e.clientY-r.top)/r.height;
+    world.classList.add('animate');
+    scale=Math.max(minScale,Math.min(maxScale,isPhone?1.3:1.6));
+    tx=txFor(fx,scale); ty=tyFor(fy,scale); clamp(); apply(); updateMini();
+  });
+  // keep the minimap box in sync with every transform: wrap apply()
+  var _apply=apply;
+  apply=function(){ _apply.apply(this,arguments); updateMini(); };
+  // poll a few times until the world has real layout, then draw the box once
+  (function miniInit(n){ if(world.offsetWidth>2){ updateMini(); } else if(n>0){ setTimeout(function(){miniInit(n-1);},120); } })(30);
+
+  /* ---- #6 deep-link: ?sign=slug flies there on load (and open its panel if any) ---- */
+  (function deeplink(){
+    var m=/[?&]sign=([a-z0-9-]+)/i.exec(location.search); if(!m) return;
+    var want=m[1].toLowerCase();
+    var o=SIGNS.filter(function(x){return x.slug===want;})[0]; if(!o) return;
+    // wait for BOTH the opener to finish AND the world to have real layout, then fly
+    var t=setInterval(function(){
+      if((bookVid.classList.contains('gone')||reduce) && world.offsetWidth>2){
+        clearInterval(t); flyToSpot(o.s);
+        if(o.s.getAttribute('data-panel')) setTimeout(openPanel,700);
+      }
+    },200);
+    setTimeout(function(){clearInterval(t);},9000);
+  })();
 })();
 </script>
 </body>
