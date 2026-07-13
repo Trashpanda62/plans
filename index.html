@@ -155,6 +155,28 @@
   #adminPanel #adminCopy:hover{background:#8ba066;}
   #adminPanel #adminReload{background:#4a3c22;color:#e8dcc0;}
   #adminPanel .anote{padding:0 12px 11px;font-size:10.5px;color:#a99873;line-height:1.4;}
+
+  /* ---------- LAMP EDIT mode (user-facing: move the streetlamp glows yourself) ---------- */
+  body.lampedit .lantern{pointer-events:auto;cursor:grab;outline:2px dashed rgba(255,220,140,.9);
+    outline-offset:2px;opacity:1 !important;}
+  body.lampedit .lantern:active{cursor:grabbing;}
+  body.lampedit .lantern.dragging-lamp{outline-color:#ffd34d;outline-width:3px;}
+  /* the edit toggle + save button, bottom-left so they don't fight the zoom rail */
+  #lampEditBar{position:fixed;left:14px;bottom:16px;z-index:41;display:flex;gap:8px;
+    font-family:var(--sans);}
+  #lampEditBar button{padding:9px 13px;border:none;border-radius:9px;cursor:pointer;
+    font-weight:700;font-size:12.5px;font-family:var(--sans);
+    box-shadow:0 8px 22px -8px rgba(0,0,0,.6);}
+  #lampEditToggle{background:rgba(28,22,14,.94);color:#f2ead6;border:1px solid #6d5a34;}
+  body.lampedit #lampEditToggle{background:#7a8b5a;color:#fff;border-color:#8ba066;}
+  #lampSave,#lampReset{display:none;}
+  body.lampedit #lampSave{display:inline-block;background:#c9873a;color:#fff;}
+  body.lampedit #lampReset{display:inline-block;background:#4a3c22;color:#e8dcc0;}
+  #lampToast{position:fixed;left:50%;bottom:66px;transform:translateX(-50%);z-index:60;
+    background:rgba(28,22,14,.96);color:#eafbe8;border:1px solid #6d5a34;border-radius:9px;
+    padding:9px 15px;font-family:var(--sans);font-size:13px;opacity:0;pointer-events:none;
+    transition:opacity .3s ease;box-shadow:0 10px 30px -8px rgba(0,0,0,.6);}
+  #lampToast.show{opacity:1;}
   /* ---- the wooden signpost IS the clickable target ---- */
   .spot .sign{
     position:absolute;
@@ -1132,6 +1154,14 @@
   <div class="hint" id="hint">Drag to roam → the village is east · scroll to zoom · click a sign to open it</div>
 </div>
 
+<!-- user-facing streetlamp-glow editor: toggle → drag glows → Save (persists in this browser) -->
+<div id="lampEditBar">
+  <button id="lampEditToggle">💡 Move lamp glows</button>
+  <button id="lampSave">Save</button>
+  <button id="lampReset">Reset</button>
+</div>
+<div id="lampToast" role="status" aria-live="polite"></div>
+
 <button class="skip" id="skip" style="display:none;">Skip ↓</button>
 
 <!-- Places drawer — the map's table of contents, built from the signs at runtime -->
@@ -1377,6 +1407,69 @@
     };
     document.getElementById('adminReload').onclick=function(){world.classList.add('animate');goFarmRead();};
   }
+
+  /* ---------- LAMP-GLOW EDITOR (user-facing; persists in the browser) ----------
+     Anyone can nudge each streetlamp glow onto its bulb and Save. Saved positions
+     live in localStorage (ta_lamps) and re-apply on every load, so edits stick with
+     no code change. A drag never pans the map (pointer events are captured on the dot). */
+  (function lampEditor(){
+    var lamps=[].slice.call(document.querySelectorAll('#lanterns .lantern'));
+    lamps.forEach(function(l,i){ l.dataset.lamp='L'+i; l.dataset.dx=l.style.left; l.dataset.dy=l.style.top; });
+
+    // apply any saved positions over the defaults
+    try{
+      var saved=JSON.parse(localStorage.getItem('ta_lamps')||'null');
+      if(saved){ lamps.forEach(function(l){ var p=saved[l.dataset.lamp]; if(p){ l.style.left=p.x; l.style.top=p.y; } }); }
+    }catch(e){}
+
+    var toggle=document.getElementById('lampEditToggle'),
+        saveB=document.getElementById('lampSave'),
+        resetB=document.getElementById('lampReset'),
+        toast=document.getElementById('lampToast'),
+        editing=false, dragLamp=null;
+
+    function say(msg){ toast.textContent=msg; toast.classList.add('show');
+      setTimeout(function(){ toast.classList.remove('show'); },1600); }
+
+    toggle.addEventListener('click',function(){
+      editing=!editing;
+      document.body.classList.toggle('lampedit',editing);
+      toggle.textContent = editing ? '✓ Done' : '💡 Move lamp glows';
+      if(editing) say('Drag each glow onto its lamp, then Save.');
+    });
+
+    // drag a glow (only in edit mode); capture so the map never pans
+    lamps.forEach(function(l){
+      l.addEventListener('pointerdown',function(e){
+        if(!editing) return;
+        e.preventDefault(); e.stopPropagation();
+        dragLamp=l; l.classList.add('dragging-lamp');
+        l.setPointerCapture&&l.setPointerCapture(e.pointerId);
+      });
+    });
+    window.addEventListener('pointermove',function(e){
+      if(!dragLamp) return;
+      var wb=world.getBoundingClientRect();
+      var x=Math.max(0,Math.min(100,(e.clientX-wb.left)/wb.width*100)),
+          y=Math.max(0,Math.min(100,(e.clientY-wb.top)/wb.height*100));
+      // account for the centring margin (-0.7% of width both axes)
+      dragLamp.style.left=(x+0.7)+'%'; dragLamp.style.top=(y+0.7)+'%';
+    });
+    window.addEventListener('pointerup',function(){
+      if(!dragLamp) return; dragLamp.classList.remove('dragging-lamp'); dragLamp=null;
+    });
+
+    saveB.addEventListener('click',function(){
+      var out={}; lamps.forEach(function(l){ out[l.dataset.lamp]={x:l.style.left,y:l.style.top}; });
+      try{ localStorage.setItem('ta_lamps',JSON.stringify(out)); say('Saved — glows will stay put.'); }
+      catch(e){ say('Could not save (storage blocked).'); }
+    });
+    resetB.addEventListener('click',function(){
+      lamps.forEach(function(l){ l.style.left=l.dataset.dx; l.style.top=l.dataset.dy; });
+      try{ localStorage.removeItem('ta_lamps'); }catch(e){}
+      say('Reset to the original positions.');
+    });
+  })();
 
   /* ---------- Obscura Video panel (opened by the "Obscura Video" sign) ---------- */
   var scrim=document.getElementById('scrim'),
