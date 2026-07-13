@@ -759,6 +759,14 @@
   body[data-season="summer"] #seasonwash{opacity:1;background:linear-gradient(180deg,rgba(255,240,196,.16),rgba(255,224,160,.1));}
   body[data-season="autumn"] #seasonwash{opacity:1;background:linear-gradient(180deg,rgba(224,150,70,.2),rgba(180,96,40,.16));}
   body[data-season="winter"] #seasonwash{opacity:1;background:linear-gradient(180deg,rgba(206,224,240,.28),rgba(224,232,244,.2));}
+  /* ---- SLICE 1: whole-scene colour grade. Filter the ART itself so each season reads
+     as a different time of year, not just a tint film. Smooth cross-fade via transition. */
+  #farm{transition:filter 1.2s ease;}
+  body[data-season="spring"] #farm{filter:saturate(1.14) brightness(1.04) hue-rotate(-6deg) contrast(1.02);}
+  body[data-season="summer"] #farm{filter:saturate(1.2) brightness(1.1) contrast(1.05);}
+  body[data-season="autumn"] #farm{filter:sepia(.28) saturate(1.28) brightness(.98) hue-rotate(-12deg) contrast(1.04);}
+  body[data-season="winter"] #farm{filter:saturate(.62) brightness(1.12) contrast(.96) hue-rotate(8deg);}
+
   #seasonfx{position:absolute;inset:0;pointer-events:none;z-index:7;overflow:hidden;border-radius:5px;}
   .fx{position:absolute;top:-6%;will-change:transform;}
 
@@ -807,7 +815,71 @@
     100%{transform:translate(var(--dx,8vw),var(--dy,110%));opacity:.2;}
   }
   @keyframes leafsway{from{transform:translateX(-15%);}to{transform:translateX(15%);}}
-  @media (prefers-reduced-motion: reduce){ #seasonfx *{animation:none !important;opacity:0 !important;} }
+
+  /* ===================== SLICES 2-5: per-season SCENE overlays =====================
+     One #seasonscene layer inside #world (rides pan/zoom), below #seasonfx. Each season
+     switches on its own children via body[data-season]. All CSS/SVG — no new images. */
+  #seasonscene{position:absolute;inset:0;pointer-events:none;z-index:6;overflow:hidden;border-radius:5px;}
+  /* only the flat wash panels fade via this rule; the particle containers (#blossoms,
+     #fireflies) manage their own children's opacity, so exclude them. */
+  #seasonscene > .sc{position:absolute;inset:0;opacity:0;transition:opacity 1.3s ease;}
+  #blossoms,#fireflies{position:absolute;inset:0;}
+
+  /* --- SLICE 2 AUTUMN: warm low-sun vignette + drifting ground leaf-litter is via #seasonfx.
+         Here: a warm corner glow + subtle amber vignette so the light feels late-afternoon. */
+  .sc.autumn-glow{inset:0;background:
+      radial-gradient(120% 80% at 82% 8%, rgba(255,196,110,.28), rgba(255,196,110,0) 46%),
+      radial-gradient(140% 120% at 50% 120%, rgba(120,60,20,.22), rgba(120,60,20,0) 55%);
+      mix-blend-mode:soft-light;}
+  body[data-season="autumn"] .sc.autumn-glow{opacity:1;}
+
+  /* --- SLICE 3 WINTER: snow blanket (top-lit white wash) + frost vignette --- */
+  .sc.winter-blanket{inset:0;background:
+      linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,255,255,.10) 34%, rgba(255,255,255,0) 60%),
+      radial-gradient(150% 100% at 50% -10%, rgba(255,255,255,.5), rgba(255,255,255,0) 50%);
+      mix-blend-mode:screen;}
+  .sc.winter-frost{inset:0;box-shadow:inset 0 0 140px 40px rgba(200,224,246,.55),
+      inset 0 0 60px 10px rgba(255,255,255,.4);
+      background:radial-gradient(130% 120% at 50% 50%, rgba(255,255,255,0) 58%, rgba(206,228,248,.4));}
+  body[data-season="winter"] .sc.winter-blanket,
+  body[data-season="winter"] .sc.winter-frost{opacity:1;}
+
+  /* --- SLICE 4 SPRING: blossom pops on the orchard/trees + bright bloom haze --- */
+  .sc.spring-haze{inset:0;background:
+      radial-gradient(120% 80% at 30% 20%, rgba(255,228,240,.22), rgba(255,228,240,0) 44%),
+      radial-gradient(100% 80% at 65% 30%, rgba(230,255,220,.18), rgba(230,255,220,0) 46%);
+      mix-blend-mode:soft-light;}
+  body[data-season="spring"] .sc.spring-haze{opacity:1;}
+  /* blossom clusters — soft pink dot-groups that breathe in/out on tree crowns (JS-placed) */
+  .blossom{position:absolute;aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle at 42% 38%, rgba(255,226,240,.98), rgba(255,196,224,.78) 50%, rgba(255,182,214,.25) 74%, rgba(255,182,214,0) 82%);
+    filter:blur(.3px);opacity:0;transition:none;
+    animation:bloom var(--dur,5s) ease-in-out var(--delay,0s) infinite;}
+  @keyframes bloom{0%,100%{opacity:.7;transform:scale(.92);}50%{opacity:1;transform:scale(1.06);}}
+
+  /* --- SLICE 5 SUMMER: god-rays sweep + heat shimmer + fireflies(night) --- */
+  .sc.summer-rays{inset:-10% 0 0 0;height:70%;background:
+      linear-gradient(100deg, rgba(255,246,200,0) 42%, rgba(255,246,200,.16) 48%, rgba(255,246,200,0) 54%),
+      linear-gradient(88deg, rgba(255,250,220,0) 60%, rgba(255,250,220,.14) 66%, rgba(255,250,220,0) 72%);
+      mix-blend-mode:screen;transform-origin:top center;animation:rays 9s ease-in-out infinite alternate;}
+  body[data-season="summer"] .sc.summer-rays{opacity:1;}
+  @keyframes rays{from{transform:translateX(-4%) skewX(-3deg);}to{transform:translateX(4%) skewX(3deg);}}
+  .firefly{position:absolute;width:.5%;aspect-ratio:1;border-radius:50%;background:#fff6a8;
+    box-shadow:0 0 6px 2px rgba(255,240,140,.9);opacity:0;
+    animation:fly var(--dur,7s) ease-in-out var(--delay,0s) infinite, glow 2.2s ease-in-out var(--delay,0s) infinite;}
+  @keyframes glow{0%,100%{opacity:0;}50%{opacity:1;}}
+  @keyframes fly{
+    0%{transform:translate(0,0);}25%{transform:translate(3vw,-2vh);}
+    50%{transform:translate(-2vw,-4vh);}75%{transform:translate(2vw,-1vh);}100%{transform:translate(0,0);}}
+  /* fireflies only glow at night+summer; hidden otherwise */
+  #fireflies{opacity:0;transition:opacity 1.3s ease;}
+  body[data-season="summer"].night #fireflies{opacity:1;}
+
+  @media (prefers-reduced-motion: reduce){
+    #seasonfx *{animation:none !important;opacity:0 !important;}
+    .blossom,.firefly,.sc.summer-rays{animation:none !important;}
+    #fireflies{opacity:0 !important;}
+  }
 
   @media (prefers-reduced-motion: reduce){
     #ambient *{animation:none !important;}
@@ -880,6 +952,15 @@
     <div id="nightwash" aria-hidden="true"></div>
     <!-- seasonal tint + falling-particle field (populated by JS) -->
     <div id="seasonwash" aria-hidden="true"></div>
+    <!-- per-season scene overlays (glow/snow/haze/rays + JS-placed blossoms & fireflies) -->
+    <div id="seasonscene" aria-hidden="true">
+      <div class="sc autumn-glow"></div>
+      <div class="sc winter-blanket"></div><div class="sc winter-frost"></div>
+      <div class="sc spring-haze"></div>
+      <div class="sc summer-rays"></div>
+      <div id="blossoms"></div>
+      <div id="fireflies"></div>
+    </div>
     <div id="seasonfx" aria-hidden="true"></div>
 
     <!-- hotspots: each .spot is a POINT (left/top %) above its object; only the wooden
@@ -1636,7 +1717,8 @@
     try{ localStorage.setItem('ta_night', on?'1':'0'); }catch(e){}
   }
   dnBtn.addEventListener('click',function(){ setNight(!document.body.classList.contains('night')); });
-  try{ if(localStorage.getItem('ta_night')==='1') setNight(true); }catch(e){}
+  if(/[?&]night=1/.test(location.search)) setNight(true);
+  else { try{ if(localStorage.getItem('ta_night')==='1') setNight(true); }catch(e){} }
 
   /* ---- #10 seasons: cycle spring → summer → autumn → winter, tint + falling particles ---- */
   var SEASONS=['spring','summer','autumn','winter'];
@@ -1650,12 +1732,56 @@
   // deterministic pseudo-random (no Math.random — banned) seeded per index
   function rnd(i,s){ var x=Math.sin((i+1)*12.9898+s*78.233)*43758.5453; return x-Math.floor(x); }
   var LEAFCOLORS=['#c8752f','#a8501f','#d98a2b','#8f3d18','#e0a23a','#b5621f'];
+  // tree-crown anchors on the map (%) — where spring blossoms cluster. Real crowns in the art.
+  // % anchors on real leafy (deciduous) tree crowns in the art — blossoms cluster here.
+  var TREE_CROWNS=[
+    [26.5,14.5],[28.5,25],[24,49],[16,52],[35,58],                   // farm side leafy trees
+    [58,40],[63.5,55],[75.5,64],[88,52],[70,72]                      // village side leafy trees
+  ];
+  var blossomsEl=document.getElementById('blossoms'), firefliesEl=document.getElementById('fireflies');
+  var isSmall = (window.innerWidth < 760);               // mobile perf cap
+
+  function spawnBlossoms(){
+    blossomsEl.innerHTML='';
+    if(reduce) return;
+    TREE_CROWNS.forEach(function(c,ci){
+      var per = isSmall?4:7;                              // small pink pops per crown
+      for(var k=0;k<per;k++){
+        var b=document.createElement('div'); b.className='blossom';
+        b.style.left=(c[0]+ (rnd(ci*7+k,11)*3.2-1.6)).toFixed(1)+'%';   // tight cluster
+        b.style.top =(c[1]+ (rnd(ci*7+k,12)*3.0-1.5)).toFixed(1)+'%';
+        b.style.width=(0.7+rnd(ci*7+k,13)*0.9).toFixed(2)+'%';          // small dabs, not bubbles
+        b.style.setProperty('--dur',(4+rnd(ci*7+k,14)*4).toFixed(1)+'s');
+        b.style.setProperty('--delay',(-(rnd(ci*7+k,15)*5)).toFixed(1)+'s');
+        blossomsEl.appendChild(b);
+      }
+    });
+  }
+  function spawnFireflies(){
+    firefliesEl.innerHTML='';
+    if(reduce) return;
+    var n=isSmall?14:26;
+    for(var i=0;i<n;i++){
+      var f=document.createElement('div'); f.className='firefly';
+      f.style.left=(rnd(i,21)*96+2).toFixed(1)+'%';
+      f.style.top =(rnd(i,22)*70+22).toFixed(1)+'%';      // lower two-thirds (over grass/town)
+      f.style.setProperty('--dur',(5+rnd(i,23)*6).toFixed(1)+'s');
+      f.style.setProperty('--delay',(-(rnd(i,24)*8)).toFixed(1)+'s');
+      firefliesEl.appendChild(f);
+    }
+  }
+
   function spawnSeasonFx(season){
     seasonFx.innerHTML='';
+    // scene extras: blossoms for spring, fireflies for summer — cleared/rebuilt each switch
+    blossomsEl.innerHTML=''; firefliesEl.innerHTML='';
+    if(season==='spring') spawnBlossoms();
+    if(season==='summer') spawnFireflies();
     if(reduce) return;
     var kind = season==='autumn'?'leaf' : season==='spring'?'petal' : season==='winter'?'flake' : null;
-    if(!kind) return;                                  // summer = tint only, no particles
-    var n = kind==='leaf'?40 : kind==='flake'?46 : 30;
+    if(!kind) return;                                  // summer = scene-only particles
+    // denser fields; cap on small screens for perf
+    var n = kind==='leaf'?(isSmall?45:90) : kind==='flake'?(isSmall?40:80) : (isSmall?28:55);
     for(var i=0;i<n;i++){
       var layer = i%3;                                 // 0=mid 1=far 2=near depth layers
       var f=document.createElement('div');
