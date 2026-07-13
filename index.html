@@ -1036,9 +1036,9 @@
       <span class="sign"><span class="plank">Signage &amp; Print<span class="sub">signs, flyers, ads</span></span><span class="post"></span></span>
     </a>
 
-    <!-- Log workshop/cabin → Building Plans -->
+    <!-- Roadside entrance signboard (top-left) → Building Plans -->
     <a class="spot" href="https://trashpanda62.github.io/plans/building-plans.html"
-       style="left:44.0%;top:20.0%;" data-tag="build plans"
+       style="left:11.0%;top:6.5%;" data-tag="build plans"
        aria-label="Building Plans — DIY farm structures">
       <span class="sign"><span class="plank">Building Plans<span class="sub">DIY farm structures</span></span><span class="post"></span></span>
     </a>
@@ -1423,10 +1423,19 @@
     var lamps=[].slice.call(document.querySelectorAll('#lanterns .lantern'));
     lamps.forEach(function(l,i){ l.dataset.lamp='L'+i; l.dataset.dx=l.style.left; l.dataset.dy=l.style.top; });
 
-    // apply any saved positions over the defaults
+    // apply saved positions over the defaults. When embedded in Obscura Sites the
+    // server injects window.__SITE_DATA__.lamps (durable, per-site); standalone we
+    // fall back to this browser's localStorage.
+    var embedded = false;
+    try{ embedded = window.parent && window.parent !== window; }catch(e){ embedded = true; }
+    function applyLampData(saved){
+      if(!saved) return;
+      lamps.forEach(function(l){ var p=saved[l.dataset.lamp]; if(p){ l.style.left=p.x; l.style.top=p.y; } });
+    }
     try{
-      var saved=JSON.parse(localStorage.getItem('ta_lamps')||'null');
-      if(saved){ lamps.forEach(function(l){ var p=saved[l.dataset.lamp]; if(p){ l.style.left=p.x; l.style.top=p.y; } }); }
+      var fromSite = (window.__SITE_DATA__ && window.__SITE_DATA__.lamps) || null;
+      var fromLocal = JSON.parse(localStorage.getItem('ta_lamps')||'null');
+      applyLampData(fromSite || fromLocal);
     }catch(e){}
 
     var toggle=document.getElementById('lampEditToggle'),
@@ -1468,8 +1477,16 @@
 
     saveB.addEventListener('click',function(){
       var out={}; lamps.forEach(function(l){ out[l.dataset.lamp]={x:l.style.left,y:l.style.top}; });
-      try{ localStorage.setItem('ta_lamps',JSON.stringify(out)); say('Saved — glows will stay put.'); }
-      catch(e){ say('Could not save (storage blocked).'); }
+      // Always cache locally; when embedded in Obscura Sites, also post the whole
+      // __SITE_DATA__ up to the host so it persists to this site on the server.
+      try{ localStorage.setItem('ta_lamps',JSON.stringify(out)); }catch(e){}
+      if(embedded){
+        var blob = Object.assign({}, window.__SITE_DATA__||{}, { lamps: out });
+        try{ window.parent.postMessage({ type:'ta:save-data', data: blob }, '*'); }catch(e){}
+        say('Saved to this site.');
+      } else {
+        say('Saved — glows will stay put.');
+      }
     });
     resetB.addEventListener('click',function(){
       lamps.forEach(function(l){ l.style.left=l.dataset.dx; l.style.top=l.dataset.dy; });
