@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barnyard Cams · Tapestry Acres</title>
+<style>
+  :root{
+    --parch:#f3e7cc; --parch2:#e9d9b6; --ink:#3d2c17; --wood:#6b4a2b;
+    --wood-d:#4a3018; --wood-l:#8a6338; --brass:#b98a3c; --live:#c8452f;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+    color:var(--ink); min-height:100vh;
+    background:
+      radial-gradient(120% 80% at 50% -10%, #fbf3e0 0%, var(--parch) 45%, var(--parch2) 100%);
+    background-attachment:fixed;
+  }
+  /* faint paper grain */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;opacity:.06;z-index:0;
+    background-image:radial-gradient(#000 1px,transparent 1px);background-size:3px 3px;
+  }
+  .wrap{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:26px 20px 60px}
+  header{text-align:center;margin:8px 0 26px}
+  .sign{
+    display:inline-block;padding:16px 40px;border-radius:12px;position:relative;
+    background:linear-gradient(180deg,var(--wood-l),var(--wood) 55%,var(--wood-d));
+    box-shadow:0 10px 26px rgba(40,25,10,.4), inset 0 2px 0 rgba(255,240,210,.35), inset 0 -6px 14px rgba(0,0,0,.35);
+    border:3px solid #3a2712;
+  }
+  .sign h1{
+    margin:0;font-size:clamp(26px,5vw,44px);letter-spacing:.5px;color:#f6ecd4;
+    text-shadow:0 2px 0 #2c1c0c, 0 -1px 0 rgba(255,255,255,.15);
+  }
+  .sign .sub{display:block;margin-top:4px;font-size:14px;color:#e7cfa1;font-style:italic;letter-spacing:1px}
+  /* screw heads */
+  .sign::before,.sign::after{content:"";position:absolute;width:9px;height:9px;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%,#d9c188,#7c5a24);top:9px}
+  .sign::before{left:12px}.sign::after{right:12px}
+  .back{display:inline-block;margin:18px auto 0;color:var(--wood-d);text-decoration:none;font-size:15px;
+    border-bottom:1px dashed var(--wood);padding-bottom:1px}
+  .back:hover{color:var(--live)}
+  .grid{display:grid;gap:26px;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr))}
+  .cam{
+    background:linear-gradient(180deg,var(--wood-l),var(--wood) 60%,var(--wood-d));
+    padding:14px 14px 10px;border-radius:14px;border:3px solid #3a2712;
+    box-shadow:0 12px 28px rgba(40,25,10,.38), inset 0 2px 0 rgba(255,240,210,.3);
+  }
+  .frame{position:relative;border-radius:8px;overflow:hidden;background:#12100c;
+    border:2px solid #2a1b0d;aspect-ratio:16/9;box-shadow:inset 0 0 30px rgba(0,0,0,.7)}
+  .frame video{width:100%;height:100%;object-fit:cover;display:block;background:#12100c}
+  .plate{display:flex;align-items:center;gap:9px;margin-top:9px;padding:2px 4px}
+  .plate .name{font-size:18px;color:#f6ecd4;text-shadow:0 1px 0 #2c1c0c;flex:1}
+  .dot{width:11px;height:11px;border-radius:50%;background:var(--live);
+    box-shadow:0 0 0 0 rgba(200,69,47,.6);animation:pulse 2s infinite}
+  .dot.off{background:#8a8577;animation:none}
+  .live{font-size:12px;letter-spacing:2px;color:#f0d9ac;text-transform:uppercase}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(200,69,47,.55)}70%{box-shadow:0 0 0 9px rgba(200,69,47,0)}100%{box-shadow:0 0 0 0 rgba(200,69,47,0)}}
+  .offline{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;
+    color:#cbb98f;font-style:italic;gap:8px;text-align:center;padding:20px}
+  .offline .em{font-size:40px;filter:grayscale(.2)}
+  .frame.down video{display:none}
+  .frame.down .offline{display:flex}
+  .expand{position:absolute;top:8px;right:8px;background:rgba(20,14,6,.6);color:#f0d9ac;border:1px solid #6b4a2b;
+    border-radius:6px;padding:4px 8px;font-size:12px;cursor:pointer;opacity:.8}
+  .expand:hover{opacity:1}
+  footer{text-align:center;margin-top:34px;color:var(--wood-d);font-size:13px;font-style:italic;opacity:.85}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="sign">
+        <h1>Barnyard Cams</h1>
+        <span class="sub">· live from Tapestry Acres ·</span>
+      </div>
+      <div><a class="back" href="../index.html">&larr; Back to the Map</a></div>
+    </header>
+    <div class="grid" id="grid"></div>
+    <footer>Feeds run live from the farm. If a window&rsquo;s dark, that critter cam is just resting &mdash; check back soon. 🐐</footer>
+  </div>
+
+<script>
+  // --- Add a camera: enable RTSP in Protect, add it to go2rtc, then append one row here. ---
+  // Stream origin: same-origin when served from the cams edge (works on LAN + public);
+  // absolute cams host when embedded elsewhere (e.g. the GitHub Pages storybook).
+  var CAM_HOST = "https://cams.obscurastudio.design";
+  var h = location.hostname;
+  var sameOrigin = h.indexOf("obscurastudio.design") >= 0 || h.indexOf("10.42.") === 0 || h === "localhost";
+  var BASE = (sameOrigin ? "" : CAM_HOST) + "/api/stream.mp4?src=";
+  var CAMS = [
+    { name:"barnyard1", label:"The Front Porch" },
+    { name:"barnyard2", label:"The Paddock" }
+  ];
+
+  var grid = document.getElementById("grid");
+  CAMS.forEach(function(c){
+    var el = document.createElement("div");
+    el.className = "cam";
+    el.innerHTML =
+      '<div class="frame" id="f-'+c.name+'">'
+      + '<video muted autoplay playsinline></video>'
+      + '<button class="expand">&#9974; full</button>'
+      + '<div class="offline"><div class="em">🌙</div><div>'+c.label+' is resting</div></div>'
+      + '</div>'
+      + '<div class="plate"><span class="dot" id="d-'+c.name+'"></span>'
+      + '<span class="name">'+c.label+'</span><span class="live">Live</span></div>';
+    grid.appendChild(el);
+
+    var frame = el.querySelector(".frame");
+    var video = el.querySelector("video");
+    var dot   = el.querySelector(".dot");
+    var url   = BASE + encodeURIComponent(c.name);
+
+    function connect(){
+      frame.classList.remove("down"); dot.classList.remove("off");
+      video.src = url + "&_=" + Date.now();
+      video.play().catch(function(){});
+    }
+    function down(){
+      frame.classList.add("down"); dot.classList.add("off");
+      setTimeout(connect, 6000); // auto-reconnect
+    }
+    video.addEventListener("error", down);
+    video.addEventListener("stalled", function(){ setTimeout(function(){ if(video.readyState<2) down(); },4000); });
+    video.addEventListener("ended", down);
+    el.querySelector(".expand").addEventListener("click", function(){
+      if (frame.requestFullscreen) frame.requestFullscreen();
+      else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
+    });
+    connect();
+  });
+</script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tapestry Acres — The Working Library</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
 <meta name="description" content="Explore the farm. Every plan, venture, tool and playbook lives where it belongs on the land.">
@@ -714,11 +714,11 @@
 
 
   /* ---- foreground trees + grass sway (whole scene breathes) ---- */
-  .sway{width:6%;height:10%;transform-origin:50% 100%;animation:sway 6s ease-in-out infinite;}
+   .sway{width:6%;height:10%;transform-origin:50% 100%;animation:ambientSway 6s ease-in-out infinite;}
   .sway.s1{left:44%;top:44%;animation-duration:7s;}
   .sway.s2{left:2%;top:60%;animation-duration:8s;animation-delay:-2s;}
   .sway.s3{left:83%;top:30%;animation-duration:6.5s;animation-delay:-3s;}
-  @keyframes sway{0%,100%{transform:rotate(-1.1deg);}50%{transform:rotate(1.1deg);}}
+   @keyframes ambientSway{0%,100%{transform:rotate(-1.1deg);}50%{transform:rotate(1.1deg);}}
 
   /* ---------- day / night ---------- */
   /* a tint layer over the whole book; the toggle stamps body.night to warm→cool the scene */
@@ -785,13 +785,12 @@
   /* ---- SLICE 1: whole-scene colour grade. Filter the ART itself so each season reads
      as a different time of year, not just a tint film. Smooth cross-fade via transition. */
   #farm{transition:filter 1.2s ease;}
-  /* spring = THUNDERSTORM: dark, cool, rain-lashed, lightning flashes */
-  body[data-season="spring"] #farm{filter:saturate(.72) brightness(.6) contrast(1.08) hue-rotate(6deg);
-    transition:filter 1.2s ease, brightness .12s;}
-  body[data-season="spring"].lightning #farm{filter:saturate(.85) brightness(1.35) contrast(1.05);}
-  body[data-season="summer"] #farm{filter:saturate(1.2) brightness(1.1) contrast(1.05);}
-  body[data-season="autumn"] #farm{filter:sepia(.28) saturate(1.28) brightness(.98) hue-rotate(-12deg) contrast(1.04);}
-  body[data-season="winter"] #farm{filter:saturate(.34) brightness(1.18) contrast(.92) hue-rotate(6deg);}
+   body[data-season="spring"] #farm{filter:saturate(1.08) brightness(1.04) hue-rotate(4deg);}
+   body[data-season="summer"] #farm{filter:saturate(1.2) brightness(1.1) contrast(1.05);}
+   body[data-season="autumn"] #farm{filter:sepia(.28) saturate(1.28) brightness(.98) hue-rotate(-12deg) contrast(1.04);}
+   body[data-season="winter"] #farm{filter:saturate(.34) brightness(1.18) contrast(.92) hue-rotate(6deg);}
+   body[data-weather="storm"] #farm{filter:saturate(.72) brightness(.6) contrast(1.08) hue-rotate(6deg);transition:filter 1.2s ease,brightness .12s;}
+   body[data-weather="storm"].lightning #farm{filter:saturate(.85) brightness(1.35) contrast(1.05);}
 
   #seasonfx{position:absolute;inset:0;pointer-events:none;z-index:7;overflow:hidden;border-radius:5px;}
   .fx{position:absolute;top:-6%;will-change:transform;}
@@ -888,18 +887,17 @@
   body[data-season="winter"] .sc.winter-ground,
   body[data-season="winter"] .sc.winter-frost{opacity:1;}
 
-  /* --- SLICE 4 SPRING: blossom pops on the orchard/trees + bright bloom haze --- */
-  /* storm gloom + rolling dark cloud shadow across the top */
+   /* --- WEATHER: live conditions add rain, snow, or a storm over the calendar season. --- */
   .sc.storm-gloom{inset:0;background:
       linear-gradient(180deg, rgba(30,38,55,.5), rgba(40,50,70,.28) 40%, rgba(40,50,70,.12) 100%),
       radial-gradient(140% 90% at 50% -10%, rgba(18,24,38,.55), rgba(18,24,38,0) 55%);
       mix-blend-mode:multiply;}
-  body[data-season="spring"] .sc.storm-gloom{opacity:1;}
+   body[data-weather="storm"] .sc.storm-gloom{opacity:1;}
   /* lightning flash — a full-scene white/blue pop toggled by JS via body.lightning */
   .sc.storm-flash{inset:0;background:
       radial-gradient(120% 80% at 60% 15%, rgba(226,238,255,.85), rgba(200,220,255,.25) 40%, rgba(200,220,255,0) 65%);
       mix-blend-mode:screen;opacity:0 !important;transition:opacity .08s ease;}
-  body[data-season="spring"].lightning .sc.storm-flash{opacity:1 !important;}
+   body[data-weather="storm"].lightning .sc.storm-flash{opacity:1 !important;}
   /* blossom clusters — soft pink dot-groups that breathe in/out on tree crowns (JS-placed) */
   /* A flowering-canopy: many TINY 5-petal blossoms speckled over a crown, not big blobs.
      Each .blossom is a small soft-pink flower (radial dot) that gently sways/twinkles. */
@@ -1024,14 +1022,14 @@
     <!-- ============ LEFT PAGE — FARM → FOREST (x 0-50%) ============ -->
     <!-- HERO: big entrance sign at the farm lane → the farm website -->
     <a class="spot entrance" href="https://trashpanda62.github.io/tapestry-game/"
-       style="left:36.6%;top:24.8%;" data-tag="live"
+        style="left:36.6%;top:24.8%;" data-tag="live"
        aria-label="Tapestry Acres — the farm">
       <span class="sign"><span class="plank"><img class="logo" src="assets/logo.png" alt=""><span class="big">Tapestry Acres</span></span><span class="post"></span></span>
     </a>
 
     <!-- Signage dashboard sign near the farmhouse → all property signs & flyers -->
     <a class="spot mini" href="signage/"
-       style="left:24.8%;top:66.4%;" data-tag="signs &amp; flyers"
+        style="left:24.8%;top:66.4%;" data-tag="signs &amp; flyers"
        aria-label="Signage Dashboard — all farm signs & flyers">
       <span class="sign"><span class="plank">Signage &amp; Print<span class="sub">signs, flyers, ads</span></span><span class="post"></span></span>
     </a>
@@ -1045,64 +1043,71 @@
 
     <!-- Roadside sign → Social plan -->
     <a class="spot" href="https://trashpanda62.github.io/tapestry-area-map/social-plan.html"
-       style="left:23.6%;top:50.0%;" data-tag="roadside sign"
+        style="left:23.6%;top:50.0%;" data-tag="roadside sign"
        aria-label="Social Media Posting Plan">
       <span class="sign"><span class="plank">Social Plan<span class="sub">roadside sign playbook</span></span><span class="post"></span></span>
     </a>
 
     <!-- Berry field → Raspberries -->
     <a class="spot" href="https://trashpanda62.github.io/plans/tapestry-freeze-dried-raspberries.html"
-       style="left:41.1%;top:13.3%;" data-tag="playbook"
+        style="left:41.1%;top:13.3%;" data-tag="playbook"
        aria-label="Freeze-Dried Raspberries Launch Playbook">
       <span class="sign"><span class="plank">Freeze-Dried Berries<span class="sub">product playbook</span></span><span class="post"></span></span>
     </a>
 
     <!-- Pasture → Hair contest -->
     <a class="spot" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/"
-       style="left:13.0%;top:27.0%;" data-tag="live"
+        style="left:13.0%;top:27.0%;" data-tag="live"
        aria-label="Best Hair Contest Viral Poll">
       <span class="sign"><span class="plank">Best Hair Contest<span class="sub live">vote live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Hair contest sub-doc: Posting kit (by the animals) -->
     <a class="spot mini" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/kit.html"
-       style="left:25.0%;top:34.0%;" data-tag="for Dani"
+        style="left:25.0%;top:34.0%;" data-tag="for Dani"
        aria-label="Posting kit for Dani">
       <span class="sign"><span class="plank">Posting Kit<span class="sub">ready-to-post · for Dani</span></span><span class="post"></span></span>
     </a>
 
     <!-- Garden plot → Name the Herd admin -->
     <a class="spot mini" href="https://steve-voice-pc.tailfbd25a.ts.net/herd/?admin=1"
-       style="left:6.0%;top:32.9%;" data-tag="owner admin"
+        style="left:6.0%;top:32.9%;" data-tag="owner admin"
        aria-label="Name the Herd — owner admin">
       <span class="sign"><span class="plank">Name the Herd<span class="sub">owner admin</span></span><span class="post"></span></span>
+    </a>
+
+    <!-- Farmhouse porch → live barnyard animal cams -->
+    <a class="spot" href="cameras/"
+        style="left:20.0%;top:18.0%;" data-tag="live"
+       aria-label="Barnyard Cams — live animal cameras">
+      <span class="sign"><span class="plank">Barnyard Cams<span class="sub live">live animal cams</span></span><span class="post"></span></span>
     </a>
 
     <!-- ============ RIGHT PAGE — LIVINGSTON DOWNTOWN (x 50-100%) ============ -->
     <!-- Photo-studio storefront → Obscura Studio -->
     <a class="spot" href="https://obscurastudio.design"
-       style="left:60.5%;top:27.0%;" data-tag="live"
+        style="left:60.5%;top:27.0%;" data-tag="live"
        aria-label="Obscura Studio photo suite">
       <span class="sign"><span class="plank">Obscura Studio<span class="sub live">photo studio · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Sign-shop storefront → Obscura Sites -->
     <a class="spot" href="https://sites.obscurastudio.design"
-       style="left:95.6%;top:31.7%;" data-tag="live"
+        style="left:95.6%;top:31.7%;" data-tag="live"
        aria-label="Obscura Sites website builder">
       <span class="sign"><span class="plank">Obscura Sites<span class="sub live">website builder · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Arcade storefront → browse -->
     <a class="spot" href="https://arcade.retrogaming.win/"
-       style="left:86.4%;top:15.2%;" data-tag="live"
+        style="left:86.4%;top:15.2%;" data-tag="live"
        aria-label="Retro Arcade browse">
       <span class="sign"><span class="plank">Retro Arcade<span class="sub live">play in browser · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Records-office storefront → Family Tree -->
     <a class="spot" href="https://trashpanda62.github.io/family-tree/"
-       style="left:78.2%;top:46.5%;" data-tag="live"
+        style="left:78.2%;top:46.5%;" data-tag="live"
        data-new aria-label="Family Tree Bloodlines game">
       <span class="sign"><span class="plank">Bloodlines<span class="sub live">family-tree game · live</span></span><span class="post"></span></span>
     </a>
@@ -1110,21 +1115,21 @@
 
     <!-- Bookshop storefront → Books -->
     <a class="spot" href="https://trashpanda62.github.io/book-library/"
-       style="left:59.9%;top:55.3%;" data-tag="live"
+        style="left:59.9%;top:55.3%;" data-tag="live"
        data-new aria-label="Books Library">
       <span class="sign"><span class="plank">The Library<span class="sub live">ebooks &amp; reading</span></span><span class="post"></span></span>
     </a>
 
     <!-- Cinema/theater → Obscura Video (multi-link panel: AI Explainer + Dark Requiem) -->
     <a class="spot" href="#video" data-panel="workshop"
-       style="left:89.5%;top:70.0%;" data-tag="video arm"
+        style="left:89.5%;top:70.0%;" data-tag="video arm"
        aria-label="Obscura Video — the screening room">
       <span class="sign"><span class="plank">Obscura Video<span class="sub">AI Explainer + films</span></span><span class="post"></span></span>
     </a>
 
     <!-- Gym storefront → Show Prep -->
     <a class="spot" href="https://trashpanda62.github.io/plans/show-prep-plan.html"
-       style="left:67.9%;top:80.1%;" data-tag="playbook"
+        style="left:67.9%;top:80.1%;" data-tag="playbook"
        aria-label="Show Prep plan">
       <span class="sign"><span class="plank">Show Prep<span class="sub">training + diet plan</span></span><span class="post"></span></span>
     </a>
@@ -1155,6 +1160,7 @@
     <button class="ctrl" id="reset" aria-label="Recenter the map" style="font-size:17px;">⌂</button>
     <button class="ctrl" id="daynight" aria-label="Toggle day and night" style="font-size:15px;">☾</button>
     <button class="ctrl" id="season" aria-label="Change the season" style="font-size:15px;">✿</button>
+    <button class="ctrl" id="weather" aria-label="Weather: automatic" title="Weather: automatic" style="font-size:14px;">◌</button>
     <button class="ctrl" id="replay" aria-label="Replay the flythrough" style="font-size:16px;">↻</button>
   </div>
   <div id="tip" role="tooltip" aria-hidden="true"><div class="tt"></div><div class="td"></div></div>
@@ -1173,7 +1179,7 @@
 
 <!-- Places drawer — the map's table of contents, built from the signs at runtime -->
 <div class="drawer-scrim" id="drawerScrim"></div>
-<aside class="drawer" id="places" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
+<aside class="drawer" id="places" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true" inert>
   <div class="drawer-head">
     <div class="eyebrow">The Working Library</div>
     <h2 id="drawerTitle">Places</h2>
@@ -1189,7 +1195,7 @@
 </aside>
 
 <!-- workshop panel -->
-<div class="scrim" id="scrim" aria-hidden="true">
+<div class="scrim" id="scrim" aria-hidden="true" inert>
   <div class="panel" role="dialog" aria-modal="true" aria-labelledby="wtitle">
     <div class="panel-head">
       <div class="k">Obscura Video</div>
@@ -1504,13 +1510,13 @@
   function openPanel(){
     panelLastFocus=document.activeElement;
     scrim.classList.add('open');
-    scrim.setAttribute('aria-hidden','false');
+    scrim.setAttribute('aria-hidden','false'); scrim.removeAttribute('inert');
     if(pcl) pcl.focus();
   }
   function closePanel(){
     if(!scrim.classList.contains('open'))return;
     scrim.classList.remove('open');
-    scrim.setAttribute('aria-hidden','true');
+    scrim.setAttribute('aria-hidden','true'); scrim.setAttribute('inert','');
     if(panelLastFocus&&panelLastFocus.focus) panelLastFocus.focus();
   }
   var wsBtn=document.querySelector('[data-panel="workshop"]');
@@ -1603,12 +1609,12 @@
   function openDrawer(){
     lastFocus=document.activeElement;
     drawer.classList.add('open'); drawerScrim.classList.add('open');
-    drawer.setAttribute('aria-hidden','false'); placesBtn.setAttribute('aria-expanded','true');
+    drawer.setAttribute('aria-hidden','false'); drawer.removeAttribute('inert'); placesBtn.setAttribute('aria-expanded','true');
     drawerClose.focus();
   }
   function closeDrawer(){
     drawer.classList.remove('open'); drawerScrim.classList.remove('open');
-    drawer.setAttribute('aria-hidden','true'); placesBtn.setAttribute('aria-expanded','false');
+    drawer.setAttribute('aria-hidden','true'); drawer.setAttribute('inert',''); placesBtn.setAttribute('aria-expanded','false');
     if(lastFocus&&lastFocus.focus)lastFocus.focus();
   }
   function toggleDrawer(){ drawer.classList.contains('open')?closeDrawer():openDrawer(); }
@@ -1616,6 +1622,13 @@
   drawerClose.addEventListener('click',closeDrawer);
   drawerScrim.addEventListener('click',closeDrawer);
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&drawer.classList.contains('open'))closeDrawer(); });
+  drawer.addEventListener('keydown',function(e){
+    if(e.key!=='Tab')return;
+    var f=drawer.querySelectorAll('a[href],button:not([disabled]),input:not([disabled])'); if(!f.length)return;
+    var first=f[0], last=f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+  });
 
   /* focus helpers: fx/fy are world fractions (0-1) to bring to screen centre at scale sc.
      Each page fills the FULL height now: farm = LEFT half (fx≈.25), town = RIGHT half
@@ -1923,7 +1936,7 @@
     }
   }
 
-  // lightning: schedule irregular flashes (double-strike) while spring/storm is active.
+   // Lightning runs only while the current weather is a storm.
   var lightningTimer=null, lightningSeed=0;
   function flashOnce(){
     document.body.classList.add('lightning');
@@ -1948,15 +1961,17 @@
     if(on && !reduce){ setTimeout(flashOnce, 700); scheduleLightning(); }
   }
 
-  function spawnSeasonFx(season){
+   function spawnSeasonFx(season){
     seasonFx.innerHTML='';
-    // scene extras: fireflies for summer; spring is a thunderstorm (rain + lightning)
+    // Scene extras follow the calendar season; precipitation follows live/manual weather.
     blossomsEl.innerHTML=''; firefliesEl.innerHTML='';
-    startLightning(season==='spring');
+    var weather=document.body.getAttribute('data-weather')||'clear';
+    startLightning(weather==='storm');
+    if(season==='spring') spawnBlossoms();
     if(season==='summer') spawnFireflies();
     if(reduce) return;
-    var kind = season==='autumn'?'leaf' : season==='spring'?'rain' : season==='winter'?'flake' : null;
-    if(!kind) return;                                  // summer = scene-only particles
+    var kind = season==='autumn'?'leaf' : weather==='rain'||weather==='storm'?'rain' : weather==='snow'?'flake' : null;
+    if(!kind) return;
     // denser fields; cap on small screens for perf
     var n = kind==='leaf'?(isSmall?45:90) : kind==='flake'?(isSmall?70:140) : kind==='rain'?(isSmall?90:170) : (isSmall?28:55);
     for(var i=0;i<n;i++){
@@ -1994,24 +2009,72 @@
       seasonFx.appendChild(f);
     }
   }
-  function setSeason(season){
-    if(!season){ document.body.removeAttribute('data-season'); seasonFx.innerHTML='';
-      seasonBtn.textContent='✿'; try{localStorage.removeItem('ta_season');}catch(e){} return; }
-    document.body.setAttribute('data-season',season);
-    seasonBtn.textContent=seasonIcon[season]||'✿';
-    spawnSeasonFx(season);
-    try{ localStorage.setItem('ta_season',season); }catch(e){}
-  }
-  seasonBtn.addEventListener('click',function(){
-    var cur=document.body.getAttribute('data-season');
-    var idx=SEASONS.indexOf(cur);                      // always cycle within the 4 real seasons
-    setSeason(SEASONS[(idx+1)%SEASONS.length]);
-  });
-  var qseason=/[?&]season=(spring|summer|autumn|winter)/i.exec(location.search);
-  if(qseason){ setSeason(qseason[1].toLowerCase()); }
-  else { try{ var ss=localStorage.getItem('ta_season'); setSeason(ss||'spring'); }catch(e){ setSeason('spring'); } }
+   function setSeason(season,save){
+     if(!season){ document.body.removeAttribute('data-season'); seasonFx.innerHTML=''; startLightning(false);
+       blossomsEl.innerHTML=''; firefliesEl.innerHTML=''; seasonBtn.textContent='✿'; return; }
+     document.body.setAttribute('data-season',season);
+     seasonBtn.textContent=seasonIcon[season]||'✿';
+     seasonBtn.setAttribute('aria-label','Season: '+season);
+     seasonBtn.title='Season: '+season;
+     spawnSeasonFx(season);
+     if(save){ try{ localStorage.setItem('ta_season',season); }catch(e){} }
+   }
+   function calendarSeason(){
+     var month=Number(new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',month:'numeric'}).format(new Date()));
+     return month>=3&&month<=5?'spring':month>=6&&month<=8?'summer':month>=9&&month<=11?'autumn':'winter';
+   }
+   function automaticSeason(){
+     var season=calendarSeason(); setSeason(season,false); return season;
+   }
+   seasonBtn.addEventListener('click',function(){
+     var saved; try{saved=localStorage.getItem('ta_season');}catch(e){}
+     var active=document.body.getAttribute('data-season')||calendarSeason();
+     var idx=SEASONS.indexOf(active);
+     if(saved===SEASONS[SEASONS.length-1]){ try{localStorage.removeItem('ta_season');}catch(e){} automaticSeason(); }
+     else { setSeason(SEASONS[(idx+1)%SEASONS.length],true); }
+   });
+   var qseason=/[?&]season=(spring|summer|autumn|winter)/i.exec(location.search);
+   if(qseason){ setSeason(qseason[1].toLowerCase(),false); }
+   else { try{ var ss=localStorage.getItem('ta_season'); if(ss&&SEASONS.indexOf(ss)>=0)setSeason(ss,false); else automaticSeason(); }catch(e){ automaticSeason(); } }
 
-  /* ---- #6 deep-link: ?sign=slug flies there on load (and open its panel if any) ---- */
+   /* ---- Weather: automatic uses the current Livingston, TN conditions; the control can
+      temporarily pin a condition when reviewing the map. Calendar season remains separate. */
+   var weatherBtn=document.getElementById('weather'), WEATHER_MODES=['auto','clear','rain','storm','snow'];
+   var weatherIcon={auto:'◌',clear:'☀',rain:'☂',storm:'⛈',snow:'❄'};
+   function weatherFromCode(code){
+     if(code>=95) return 'storm';
+     if((code>=71&&code<=77)||(code>=85&&code<=86)) return 'snow';
+     if((code>=51&&code<=67)||(code>=80&&code<=82)) return 'rain';
+     return 'clear';
+   }
+   function setWeather(weather,mode){
+     document.body.toggleAttribute('data-weather',weather!=='clear');
+     if(weather!=='clear') document.body.setAttribute('data-weather',weather);
+     weatherBtn.textContent=weatherIcon[mode||weather]||weatherIcon[weather];
+     var label='Weather: '+(mode==='auto'?'automatic ('+weather+')':weather);
+     weatherBtn.setAttribute('aria-label',label); weatherBtn.title=label;
+     spawnSeasonFx(document.body.getAttribute('data-season')||calendarSeason());
+   }
+   function loadAutomaticWeather(){
+     fetch('https://api.open-meteo.com/v1/forecast?latitude=36.391907&longitude=-85.313194&current=weather_code&timezone=America%2FChicago')
+       .then(function(r){ if(!r.ok)throw new Error('weather unavailable'); return r.json(); })
+       .then(function(data){ setWeather(weatherFromCode(data.current.weather_code),'auto'); })
+       .catch(function(){ setWeather('clear','auto'); });
+   }
+   function setWeatherMode(mode,save){
+     if(save){ try{localStorage.setItem('ta_weather',mode);}catch(e){} }
+     if(mode==='auto') loadAutomaticWeather(); else setWeather(mode,mode);
+   }
+   weatherBtn.addEventListener('click',function(){
+     var mode; try{mode=localStorage.getItem('ta_weather');}catch(e){}
+     mode=WEATHER_MODES[(WEATHER_MODES.indexOf(mode||'auto')+1)%WEATHER_MODES.length];
+     setWeatherMode(mode,true);
+   });
+   var qweather=/[?&]weather=(clear|rain|storm|snow)/i.exec(location.search);
+   if(qweather){ setWeather(qweather[1].toLowerCase(),qweather[1].toLowerCase()); }
+   else { try{ var savedWeather=localStorage.getItem('ta_weather'); setWeatherMode(WEATHER_MODES.indexOf(savedWeather)>=0?savedWeather:'auto',false); }catch(e){ setWeatherMode('auto',false); } }
+
+   /* ---- #6 deep-link: ?sign=slug flies there on load (and open its panel if any) ---- */
   (function deeplink(){
     var m=/[?&]sign=([a-z0-9-]+)/i.exec(location.search); if(!m) return;
     var want=m[1].toLowerCase();
