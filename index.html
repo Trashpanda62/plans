@@ -215,10 +215,11 @@
   .spot .sign .plank::after{right:4px;}
   .spot .sign .sub{
     display:block;font-family:var(--sans);font-size:8px;font-weight:800;
-    letter-spacing:.4px;text-transform:uppercase;color:#6a4a24;margin-top:2px;
+    letter-spacing:.4px;text-transform:uppercase;color:#5a3c1c;margin-top:2px;
+    text-shadow:0 1px 0 rgba(255,248,228,.6);   /* lift text off the wood grain for legibility */
   }
-  .spot .sign .sub.live{color:#2c6b3c;}
-  .spot .sign .sub.live::before{content:"● ";color:#39a659;}
+  .spot .sign .sub.live{color:#1f5a2f;text-shadow:0 1px 0 rgba(255,248,228,.7);}  /* deeper, higher-contrast green */
+  .spot .sign .sub.live::before{content:"● ";color:#2e8f4a;}
   /* the wooden signpost: a taller central stake the board is mounted on, with a small
      finial cap up top so it reads as a real staked trail sign, not a floating box. */
   .spot .sign .post{
@@ -277,8 +278,8 @@
   .spot.mini .sign .plank::before,.spot.mini .sign .plank::after{
     background:radial-gradient(circle at 35% 30%, #a9814b, #5b3c1c);
   }
-  .spot.mini .sign .sub{color:#6a4a24;}
-  .spot.mini .sign .sub.live{color:#2c6b3c;}
+  .spot.mini .sign .sub{color:#5a3c1c;text-shadow:0 1px 0 rgba(255,248,228,.6);}
+  .spot.mini .sign .sub.live{color:#1f5a2f;text-shadow:0 1px 0 rgba(255,248,228,.7);}
   .spot.mini .sign .post{height:12px;background:linear-gradient(90deg,#5f3f1c 0%,#8a5c2c 40%,#a06e39 50%,#7a5228 65%,#5a3a19 100%);}
   .spot.mini:hover .sign .plank,.spot.mini:focus-visible .sign .plank{
     background:
@@ -631,49 +632,49 @@
     <!-- ============ LEFT PAGE — FARM → FOREST (x 0-50%) ============ -->
     <!-- HERO: big entrance sign at the farm lane → the farm website -->
     <a class="spot entrance" href="https://trashpanda62.github.io/tapestry-game/"
-       style="left:36.6%;top:24.8%;" data-group="The Farm" data-name="Tapestry Acres" data-tag="live"
+       style="left:36.6%;top:24.8%;" data-tag="live"
        aria-label="Tapestry Acres — the farm">
       <span class="sign"><span class="plank"><img class="logo" src="assets/logo.png" alt=""><span class="big">Tapestry Acres</span></span><span class="post"></span></span>
     </a>
 
     <!-- Signage dashboard sign near the farmhouse → all property signs & flyers -->
     <a class="spot mini" href="signage/"
-       style="left:24.8%;top:66.4%;" data-group="The Farm" data-name="Signage Dashboard" data-tag="signs &amp; flyers"
+       style="left:24.8%;top:66.4%;" data-tag="signs &amp; flyers"
        aria-label="Signage Dashboard — all farm signs & flyers">
       <span class="sign"><span class="plank">Signage Dashboard<span class="sub">signs &amp; flyers</span></span><span class="post"></span></span>
     </a>
 
     <!-- Roadside sign → Social plan -->
     <a class="spot" href="https://trashpanda62.github.io/tapestry-area-map/social-plan.html"
-       style="left:23.6%;top:50.0%;" data-group="The Farm" data-name="Social Plan" data-tag="roadside sign"
+       style="left:23.6%;top:50.0%;" data-tag="roadside sign"
        aria-label="Social Media Posting Plan">
       <span class="sign"><span class="plank">Social Plan<span class="sub">roadside sign</span></span><span class="post"></span></span>
     </a>
 
     <!-- Berry field → Raspberries -->
     <a class="spot" href="https://trashpanda62.github.io/plans/tapestry-freeze-dried-raspberries.html"
-       style="left:41.1%;top:13.3%;" data-group="The Farm" data-name="Freeze-Dried Berries" data-tag="playbook"
+       style="left:41.1%;top:13.3%;" data-tag="playbook"
        aria-label="Freeze-Dried Raspberries Launch Playbook">
       <span class="sign"><span class="plank">Freeze-Dried Berries<span class="sub">berry field · playbook</span></span><span class="post"></span></span>
     </a>
 
     <!-- Pasture → Hair contest -->
     <a class="spot" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/"
-       style="left:13.0%;top:27.0%;" data-group="The Farm" data-name="Best Hair Contest" data-tag="live"
+       style="left:13.0%;top:27.0%;" data-tag="live"
        aria-label="Best Hair Contest Viral Poll">
       <span class="sign"><span class="plank">Best Hair Contest<span class="sub live">the pasture · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Hair contest sub-doc: Posting kit (by the animals) -->
     <a class="spot mini" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/kit.html"
-       style="left:25.0%;top:34.0%;" data-group="The Farm" data-name="Posting Kit" data-tag="for Dani"
+       style="left:25.0%;top:34.0%;" data-tag="for Dani"
        aria-label="Posting kit for Dani">
       <span class="sign"><span class="plank">Posting Kit<span class="sub">for Dani</span></span><span class="post"></span></span>
     </a>
 
     <!-- Garden plot → Name the Herd admin -->
     <a class="spot mini" href="https://steve-voice-pc.tailfbd25a.ts.net/herd/?admin=1"
-       style="left:6.0%;top:32.9%;" data-group="The Farm" data-name="Name the Herd" data-tag="owner admin"
+       style="left:6.0%;top:32.9%;" data-tag="owner admin"
        aria-label="Name the Herd — owner admin">
       <span class="sign"><span class="plank">Name the Herd<span class="sub">owner admin</span></span><span class="post"></span></span>
     </a>
@@ -681,28 +682,28 @@
     <!-- ============ RIGHT PAGE — LIVINGSTON DOWNTOWN (x 50-100%) ============ -->
     <!-- Photo-studio storefront → Obscura Studio -->
     <a class="spot" href="https://obscurastudio.design"
-       style="left:60.5%;top:27.0%;" data-group="The Village" data-name="Obscura Studio" data-tag="live"
+       style="left:60.5%;top:27.0%;" data-tag="live"
        aria-label="Obscura Studio photo suite">
       <span class="sign"><span class="plank">Obscura Studio<span class="sub live">the photo shop · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Sign-shop storefront → Obscura Sites -->
     <a class="spot" href="https://sites.obscurastudio.design"
-       style="left:63.5%;top:16.0%;" data-group="The Village" data-name="Obscura Sites" data-tag="live"
+       style="left:95.6%;top:31.7%;" data-tag="live"
        aria-label="Obscura Sites website builder">
       <span class="sign"><span class="plank">Obscura Sites<span class="sub live">the sign shop · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Arcade storefront → browse -->
     <a class="spot" href="https://arcade.retrogaming.win/"
-       style="left:89.0%;top:14.0%;" data-group="The Village" data-name="Retro Arcade" data-tag="live"
+       style="left:86.4%;top:15.2%;" data-tag="live"
        aria-label="Retro Arcade browse">
       <span class="sign"><span class="plank">Retro Arcade<span class="sub live">browse · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Records-office storefront → Family Tree -->
     <a class="spot" href="https://trashpanda62.github.io/family-tree/"
-       style="left:75.5%;top:26.0%;" data-group="The Village" data-name="Family Tree" data-tag="live"
+       style="left:78.2%;top:46.5%;" data-tag="live"
        aria-label="Family Tree Bloodlines game">
       <span class="sign"><span class="plank">Family Tree<span class="sub live">records office · live</span></span><span class="post"></span></span>
     </a>
@@ -710,21 +711,21 @@
 
     <!-- Bookshop storefront → Books -->
     <a class="spot" href="https://trashpanda62.github.io/book-library/"
-       style="left:62.0%;top:56.0%;" data-group="The Village" data-name="Books Library" data-tag="live"
+       style="left:59.9%;top:55.3%;" data-tag="live"
        aria-label="Books Library">
       <span class="sign"><span class="plank">Books Library<span class="sub live">the bookshop · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Cinema/theater → Obscura Video (multi-link panel: AI Explainer + Dark Requiem) -->
     <a class="spot" href="#video" data-panel="workshop"
-       style="left:89.5%;top:70.0%;" data-group="The Village" data-name="Obscura Video" data-tag="video arm"
+       style="left:89.5%;top:70.0%;" data-tag="video arm"
        aria-label="Obscura Video — the screening room">
       <span class="sign"><span class="plank">Obscura Video<span class="sub">the screening room</span></span><span class="post"></span></span>
     </a>
 
     <!-- Gym storefront → Show Prep -->
     <a class="spot" href="https://trashpanda62.github.io/plans/show-prep-plan.html"
-       style="left:78.5%;top:46.0%;" data-group="The Village" data-name="Show Prep" data-tag="playbook"
+       style="left:67.9%;top:80.1%;" data-tag="playbook"
        aria-label="Show Prep plan">
       <span class="sign"><span class="plank">Show Prep<span class="sub">the gym · playbook</span></span><span class="post"></span></span>
     </a>
