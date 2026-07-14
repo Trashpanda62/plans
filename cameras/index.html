@@ -106,24 +106,29 @@
       + '<button class="expand">&#9974; full</button>'
       + '<div class="offline"><div class="em">🌙</div><div>'+c.label+' is resting</div></div>'
       + '</div>'
-      + '<div class="plate"><span class="dot" id="d-'+c.name+'"></span>'
-      + '<span class="name">'+c.label+'</span><span class="live">Live</span></div>';
+       + '<div class="plate"><span class="dot off" id="d-'+c.name+'"></span>'
+       + '<span class="name">'+c.label+'</span><span class="live" id="s-'+c.name+'" role="status" aria-live="polite">Connecting</span></div>';
     grid.appendChild(el);
 
     var frame = el.querySelector(".frame");
     var video = el.querySelector("video");
-    var dot   = el.querySelector(".dot");
+     var dot   = el.querySelector(".dot");
+     var status = el.querySelector(".live");
     var url   = BASE + encodeURIComponent(c.name);
 
-    function connect(){
-      frame.classList.remove("down"); dot.classList.remove("off");
-      video.src = url + "&_=" + Date.now();
-      video.play().catch(function(){});
-    }
-    function down(){
-      frame.classList.add("down"); dot.classList.add("off");
-      setTimeout(connect, 6000); // auto-reconnect
-    }
+     function connect(){
+       frame.classList.remove("down"); dot.classList.add("off"); status.textContent = "Connecting";
+       video.src = url + "&_=" + Date.now();
+       video.play().catch(function(){});
+     }
+     function live(){
+       frame.classList.remove("down"); dot.classList.remove("off"); status.textContent = "Live";
+     }
+     function down(){
+       frame.classList.add("down"); dot.classList.add("off"); status.textContent = "Offline";
+       setTimeout(connect, 6000); // auto-reconnect
+     }
+     video.addEventListener("playing", live);
     video.addEventListener("error", down);
     video.addEventListener("stalled", function(){ setTimeout(function(){ if(video.readyState<2) down(); },4000); });
     video.addEventListener("ended", down);

@@ -176,7 +176,13 @@
     background:rgba(28,22,14,.96);color:#eafbe8;border:1px solid #6d5a34;border-radius:9px;
     padding:9px 15px;font-family:var(--sans);font-size:13px;opacity:0;pointer-events:none;
     transition:opacity .3s ease;box-shadow:0 10px 30px -8px rgba(0,0,0,.6);}
-  #lampToast.show{opacity:1;}
+   #lampToast.show{opacity:1;}
+   #linkToast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:60;
+     max-width:min(360px,calc(100vw - 32px));padding:9px 14px;border-radius:9px;
+     background:rgba(28,22,14,.96);color:#eafbe8;border:1px solid #6d5a34;
+     font:13px var(--sans);opacity:0;pointer-events:none;transition:opacity .22s ease;
+     box-shadow:0 10px 30px -8px rgba(0,0,0,.6);text-align:center;}
+   #linkToast.show{opacity:1;}
   /* ---- the wooden signpost IS the clickable target ---- */
   .spot .sign{
     position:absolute;
@@ -484,7 +490,7 @@
     pointer-events:auto;
   }
   .ctrl{
-    width:42px;height:42px;border:none;border-radius:12px;
+     width:44px;height:44px;border:none;border-radius:12px;
     background:rgba(255,253,249,.92);
     color:var(--sage-deep);
     font-size:20px;cursor:pointer;
@@ -492,8 +498,17 @@
     box-shadow:0 4px 16px -6px rgba(0,0,0,.4);
     transition:background .15s var(--ease),transform .1s var(--ease);
   }
-  .ctrl:hover{background:#fff;}
-  .ctrl:active{transform:scale(.94);}
+   .ctrl:hover{background:#fff;}
+   .ctrl:active{transform:scale(.94);}
+   .map-settings{position:fixed;right:76px;bottom:20px;z-index:18;width:236px;padding:8px;
+     border:1px solid rgba(104,79,43,.24);border-radius:14px;background:rgba(255,253,249,.97);
+     box-shadow:0 18px 42px -16px rgba(0,0,0,.5);}
+   .map-settings[hidden]{display:none;}
+   .map-settings h2{padding:8px 10px 6px;font:700 16px var(--serif);color:var(--ink);}
+   .map-setting{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:44px;
+     padding:8px 10px;border:0;border-radius:9px;background:transparent;color:var(--ink);font:700 13px var(--sans);cursor:pointer;text-align:left;}
+   .map-setting:hover,.map-setting:focus-visible{background:#f0e6d5;outline:none;}
+   .map-setting .setting-value{color:var(--sage-deep);font-size:12px;}
 
   .hint{
     position:absolute;left:50%;bottom:22px;transform:translateX(-50%);
@@ -552,7 +567,7 @@
   .panel-head p{font-size:13px;opacity:.92;margin-top:6px;max-width:44ch;line-height:1.5;}
   .panel-close{
     position:absolute;top:14px;right:14px;
-    width:32px;height:32px;border:none;border-radius:50%;
+     width:44px;height:44px;border:none;border-radius:50%;
     background:rgba(255,255,255,.22);color:#fff;
     font-size:18px;cursor:pointer;line-height:1;
   }
@@ -588,8 +603,13 @@
     .spot .sign .post::after{width:10px;height:2.5px;}
     .spot.mini .sign .plank{font-size:6px;padding:2.5px 5px;max-width:74px;}
     .spot.mini .sign .post{height:14px;width:3px;}
+    .spot .sign{min-width:44px;min-height:44px;justify-content:center;}
     .titlecard{top:14px;left:14px;max-width:56vw;}
     .home{top:14px;right:14px;}
+    .controls{right:14px;bottom:14px;display:grid;grid-template-columns:repeat(2,44px);gap:6px;}
+    .map-settings{right:14px;bottom:116px;width:min(260px,calc(100vw - 28px));}
+    .hint{display:none;}
+    #lampEditBar{display:none;}
   }
 
   /* ---------- storybook sky: drifting clouds, only when zoomed all the way out ----------
@@ -632,8 +652,9 @@
      BELOW the signs (z-index:7; .spot is 8). pointer-events:none so it never eats a click.
      Everything is sized in % of the world so it stays anchored on the painting at any zoom.
      Elements are deliberately bold + opaque enough to read against the busy illustration. */
-  #ambient{position:absolute;inset:0;pointer-events:none;z-index:7;overflow:hidden;border-radius:5px;}
-  #ambient > *{position:absolute;will-change:transform,opacity;}
+   #ambient{position:absolute;inset:0;pointer-events:none;z-index:7;overflow:hidden;border-radius:5px;}
+   #ambient > *{position:absolute;will-change:transform,opacity;}
+   body.reading #ambient *,body.reading #sky .cloud,body.reading #seasonfx *{animation-play-state:paused;}
 
   /* ---- chimney smoke: every chimney on the map ---- */
   .smoke{width:1.4%;aspect-ratio:1;border-radius:50%;
@@ -1021,63 +1042,63 @@
 
     <!-- ============ LEFT PAGE — FARM → FOREST (x 0-50%) ============ -->
     <!-- HERO: big entrance sign at the farm lane → the farm website -->
-    <a class="spot entrance" href="https://trashpanda62.github.io/tapestry-game/"
+    <a class="spot entrance" href="https://trashpanda62.github.io/tapestry-game/" data-group="Farm"
         style="left:36.6%;top:24.8%;" data-tag="live"
        aria-label="Tapestry Acres — the farm">
       <span class="sign"><span class="plank"><img class="logo" src="assets/logo.png" alt=""><span class="big">Tapestry Acres</span></span><span class="post"></span></span>
     </a>
 
     <!-- Signage dashboard sign near the farmhouse → all property signs & flyers -->
-    <a class="spot mini" href="signage/"
+    <a class="spot mini" href="signage/" data-group="Farm"
         style="left:24.8%;top:66.4%;" data-tag="signs &amp; flyers"
        aria-label="Signage Dashboard — all farm signs & flyers">
       <span class="sign"><span class="plank">Signage &amp; Print<span class="sub">signs, flyers, ads</span></span><span class="post"></span></span>
     </a>
 
     <!-- Roadside entrance signboard (top-left) → Building Plans -->
-    <a class="spot" href="https://trashpanda62.github.io/plans/building-plans.html"
+    <a class="spot" href="https://trashpanda62.github.io/plans/building-plans.html" data-group="Farm"
        style="left:11.0%;top:6.5%;" data-tag="build plans"
        aria-label="Building Plans — DIY farm structures">
       <span class="sign"><span class="plank">Building Plans<span class="sub">DIY farm structures</span></span><span class="post"></span></span>
     </a>
 
     <!-- Roadside sign → Social plan -->
-    <a class="spot" href="https://trashpanda62.github.io/tapestry-area-map/social-plan.html"
+    <a class="spot" href="https://trashpanda62.github.io/tapestry-area-map/social-plan.html" data-group="Campaigns"
         style="left:23.6%;top:50.0%;" data-tag="roadside sign"
        aria-label="Social Media Posting Plan">
       <span class="sign"><span class="plank">Social Plan<span class="sub">roadside sign playbook</span></span><span class="post"></span></span>
     </a>
 
     <!-- Berry field → Raspberries -->
-    <a class="spot" href="https://trashpanda62.github.io/plans/tapestry-freeze-dried-raspberries.html"
+    <a class="spot" href="https://trashpanda62.github.io/plans/tapestry-freeze-dried-raspberries.html" data-group="Playbooks"
         style="left:41.1%;top:13.3%;" data-tag="playbook"
        aria-label="Freeze-Dried Raspberries Launch Playbook">
       <span class="sign"><span class="plank">Freeze-Dried Berries<span class="sub">product playbook</span></span><span class="post"></span></span>
     </a>
 
     <!-- Pasture → Hair contest -->
-    <a class="spot" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/"
+    <a class="spot" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/" data-group="Campaigns"
         style="left:13.0%;top:27.0%;" data-tag="live"
        aria-label="Best Hair Contest Viral Poll">
       <span class="sign"><span class="plank">Best Hair Contest<span class="sub live">vote live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Hair contest sub-doc: Posting kit (by the animals) -->
-    <a class="spot mini" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/kit.html"
+    <a class="spot mini" href="https://trashpanda62.github.io/tapestry-area-map/hair-poll/kit.html" data-group="Campaigns"
         style="left:25.0%;top:34.0%;" data-tag="for Dani"
        aria-label="Posting kit for Dani">
       <span class="sign"><span class="plank">Posting Kit<span class="sub">ready-to-post · for Dani</span></span><span class="post"></span></span>
     </a>
 
     <!-- Garden plot → Name the Herd admin -->
-    <a class="spot mini" href="https://steve-voice-pc.tailfbd25a.ts.net/herd/?admin=1"
+    <a class="spot mini" href="https://steve-voice-pc.tailfbd25a.ts.net/herd/?admin=1" data-group="Farm"
         style="left:6.0%;top:32.9%;" data-tag="owner admin"
        aria-label="Name the Herd — owner admin">
       <span class="sign"><span class="plank">Name the Herd<span class="sub">owner admin</span></span><span class="post"></span></span>
     </a>
 
     <!-- Farmhouse porch → live barnyard animal cams -->
-    <a class="spot" href="cameras/"
+    <a class="spot" href="cameras/" data-group="Farm"
         style="left:20.0%;top:18.0%;" data-tag="live"
        aria-label="Barnyard Cams — live animal cameras">
       <span class="sign"><span class="plank">Barnyard Cams<span class="sub live">live animal cams</span></span><span class="post"></span></span>
@@ -1085,28 +1106,28 @@
 
     <!-- ============ RIGHT PAGE — LIVINGSTON DOWNTOWN (x 50-100%) ============ -->
     <!-- Photo-studio storefront → Obscura Studio -->
-    <a class="spot" href="https://obscurastudio.design"
+    <a class="spot" href="https://obscurastudio.design" data-group="Ventures"
         style="left:60.5%;top:27.0%;" data-tag="live"
        aria-label="Obscura Studio photo suite">
       <span class="sign"><span class="plank">Obscura Studio<span class="sub live">photo studio · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Sign-shop storefront → Obscura Sites -->
-    <a class="spot" href="https://sites.obscurastudio.design"
+    <a class="spot" href="https://sites.obscurastudio.design" data-group="Ventures"
         style="left:95.6%;top:31.7%;" data-tag="live"
        aria-label="Obscura Sites website builder">
       <span class="sign"><span class="plank">Obscura Sites<span class="sub live">website builder · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Arcade storefront → browse -->
-    <a class="spot" href="https://arcade.retrogaming.win/"
+    <a class="spot" href="https://arcade.retrogaming.win/" data-group="Ventures"
         style="left:86.4%;top:15.2%;" data-tag="live"
        aria-label="Retro Arcade browse">
       <span class="sign"><span class="plank">Retro Arcade<span class="sub live">play in browser · live</span></span><span class="post"></span></span>
     </a>
 
     <!-- Records-office storefront → Family Tree -->
-    <a class="spot" href="https://trashpanda62.github.io/family-tree/"
+    <a class="spot" href="https://trashpanda62.github.io/family-tree/" data-group="Ventures"
         style="left:78.2%;top:46.5%;" data-tag="live"
        data-new aria-label="Family Tree Bloodlines game">
       <span class="sign"><span class="plank">Bloodlines<span class="sub live">family-tree game · live</span></span><span class="post"></span></span>
@@ -1114,21 +1135,21 @@
 
 
     <!-- Bookshop storefront → Books -->
-    <a class="spot" href="https://trashpanda62.github.io/book-library/"
+    <a class="spot" href="https://trashpanda62.github.io/book-library/" data-group="Ventures"
         style="left:59.9%;top:55.3%;" data-tag="live"
        data-new aria-label="Books Library">
       <span class="sign"><span class="plank">The Library<span class="sub live">ebooks &amp; reading</span></span><span class="post"></span></span>
     </a>
 
     <!-- Cinema/theater → Obscura Video (multi-link panel: AI Explainer + Dark Requiem) -->
-    <a class="spot" href="#video" data-panel="workshop"
+    <a class="spot" href="#video" data-panel="workshop" data-group="Ventures"
         style="left:89.5%;top:70.0%;" data-tag="video arm"
        aria-label="Obscura Video — the screening room">
       <span class="sign"><span class="plank">Obscura Video<span class="sub">AI Explainer + films</span></span><span class="post"></span></span>
     </a>
 
     <!-- Gym storefront → Show Prep -->
-    <a class="spot" href="https://trashpanda62.github.io/plans/show-prep-plan.html"
+    <a class="spot" href="https://trashpanda62.github.io/plans/show-prep-plan.html" data-group="Playbooks"
         style="left:67.9%;top:80.1%;" data-tag="playbook"
        aria-label="Show Prep plan">
       <span class="sign"><span class="plank">Show Prep<span class="sub">training + diet plan</span></span><span class="post"></span></span>
@@ -1158,14 +1179,19 @@
     <button class="ctrl" id="zin" aria-label="Zoom in">+</button>
     <button class="ctrl" id="zout" aria-label="Zoom out">−</button>
     <button class="ctrl" id="reset" aria-label="Recenter the map" style="font-size:17px;">⌂</button>
-    <button class="ctrl" id="daynight" aria-label="Toggle day and night" style="font-size:15px;">☾</button>
-    <button class="ctrl" id="season" aria-label="Change the season" style="font-size:15px;">✿</button>
-    <button class="ctrl" id="weather" aria-label="Weather: automatic" title="Weather: automatic" style="font-size:14px;">◌</button>
-    <button class="ctrl" id="replay" aria-label="Replay the flythrough" style="font-size:16px;">↻</button>
+    <button class="ctrl" id="mapSettingsBtn" aria-label="Open map settings" aria-expanded="false" aria-controls="mapSettings" style="font-size:17px;">⚙</button>
   </div>
   <div id="tip" role="tooltip" aria-hidden="true"><div class="tt"></div><div class="td"></div></div>
   <div class="hint" id="hint">Drag to roam → the village is east · scroll to zoom · click a sign to open it</div>
 </div>
+
+<section class="map-settings" id="mapSettings" aria-labelledby="mapSettingsTitle" hidden>
+  <h2 id="mapSettingsTitle">Map settings</h2>
+  <button class="map-setting" id="daynight" aria-label="Toggle day and night"><span>Light</span><span class="setting-value">Day</span></button>
+  <button class="map-setting" id="season" aria-label="Change the season"><span>Season</span><span class="setting-value">Automatic</span></button>
+  <button class="map-setting" id="weather" aria-label="Weather: automatic"><span>Weather</span><span class="setting-value">Automatic</span></button>
+  <button class="map-setting" id="replay" aria-label="Replay the opening animation"><span>Replay opener</span><span class="setting-value">↻</span></button>
+</section>
 
 <!-- user-facing streetlamp-glow editor: toggle → drag glows → Save (persists in this browser) -->
 <div id="lampEditBar">
@@ -1174,6 +1200,7 @@
   <button id="lampReset">Reset</button>
 </div>
 <div id="lampToast" role="status" aria-live="polite"></div>
+<div id="linkToast" role="status" aria-live="polite"></div>
 
 <button class="skip" id="skip" style="display:none;">Skip ↓</button>
 
@@ -1335,11 +1362,20 @@
   stage.addEventListener('pointercancel',clearPt);
 
   /* ---------- suppress click after a drag ---------- */
+  var linkToast=document.getElementById('linkToast'), linkToastTimer;
+  function showLinkToast(s){
+    linkToast.textContent='Opening '+(s.getAttribute('aria-label')||'this destination')+' in a new tab.';
+    linkToast.classList.add('show'); clearTimeout(linkToastTimer);
+    linkToastTimer=setTimeout(function(){linkToast.classList.remove('show');},2200);
+  }
   document.querySelectorAll('.spot').forEach(function(s){
     var href=s.getAttribute('href'), panel=s.getAttribute('data-panel');
     // every real sign opens its target in a NEW TAB (panel signs open the in-page panel instead)
     if(href && href!=='#' && !panel){ s.setAttribute('target','_blank'); s.setAttribute('rel','noopener'); }
-    s.addEventListener('click',function(e){ if(moved>8){e.preventDefault();} });
+    s.addEventListener('click',function(e){
+      if(moved>8){e.preventDefault(); return;}
+      if(href && href!=='#' && !panel)showLinkToast(s);
+    });
   });
 
   /* ---------- ADMIN sign-placement mode (?admin=1) ----------
@@ -1609,11 +1645,13 @@
   function openDrawer(){
     lastFocus=document.activeElement;
     drawer.classList.add('open'); drawerScrim.classList.add('open');
+    document.body.classList.add('reading');
     drawer.setAttribute('aria-hidden','false'); drawer.removeAttribute('inert'); placesBtn.setAttribute('aria-expanded','true');
     drawerClose.focus();
   }
   function closeDrawer(){
     drawer.classList.remove('open'); drawerScrim.classList.remove('open');
+    document.body.classList.remove('reading');
     drawer.setAttribute('aria-hidden','true'); drawer.setAttribute('inert',''); placesBtn.setAttribute('aria-expanded','false');
     if(lastFocus&&lastFocus.focus)lastFocus.focus();
   }
@@ -1650,7 +1688,7 @@
      touch past cover scale so there's real vertical pan headroom (cover scale alone can be
      too tight to scroll on wide desktops), then centre high (fy≈.20). clamp() keeps bounds. */
   function goFarmRead(){
-    scale=farmCoverScale();
+    scale=isPhone ? farmCoverScale() : Math.min(farmCoverScale(),1.7);
     tx=txFor(0.26,scale);
     /* pull the map DOWN to its very top plus the extra top headroom, so the whole top farm-
        sign row sits fully in view below the title chrome. clamp caps at my+topExtra. */
@@ -1732,6 +1770,7 @@
     timers.push(setTimeout(function(){ fadeHint(); }, 300));
     // hard-remove the overlay after its fade so it can never linger over the live map
     timers.push(setTimeout(function(){ bookVid.style.display='none'; try{openVid.pause();}catch(e){} }, 500));
+    if(isPhone){ timers.push(setTimeout(function(){ world.style.transition=''; world.classList.add('animate'); goFarmRead(); }, 550)); }
   }
   var timers=[];
   function endFly(){
@@ -1740,7 +1779,7 @@
     try{ openVid.pause(); }catch(e){}
     bookVid.classList.add('gone');
     world.style.transition='';
-    goWhole();                                 // land directly on the whole-book rest
+    goFarmRead();
     skipBtn.style.display='none';
     fadeHint();
     timers.push(setTimeout(function(){ bookVid.style.display='none'; }, 1100));
@@ -1759,17 +1798,14 @@
     sizeWorld();
     if(world.offsetWidth<2){ setTimeout(runBoot,60); return; }
     booted=true;
-    /* play the opening once per browsing session — click into a project and hit back →
-       straight to the map, no video. */
-    var admin=/[?&]admin=1\b/.test(location.search);
-    var seen; try{ seen=sessionStorage.getItem('ta_opened'); }catch(e){}
-    if(seen||admin){ endFly(); }   // admin: skip the opening, land straight on the map
-    else{
-      try{ sessionStorage.setItem('ta_opened','1'); }catch(e){}
-      flythrough();
-    }
+    /* The map is the first-run experience; the opener remains available from Replay. */
+    endFly();
   }
   window.addEventListener('resize',function(){ world.classList.remove('animate'); sizeWorld(); });
+  /* A browser Back navigation may restore this page from bfcache with the video frame
+     still painted. Always restore the usable map, never replay the opener. */
+  window.addEventListener('pageshow',function(e){ if(e.persisted) endFly(); });
+  window.addEventListener('pagehide',function(){ try{openVid.pause();}catch(e){} bookVid.classList.add('gone'); });
   if(farm.complete && farm.naturalWidth>0){ setTimeout(runBoot,0); }
   else { farm.addEventListener('load',runBoot); farm.addEventListener('error',runBoot); }
   window.addEventListener('load',runBoot);
@@ -1864,16 +1900,22 @@
   SIGNS.forEach(function(o){
     o.s.addEventListener('pointerenter',function(){ if(drag)return; var r=o.s.getBoundingClientRect(); showTip(o,r.left+r.width/2,r.top); });
     o.s.addEventListener('pointerleave',hideTip);
-    o.s.addEventListener('focus',function(){ var r=o.s.getBoundingClientRect(); showTip(o,r.left+r.width/2,r.top); },true);
+    o.s.addEventListener('focus',function(){ flyToSpot(o.s); var r=o.s.getBoundingClientRect(); showTip(o,r.left+r.width/2,r.top); },true);
     o.s.addEventListener('blur',hideTip,true);
   });
   stage.addEventListener('pointerdown',hideTip);
 
   /* ---- #5 day / night toggle ---- */
+  var mapSettings=document.getElementById('mapSettings'), mapSettingsBtn=document.getElementById('mapSettingsBtn');
+  function settingValue(button,value){ var valueEl=button.querySelector('.setting-value'); if(valueEl)valueEl.textContent=value; }
+  function closeMapSettings(){ mapSettings.hidden=true; mapSettingsBtn.setAttribute('aria-expanded','false'); }
+  mapSettingsBtn.addEventListener('click',function(){ var open=mapSettings.hidden; mapSettings.hidden=!open; mapSettingsBtn.setAttribute('aria-expanded',String(open)); });
+  document.addEventListener('click',function(e){ if(!mapSettings.hidden&&!mapSettings.contains(e.target)&&e.target!==mapSettingsBtn)closeMapSettings(); });
+
   var dnBtn=document.getElementById('daynight');
   function setNight(on){
     document.body.classList.toggle('night',on);
-    dnBtn.textContent=on?'☀':'☾';
+    settingValue(dnBtn,on?'Night':'Day');
     dnBtn.setAttribute('aria-label',on?'Switch to day':'Switch to night');
     try{ localStorage.setItem('ta_night', on?'1':'0'); }catch(e){}
   }
@@ -2011,9 +2053,9 @@
   }
    function setSeason(season,save){
      if(!season){ document.body.removeAttribute('data-season'); seasonFx.innerHTML=''; startLightning(false);
-       blossomsEl.innerHTML=''; firefliesEl.innerHTML=''; seasonBtn.textContent='✿'; return; }
+       blossomsEl.innerHTML=''; firefliesEl.innerHTML=''; settingValue(seasonBtn,'Automatic'); return; }
      document.body.setAttribute('data-season',season);
-     seasonBtn.textContent=seasonIcon[season]||'✿';
+     settingValue(seasonBtn,season.charAt(0).toUpperCase()+season.slice(1));
      seasonBtn.setAttribute('aria-label','Season: '+season);
      seasonBtn.title='Season: '+season;
      spawnSeasonFx(season);
@@ -2050,7 +2092,7 @@
    function setWeather(weather,mode){
      document.body.toggleAttribute('data-weather',weather!=='clear');
      if(weather!=='clear') document.body.setAttribute('data-weather',weather);
-     weatherBtn.textContent=weatherIcon[mode||weather]||weatherIcon[weather];
+     settingValue(weatherBtn,(mode==='auto'?'Automatic · ':'')+weather);
      var label='Weather: '+(mode==='auto'?'automatic ('+weather+')':weather);
      weatherBtn.setAttribute('aria-label',label); weatherBtn.title=label;
      spawnSeasonFx(document.body.getAttribute('data-season')||calendarSeason());
