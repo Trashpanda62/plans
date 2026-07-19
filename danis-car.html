@@ -51,9 +51,13 @@
   .sc-pill[aria-pressed="true"]{background:var(--sage-deep);border-color:var(--sage-deep);color:var(--card);}
   .sc-pill:focus-visible{outline:2px solid var(--clay);outline-offset:2px;}
   .sc-list{display:flex;flex-direction:column;gap:11px;list-style:none;margin:0;padding:0;}
-  .sc-card{display:grid;grid-template-columns:minmax(190px,.72fr) minmax(330px,1.28fr);gap:14px 22px;background:var(--card);
-    border:1px solid var(--line);border-radius:13px;padding:16px 18px;box-shadow:0 7px 24px -22px var(--ink);}
-  .sc-summary{display:grid;grid-template-columns:34px 48px 1fr;gap:8px;align-items:start;min-width:0;}
+  .sc-card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 18px;box-shadow:0 7px 24px -22px var(--ink);min-width:0;}
+  .sc-photos{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px;margin:-2px 0 10px;-webkit-overflow-scrolling:touch;}
+  .sc-photos img{height:clamp(140px,42vw,180px);width:auto;flex:0 0 auto;border-radius:9px;object-fit:cover;scroll-snap-align:start;background:var(--parchment);border:1px solid var(--line);}
+  .sc-credit{display:block;font-size:9.5px;color:var(--soft);opacity:.7;margin:2px 0 0;}
+  .sc-head{display:grid;grid-template-columns:34px 46px 1fr auto;gap:8px;align-items:center;width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:2px 0 10px;font:inherit;color:inherit;}
+  .sc-chev{color:var(--soft);transition:transform .2s;}.sc-card.open .sc-chev{transform:rotate(90deg);}
+  .sc-head:focus-visible{outline:2px solid var(--clay);outline-offset:3px;border-radius:8px;}
   .sc-rank{font:700 13px var(--sans);color:var(--soft);padding-top:11px;}
   .sc-score{display:flex;align-items:center;justify-content:center;width:46px;height:42px;border-radius:12px;color:var(--ink);
     font:800 20px/1 var(--sans);font-variant-numeric:tabular-nums;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink) 13%,transparent);}
@@ -72,17 +76,19 @@
   .sc-value{color:var(--soft);font:600 11px/1 var(--sans);font-variant-numeric:tabular-nums;text-align:right;}
   .sc-metric.sc-active{outline:1px solid var(--sage);outline-offset:3px;}
   .sc-metric.sc-active .sc-label,.sc-metric.sc-active .sc-value{color:var(--sage-deep);font-weight:800;}
-  .sc-specs{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid var(--line);padding-top:11px;}
-  .sc-spec{border:1px solid var(--line);border-radius:999px;background:var(--parchment);color:var(--soft);font-size:10.5px;padding:4px 9px;}
-  .sc-spec sup{font-size:8px;margin-left:2px;}
+  .sc-detail{max-height:0;overflow:hidden;transition:max-height .3s ease;}.sc-card.open .sc-detail{max-height:640px;}
+  .sc-detail-inner{padding:12px 2px 2px;border-top:1px solid var(--line);margin-top:10px;}
+  .sc-why{font-size:13px;color:var(--ink);opacity:.9;margin:0 0 8px;line-height:1.55;}.sc-cnote{font-size:12px;color:var(--soft);font-style:italic;margin:0 0 10px;}
+  .sc-specs2{display:grid;grid-template-columns:repeat(2,1fr);gap:4px 16px;font-size:12px;color:var(--soft);margin:0 0 12px;}.sc-specs2 b{color:var(--ink);font-weight:600;}
+  .sc-links{display:flex;flex-wrap:wrap;gap:8px;}.sc-links a{display:inline-flex;align-items:center;font-size:12.5px;font-weight:600;text-decoration:none;color:var(--sage-deep);background:var(--parchment);border:1px solid #e3d8c5;border-radius:999px;padding:7px 13px;}.sc-links a:hover{border-color:var(--sage);}.sc-links a.mfr{color:var(--clay-deep);}
   .sc-note{margin-bottom:30px;max-width:none;}
   @media(max-width:560px){
-    .sc-card{grid-template-columns:1fr;padding:15px;}
+    .sc-card{padding:15px;}
     .sc-metrics{grid-template-columns:1fr;}
-    .sc-summary{grid-template-columns:30px 48px minmax(0,1fr);}
-    .sc-specs{grid-column:1;}
+    .sc-head{grid-template-columns:30px 46px minmax(0,1fr) auto;}
+    .sc-specs2{grid-template-columns:1fr;}
   }
-  @media(prefers-reduced-motion:reduce){.sc-pill,.sc-fill{transition:none;}.sc-pill:hover{transform:none;}}
+  @media(prefers-reduced-motion:reduce){.sc-pill,.sc-fill,.sc-chev,.sc-detail{transition:none;}.sc-pill:hover{transform:none;}}
   footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--soft);}
   footer .mark{font-family:var(--serif);font-style:italic;color:var(--sage-deep);}
 </style>
@@ -104,20 +110,20 @@
     <p class="note sc-note">Scores blend published specs (cargo, seats, mpg) with review + reliability consensus (Consumer Reports, iSeeCars, JD Power). Cupholder counts marked ~ are estimates. Overall weights: reliability &amp; comfort 22% each, cargo &amp; seating 12% each, safety 10%, mpg 8%, value 8%, cupholders 6%.</p>
     <script>
       const CARS = [
-       {name:"Toyota Grand Highlander", group:"3-row comfort", price:"from $42,260", seats:"7–8", cup:"13", cupEst:false, cargo:"97.5", mpg:"24–34", overall:93,
-         s:{Reliability:90, Comfort:90, Cargo:100, Seating:100, Cupholders:100, MPG:88, Safety:92, Value:92}},
-       {name:"Toyota 4Runner", group:"boxy & rugged", price:"from $42,070", seats:"5 (7 opt)", cup:"~6", cupEst:true, cargo:"90.2", mpg:"20–23", overall:81,
-         s:{Reliability:96, Comfort:80, Cargo:86, Seating:78, Cupholders:53, MPG:60, Safety:82, Value:80}},
+       {name:"Toyota Grand Highlander", group:"3-row comfort", price:"from $42,260", seats:"7–8", cup:"13", cupEst:false, cargo:"97.5", mpg:"24–34", overall:93, pick:false,
+         key:"grandhighlander", cargoRear:"20.6 behind 3rd · 57.9 behind 2nd", s:{Reliability:90, Comfort:90, Cargo:100, Seating:100, Cupholders:100, MPG:88, Safety:92, Value:92}, why:"The roomiest option here by a mile: a big, genuinely usable third row, a quiet comfortable ride, and Toyota reliability at a mainstream price. Not a luxury badge, but Limited and Platinum trims get close, for thousands less than the MDX.", note:"Wins on sheer space, seats, cupholders (13!) and value. Hybrid and 362-hp Hybrid Max available.", mfr:"https://www.toyota.com/grandhighlander/", kbb:"https://www.kbb.com/toyota/grand-highlander/", photos:["https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/2024_Toyota_Grand_Highlander_XLE_AWD_in_Blueprint%2C_Front_Right%2C_09-10-2023.jpg/1280px-2024_Toyota_Grand_Highlander_XLE_AWD_in_Blueprint%2C_Front_Right%2C_09-10-2023.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2024_Toyota_Grand_Highlander_front_view.jpg/1280px-2024_Toyota_Grand_Highlander_front_view.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/24_Toyota_Grand_Highlander_XLE.jpg/1280px-24_Toyota_Grand_Highlander_XLE.jpg","https://upload.wikimedia.org/wikipedia/commons/b/bb/Toyota_Grand_Highlander_%28AS10%29_Washington_DC_Metro_Area%2C_USA.jpg"], credit:"Photos: Wikimedia Commons"},
+       {name:"Toyota 4Runner", group:"boxy & rugged", price:"from $42,070", seats:"5 (7 opt)", cup:"~6", cupEst:true, cargo:"90.2", mpg:"20–23", overall:81, pick:false,
+         key:"4runner", cargoRear:"44.8 behind 2nd", s:{Reliability:96, Comfort:80, Cargo:86, Seating:78, Cupholders:53, MPG:60, Safety:82, Value:80}, why:"The classic upright SUV shape, freshly redone for 2025 with a far nicer, more comfortable cabin, and Toyota's legendary go-forever reliability. The rugged pick that still coddles you.", note:"Highest reliability of the group. New 2025 generation; optional third row on SR5/Limited.", mfr:"https://www.toyota.com/4runner/", kbb:"https://www.kbb.com/toyota/4runner/", photos:["https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/25_Toyota_4Runner_SR5.jpg/1280px-25_Toyota_4Runner_SR5.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/25_Toyota_4Runner_TRD_Sport_LA.jpg/1280px-25_Toyota_4Runner_TRD_Sport_LA.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Toyota_4Runner_SR5_-_01.jpg/1280px-Toyota_4Runner_SR5_-_01.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Toyota_4Runner_SR5_-_02.jpg/1280px-Toyota_4Runner_SR5_-_02.jpg"], credit:"Photos: Wikimedia Commons"},
        {name:"Acura MDX", group:"3-row comfort", price:"~$52,000", seats:"7", cup:"10", cupEst:false, cargo:"71.4", mpg:"21", overall:80, pick:true,
-         s:{Reliability:85, Comfort:92, Cargo:52, Seating:88, Cupholders:80, MPG:62, Safety:92, Value:68}},
-       {name:"Honda Passport", group:"boxy & rugged", price:"~$46,000", seats:"5", cup:"10", cupEst:false, cargo:"83.8", mpg:"21", overall:80,
-         s:{Reliability:88, Comfort:84, Cargo:75, Seating:72, Cupholders:80, MPG:62, Safety:88, Value:74}},
-       {name:"Ford Bronco Sport", group:"boxy & rugged", price:"from $31,845", seats:"5", cup:"~4", cupEst:true, cargo:"65.2", mpg:"26", overall:69,
-         s:{Reliability:74, Comfort:80, Cargo:40, Seating:55, Cupholders:40, MPG:72, Safety:84, Value:90}},
-       {name:"Jeep Grand Cherokee", group:"boxy & rugged", price:"~$40,000", seats:"5 (7 in L)", cup:"~6", cupEst:true, cargo:"70.8", mpg:"22", overall:69,
-         s:{Reliability:60, Comfort:85, Cargo:51, Seating:66, Cupholders:53, MPG:66, Safety:82, Value:78}},
-       {name:"Ford Bronco", group:"boxy & rugged", price:"~$39,000", seats:"4–5", cup:"~4", cupEst:true, cargo:"77.6", mpg:"19", overall:65,
-         s:{Reliability:68, Comfort:72, Cargo:63, Seating:60, Cupholders:40, MPG:52, Safety:76, Value:72}},
+         key:"mdx", cargoRear:"16.3 behind 3rd · 39.1 behind 2nd", s:{Reliability:85, Comfort:92, Cargo:52, Seating:88, Cupholders:80, MPG:62, Safety:92, Value:68}, why:"A true 3-row with Honda-grade reliability and a comfortable, well-built cabin. Highest comfort score here, and your pick from the set.", note:"Your favorite. Best comfort + safety, but priciest and least cargo behind the third row.", mfr:"https://www.acura.com/mdx", kbb:"https://www.kbb.com/acura/mdx/", photos:["https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Acura_MDX_Advance_SH-AWD_%282024%29_%2853625374928%29.jpg/1280px-Acura_MDX_Advance_SH-AWD_%282024%29_%2853625374928%29.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/2022_Acura_MDX_Type_S.jpg/1280px-2022_Acura_MDX_Type_S.jpg"], credit:"Photos: Wikimedia Commons"},
+       {name:"Honda Passport", group:"boxy & rugged", price:"~$46,000", seats:"5", cup:"10", cupEst:false, cargo:"83.8", mpg:"21", overall:80, pick:false,
+         key:"passport", cargoRear:"44 behind rear", s:{Reliability:88, Comfort:84, Cargo:75, Seating:72, Cupholders:80, MPG:62, Safety:88, Value:74}, why:"The Acura's Honda cousin: same dependable bones, restyled upright and rugged (TrailSport) for 2026. Comfortable, roomy behind the rear seats, and the reliability you already trust.", note:"Two-row, so tons of cargo behind the seats. Basically an MDX that traded the third row for ruggedness.", mfr:"https://automobiles.honda.com/passport", kbb:"https://www.kbb.com/honda/passport/", photos:["https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/2026_Honda_Passport_RTL%2C_front_right%2C_06-07-2025.jpg/1280px-2026_Honda_Passport_RTL%2C_front_right%2C_06-07-2025.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/2026_Honda_Passport_Trailsport_Touring_in_Radiant_Red_Metallic_II%2C_front_right%2C_2025-06-11.jpg/1280px-2026_Honda_Passport_Trailsport_Touring_in_Radiant_Red_Metallic_II%2C_front_right%2C_2025-06-11.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/26_Honda_Passport_TrailSport.jpg/1280px-26_Honda_Passport_TrailSport.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Honda_Passport_TrailSport_Elite_%28front_three-quarter_view1%29_at_Osaka_Auto_Messe_2026.jpg/1280px-Honda_Passport_TrailSport_Elite_%28front_three-quarter_view1%29_at_Osaka_Auto_Messe_2026.jpg"], credit:"Photos: Wikimedia Commons"},
+       {name:"Ford Bronco Sport", group:"boxy & rugged", price:"from $31,845", seats:"5", cup:"~4", cupEst:true, cargo:"65.2", mpg:"26", overall:69, pick:false,
+         key:"broncosport", cargoRear:"32.5 behind rear", s:{Reliability:74, Comfort:80, Cargo:40, Seating:55, Cupholders:40, MPG:72, Safety:84, Value:90}, why:"Basically the Escape's size and easy, car-like ride wrapped in boxy Bronco styling. Upright, the most comfortable-to-live-with of the rugged bunch, and easiest on the budget.", note:"Closest to the 2010 Escape in size and feel. Best value and mpg; smallest cargo.", mfr:"https://www.ford.com/suvs/bronco-sport/", kbb:"https://www.kbb.com/ford/bronco-sport/", photos:["https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Ford_Bronco_Sport_001.jpg/1280px-Ford_Bronco_Sport_001.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Ford_Bronco_Sport_Badlands_1X7A0168.jpg/1280px-Ford_Bronco_Sport_Badlands_1X7A0168.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Ford_Bronco_Sport_Badlands_1X7A0384.jpg/1280px-Ford_Bronco_Sport_Badlands_1X7A0384.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Ford_Bronco_Sport_Badlands_1X7A0385.jpg/1280px-Ford_Bronco_Sport_Badlands_1X7A0385.jpg"], credit:"Photos: Wikimedia Commons"},
+       {name:"Jeep Grand Cherokee", group:"boxy & rugged", price:"~$40,000", seats:"5 (7 in L)", cup:"~6", cupEst:true, cargo:"70.8", mpg:"22", overall:69, pick:false,
+         key:"grandcherokee", cargoRear:"37.7 behind rear", s:{Reliability:60, Comfort:85, Cargo:51, Seating:66, Cupholders:53, MPG:66, Safety:82, Value:78}, why:"Upright Jeep looks with a genuinely plush, quiet interior in the Limited and Overland trims, far comfier than a Wrangler. The rugged badge without the harsh ride, though reliability is the weak spot.", note:"Very comfortable, but the lowest reliability score here. 4xe plug-in hybrid and 3-row L available.", mfr:"https://www.jeep.com/grand-cherokee.html", kbb:"https://www.kbb.com/jeep/grand-cherokee/", photos:["https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/2022_Jeep_Grand_Cherokee_4xe_Trailhawk.jpg/1280px-2022_Jeep_Grand_Cherokee_4xe_Trailhawk.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/2022_Jeep_Grand_Cherokee_L_Laredo_4x4%2C_front_right%2C_08-24-2022.jpg/1280px-2022_Jeep_Grand_Cherokee_L_Laredo_4x4%2C_front_right%2C_08-24-2022.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/2022_Jeep_Grand_Cherokee_L_Summit_Reserve_4x4_front.jpg/1280px-2022_Jeep_Grand_Cherokee_L_Summit_Reserve_4x4_front.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/2022_Jeep_Grand_Cherokee_L_Summit_Reserve_4x4_rear.jpg/1280px-2022_Jeep_Grand_Cherokee_L_Summit_Reserve_4x4_rear.jpg"], credit:"Photos: Wikimedia Commons"},
+       {name:"Ford Bronco", group:"boxy & rugged", price:"~$39,000", seats:"4–5", cup:"~4", cupEst:true, cargo:"77.6", mpg:"19", overall:65, pick:false,
+         key:"bronco", cargoRear:"35.6 behind rear", s:{Reliability:68, Comfort:72, Cargo:63, Seating:60, Cupholders:40, MPG:52, Safety:76, Value:72}, why:"The full boxy icon with a removable top and doors. For a comfortable daily driver, aim at the Outer Banks trim rather than the off-road Badlands or Sasquatch, which ride stiffer. Big presence, tons of character.", note:"Most character, roughest ride and thirstiest. Removable top/doors. Pick Outer Banks for comfort.", mfr:"https://www.ford.com/suvs/bronco/", kbb:"https://www.kbb.com/ford/bronco/", photos:["https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/2021_Ford_Bronco_%2851492635983%29.jpg/1280px-2021_Ford_Bronco_%2851492635983%29.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/2021_Ford_Bronco_Big_Bend%2C_Front_Left%2C_07-11-2021.jpg/1280px-2021_Ford_Bronco_Big_Bend%2C_Front_Left%2C_07-11-2021.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/2021_Ford_Bronco_Big_Bend%2C_Front_Right%2C_07-11-2021.jpg/1280px-2021_Ford_Bronco_Big_Bend%2C_Front_Right%2C_07-11-2021.jpg","https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/2021_Ford_Bronco_Big_Bend%2C_Rear_Right%2C_07-11-2021.jpg/1280px-2021_Ford_Bronco_Big_Bend%2C_Rear_Right%2C_07-11-2021.jpg"], credit:"Photos: Wikimedia Commons"},
       ];
       const METRICS = ["Reliability","Comfort","Cargo","Seating","Cupholders","MPG","Safety","Value"];
       const scSort = document.getElementById("sc-sort");
@@ -129,11 +135,19 @@
         [...scSort.children].forEach(button => button.setAttribute("aria-pressed", String(button.dataset.key === scKey)));
         const cars = CARS.map((car, index) => ({car, index})).sort((a, b) => scValue(b.car, scKey) - scValue(a.car, scKey) || a.index - b.index);
         scList.innerHTML = cars.map(({car}, index) => `<li class="sc-card">
-          <div class="sc-summary"><span class="sc-rank">#${index + 1}</span><span class="sc-score" style="background:${scColor(car.overall)}" aria-label="Overall score ${car.overall}">${car.overall}</span>
-            <div class="sc-identity"><span class="sc-name">${car.name}</span><span class="sc-tags"><span class="sc-tag">${car.group}</span>${car.pick ? '<span class="sc-tag sc-pick">★ your pick</span>' : ''}<span class="sc-price">${car.price}</span></span></div></div>
+          ${car.photos.length ? `<div class="sc-photos">${car.photos.map(url => `<img loading="lazy" src="${url}" alt="${car.name}">`).join("")}</div><span class="sc-credit">${car.credit}</span>` : ""}
+          <button class="sc-head" type="button" aria-expanded="false"><span class="sc-rank">#${index + 1}</span><span class="sc-score" style="background:${scColor(car.overall)}" aria-label="Overall score ${car.overall}">${car.overall}</span>
+            <span class="sc-identity"><span class="sc-name">${car.name}</span><span class="sc-tags"><span class="sc-tag">${car.group}</span>${car.pick ? '<span class="sc-tag sc-pick">★ your pick</span>' : ''}<span class="sc-price">${car.price}</span></span></span><span class="sc-chev" aria-hidden="true">▸</span></button>
           <div class="sc-metrics">${METRICS.map(metric => `<div class="sc-metric${scKey === metric ? ' sc-active' : ''}"><span class="sc-label">${metric}</span><span class="sc-track"><span class="sc-fill" style="background:${scColor(car.s[metric])}" data-width="${car.s[metric]}%"></span></span><span class="sc-value">${car.s[metric]}</span></div>`).join("")}</div>
-          <div class="sc-specs"><span class="sc-spec">🪑 ${car.seats} seats</span><span class="sc-spec">🥤 ${car.cup} cupholders${car.cupEst ? '<sup>*est</sup>' : ''}</span><span class="sc-spec">📦 ${car.cargo} cu ft</span><span class="sc-spec">⛽ ${car.mpg} mpg</span><span class="sc-spec">${car.price}</span></div>
+          <div class="sc-detail"><div class="sc-detail-inner"><p class="sc-why">${car.why}</p><p class="sc-cnote">${car.note}</p>
+            <div class="sc-specs2"><span><b>Seats:</b> ${car.seats}</span><span><b>Cupholders:</b> ${car.cup}${car.cupEst ? " (est.)" : ""}</span><span><b>Cargo max:</b> ${car.cargo} cu ft</span><span><b>Cargo by row:</b> ${car.cargoRear}</span><span><b>MPG:</b> ${car.mpg}</span><span><b>Price:</b> ${car.price}</span></div>
+            <div class="sc-links"><a class="mfr" href="${car.mfr}" target="_blank" rel="noopener">Official photos &amp; build ↗</a><a href="${car.kbb}" target="_blank" rel="noopener">Reviews &amp; photos ↗</a></div>
+          </div></div>
         </li>`).join("");
+        scList.querySelectorAll(".sc-head").forEach(head => head.addEventListener("click", () => {
+          const card = head.closest(".sc-card");
+          head.setAttribute("aria-expanded", String(card.classList.toggle("open")));
+        }));
         requestAnimationFrame(() => scList.querySelectorAll(".sc-fill").forEach(fill => { fill.style.width = fill.dataset.width; }));
       };
       ["Overall", ...METRICS].forEach(key => {
@@ -149,92 +163,6 @@
       scRender();
     </script>
   </section>
-
-  <h2 class="sh">Boxy &amp; rugged &mdash; Escape / Bronco / Jeep shape</h2>
-  <p class="sub-note">Upright, squared-off, go-anywhere styling like the old Escape, ordered comfort-first. (The Jeep Wrangler is the boxiest of all, but it rides the roughest, so it's not here &mdash; say the word if you want it.)</p>
-
-  <ul class="cards">
-
-    <li class="card pick">
-      <div class="chead"><span class="cname">Ford Bronco Sport</span><span class="tag">closest to the Escape</span><span class="price">from $31,845</span></div>
-      <p class="spec">Compact · 5-seat · AWD standard · ~25 city / 28 hwy mpg</p>
-      <p class="why">Basically the Escape's size and easy, car-like ride wrapped in boxy Bronco styling. Upright, roomy, and the most comfortable-to-live-with of the rugged bunch &mdash; and the easiest on the budget.</p>
-      <div class="links">
-        <a class="mfr" href="https://www.ford.com/suvs/bronco-sport/" target="_blank" rel="noopener">Official photos &amp; build &rarr;</a>
-        <a href="https://www.kbb.com/ford/bronco-sport/" target="_blank" rel="noopener">Reviews &amp; real photos &rarr;</a>
-      </div>
-    </li>
-
-    <li class="card pick">
-      <div class="chead"><span class="cname">Toyota 4Runner</span><span class="tag">boxy + bulletproof</span><span class="price">from $42,070</span></div>
-      <p class="spec">Midsize · 5&ndash;7 seat · 4WD available · all-new 2025 redesign</p>
-      <p class="why">The classic upright SUV shape, freshly redone for 2025 with a far nicer, more comfortable cabin, and Toyota's legendary go-forever reliability. The rugged pick that still coddles you.</p>
-      <div class="links">
-        <a class="mfr" href="https://www.toyota.com/4runner/" target="_blank" rel="noopener">Official photos &amp; build &rarr;</a>
-        <a href="https://www.kbb.com/toyota/4runner/" target="_blank" rel="noopener">Reviews &amp; real photos &rarr;</a>
-      </div>
-    </li>
-
-    <li class="card">
-      <div class="chead"><span class="cname">Ford Bronco</span><span class="tag">the one you named</span><span class="price">~$39k&ndash;50k</span></div>
-      <p class="spec">Midsize · 4-door · 4WD standard · removable top &amp; doors</p>
-      <p class="why">The full boxy icon. For a comfortable daily driver, aim at the <b>Outer Banks</b> trim (softer setup, nicer interior) rather than the off-road Badlands/Sasquatch, which ride stiffer. Big presence, tons of character.</p>
-      <div class="links">
-        <a class="mfr" href="https://www.ford.com/suvs/bronco/" target="_blank" rel="noopener">Official photos &amp; build &rarr;</a>
-        <a href="https://www.kbb.com/ford/bronco/" target="_blank" rel="noopener">Reviews &amp; real photos &rarr;</a>
-      </div>
-    </li>
-
-    <li class="card">
-      <div class="chead"><span class="cname">Jeep Grand Cherokee</span><span class="tag">the comfortable Jeep</span><span class="price">~$40k&ndash;55k</span></div>
-      <p class="spec">Midsize · 5-seat (L trim seats 6&ndash;7) · 4WD available</p>
-      <p class="why">Upright Jeep looks with a genuinely plush, quiet interior in the Limited/Overland trims &mdash; far comfier than a Wrangler. The rugged badge without the harsh ride.</p>
-      <div class="links">
-        <a class="mfr" href="https://www.jeep.com/grand-cherokee.html" target="_blank" rel="noopener">Official photos &amp; build &rarr;</a>
-        <a href="https://www.kbb.com/jeep/grand-cherokee/" target="_blank" rel="noopener">Reviews &amp; real photos &rarr;</a>
-      </div>
-    </li>
-
-    <li class="card pick">
-      <div class="chead"><span class="cname">Honda Passport</span><span class="tag">Honda reliability, rugged look</span><span class="price">~$46k&ndash;53k</span></div>
-      <p class="spec">Midsize · 5-seat · AWD available · redesigned for 2026, boxier &amp; more rugged</p>
-      <p class="why">Since you liked the Acura, this is its Honda cousin &mdash; same dependable bones, now restyled upright and rugged (TrailSport trim). Comfortable, roomy, and the reliability you already trust.</p>
-      <div class="links">
-        <a class="mfr" href="https://automobiles.honda.com/passport" target="_blank" rel="noopener">Official photos &amp; build &rarr;</a>
-        <a href="https://www.kbb.com/honda/passport/" target="_blank" rel="noopener">Reviews &amp; real photos &rarr;</a>
-      </div>
-    </li>
-
-  </ul>
-
-  <p class="note" style="margin-top:20px">Boxy <b>and</b> luxury, if the budget stretches past $50k: the <b>Lexus GX</b> (~$65k) is the plush, reliable, squared-off SUV &mdash; think 4Runner comfort with a luxury cabin. <a href="https://www.kbb.com/lexus/gx/" target="_blank" rel="noopener" style="color:var(--sage-deep);font-weight:600;">See the GX &rarr;</a></p>
-
-  <h2 class="sh">Roomy 3-row comfort</h2>
-  <p class="sub-note">The smoother, more car-like pair &mdash; both roomy, reliable, and easy to live with if a boxy SUV isn't the move.</p>
-
-  <ul class="cards">
-
-    <li class="card pick">
-      <div class="chead"><span class="cname">Acura MDX</span><span class="tag pickstar">★ your pick</span><span class="price">~$52,000</span></div>
-      <p class="why">A little bigger &mdash; a true 3-row if she ever wants the space &mdash; with Honda-grade reliability and a comfortable, well-built cabin. The practical pick if seats-for-more matters.</p>
-      <p class="spec">3-row · 6&ndash;7 seat · AWD available · ~19 city / 25 hwy mpg</p>
-      <div class="links">
-        <a class="mfr" href="https://www.acura.com/mdx" target="_blank" rel="noopener">Official photos &amp; build &rarr;</a>
-        <a href="https://www.kbb.com/acura/mdx/" target="_blank" rel="noopener">Reviews &amp; real photos &rarr;</a>
-      </div>
-    </li>
-
-    <li class="card">
-      <div class="chead"><span class="cname">Toyota Grand Highlander</span><span class="tag">most space + value</span><span class="price">from $42,260</span></div>
-      <p class="spec">Large · 3-row · 7&ndash;8 seat · AWD available · gas, hybrid, or 362-hp Hybrid Max ($45,610 hybrid)</p>
-      <p class="why">The roomiest option here by a mile: a big, genuinely usable third row, a quiet comfortable ride, and Toyota reliability at a mainstream price. Not a luxury badge, but Limited/Platinum trims get close &mdash; for several thousand less than the MDX. The value play if space matters most.</p>
-      <div class="links">
-        <a class="mfr" href="https://www.toyota.com/grandhighlander/" target="_blank" rel="noopener">Official photos &amp; build &rarr;</a>
-        <a href="https://www.kbb.com/toyota/grand-highlander/" target="_blank" rel="noopener">Reviews &amp; real photos &rarr;</a>
-      </div>
-    </li>
-
-  </ul>
 
   <footer><span class="mark">Dani's Car</span> · Phase-2 goal on the 2-Year Plan · prices are 2026 starting MSRP, for browsing</footer>
 </div>
