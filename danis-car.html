@@ -40,6 +40,10 @@
     color:var(--sage-deep);background:var(--parchment);border:1px solid #e3d8c5;border-radius:999px;padding:7px 13px;transition:background .15s,border-color .15s;}
   .links a:hover{background:#eae2d1;border-color:var(--sage);}
   .links a.mfr{color:var(--clay-deep);}
+  .sh{font-family:var(--serif);font-weight:700;font-size:clamp(19px,3.6vw,26px);color:var(--ink);margin:38px 0 3px;padding-top:22px;border-top:1px solid var(--line);letter-spacing:-.3px;}
+  .sh.first{border-top:none;padding-top:0;margin-top:28px;}
+  .sub-note{font-size:12.5px;color:var(--soft);margin:0 0 16px;max-width:64ch;}
+  .tag.pickstar{background:var(--sage);color:#fff;border-color:var(--sage);}
   footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--soft);}
   footer .mark{font-family:var(--serif);font-style:italic;color:var(--sage-deep);}
 </style>
@@ -51,8 +55,69 @@
     <p class="eyebrow">Dani's Car · Phase-2 reward</p>
     <h1>Dani's Car</h1>
   </header>
-  <p class="intro">A shortlist for Dani &mdash; luxury midsize SUVs, picked for <b>comfort first</b> and reliability close behind, all landing right around the <b>~$50k</b> line the plan sets aside once the debt is cleared. Tap the links on any card to browse real photos and build one out.</p>
-  <p class="note">These four lead the class for a quiet, plush ride you don't get tired in, and they hold their value and stay out of the shop. The German options (BMW X3, Audi Q5, Mercedes GLC) drive nicely but rank lower on long-term reliability, so they're left off on purpose &mdash; say the word if you want them added.</p>
+  <p class="intro">A shortlist for Dani, comfort first, around the <b>~$50k</b> line the plan sets aside once the debt is cleared. Two directions: the <b>boxy, rugged shape</b> you like (the 2010 Escape / Bronco / Jeep look), and sleeker luxury crossovers. Tap the links on any card to browse real photos and build one out.</p>
+
+  <h2 class="sh first">Boxy &amp; rugged &mdash; Escape / Bronco / Jeep shape</h2>
+  <p class="sub-note">Upright, squared-off, go-anywhere styling like the old Escape, ordered comfort-first. (The Jeep Wrangler is the boxiest of all, but it rides the roughest, so it's not here &mdash; say the word if you want it.)</p>
+
+  <ul class="cards">
+
+    <li class="card pick">
+      <div class="chead"><span class="cname">Ford Bronco Sport</span><span class="tag">closest to the Escape</span><span class="price">from $31,845</span></div>
+      <p class="spec">Compact · 5-seat · AWD standard · ~25 city / 28 hwy mpg</p>
+      <p class="why">Basically the Escape's size and easy, car-like ride wrapped in boxy Bronco styling. Upright, roomy, and the most comfortable-to-live-with of the rugged bunch &mdash; and the easiest on the budget.</p>
+      <div class="links">
+        <a class="mfr" href="https://www.ford.com/suvs/bronco-sport/" target="_blank" rel="noopener">Official photos &amp; build &rarr;</a>
+        <a href="https://www.kbb.com/ford/bronco-sport/" target="_blank" rel="noopener">Reviews &amp; real photos &rarr;</a>
+      </div>
+    </li>
+
+    <li class="card pick">
+      <div class="chead"><span class="cname">Toyota 4Runner</span><span class="tag">boxy + bulletproof</span><span class="price">from $42,070</span></div>
+      <p class="spec">Midsize · 5&ndash;7 seat · 4WD available · all-new 2025 redesign</p>
+      <p class="why">The classic upright SUV shape, freshly redone for 2025 with a far nicer, more comfortable cabin, and Toyota's legendary go-forever reliability. The rugged pick that still coddles you.</p>
+      <div class="links">
+        <a class="mfr" href="https://www.toyota.com/4runner/" target="_blank" rel="noopener">Official photos &amp; build &rarr;</a>
+        <a href="https://www.kbb.com/toyota/4runner/" target="_blank" rel="noopener">Reviews &amp; real photos &rarr;</a>
+      </div>
+    </li>
+
+    <li class="card">
+      <div class="chead"><span class="cname">Ford Bronco</span><span class="tag">the one you named</span><span class="price">~$39k&ndash;50k</span></div>
+      <p class="spec">Midsize · 4-door · 4WD standard · removable top &amp; doors</p>
+      <p class="why">The full boxy icon. For a comfortable daily driver, aim at the <b>Outer Banks</b> trim (softer setup, nicer interior) rather than the off-road Badlands/Sasquatch, which ride stiffer. Big presence, tons of character.</p>
+      <div class="links">
+        <a class="mfr" href="https://www.ford.com/suvs/bronco/" target="_blank" rel="noopener">Official photos &amp; build &rarr;</a>
+        <a href="https://www.kbb.com/ford/bronco/" target="_blank" rel="noopener">Reviews &amp; real photos &rarr;</a>
+      </div>
+    </li>
+
+    <li class="card">
+      <div class="chead"><span class="cname">Jeep Grand Cherokee</span><span class="tag">the comfortable Jeep</span><span class="price">~$40k&ndash;55k</span></div>
+      <p class="spec">Midsize · 5-seat (L trim seats 6&ndash;7) · 4WD available</p>
+      <p class="why">Upright Jeep looks with a genuinely plush, quiet interior in the Limited/Overland trims &mdash; far comfier than a Wrangler. The rugged badge without the harsh ride.</p>
+      <div class="links">
+        <a class="mfr" href="https://www.jeep.com/grand-cherokee.html" target="_blank" rel="noopener">Official photos &amp; build &rarr;</a>
+        <a href="https://www.kbb.com/jeep/grand-cherokee/" target="_blank" rel="noopener">Reviews &amp; real photos &rarr;</a>
+      </div>
+    </li>
+
+    <li class="card pick">
+      <div class="chead"><span class="cname">Honda Passport</span><span class="tag">Honda reliability, rugged look</span><span class="price">~$46k&ndash;53k</span></div>
+      <p class="spec">Midsize · 5-seat · AWD available · redesigned for 2026, boxier &amp; more rugged</p>
+      <p class="why">Since you liked the Acura, this is its Honda cousin &mdash; same dependable bones, now restyled upright and rugged (TrailSport trim). Comfortable, roomy, and the reliability you already trust.</p>
+      <div class="links">
+        <a class="mfr" href="https://automobiles.honda.com/passport" target="_blank" rel="noopener">Official photos &amp; build &rarr;</a>
+        <a href="https://www.kbb.com/honda/passport/" target="_blank" rel="noopener">Reviews &amp; real photos &rarr;</a>
+      </div>
+    </li>
+
+  </ul>
+
+  <p class="note" style="margin-top:20px">Boxy <b>and</b> luxury, if the budget stretches past $50k: the <b>Lexus GX</b> (~$65k) is the plush, reliable, squared-off SUV &mdash; think 4Runner comfort with a luxury cabin. <a href="https://www.kbb.com/lexus/gx/" target="_blank" rel="noopener" style="color:var(--sage-deep);font-weight:600;">See the GX &rarr;</a></p>
+
+  <h2 class="sh">Sleeker luxury crossovers</h2>
+  <p class="sub-note">The smoother, more car-like luxury set. The German options (BMW X3, Audi Q5, Mercedes GLC) are left off on purpose &mdash; nice to drive, but lower on long-term reliability.</p>
 
   <ul class="cards">
 
@@ -96,8 +161,8 @@
       </div>
     </li>
 
-    <li class="card">
-      <div class="chead"><span class="cname">Acura MDX</span><span class="tag">roomier option</span><span class="price">~$52,000</span></div>
+    <li class="card pick">
+      <div class="chead"><span class="cname">Acura MDX</span><span class="tag pickstar">★ your pick</span><span class="price">~$52,000</span></div>
       <p class="why">A little bigger &mdash; a true 3-row if she ever wants the space &mdash; with Honda-grade reliability and a comfortable, well-built cabin. The practical pick if seats-for-more matters.</p>
       <p class="spec">3-row · 6&ndash;7 seat · AWD available · ~19 city / 25 hwy mpg</p>
       <div class="links">
