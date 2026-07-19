@@ -44,6 +44,45 @@
   .sh.first{border-top:none;padding-top:0;margin-top:28px;}
   .sub-note{font-size:12.5px;color:var(--soft);margin:0 0 16px;max-width:64ch;}
   .tag.pickstar{background:var(--sage);color:#fff;border-color:var(--sage);}
+  .sc-sort{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 14px;}
+  .sc-pill{appearance:none;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--soft);
+    cursor:pointer;font:600 11.5px var(--sans);padding:6px 11px;transition:background .15s,border-color .15s,color .15s,transform .15s;}
+  .sc-pill:hover{border-color:var(--sage);color:var(--sage-deep);transform:translateY(-1px);}
+  .sc-pill[aria-pressed="true"]{background:var(--sage-deep);border-color:var(--sage-deep);color:var(--card);}
+  .sc-pill:focus-visible{outline:2px solid var(--clay);outline-offset:2px;}
+  .sc-list{display:flex;flex-direction:column;gap:11px;list-style:none;margin:0;padding:0;}
+  .sc-card{display:grid;grid-template-columns:minmax(190px,.72fr) minmax(330px,1.28fr);gap:14px 22px;background:var(--card);
+    border:1px solid var(--line);border-radius:13px;padding:16px 18px;box-shadow:0 7px 24px -22px var(--ink);}
+  .sc-summary{display:grid;grid-template-columns:34px 48px 1fr;gap:8px;align-items:start;min-width:0;}
+  .sc-rank{font:700 13px var(--sans);color:var(--soft);padding-top:11px;}
+  .sc-score{display:flex;align-items:center;justify-content:center;width:46px;height:42px;border-radius:12px;color:var(--ink);
+    font:800 20px/1 var(--sans);font-variant-numeric:tabular-nums;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink) 13%,transparent);}
+  .sc-identity{min-width:0;padding-top:1px;}
+  .sc-name{display:block;font:700 17px/1.2 var(--serif);color:var(--ink);}
+  .sc-tags{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-top:7px;}
+  .sc-tag{border:1px solid var(--line);border-radius:999px;background:var(--parchment);color:var(--soft);font-size:9.5px;
+    font-weight:700;letter-spacing:.35px;padding:2px 7px;text-transform:uppercase;}
+  .sc-tag.sc-pick{background:var(--sage);border-color:var(--sage);color:var(--card);}
+  .sc-price{color:var(--clay-deep);font:700 11.5px var(--sans);white-space:nowrap;}
+  .sc-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 18px;}
+  .sc-metric{display:grid;grid-template-columns:68px minmax(50px,1fr) 25px;gap:7px;align-items:center;border-radius:6px;}
+  .sc-label{color:var(--soft);font-size:11px;line-height:1;}
+  .sc-track{height:9px;overflow:hidden;border-radius:5px;background:color-mix(in srgb,var(--parchment) 82%,var(--line));}
+  .sc-fill{display:block;height:100%;width:0;border-radius:inherit;transition:width .28s ease-out;}
+  .sc-value{color:var(--soft);font:600 11px/1 var(--sans);font-variant-numeric:tabular-nums;text-align:right;}
+  .sc-metric.sc-active{outline:1px solid var(--sage);outline-offset:3px;}
+  .sc-metric.sc-active .sc-label,.sc-metric.sc-active .sc-value{color:var(--sage-deep);font-weight:800;}
+  .sc-specs{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid var(--line);padding-top:11px;}
+  .sc-spec{border:1px solid var(--line);border-radius:999px;background:var(--parchment);color:var(--soft);font-size:10.5px;padding:4px 9px;}
+  .sc-spec sup{font-size:8px;margin-left:2px;}
+  .sc-note{margin-bottom:30px;max-width:none;}
+  @media(max-width:560px){
+    .sc-card{grid-template-columns:1fr;padding:15px;}
+    .sc-metrics{grid-template-columns:1fr;}
+    .sc-summary{grid-template-columns:30px 48px minmax(0,1fr);}
+    .sc-specs{grid-column:1;}
+  }
+  @media(prefers-reduced-motion:reduce){.sc-pill,.sc-fill{transition:none;}.sc-pill:hover{transform:none;}}
   footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--soft);}
   footer .mark{font-family:var(--serif);font-style:italic;color:var(--sage-deep);}
 </style>
@@ -57,7 +96,61 @@
   </header>
   <p class="intro">A shortlist for Dani, comfort first, around the <b>~$50k</b> line the plan sets aside once the debt is cleared. Two directions: the <b>boxy, rugged shape</b> you like (the 2010 Escape / Bronco / Jeep look), plus two roomy, reliable comfort picks (the Acura and the Grand Highlander). Tap the links on any card to browse real photos and build one out.</p>
 
-  <h2 class="sh first">Boxy &amp; rugged &mdash; Escape / Bronco / Jeep shape</h2>
+  <section class="sc-section" aria-labelledby="score-card-heading">
+    <h2 class="sh first" id="score-card-heading">Score card &mdash; how they stack up</h2>
+    <p class="sub-note">Scores out of 100, weighted toward what you told me matters most &mdash; comfort and reliability. Tap a metric to re-sort. Grand Highlander wins on sheer space; the Acura leads on comfort.</p>
+    <div class="sc-sort" id="sc-sort" aria-label="Sort score card by"></div>
+    <ol class="sc-list" id="sc-list" aria-live="polite"></ol>
+    <p class="note sc-note">Scores blend published specs (cargo, seats, mpg) with review + reliability consensus (Consumer Reports, iSeeCars, JD Power). Cupholder counts marked ~ are estimates. Overall weights: reliability &amp; comfort 22% each, cargo &amp; seating 12% each, safety 10%, mpg 8%, value 8%, cupholders 6%.</p>
+    <script>
+      const CARS = [
+       {name:"Toyota Grand Highlander", group:"3-row comfort", price:"from $42,260", seats:"7–8", cup:"13", cupEst:false, cargo:"97.5", mpg:"24–34", overall:93,
+         s:{Reliability:90, Comfort:90, Cargo:100, Seating:100, Cupholders:100, MPG:88, Safety:92, Value:92}},
+       {name:"Toyota 4Runner", group:"boxy & rugged", price:"from $42,070", seats:"5 (7 opt)", cup:"~6", cupEst:true, cargo:"90.2", mpg:"20–23", overall:81,
+         s:{Reliability:96, Comfort:80, Cargo:86, Seating:78, Cupholders:53, MPG:60, Safety:82, Value:80}},
+       {name:"Acura MDX", group:"3-row comfort", price:"~$52,000", seats:"7", cup:"10", cupEst:false, cargo:"71.4", mpg:"21", overall:80, pick:true,
+         s:{Reliability:85, Comfort:92, Cargo:52, Seating:88, Cupholders:80, MPG:62, Safety:92, Value:68}},
+       {name:"Honda Passport", group:"boxy & rugged", price:"~$46,000", seats:"5", cup:"10", cupEst:false, cargo:"83.8", mpg:"21", overall:80,
+         s:{Reliability:88, Comfort:84, Cargo:75, Seating:72, Cupholders:80, MPG:62, Safety:88, Value:74}},
+       {name:"Ford Bronco Sport", group:"boxy & rugged", price:"from $31,845", seats:"5", cup:"~4", cupEst:true, cargo:"65.2", mpg:"26", overall:69,
+         s:{Reliability:74, Comfort:80, Cargo:40, Seating:55, Cupholders:40, MPG:72, Safety:84, Value:90}},
+       {name:"Jeep Grand Cherokee", group:"boxy & rugged", price:"~$40,000", seats:"5 (7 in L)", cup:"~6", cupEst:true, cargo:"70.8", mpg:"22", overall:69,
+         s:{Reliability:60, Comfort:85, Cargo:51, Seating:66, Cupholders:53, MPG:66, Safety:82, Value:78}},
+       {name:"Ford Bronco", group:"boxy & rugged", price:"~$39,000", seats:"4–5", cup:"~4", cupEst:true, cargo:"77.6", mpg:"19", overall:65,
+         s:{Reliability:68, Comfort:72, Cargo:63, Seating:60, Cupholders:40, MPG:52, Safety:76, Value:72}},
+      ];
+      const METRICS = ["Reliability","Comfort","Cargo","Seating","Cupholders","MPG","Safety","Value"];
+      const scSort = document.getElementById("sc-sort");
+      const scList = document.getElementById("sc-list");
+      let scKey = "Overall";
+      const scColor = score => score >= 85 ? "#4f8a3f" : score >= 75 ? "#7a9a3f" : score >= 65 ? "#c9992f" : score >= 55 ? "#c47a33" : "#b8543a";
+      const scValue = (car, key) => key === "Overall" ? car.overall : car.s[key];
+      const scRender = () => {
+        [...scSort.children].forEach(button => button.setAttribute("aria-pressed", String(button.dataset.key === scKey)));
+        const cars = CARS.map((car, index) => ({car, index})).sort((a, b) => scValue(b.car, scKey) - scValue(a.car, scKey) || a.index - b.index);
+        scList.innerHTML = cars.map(({car}, index) => `<li class="sc-card">
+          <div class="sc-summary"><span class="sc-rank">#${index + 1}</span><span class="sc-score" style="background:${scColor(car.overall)}" aria-label="Overall score ${car.overall}">${car.overall}</span>
+            <div class="sc-identity"><span class="sc-name">${car.name}</span><span class="sc-tags"><span class="sc-tag">${car.group}</span>${car.pick ? '<span class="sc-tag sc-pick">★ your pick</span>' : ''}<span class="sc-price">${car.price}</span></span></div></div>
+          <div class="sc-metrics">${METRICS.map(metric => `<div class="sc-metric${scKey === metric ? ' sc-active' : ''}"><span class="sc-label">${metric}</span><span class="sc-track"><span class="sc-fill" style="background:${scColor(car.s[metric])}" data-width="${car.s[metric]}%"></span></span><span class="sc-value">${car.s[metric]}</span></div>`).join("")}</div>
+          <div class="sc-specs"><span class="sc-spec">🪑 ${car.seats} seats</span><span class="sc-spec">🥤 ${car.cup} cupholders${car.cupEst ? '<sup>*est</sup>' : ''}</span><span class="sc-spec">📦 ${car.cargo} cu ft</span><span class="sc-spec">⛽ ${car.mpg} mpg</span><span class="sc-spec">${car.price}</span></div>
+        </li>`).join("");
+        requestAnimationFrame(() => scList.querySelectorAll(".sc-fill").forEach(fill => { fill.style.width = fill.dataset.width; }));
+      };
+      ["Overall", ...METRICS].forEach(key => {
+        const button = document.createElement("button");
+        button.className = "sc-pill";
+        button.type = "button";
+        button.dataset.key = key;
+        button.textContent = key;
+        button.setAttribute("aria-pressed", String(key === scKey));
+        button.addEventListener("click", () => { scKey = key; scRender(); });
+        scSort.appendChild(button);
+      });
+      scRender();
+    </script>
+  </section>
+
+  <h2 class="sh">Boxy &amp; rugged &mdash; Escape / Bronco / Jeep shape</h2>
   <p class="sub-note">Upright, squared-off, go-anywhere styling like the old Escape, ordered comfort-first. (The Jeep Wrangler is the boxiest of all, but it rides the roughest, so it's not here &mdash; say the word if you want it.)</p>
 
   <ul class="cards">
