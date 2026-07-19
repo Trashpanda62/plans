@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dani's Car — Luxury Midsize SUVs</title>
+<style>
+  :root{
+    --ink:#2b2620;--soft:#6b6258;--line:#d8cfc2;--sage:#7a8b5a;--sage-deep:#5f6f44;
+    --clay:#b9824f;--clay-deep:#9c6a3c;--parchment:#f3efe7;--ground:#faf8f3;--card:#fffdf9;
+    --serif:Georgia,"Palatino Linotype",Palatino,"Book Antiqua",serif;
+    --sans:"Segoe UI",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}html,body{margin:0;padding:0;}
+  body{font-family:var(--sans);color:var(--ink);background:var(--ground);line-height:1.5;}
+  a{color:inherit;}
+  .page{max-width:760px;margin:0 auto;padding:26px 28px 72px;}
+  .home{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--soft);
+    text-decoration:none;padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--card);margin-bottom:28px;}
+  .home:hover{color:var(--sage-deep);border-color:var(--sage);}
+  header{padding-bottom:18px;border-bottom:1px solid var(--sage);margin-bottom:8px;}
+  .eyebrow{font-size:11px;letter-spacing:2.6px;text-transform:uppercase;color:var(--clay-deep);font-weight:700;margin:0 0 10px;}
+  h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,6vw,44px);line-height:1.04;margin:0;letter-spacing:-.5px;}
+  .intro{font-size:14.5px;color:var(--soft);margin:18px 0 4px;max-width:64ch;line-height:1.6;}
+  .note{font-size:13px;color:var(--soft);margin:14px 0 30px;max-width:64ch;background:var(--parchment);border:1px solid #e3d8c5;border-radius:10px;padding:12px 15px;}
+  .note b{color:var(--ink);}
+  .cards{display:flex;flex-direction:column;gap:18px;list-style:none;margin:0;padding:0;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;transition:border-color .15s,box-shadow .18s;}
+  .card:hover{border-color:#cbc0ae;box-shadow:0 6px 22px -14px rgba(70,55,35,.32);}
+  .card.pick{border-color:var(--sage);}
+  .chead{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;}
+  .cname{font-family:var(--serif);font-weight:700;font-size:clamp(19px,3.2vw,23px);color:var(--sage-deep);}
+  .price{font-family:var(--serif);font-weight:700;font-size:15px;color:var(--clay-deep);margin-left:auto;white-space:nowrap;}
+  .tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--clay-deep);
+    background:var(--parchment);border:1px solid #e3d8c5;border-radius:999px;padding:3px 9px;vertical-align:middle;}
+  .spec{font-size:11.5px;color:var(--soft);margin:9px 0 0;letter-spacing:.2px;}
+  .card p.why{font-size:13.5px;color:var(--ink);opacity:.85;margin:9px 0 0;line-height:1.55;}
+  .links{display:flex;flex-wrap:wrap;gap:9px;margin:15px 0 0;}
+  .links a{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;text-decoration:none;
+    color:var(--sage-deep);background:var(--parchment);border:1px solid #e3d8c5;border-radius:999px;padding:7px 13px;transition:background .15s,border-color .15s;}
+  .links a:hover{background:#eae2d1;border-color:var(--sage);}
+  .links a.mfr{color:var(--clay-deep);}
+  footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--soft);}
+  footer .mark{font-family:var(--serif);font-style:italic;color:var(--sage-deep);}
+</style>
+</head>
+<body>
+<div class="page">
+  <a class="home" href="https://trashpanda62.github.io/plans/"><span aria-hidden="true">←</span> The Map</a>
+  <header>
+    <p class="eyebrow">Dani's Car · Phase-2 reward</p>
+    <h1>Dani's Car</h1>
+  </header>
+  <p class="intro">A shortlist for Dani &mdash; luxury midsize SUVs, picked for <b>comfort first</b> and reliability close behind, all landing right around the <b>~$50k</b> line the plan sets aside once the debt is cleared. Tap the links on any card to browse real photos and build one out.</p>
+  <p class="note">These four lead the class for a quiet, plush ride you don't get tired in, and they hold their value and stay out of the shop. The German options (BMW X3, Audi Q5, Mercedes GLC) drive nicely but rank lower on long-term reliability, so they're left off on purpose &mdash; say the word if you want them added.</p>
+
+  <ul class="cards">
+
+    <li class="card pick">
+      <div class="chead"><span class="cname">Lincoln Nautilus</span><span class="tag">quietest cabin</span><span class="price">~$52,000</span></div>
+      <p class="spec">2-row · 5-seat · AWD available · ~21&ndash;29 city / 29&ndash;31 hwy mpg</p>
+      <p class="why">The most living-room-like of the bunch: a hushed, floaty ride, deeply cushioned seats, and a full-width panoramic dash display. If "most importantly comfortable" is the brief, this is the one to sit in first.</p>
+      <div class="links">
+        <a class="mfr" href="https://www.lincoln.com/luxury-suvs/nautilus/" target="_blank" rel="noopener">Official photos &amp; build &rarr;</a>
+        <a href="https://www.kbb.com/lincoln/nautilus/" target="_blank" rel="noopener">Reviews &amp; real photos &rarr;</a>
+      </div>
+    </li>
+
+    <li class="card pick">
+      <div class="chead"><span class="cname">Genesis GV70</span><span class="tag">most for the money</span><span class="price">from $50,480</span></div>
+      <p class="spec">2-row · 5-seat · AWD available · ~20 city / 28 hwy mpg · 10-yr/100k powertrain warranty</p>
+      <p class="why">Quilted-leather plush with nearly everything standard, and it consistently rates at the top for comfort and value. The long Genesis warranty is peace-of-mind on the reliability side.</p>
+      <div class="links">
+        <a class="mfr" href="https://www.genesis.com/us/en/gv70/gallery" target="_blank" rel="noopener">Official photos &amp; build &rarr;</a>
+        <a href="https://www.kbb.com/genesis/gv70/" target="_blank" rel="noopener">Reviews &amp; real photos &rarr;</a>
+      </div>
+    </li>
+
+    <li class="card pick">
+      <div class="chead"><span class="cname">Lexus RX 350</span><span class="tag">reliability benchmark</span><span class="price">from $51,975</span></div>
+      <p class="spec">2-row · 5-seat · AWD available · ~22 city / 29 hwy mpg</p>
+      <p class="why">The default answer for "comfortable and it'll never break." A smooth, quiet ride and Lexus's best-in-industry dependability record &mdash; the safe, resale-proof pick.</p>
+      <div class="links">
+        <a class="mfr" href="https://www.lexus.com/models/RX" target="_blank" rel="noopener">Official photos &amp; build &rarr;</a>
+        <a href="https://www.kbb.com/lexus/rx/" target="_blank" rel="noopener">Reviews &amp; real photos &rarr;</a>
+      </div>
+    </li>
+
+    <li class="card">
+      <div class="chead"><span class="cname">Volvo XC60</span><span class="tag">best seats</span><span class="price">~$48,000</span></div>
+      <p class="spec">2-row · 5-seat · AWD standard · ~26 mpg combined</p>
+      <p class="why">Widely rated the most comfortable seats in the class, a calm, uncluttered Scandinavian cabin, and top-tier safety. The most efficient of the group.</p>
+      <div class="links">
+        <a class="mfr" href="https://www.volvocars.com/us/cars/xc60/" target="_blank" rel="noopener">Official photos &amp; build &rarr;</a>
+        <a href="https://www.kbb.com/volvo/xc60/" target="_blank" rel="noopener">Reviews &amp; real photos &rarr;</a>
+      </div>
+    </li>
+
+    <li class="card">
+      <div class="chead"><span class="cname">Acura MDX</span><span class="tag">roomier option</span><span class="price">~$52,000</span></div>
+      <p class="why">A little bigger &mdash; a true 3-row if she ever wants the space &mdash; with Honda-grade reliability and a comfortable, well-built cabin. The practical pick if seats-for-more matters.</p>
+      <p class="spec">3-row · 6&ndash;7 seat · AWD available · ~19 city / 25 hwy mpg</p>
+      <div class="links">
+        <a class="mfr" href="https://www.acura.com/mdx" target="_blank" rel="noopener">Official photos &amp; build &rarr;</a>
+        <a href="https://www.kbb.com/acura/mdx/" target="_blank" rel="noopener">Reviews &amp; real photos &rarr;</a>
+      </div>
+    </li>
+
+  </ul>
+
+  <p class="note" style="margin-top:22px">Want to stretch a little? The <b>Genesis GV80</b> (~$60k+) is the step-up &mdash; bigger, even plusher, and the top-rated luxury midsize SUV overall. <a href="https://www.kbb.com/genesis/gv80/" target="_blank" rel="noopener" style="color:var(--sage-deep);font-weight:600;">See the GV80 &rarr;</a></p>
+
+  <footer><span class="mark">Dani's Car</span> · Phase-2 goal on the 2-Year Plan · prices are 2026 starting MSRP, for browsing</footer>
+</div>
+</body>
+</html>
