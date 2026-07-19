@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dani's Car — Luxury Midsize SUVs</title>
+<title>Best Mom Cars 2026: Family SUVs Ranked by Budget (New &amp; Used)</title>
+<meta name="description" content="The best family SUVs and mom cars for 2026, scored 0-100 and ranked by budget - new and used, from under $20k to $60k+. Reliability, comfort, cargo, safety and value compared.">
 <style>
   :root{
     --ink:#2b2620;--soft:#6b6258;--line:#d8cfc2;--sage:#7a8b5a;--sage-deep:#5f6f44;
@@ -45,6 +46,8 @@
   .sub-note{font-size:12.5px;color:var(--soft);margin:0 0 16px;max-width:64ch;}
   .tag.pickstar{background:var(--sage);color:#fff;border-color:var(--sage);}
   .sc-sort{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 14px;}
+  .sc-jump{position:sticky;top:0;z-index:4;display:flex;gap:7px;overflow-x:auto;margin:0 0 18px;padding:8px 0;background:var(--ground);}
+  .sc-jump .sc-pill{flex:0 0 auto;text-decoration:none;}
   .sc-pill{appearance:none;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--soft);
     cursor:pointer;font:600 11.5px var(--sans);padding:6px 11px;transition:background .15s,border-color .15s,color .15s,transform .15s;}
   .sc-pill:hover{border-color:var(--sage);color:var(--sage-deep);transform:translateY(-1px);}
@@ -103,16 +106,16 @@
 <div class="page">
   <a class="home" href="https://trashpanda62.github.io/plans/"><span aria-hidden="true">←</span> The Map</a>
   <header>
-    <p class="eyebrow">Dani's Car · Phase-2 reward</p>
-    <h1>Dani's Car</h1>
+    <p class="eyebrow">Family SUV Buyer's Guide · 2026</p>
+    <h1>Best Mom Cars 2026</h1>
   </header>
-  <p class="intro">A shortlist for Dani, comfort first, around the <b>~$50k</b> line the plan sets aside once the debt is cleared. Two directions: the <b>boxy, rugged shape</b> you like (the 2010 Escape / Bronco / Jeep look), plus two roomy, reliable comfort picks (the Acura and the Grand Highlander). Tap the links on any card to browse real photos and build one out.</p>
+  <p class="intro">The family SUVs worth your money in 2026, scored out of 100 and sorted into budget bands - new and used. Every pick is weighted toward what actually matters to a busy parent: reliability, comfort, space, safety, and value. Tap a metric to re-sort a band; tap any car's score for the full breakdown, specs, and photo links.</p>
 
   <section class="sc-section" aria-labelledby="score-card-heading">
     <h2 class="sh first" id="score-card-heading">Score card &mdash; how they stack up</h2>
-    <p class="sub-note">Scores out of 100, weighted toward what you told me matters most &mdash; comfort and reliability. Tap a metric to re-sort. Grand Highlander wins on sheer space; the Acura leads on comfort.</p>
+    <nav class="sc-jump" id="sc-jump" aria-label="Jump to budget band"></nav>
     <div class="sc-sort" id="sc-sort" aria-label="Sort score card by"></div>
-    <ol class="sc-list" id="sc-list" aria-live="polite"></ol>
+    <div id="sc-bands" aria-live="polite"></div>
     <p class="note sc-note">Scores blend published specs (cargo, seats, mpg) with review + reliability consensus (Consumer Reports, iSeeCars, JD Power). Cupholder counts marked ~ are estimates. Overall weights: reliability &amp; comfort 22% each, cargo &amp; seating 12% each, safety 10%, mpg 8%, value 8%, cupholders 6%.</p>
     <script>
       const CARS = [
@@ -121,7 +124,7 @@
        {name:"Toyota 4Runner", group:"boxy & rugged", price:"from $42,070", seats:"5 (7 opt)", cup:"~6", cupEst:true, cargo:"90.2", mpg:"20–23", overall:81, pick:false,
          key:"4runner", cargoRear:"44.8 behind 2nd", s:{Reliability:96, Comfort:80, Cargo:86, Seating:78, Cupholders:53, MPG:60, Safety:82, Value:80}, why:"The classic upright SUV shape, freshly redone for 2025 with a far nicer, more comfortable cabin, and Toyota's legendary go-forever reliability. The rugged pick that still coddles you.", note:"Highest reliability of the group. New 2025 generation; optional third row on SR5/Limited.", mfr:"https://www.toyota.com/4runner/", kbb:"https://www.kbb.com/toyota/4runner/", photos:["assets/cars/car-r00.jpg","assets/cars/car-r01.jpg","assets/cars/car-06.jpg","assets/cars/car-r02.jpg"], credit:"Photos: Wikimedia Commons"},
        {name:"Acura MDX", group:"3-row comfort", price:"~$52,000", seats:"7", cup:"10", cupEst:false, cargo:"71.4", mpg:"21", overall:80, pick:true,
-         key:"mdx", cargoRear:"16.3 behind 3rd · 39.1 behind 2nd", s:{Reliability:85, Comfort:92, Cargo:52, Seating:88, Cupholders:80, MPG:62, Safety:92, Value:68}, why:"A true 3-row with Honda-grade reliability and a comfortable, well-built cabin. Highest comfort score here, and your pick from the set.", note:"Your favorite. Best comfort + safety, but priciest and least cargo behind the third row.", mfr:"https://www.acura.com/mdx", kbb:"https://www.kbb.com/acura/mdx/", photos:["assets/cars/car-r03.jpg","assets/cars/car-09.jpg"], credit:"Photos: Wikimedia Commons"},
+         key:"mdx", cargoRear:"16.3 behind 3rd · 39.1 behind 2nd", s:{Reliability:85, Comfort:92, Cargo:52, Seating:88, Cupholders:80, MPG:62, Safety:92, Value:68}, why:"A true 3-row with Honda-grade reliability and a comfortable, well-built cabin. The comfort standout of the group if you can stretch to it.", note:"Best comfort + safety in the premium band, but priciest and least cargo behind the third row.", mfr:"https://www.acura.com/mdx", kbb:"https://www.kbb.com/acura/mdx/", photos:["assets/cars/car-r03.jpg","assets/cars/car-09.jpg"], credit:"Photos: Wikimedia Commons"},
        {name:"Honda Passport", group:"boxy & rugged", price:"~$46,000", seats:"5", cup:"10", cupEst:false, cargo:"83.8", mpg:"21", overall:80, pick:false,
          key:"passport", cargoRear:"44 behind rear", s:{Reliability:88, Comfort:84, Cargo:75, Seating:72, Cupholders:80, MPG:62, Safety:88, Value:74}, why:"The Acura's Honda cousin: same dependable bones, restyled upright and rugged (TrailSport) for 2026. Comfortable, roomy behind the rear seats, and the reliability you already trust.", note:"Two-row, so tons of cargo behind the seats. Basically an MDX that traded the third row for ruggedness.", mfr:"https://automobiles.honda.com/passport", kbb:"https://www.kbb.com/honda/passport/", photos:["assets/cars/car-r04.jpg","assets/cars/car-r05.jpg","assets/cars/car-12.jpg","assets/cars/car-r06.jpg","assets/cars/car-14.jpg"], credit:"Photos: Wikimedia Commons"},
        {name:"Ford Bronco Sport", group:"boxy & rugged", price:"from $31,845", seats:"5", cup:"~4", cupEst:true, cargo:"65.2", mpg:"26", overall:69, pick:false,
@@ -131,30 +134,59 @@
        {name:"Ford Bronco", group:"boxy & rugged", price:"~$39,000", seats:"4–5", cup:"~4", cupEst:true, cargo:"77.6", mpg:"19", overall:65, pick:false,
          key:"bronco", cargoRear:"35.6 behind rear", s:{Reliability:68, Comfort:72, Cargo:63, Seating:60, Cupholders:40, MPG:52, Safety:76, Value:72}, why:"The full boxy icon with a removable top and doors. For a comfortable daily driver, aim at the Outer Banks trim rather than the off-road Badlands or Sasquatch, which ride stiffer. Big presence, tons of character.", note:"Most character, roughest ride and thirstiest. Removable top/doors. Pick Outer Banks for comfort.", mfr:"https://www.ford.com/suvs/bronco/", kbb:"https://www.kbb.com/ford/bronco/", photos:["assets/cars/car-24.jpg","assets/cars/car-25.jpg","assets/cars/car-r12.jpg","assets/cars/car-27.jpg","assets/cars/car-r13.jpg"], credit:"Photos: Wikimedia Commons"},
       ];
+      const NEW_CARS = [
+        {key:"crv",band:"new-budget",name:"Honda CR-V",group:"compact",price:"from ~$31,000",seats:"5",cup:"~4",cupEst:true,cargo:"76.5",cargoRear:"39.3 behind rear",mpg:"28-40 hyb",overall:81,s:{Reliability:90,Comfort:84,Cargo:66,Seating:62,Cupholders:45,MPG:84,Safety:90,Value:90},why:"The default sensible mom car: bulletproof Honda reliability, easy to drive and park, roomy for a compact, and hybrid fuel economy. The safe, affordable all-rounder.",note:"America's benchmark compact SUV. Hybrid gets ~40 mpg.",mfr:"https://automobiles.honda.com/cr-v",kbb:"https://www.kbb.com/honda/cr-v/",photos:["assets/cars/m-crv-0.jpg","assets/cars/m-crv-1.jpg"]},
+        {key:"rav4",band:"new-budget",name:"Toyota RAV4",group:"compact",price:"from ~$30,000",seats:"5",cup:"~4",cupEst:true,cargo:"69.8",cargoRear:"37.6 behind rear",mpg:"27-39 hyb",overall:80,s:{Reliability:94,Comfort:78,Cargo:64,Seating:62,Cupholders:45,MPG:84,Safety:88,Value:88},why:"Toyota's compact best-seller: go-anywhere reliability, available hybrid and AWD, and rock-solid resale. A touch firmer than the CR-V but rugged and dependable.",note:"Top-selling SUV in America. Hybrid and Prime plug-in available.",mfr:"https://www.toyota.com/rav4/",kbb:"https://www.kbb.com/toyota/rav4/",photos:["assets/cars/m-rav4-0.jpg","assets/cars/m-rav4-1.jpg"]},
+        {key:"telluride",band:"new-mid",name:"Kia Telluride",group:"3-row",price:"from ~$37,000",seats:"7-8",cup:"~10",cupEst:true,cargo:"87.0",cargoRear:"21 behind 3rd / 46 behind 2nd",mpg:"21",overall:86,s:{Reliability:82,Comfort:90,Cargo:88,Seating:95,Cupholders:82,MPG:60,Safety:92,Value:92},why:"The mom-car darling: three roomy rows, a genuinely upscale cabin for the price, big cargo, and loads of family features. Perennially a top-rated family SUV.",note:"Award magnet. The value 3-row everyone cross-shops.",mfr:"https://www.kia.com/us/en/telluride",kbb:"https://www.kbb.com/kia/telluride/",photos:["assets/cars/m-telluride-0.jpg","assets/cars/m-telluride-1.jpg"]},
+        {key:"palisade",band:"new-mid",name:"Hyundai Palisade",group:"3-row",price:"from ~$37,000",seats:"7-8",cup:"~10",cupEst:true,cargo:"86.4",cargoRear:"18 behind 3rd / 45.8 behind 2nd",mpg:"21",overall:85,s:{Reliability:82,Comfort:90,Cargo:86,Seating:92,Cupholders:80,MPG:60,Safety:92,Value:90},why:"The Telluride's corporate twin: the same plush 3-row space and value with softer styling, plus Hyundai's long warranty for reliability peace-of-mind.",note:"Cross-shop with the Telluride; pick on styling + deal.",mfr:"https://www.hyundaiusa.com/us/en/vehicles/palisade",kbb:"https://www.kbb.com/hyundai/palisade/",photos:["assets/cars/m-palisade-0.jpg","assets/cars/m-palisade-1.jpg"]},
+        {key:"pilot",band:"new-mid",name:"Honda Pilot",group:"3-row",price:"from ~$40,000",seats:"8",cup:"~14",cupEst:true,cargo:"87.0",cargoRear:"22.4 behind 3rd / 48.5 behind 2nd",mpg:"22",overall:83,s:{Reliability:86,Comfort:84,Cargo:90,Seating:90,Cupholders:82,MPG:60,Safety:90,Value:82},why:"Honda's big 3-row: a huge, practical 8-seat hauler with a removable middle seat and Honda dependability. The minivan alternative for moms who won't do a van.",note:"Roomiest of the Honda family SUVs; TrailSport adds ruggedness.",mfr:"https://automobiles.honda.com/pilot",kbb:"https://www.kbb.com/honda/pilot/",photos:["assets/cars/m-pilot-0.jpg","assets/cars/m-pilot-1.jpg"]},
+        {key:"lexustx",band:"new-premium",name:"Lexus TX",group:"luxury 3-row",price:"from ~$55,000",seats:"6-7",cup:"~8",cupEst:true,cargo:"87.1",cargoRear:"20.2 behind 3rd / 57 behind 2nd",mpg:"21-30 hyb",overall:86,s:{Reliability:90,Comfort:92,Cargo:84,Seating:90,Cupholders:78,MPG:78,Safety:92,Value:74},why:"Lexus's new big 3-row: quiet, plush, Toyota-grade reliability and a genuinely usable third row, with hybrid options. The premium family hauler that stays out of the shop.",note:"The luxury 3-row reliability pick; hybrid + 400h available.",mfr:"https://www.lexus.com/models/TX",kbb:"https://www.kbb.com/lexus/tx/",photos:["assets/cars/m-lexustx-0.jpg"]},
+        {key:"gv80",band:"new-premium",name:"Genesis GV80",group:"luxury 2/3-row",price:"from ~$60,000",seats:"5-7",cup:"~6",cupEst:true,cargo:"84.0",cargoRear:"34 behind rear",mpg:"21",overall:80,s:{Reliability:84,Comfort:94,Cargo:60,Seating:76,Cupholders:70,MPG:58,Safety:94,Value:72},why:"Top-rated luxury family SUV: a gorgeous, ultra-comfortable cabin loaded with features and strong safety, at real value versus the German rivals. Optional third row.",note:"Highest comfort in the roster; the value-luxury flex.",mfr:"https://www.genesis.com/us/en/gv80",kbb:"https://www.kbb.com/genesis/gv80/",photos:["assets/cars/m-gv80-0.jpg","assets/cars/m-gv80-1.jpg"]}
+      ];
+      const used = (key,band,name,group,price,overall,s,why,note,mfr,kbb,photos) => ({key,band,name,group,price,seats:"",cup:"",cupEst:false,cargo:"",cargoRear:"",mpg:"",overall,s,why,note,mfr,kbb,photos,used:true});
+      const USED_CARS = [
+        used("u-crv","used-under20","Honda CR-V","used - 2018-2020","~$16k-21k",84,{Reliability:90,Comfort:80,Cargo:64,Seating:60,Cupholders:45,MPG:78,Safety:86,Value:98},"A reliable used compact that barely depreciates on quality. The smart-money first mom car.","Look for 2019+ (post oil-dilution fix on the 1.5T).","https://www.kbb.com/honda/cr-v/2019/","https://www.kbb.com/honda/cr-v/",["assets/cars/m-crv-0.jpg","assets/cars/m-crv-1.jpg"]),
+        used("u-rav4","used-under20","Toyota RAV4","used - 2017-2019","~$17k-22k",83,{Reliability:94,Comfort:76,Cargo:62,Seating:60,Cupholders:45,MPG:76,Safety:84,Value:97},"Toyota reliability at a used-compact price; holds value better than almost anything.","2019 is the current-gen redesign; earlier is the softer prior gen.","https://www.kbb.com/toyota/rav4/2019/","https://www.kbb.com/toyota/rav4/",["assets/cars/m-rav4-0.jpg","assets/cars/m-rav4-1.jpg"]),
+        used("u-pilot","used-under20","Honda Pilot","used - 2016-2018","~$16k-21k",80,{Reliability:84,Comfort:82,Cargo:88,Seating:88,Cupholders:80,MPG:58,Safety:84,Value:92},"A full 8-seat 3-row family hauler for compact-SUV money. Great value if you need the space.","Avoid the earliest 9-speed autos; 2019+ smoothed it out.","https://www.kbb.com/honda/pilot/2018/","https://www.kbb.com/honda/pilot/",["assets/cars/m-pilot-0.jpg","assets/cars/m-pilot-1.jpg"]),
+        used("u-telluride","used-20to30","Kia Telluride","used - 2020-2021","~$26k-31k",86,{Reliability:82,Comfort:90,Cargo:88,Seating:95,Cupholders:82,MPG:60,Safety:92,Value:90},"The most cross-shopped used 3-row; holds value hard because demand is huge. Worth the premium.","First-gen (2020+) is excellent; expect near-new money.","https://www.kbb.com/kia/telluride/2021/","https://www.kbb.com/kia/telluride/",["assets/cars/m-telluride-0.jpg","assets/cars/m-telluride-1.jpg"]),
+        used("u-palisade","used-20to30","Hyundai Palisade","used - 2020-2021","~$25k-30k",85,{Reliability:82,Comfort:90,Cargo:86,Seating:92,Cupholders:80,MPG:60,Safety:92,Value:90},"The Telluride's twin, usually a bit cheaper used, with warranty that may still transfer. Same plush 3-row space.","Check remaining 5yr/60k bumper-to-bumper coverage.","https://www.kbb.com/hyundai/palisade/2021/","https://www.kbb.com/hyundai/palisade/",["assets/cars/m-palisade-0.jpg","assets/cars/m-palisade-1.jpg"]),
+        used("u-pilot2","used-20to30","Honda Pilot","used - 2021-2022","~$28k-33k",83,{Reliability:86,Comfort:84,Cargo:90,Seating:90,Cupholders:80,MPG:60,Safety:90,Value:86},"Near-new prior-gen Pilot: huge, dependable, and a big discount off a new one.","2021+ has the improved 9-speed and updated tech.","https://www.kbb.com/honda/pilot/2022/","https://www.kbb.com/honda/pilot/",["assets/cars/m-pilot-1.jpg","assets/cars/m-pilot-0.jpg"]),
+        used("u-lexustx","used-30to45","Lexus TX","used - 2024","~$44k-50k",86,{Reliability:90,Comfort:92,Cargo:84,Seating:90,Cupholders:78,MPG:78,Safety:92,Value:80},"A lightly-used luxury 3-row with Lexus reliability, for a meaningful discount off sticker.","Brand-new nameplate (2024), so used stock is near-new.","https://www.kbb.com/lexus/tx/2024/","https://www.kbb.com/lexus/tx/",["assets/cars/m-lexustx-0.jpg"]),
+        used("u-gv80","used-30to45","Genesis GV80","used - 2022-2023","~$40k-48k",82,{Reliability:84,Comfort:94,Cargo:60,Seating:76,Cupholders:70,MPG:58,Safety:94,Value:84},"Big luxury depreciation works in your favor: a plush, feature-loaded GV80 for well under new.","Genesis warranty is generous and may still be active.","https://www.kbb.com/genesis/gv80/2023/","https://www.kbb.com/genesis/gv80/",["assets/cars/m-gv80-0.jpg","assets/cars/m-gv80-1.jpg"]),
+        used("u-telluride2","used-30to45","Kia Telluride","used - 2023","~$34k-40k",86,{Reliability:82,Comfort:90,Cargo:88,Seating:95,Cupholders:82,MPG:60,Safety:92,Value:88},"A near-new Telluride with the 2023 refresh, just under new pricing. The safe 3-row buy.","2023 got a styling + tech refresh; strong resale.","https://www.kbb.com/kia/telluride/2023/","https://www.kbb.com/kia/telluride/",["assets/cars/m-telluride-1.jpg","assets/cars/m-telluride-0.jpg"])
+      ];
+      const EXIST_BANDS = {grandhighlander:"new-mid","4runner":"new-mid",mdx:"new-premium",passport:"new-mid",broncosport:"new-budget",grandcherokee:"new-mid",bronco:"new-mid"};
+      const BANDS = [
+        {id:"new-budget",label:"New - Budget (under $35k)",blurb:"Reliable, easy-to-own family SUVs that won't break the bank."},{id:"new-mid",label:"New - Family Sweet-Spot ($35-50k)",blurb:"The heart of the mom-car market: roomy 3-rows and rugged crossovers."},{id:"new-premium",label:"New - Premium ($50k+)",blurb:"Luxury family haulers that still keep reliability and comfort first."},{id:"used-under20",label:"Used - Smart Buys (under $20k)",blurb:"Maximum reliability per dollar - the value mom cars."},{id:"used-20to30",label:"Used - Sweet-Spot ($20-30k)",blurb:"Near-new space and features for a real discount."},{id:"used-30to45",label:"Used - Near-New ($30-45k)",blurb:"A year or two old: luxury and big 3-rows well under sticker."}
+      ];
+      const ALL = CARS.map(c => ({...c, band: EXIST_BANDS[c.key] || "new-mid"})).concat(NEW_CARS, USED_CARS);
       const METRICS = ["Reliability","Comfort","Cargo","Seating","Cupholders","MPG","Safety","Value"];
       const scSort = document.getElementById("sc-sort");
-      const scList = document.getElementById("sc-list");
+      const scBands = document.getElementById("sc-bands");
+      const scJump = document.getElementById("sc-jump");
       let scKey = "Overall";
       const scColor = score => score >= 85 ? "#4f8a3f" : score >= 75 ? "#7a9a3f" : score >= 65 ? "#c9992f" : score >= 55 ? "#c47a33" : "#b8543a";
       const scValue = (car, key) => key === "Overall" ? car.overall : car.s[key];
       const scRender = () => {
         [...scSort.children].forEach(button => button.setAttribute("aria-pressed", String(button.dataset.key === scKey)));
-        const cars = CARS.map((car, index) => ({car, index})).sort((a, b) => scValue(b.car, scKey) - scValue(a.car, scKey) || a.index - b.index);
-        scList.innerHTML = cars.map(({car}, index) => `<li class="sc-card">
-          ${car.photos.length ? `<div class="sc-photowrap"><div class="sc-photos">${car.photos.map(url => `<img src="${url}" alt="${car.name}" decoding="async">`).join("")}</div><button class="sc-arrow sc-prev" aria-label="Previous photos" type="button">‹</button><button class="sc-arrow sc-next" aria-label="Next photos" type="button">›</button></div><span class="sc-credit">${car.credit}</span>` : ""}
+        scBands.innerHTML = BANDS.map((band, bandIndex) => {
+          const cars = ALL.map((car, index) => ({car, index})).filter(({car}) => car.band === band.id).sort((a, b) => scValue(b.car, scKey) - scValue(a.car, scKey) || a.index - b.index);
+          return `<section><h2 class="sh${bandIndex === 0 ? ' first' : ''}" id="${band.id}">${band.label}</h2><p class="sub-note">${band.blurb}</p><ol class="sc-list">${cars.map(({car}, index) => `<li class="sc-card">
+          ${car.photos.length ? `<div class="sc-photowrap"><div class="sc-photos">${car.photos.map(url => `<img src="${url}" alt="${car.name}" decoding="async">`).join("")}</div><button class="sc-arrow sc-prev" aria-label="Previous photos" type="button">‹</button><button class="sc-arrow sc-next" aria-label="Next photos" type="button">›</button></div>${car.credit ? `<span class="sc-credit">${car.credit}</span>` : ""}` : ""}
           <button class="sc-head" type="button" aria-expanded="false"><span class="sc-rank">#${index + 1}</span><span class="sc-score" style="background:${scColor(car.overall)}" aria-label="Overall score ${car.overall}">${car.overall}</span>
-            <span class="sc-identity"><span class="sc-name">${car.name}</span><span class="sc-tags"><span class="sc-tag">${car.group}</span>${car.pick ? '<span class="sc-tag sc-pick">★ your pick</span>' : ''}<span class="sc-price">${car.price}</span></span></span><span class="sc-chev" aria-hidden="true">▸</span></button>
+            <span class="sc-identity"><span class="sc-name">${car.name}</span><span class="sc-tags"><span class="sc-tag">${car.group}</span>${car.pick ? '<span class="sc-tag sc-pick">★ top pick</span>' : ''}<span class="sc-price">${car.price}</span></span></span><span class="sc-chev" aria-hidden="true">▸</span></button>
           <div class="sc-metrics">${METRICS.map(metric => `<div class="sc-metric${scKey === metric ? ' sc-active' : ''}"><span class="sc-label">${metric}</span><span class="sc-track"><span class="sc-fill" style="background:${scColor(car.s[metric])}" data-width="${car.s[metric]}%"></span></span><span class="sc-value">${car.s[metric]}</span></div>`).join("")}</div>
           <div class="sc-detail"><div class="sc-detail-inner"><p class="sc-why">${car.why}</p><p class="sc-cnote">${car.note}</p>
-            <div class="sc-specs2"><span><b>Seats:</b> ${car.seats}</span><span><b>Cupholders:</b> ${car.cup}${car.cupEst ? " (est.)" : ""}</span><span><b>Cargo max:</b> ${car.cargo} cu ft</span><span><b>Cargo by row:</b> ${car.cargoRear}</span><span><b>MPG:</b> ${car.mpg}</span><span><b>Price:</b> ${car.price}</span></div>
+            <div class="sc-specs2">${[["Seats",car.seats],["Cupholders",car.cup ? car.cup + (car.cupEst ? " (est.)" : "") : ""],["Cargo max",car.cargo ? car.cargo + " cu ft" : ""],["Cargo by row",car.cargoRear],["MPG",car.mpg],["Price",car.price]].filter(([,value]) => value).map(([label,value]) => `<span><b>${label}:</b> ${value}</span>`).join("")}</div>
             <div class="sc-links"><a class="mfr" href="${car.mfr}" target="_blank" rel="noopener">Official photos &amp; build ↗</a><a href="${car.kbb}" target="_blank" rel="noopener">Reviews &amp; photos ↗</a></div>
           </div></div>
-        </li>`).join("");
-        scList.querySelectorAll(".sc-head").forEach(head => head.addEventListener("click", () => {
+        </li>`).join("")}</ol></section>`;
+        }).join("");
+        scBands.querySelectorAll(".sc-head").forEach(head => head.addEventListener("click", () => {
           const card = head.closest(".sc-card");
           head.setAttribute("aria-expanded", String(card.classList.toggle("open")));
         }));
-        requestAnimationFrame(() => scList.querySelectorAll(".sc-fill").forEach(fill => { fill.style.width = fill.dataset.width; }));
+        requestAnimationFrame(() => scBands.querySelectorAll(".sc-fill").forEach(fill => { fill.style.width = fill.dataset.width; }));
       };
       ["Overall", ...METRICS].forEach(key => {
         const button = document.createElement("button");
@@ -166,18 +198,19 @@
         button.addEventListener("click", () => { scKey = key; scRender(); });
         scSort.appendChild(button);
       });
-      scList.addEventListener("click", event => {
+      scBands.addEventListener("click", event => {
         const arrow = event.target.closest(".sc-next, .sc-prev");
         if (!arrow) return;
         const photos = arrow.closest(".sc-photowrap").querySelector(".sc-photos");
         const direction = arrow.classList.contains("sc-next") ? 1 : -1;
         photos.scrollBy({left: direction * photos.clientWidth * 0.85});
       });
+      scJump.innerHTML = BANDS.map(band => `<a class="sc-pill" href="#${band.id}">${band.label}</a>`).join("");
       scRender();
     </script>
   </section>
 
-  <footer><span class="mark">Dani's Car</span> · Phase-2 goal on the 2-Year Plan · prices are 2026 starting MSRP, for browsing</footer>
+  <footer>Best Mom Cars 2026 · prices are approximate starting MSRP or used-market ranges, for browsing</footer>
 </div>
 </body>
 </html>
