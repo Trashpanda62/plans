@@ -74,6 +74,16 @@
   :root[data-style="memphis"]{--ground:#fbf6ec;--card:#ffffff;--ink:#232020;--line:#e6dccb;--soft:#5f5850;--sage:#00b3b3;--sage-deep:#e0402f;--clay:#e0402f;--clay-deep:#f5c518;--parchment:#f0e9db;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
   :root[data-style="vapor"]{--ground:#160e26;--card:#1f1533;--ink:#f0e6ff;--line:#33254f;--soft:#b0a0d0;--sage:#2de2e6;--sage-deep:#ff5edb;--clay:#ff5edb;--clay-deep:#ffb84a;--parchment:#24193a;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
   .sc-sort{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 14px;}
+  .sc-explain{margin:0 0 16px;border:1px solid var(--line);border-radius:11px;background:var(--parchment);overflow:hidden;}
+  .sc-explain>summary{cursor:pointer;list-style:none;padding:11px 15px;font:700 12.5px var(--sans);color:var(--ink);}
+  .sc-explain>summary::-webkit-details-marker{display:none;}
+  .sc-explain>summary::before{content:"\25B8 ";color:var(--soft);}
+  .sc-explain[open]>summary::before{content:"\25BE ";}
+  .sc-explain-in{padding:0 15px 12px;}
+  .sc-explain-in p{font-size:12.5px;color:var(--soft);margin:0 0 8px;line-height:1.55;}.sc-explain-in p:last-child{margin:0;}.sc-explain-in b{color:var(--ink);}
+  .sc-explain-in .sc-disc{font-style:italic;font-size:11.5px;}
+  .sc-key{display:inline-block;font-size:10.5px;font-weight:700;border-radius:999px;padding:2px 8px;margin:2px 4px 2px 0;color:#fff;white-space:nowrap;}
+  .sc-key.k1{background:#4f8a3f;}.sc-key.k2{background:#7a9a3f;}.sc-key.k3{background:#c9992f;}.sc-key.k4{background:#c47a33;}.sc-key.k5{background:#b8543a;}
   .sc-jump{position:sticky;top:0;z-index:4;display:flex;gap:7px;overflow-x:auto;margin:0 0 18px;padding:8px 0;background:var(--ground);}
   .sc-jump .sc-pill{flex:0 0 auto;text-decoration:none;}
   .sc-pill{appearance:none;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--soft);
@@ -116,6 +126,11 @@
   .sc-detail{max-height:0;overflow:hidden;transition:max-height .3s ease;}.sc-card.open .sc-detail{max-height:640px;}
   .sc-detail-inner{padding:12px 2px 2px;border-top:1px solid var(--line);margin-top:10px;}
   .sc-why{font-size:13px;color:var(--ink);opacity:.9;margin:0 0 8px;line-height:1.55;}.sc-cnote{font-size:12px;color:var(--soft);font-style:italic;margin:0 0 10px;}
+  .sc-rzhead{font:700 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin:2px 0 7px;}
+  .sc-rz{display:grid;grid-template-columns:70px 26px 1fr;gap:9px;align-items:center;margin:0 0 6px;}
+  .sc-rzm{font-size:11.5px;font-weight:600;color:var(--ink);}
+  .sc-rzn{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:20px;border-radius:6px;color:#fff;font:700 11px var(--sans);font-variant-numeric:tabular-nums;padding:0 4px;}
+  .sc-rzt{font-size:12px;color:var(--soft);line-height:1.4;}
   .sc-specs2{display:grid;grid-template-columns:repeat(2,1fr);gap:4px 16px;font-size:12px;color:var(--soft);margin:0 0 12px;}.sc-specs2 b{color:var(--ink);font-weight:600;}
   .sc-links{display:flex;flex-wrap:wrap;gap:8px;}.sc-links a{display:inline-flex;align-items:center;font-size:12.5px;font-weight:600;text-decoration:none;color:var(--sage-deep);background:var(--parchment);border:1px solid #e3d8c5;border-radius:999px;padding:7px 13px;}.sc-links a:hover{border-color:var(--sage);}.sc-links a.mfr{color:var(--clay-deep);}
   .sc-note{margin-bottom:30px;max-width:none;}
@@ -124,6 +139,7 @@
     .sc-metrics{grid-template-columns:1fr;}
     .sc-head{grid-template-columns:30px 46px minmax(0,1fr) auto;}
     .sc-specs2{grid-template-columns:1fr;}
+    .sc-rz{grid-template-columns:62px 24px 1fr;gap:7px;}
   }
   @media(prefers-reduced-motion:reduce){.sc-pill,.sc-fill,.sc-chev,.sc-detail{transition:none;}.sc-pill:hover{transform:none;}}
   footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--soft);}
@@ -176,6 +192,15 @@
 
   <section class="sc-section" aria-labelledby="score-card-heading">
     <h2 class="sh first" id="score-card-heading">Score card &mdash; how they stack up</h2>
+    <details class="sc-explain">
+      <summary>How the scores work</summary>
+      <div class="sc-explain-in">
+        <p>Every number is <b>0-100, higher is better</b>, graded against the other family SUVs in this guide - not the whole car market. A 78 here means "good for a family SUV," not 78%.</p>
+        <p><b>The bands:</b> <span class="sc-key k1">90-100 best-in-class</span> <span class="sc-key k2">80-89 excellent</span> <span class="sc-key k3">70-79 good</span> <span class="sc-key k4">60-69 average</span> <span class="sc-key k5">under 60 a weak point</span>. The bar colors match: green is strong, orange/red is a relative weakness.</p>
+        <p><b>The big Overall badge</b> is a weighted blend of the eight scores, tilted toward what matters most to a parent: <b>reliability &amp; comfort 22% each</b>, cargo &amp; seating 12% each, safety 10%, mpg 8%, value 8%, cupholders 6%.</p>
+        <p class="sc-disc">Scores are our editorial judgement, blending published specs (cargo, seats, mpg) with reliability and review consensus (Consumer Reports, iSeeCars, JD Power). They are a shopping shortcut, not gospel - always test-drive.</p>
+      </div>
+    </details>
     <nav class="sc-jump" id="sc-jump" aria-label="Jump to budget band"></nav>
     <div class="sc-sort" id="sc-sort" aria-label="Sort score card by"></div>
     <div id="sc-bands" aria-live="polite"></div>
@@ -229,6 +254,21 @@
       const scJump = document.getElementById("sc-jump");
       let scKey = "Overall";
       const scColor = score => score >= 85 ? "#4f8a3f" : score >= 75 ? "#7a9a3f" : score >= 65 ? "#c9992f" : score >= 55 ? "#c47a33" : "#b8543a";
+      const scReason = (m, car) => {
+        const v = car.s[m];
+        const B = (a,b,c,d,e) => v>=85?a : v>=75?b : v>=65?c : v>=55?d : e;
+        switch(m){
+          case "Reliability": return B("Best-in-class dependability - top brand track record.","Strong, above-average reliability.","Average reliability for the class.","Below-average reliability - watch-item.","Reliability is the weak spot versus rivals.");
+          case "Comfort": return B("Plush, quiet, sit-all-day comfort.","Comfortable, well-built cabin and ride.","Comfortable enough; ride is a touch firmer.","Functional, but firmer or noisier than rivals.","Utilitarian - comfort is not its strength.");
+          case "Cargo": return (car.cargo?car.cargo+" cu ft max - ":"")+B("class-leading cargo room.","lots of space for the class.","solid, usable cargo.","average cargo room.","the tightest here.");
+          case "Seating": return (car.seats?car.seats+" seats - ":"")+B("roomy, genuinely usable rows.","plenty of room for families.","decent space; any third row is snug.","average passenger room.","tight for bigger families.");
+          case "Cupholders": return (car.cup?car.cup+" cupholders - ":"")+B("tons of them.","plenty for the whole crew.","enough for the family.","a modest count.","few - the low spot.");
+          case "MPG": return (car.mpg?car.mpg+" mpg - ":"")+B("excellent efficiency (hybrid helps).","good economy for the size.","average thirst for the class.","a bit thirsty.","the thirstiest here.");
+          case "Safety": return B("Top IIHS/NHTSA crash + driver-assist scores.","Strong crash ratings and standard safety tech.","Good safety, just short of class-leading.","Average safety scores.","Safety trails the leaders here.");
+          case "Value": return B("Outstanding bang-for-the-buck.","Strong value for what you get.","Fair value for the price.","You pay a little for the badge.","Priciest for what you get.");
+        }
+        return "";
+      };
       const scValue = (car, key) => key === "Overall" ? car.overall : car.s[key];
       const scRender = () => {
         [...scSort.children].forEach(button => button.setAttribute("aria-pressed", String(button.dataset.key === scKey)));
@@ -240,6 +280,8 @@
             <span class="sc-identity"><span class="sc-name">${car.name}</span><span class="sc-tags"><span class="sc-tag">${car.group}</span>${car.pick ? '<span class="sc-tag sc-pick">★ top pick</span>' : ''}<span class="sc-price">${car.price}</span></span></span><span class="sc-chev" aria-hidden="true">▸</span></button>
           <div class="sc-metrics">${METRICS.map(metric => `<div class="sc-metric${scKey === metric ? ' sc-active' : ''}"><span class="sc-label">${metric}</span><span class="sc-track"><span class="sc-fill" style="background:${scColor(car.s[metric])}" data-width="${car.s[metric]}%"></span></span><span class="sc-value">${car.s[metric]}</span></div>`).join("")}</div>
           <div class="sc-detail"><div class="sc-detail-inner"><p class="sc-why">${car.why}</p><p class="sc-cnote">${car.note}</p>
+            <div class="sc-rzhead">Why these scores</div>
+            ${METRICS.map(metric => `<div class="sc-rz"><span class="sc-rzm">${metric}</span><span class="sc-rzn" style="background:${scColor(car.s[metric])}">${car.s[metric]}</span><span class="sc-rzt">${scReason(metric,car)}</span></div>`).join("")}
             <div class="sc-specs2">${[["Seats",car.seats],["Cupholders",car.cup ? car.cup + (car.cupEst ? " (est.)" : "") : ""],["Cargo max",car.cargo ? car.cargo + " cu ft" : ""],["Cargo by row",car.cargoRear],["MPG",car.mpg],["Price",car.price]].filter(([,value]) => value).map(([label,value]) => `<span><b>${label}:</b> ${value}</span>`).join("")}</div>
             <div class="sc-links"><a class="mfr" href="${car.mfr}" target="_blank" rel="noopener">Official photos &amp; build ↗</a><a href="${car.kbb}" target="_blank" rel="noopener">Reviews &amp; photos ↗</a></div>
           </div></div>
