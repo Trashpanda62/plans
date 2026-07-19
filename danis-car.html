@@ -45,6 +45,34 @@
   .sh.first{border-top:none;padding-top:0;margin-top:28px;}
   .sub-note{font-size:12.5px;color:var(--soft);margin:0 0 16px;max-width:64ch;}
   .tag.pickstar{background:var(--sage);color:#fff;border-color:var(--sage);}
+  /* ---- page style presets (data-style on :root) ---- */
+  .styler{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:16px 0 4px;}
+  .styler .sl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);font-weight:700;}
+  .styler select{font-family:var(--sans);font-size:13px;font-weight:600;color:var(--ink);background:var(--card);border:1px solid var(--line);padding:7px 12px;border-radius:9px;cursor:pointer;max-width:100%;}
+:root[data-style="homestead"]{--ground:#f6f1e7;--card:#fffdf7;--ink:#2e2a20;--line:#e4dac6;--soft:#6f6450;--sage:#4a6b47;--sage-deep:#5a7d3f;--clay:#b5623f;--clay-deep:#c0764f;--parchment:#ede5d6;--serif:Georgia,"Times New Roman",serif;}
+  :root[data-style="editorial"]{--ground:#faf6f4;--card:#fffefe;--ink:#3a2e33;--line:#ecdfe2;--soft:#7a6870;--sage:#7d5a74;--sage-deep:#9d6a5f;--clay:#a06d86;--clay-deep:#c98a94;--parchment:#f3eaeb;--serif:Georgia,"Times New Roman",serif;}
+  :root[data-style="golden"]{--ground:#fbf3ea;--card:#fffdf9;--ink:#3d2b22;--line:#efdcc9;--soft:#7a5f4d;--sage:#cc6b4a;--sage-deep:#b5723f;--clay:#cc6b4a;--clay-deep:#d9a441;--parchment:#f5e7d9;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="greenhouse"]{--ground:#f2f7f2;--card:#ffffff;--ink:#24302a;--line:#d8e6dc;--soft:#5a6f62;--sage:#3f8f5a;--sage-deep:#2f7d52;--clay:#6fa8b5;--clay-deep:#c99a4a;--parchment:#e5eee7;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="obscura"]{--ground:#14110f;--card:#1e1a17;--ink:#efe7db;--line:#332c26;--soft:#a79b8c;--sage:#c9a86a;--sage-deep:#d8b877;--clay:#b06a4a;--clay-deep:#c98a4a;--parchment:#231e1a;--serif:Georgia,"Times New Roman",serif;}
+  :root[data-style="peptidelab"]{--ground:#f6f7fb;--card:#ffffff;--ink:#1f2433;--line:#e2e5f0;--soft:#5f6579;--sage:#6d5ae0;--sage-deep:#2f9e6a;--clay:#c85a8a;--clay-deep:#d0913a;--parchment:#eceef5;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="aerial"]{--ground:#101526;--card:#182036;--ink:#e8ecf7;--line:#2a3350;--soft:#9aa4c0;--sage:#e0a24a;--sage-deep:#e0a24a;--clay:#c97a9a;--clay-deep:#f0b45a;--parchment:#1d243b;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="corral"]{--ground:#fbf4ec;--card:#fffaf3;--ink:#3a241c;--line:#eddccb;--soft:#7a5a48;--sage:#b0402f;--sage-deep:#b07a2f;--clay:#b0402f;--clay-deep:#d99a3a;--parchment:#f4e8db;--serif:Georgia,"Times New Roman",serif;}
+  :root[data-style="steel"]{--ground:#1a1c1f;--card:#24272b;--ink:#e6e8ea;--line:#363a3f;--soft:#9aa0a6;--sage:#8a97a3;--sage-deep:#c0a15a;--clay:#a3402f;--clay-deep:#c08a4a;--parchment:#282b2f;--serif:Georgia,"Times New Roman",serif;}
+  :root[data-style="requiem"]{--ground:#120e11;--card:#1c161a;--ink:#ece2e6;--line:#332830;--soft:#a8969e;--sage:#a33245;--sage-deep:#cba24a;--clay:#a33245;--clay-deep:#cba24a;--parchment:#221b20;--serif:Georgia,"Times New Roman",serif;}
+  :root[data-style="frontier"]{--ground:#f3e9d6;--card:#fbf4e6;--ink:#33261a;--line:#ddc9a8;--soft:#7a6448;--sage:#9a5a2f;--sage-deep:#9a6a2f;--clay:#8a4a2f;--clay-deep:#c99a4a;--parchment:#e8d9bf;--serif:Georgia,"Times New Roman",serif;}
+  :root[data-style="arcade"]{--ground:#0a0a12;--card:#14141f;--ink:#e8e8f0;--line:#2a2a3a;--soft:#9a9ab0;--sage:#22c1d6;--sage-deep:#f0d63a;--clay:#e0409a;--clay-deep:#f0a63a;--parchment:#1a1a26;--serif:ui-monospace,"Cascadia Mono",Menlo,Consolas,monospace;}
+  :root[data-style="atlas"]{--ground:#f4efe3;--card:#fbf7ec;--ink:#26221a;--line:#ddd3bf;--soft:#6a6250;--sage:#3a5a7a;--sage-deep:#3a6a5a;--clay:#8a5a3a;--clay-deep:#b08a3a;--parchment:#e8e1d1;--serif:Georgia,"Times New Roman",serif;}
+  :root[data-style="swiss"]{--ground:#ffffff;--card:#fafafa;--ink:#111111;--line:#e0e0e0;--soft:#5a5a5a;--sage:#e03127;--sage-deep:#111111;--clay:#e03127;--clay-deep:#d98a1a;--parchment:#efefef;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="bauhaus"]{--ground:#f2ede2;--card:#fbf8f0;--ink:#1a1a1a;--line:#dcd5c5;--soft:#5a5648;--sage:#2b4fa0;--sage-deep:#d0332a;--clay:#d0332a;--clay-deep:#e8b62a;--parchment:#e7e1d3;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="brutalist"]{--ground:#ffffff;--card:#ffffff;--ink:#000000;--line:#000000;--soft:#333333;--sage:#2b2bff;--sage-deep:#000000;--clay:#ff2b6b;--clay-deep:#ff8a00;--parchment:#7f7f7f;--serif:ui-monospace,"Cascadia Mono",Menlo,Consolas,monospace;}
+  :root[data-style="glass"]{--ground:#eef1fb;--card:#ffffff;--ink:#2a2f45;--line:#dde3f5;--soft:#5f6785;--sage:#6a8ae0;--sage-deep:#3f9e7a;--clay:#c87ab0;--clay-deep:#e0a24a;--parchment:#e5eaf8;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="material"]{--ground:#fafafa;--card:#ffffff;--ink:#212121;--line:#e0e0e0;--soft:#616161;--sage:#3f51b5;--sage-deep:#43a047;--clay:#e53935;--clay-deep:#fb8c00;--parchment:#ededed;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="stripe"]{--ground:#ffffff;--card:#ffffff;--ink:#1a1f36;--line:#e6e8ee;--soft:#5a627a;--sage:#635bff;--sage-deep:#3f9e7a;--clay:#c85a8a;--clay-deep:#e0913a;--parchment:#f2f3f6;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="terminal"]{--ground:#0b0f0c;--card:#111811;--ink:#c8f0c8;--line:#1f2a1f;--soft:#7aa07a;--sage:#39d353;--sage-deep:#7ee787;--clay:#f0883e;--clay-deep:#e3b341;--parchment:#151c15;--serif:ui-monospace,"Cascadia Mono",Menlo,Consolas,monospace;}
+  :root[data-style="luxe"]{--ground:#0d0d0d;--card:#161514;--ink:#eee6d6;--line:#2c2926;--soft:#a89f8c;--sage:#c8a24a;--sage-deep:#d4b45a;--clay:#9a6a4a;--clay-deep:#c8a24a;--parchment:#1c1b19;--serif:Georgia,"Times New Roman",serif;}
+  :root[data-style="scandi"]{--ground:#f5f3ee;--card:#fdfcf9;--ink:#2e302c;--line:#e2ded5;--soft:#66695f;--sage:#7d9a7f;--sage-deep:#4f7a5f;--clay:#b08a7a;--clay-deep:#c99a6a;--parchment:#ebe8e1;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="memphis"]{--ground:#fbf6ec;--card:#ffffff;--ink:#232020;--line:#e6dccb;--soft:#5f5850;--sage:#00b3b3;--sage-deep:#e0402f;--clay:#e0402f;--clay-deep:#f5c518;--parchment:#f0e9db;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="vapor"]{--ground:#160e26;--card:#1f1533;--ink:#f0e6ff;--line:#33254f;--soft:#b0a0d0;--sage:#2de2e6;--sage-deep:#ff5edb;--clay:#ff5edb;--clay-deep:#ffb84a;--parchment:#24193a;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
   .sc-sort{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 14px;}
   .sc-jump{position:sticky;top:0;z-index:4;display:flex;gap:7px;overflow-x:auto;margin:0 0 18px;padding:8px 0;background:var(--ground);}
   .sc-jump .sc-pill{flex:0 0 auto;text-decoration:none;}
@@ -110,6 +138,41 @@
     <h1>Best Mom Cars 2026</h1>
   </header>
   <p class="intro">The family SUVs worth your money in 2026, scored out of 100 and sorted into budget bands - new and used. Every pick is weighted toward what actually matters to a busy parent: reliability, comfort, space, safety, and value. Tap a metric to re-sort a band; tap any car's score for the full breakdown, specs, and photo links.</p>
+  <div class="styler">
+    <span class="sl">Style</span>
+    <select id="stylesel" aria-label="Page style">
+      <option value="">Classic Parchment</option>
+      <optgroup label="From your projects">
+        <option value="homestead">Botanical Homestead</option>
+        <option value="greenhouse">Fresh Greenhouse</option>
+        <option value="obscura">Obscura Noir</option>
+        <option value="peptidelab">Peptide Lab</option>
+        <option value="aerial">Twilight Aerial</option>
+        <option value="corral">Golden Corral Warmth</option>
+        <option value="steel">Bannerlord Steel</option>
+        <option value="requiem">Dark Requiem</option>
+        <option value="frontier">Frontier Cut</option>
+        <option value="arcade">Retro Arcade</option>
+        <option value="atlas">Knowledge Atlas</option>
+      </optgroup>
+      <optgroup label="Designer styles">
+        <option value="editorial">Soft Editorial</option>
+        <option value="golden">Golden Hour</option>
+        <option value="swiss">Swiss International</option>
+        <option value="bauhaus">Bauhaus</option>
+        <option value="brutalist">Brutalist</option>
+        <option value="glass">Glassmorphism</option>
+        <option value="material">Material Design</option>
+        <option value="stripe">Stripe Clean</option>
+        <option value="terminal">Terminal / Hacker</option>
+        <option value="luxe">Luxury Noir</option>
+        <option value="scandi">Scandinavian Minimal</option>
+        <option value="memphis">Memphis Pop</option>
+        <option value="vapor">Synthwave</option>
+      </optgroup>
+    </select>
+  </div>
+
 
   <section class="sc-section" aria-labelledby="score-card-heading">
     <h2 class="sh first" id="score-card-heading">Score card &mdash; how they stack up</h2>
@@ -212,5 +275,6 @@
 
   <footer>Best Mom Cars 2026 · prices are approximate starting MSRP or used-market ranges, for browsing</footer>
 </div>
+  <script>(function(){var root=document.documentElement,sel=document.getElementById("stylesel");if(!sel)return;sel.addEventListener("change",function(){var s=sel.value;if(s){root.setAttribute("data-style",s);}else{root.removeAttribute("data-style");}});})();</script>
 </body>
 </html>
