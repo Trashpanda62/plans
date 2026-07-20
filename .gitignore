@@ -1,0 +1,5 @@
+
+# bestmomcars: never publish un-blurred plate backups, scratch, or the working fork
+assets/cars/_orig/
+scratchpad/
+bestmomcars.html
