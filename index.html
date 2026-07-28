@@ -479,7 +479,7 @@
   }
   .place:hover,.place:focus-visible{background:#efe7d6;outline:none;}
   .place .pn{font-family:var(--serif);font-weight:700;font-size:15px;color:var(--ink);line-height:1.2;}
-  .place .pd{font-family:var(--sans);font-size:11px;color:#7a6f60;margin-left:auto;white-space:nowrap;flex:0 0 auto;font-weight:600;}
+  .place .pd{font-family:var(--sans);font-size:11px;color:#6e6353;margin-left:auto;white-space:nowrap;flex:0 0 auto;font-weight:600;} /* S13 a11y fix (2026-07-27): #7a6f60 measured ~4.3:1 on the drawer's lighter gradient stop (below WCAG AA 4.5:1); #6e6353 measures 5.1-5.7:1 across both gradient stops */
   .place .pd.live{color:#2c6b3c;}
   .place .pd.live::before{content:"● ";color:#39a659;}
 
@@ -975,6 +975,15 @@
   @media (prefers-reduced-motion: reduce){
     #ambient *{animation:none !important;}
     .bird,.flit,.ripple{opacity:0 !important;}
+  }
+
+  /* S13 a11y fix (2026-07-27, plan c-000926): .lantern's infinite
+     brightness flicker wasn't covered by any of the reduced-motion
+     blocks above (they target #seasonfx/#ambient/#sky, not the
+     always-on streetlamp glows). Keep the lamps lit (opacity/scale
+     unchanged) but stop the flicker. */
+  @media (prefers-reduced-motion: reduce){
+    .lantern{animation:none;}
   }
 
   /* one seamless slow pass: off the left edge → off the right edge, then loops */
