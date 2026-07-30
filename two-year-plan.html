@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>The 2-Year Plan — Scaling to $30k/mo</title>
+</head>
+<body>
+<style>
+  :root{
+    --ink:#0f1a1e; --paper:#f2f5f4; --card:#ffffff; --line:#d9e0de;
+    --muted:#5f7076; --faint:#8a9895;
+    --teal:#2f9c8d; --green:#3f8f5a; --amber:#c0863a; --money:#337a4c; --clay:#c25b46;
+    --shadow:0 1px 2px rgba(16,26,30,.06),0 8px 28px rgba(16,26,30,.06);
+    --serif:Georgia,"Times New Roman",serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ink:#e8efec; --paper:#0d1517; --card:#131e21; --line:#243033;
+      --muted:#93a4a0; --faint:#65787a;
+      --teal:#43b6a5; --green:#5cae74; --amber:#d29a4f; --money:#6cbf85; --clay:#d97a63;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --ink:#0f1a1e; --paper:#f2f5f4; --card:#ffffff; --line:#d9e0de;
+    --muted:#5f7076; --faint:#8a9895;
+    --teal:#2f9c8d; --green:#3f8f5a; --amber:#c0863a; --money:#337a4c; --clay:#c25b46;
+    --shadow:0 1px 2px rgba(16,26,30,.06),0 8px 28px rgba(16,26,30,.06);
+  }
+  :root[data-theme="dark"]{
+    --ink:#e8efec; --paper:#0d1517; --card:#131e21; --line:#243033;
+    --muted:#93a4a0; --faint:#65787a;
+    --teal:#43b6a5; --green:#5cae74; --amber:#d29a4f; --money:#6cbf85; --clay:#d97a63;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+  }
+  :root[data-style="homestead"]{--paper:#f6f1e7;--ink:#2e2a20;--card:#fffdf7;--line:#e4dac6;--muted:#6f6450;--faint:#9a8f78;--teal:#4a6b47;--green:#5a7d3f;--money:#5a7d3f;--amber:#c0764f;--clay:#b5623f;--cat-web:#4a6b47;--cat-drone:#c0764f;--cat-ecom:#cba24a;--cat-photo:#8a6f4a;--cat-sub:#6f9256;--cat-dig:#9a8f78;--serif:Georgia,"Times New Roman",serif;}
+  :root[data-style="editorial"]{--paper:#faf6f4;--ink:#3a2e33;--card:#fffefe;--line:#ecdfe2;--muted:#7a6870;--faint:#a898a0;--teal:#7d5a74;--green:#9d6a5f;--money:#9d6a5f;--amber:#c98a94;--clay:#a06d86;--cat-web:#7d5a74;--cat-drone:#c98a94;--cat-ecom:#d9b48a;--cat-photo:#a06d86;--cat-sub:#8a94a0;--cat-dig:#b0a0a8;--serif:Georgia,"Times New Roman",serif;}
+  :root[data-style="golden"]{--paper:#fbf3ea;--ink:#3d2b22;--card:#fffdf9;--line:#efdcc9;--muted:#7a5f4d;--faint:#ab8f78;--teal:#cc6b4a;--green:#b5723f;--money:#b5723f;--amber:#d9a441;--clay:#cc6b4a;--cat-web:#cc6b4a;--cat-drone:#e0855a;--cat-ecom:#d9a441;--cat-photo:#b5623f;--cat-sub:#c99457;--cat-dig:#a88a6a;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="greenhouse"]{--paper:#f2f7f2;--ink:#24302a;--card:#ffffff;--line:#d8e6dc;--muted:#5a6f62;--faint:#8aa093;--teal:#3f8f5a;--green:#2f7d52;--money:#2f7d52;--amber:#c99a4a;--clay:#6fa8b5;--cat-web:#3f8f5a;--cat-drone:#c99a4a;--cat-ecom:#6fa8b5;--cat-photo:#7bc095;--cat-sub:#5aa0a8;--cat-dig:#8aa093;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="obscura"]{--paper:#14110f;--ink:#efe7db;--card:#1e1a17;--line:#332c26;--muted:#a79b8c;--faint:#6f6558;--teal:#c9a86a;--green:#b9975a;--money:#d8b877;--amber:#c98a4a;--clay:#b06a4a;--cat-web:#c9a86a;--cat-drone:#b9975a;--cat-ecom:#8a7d9a;--cat-photo:#a88a6a;--cat-sub:#7a9a8a;--cat-dig:#6f6558;--serif:Georgia,"Times New Roman",serif;}
+  :root[data-style="peptidelab"]{--paper:#f6f7fb;--ink:#1f2433;--card:#ffffff;--line:#e2e5f0;--muted:#5f6579;--faint:#9aa0b5;--teal:#6d5ae0;--green:#2fa39a;--money:#2f9e6a;--amber:#d0913a;--clay:#c85a8a;--cat-web:#6d5ae0;--cat-drone:#2fa39a;--cat-ecom:#c85a8a;--cat-photo:#4a7fd0;--cat-sub:#8a6ae0;--cat-dig:#9aa0b5;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="aerial"]{--paper:#101526;--ink:#e8ecf7;--card:#182036;--line:#2a3350;--muted:#9aa4c0;--faint:#5f6a88;--teal:#e0a24a;--green:#5cae9a;--money:#e0a24a;--amber:#f0b45a;--clay:#c97a9a;--cat-web:#5c86d0;--cat-drone:#e0a24a;--cat-ecom:#c97a9a;--cat-photo:#8a7ad0;--cat-sub:#5cae9a;--cat-dig:#5f6a88;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="corral"]{--paper:#fbf4ec;--ink:#3a241c;--card:#fffaf3;--line:#eddccb;--muted:#7a5a48;--faint:#ab8a72;--teal:#b0402f;--green:#5a8f3f;--money:#b07a2f;--amber:#d99a3a;--clay:#b0402f;--cat-web:#b0402f;--cat-drone:#d99a3a;--cat-ecom:#c99457;--cat-photo:#8a6f4a;--cat-sub:#5a8f3f;--cat-dig:#a88a6a;--serif:Georgia,"Times New Roman",serif;}
+  :root[data-style="steel"]{--paper:#1a1c1f;--ink:#e6e8ea;--card:#24272b;--line:#363a3f;--muted:#9aa0a6;--faint:#61666c;--teal:#8a97a3;--green:#6f9a5a;--money:#c0a15a;--amber:#c08a4a;--clay:#a3402f;--cat-web:#8a97a3;--cat-drone:#c08a4a;--cat-ecom:#a3402f;--cat-photo:#6f7a86;--cat-sub:#6f9a5a;--cat-dig:#61666c;--serif:Georgia,"Times New Roman",serif;}
+  :root[data-style="requiem"]{--paper:#120e11;--ink:#ece2e6;--card:#1c161a;--line:#332830;--muted:#a8969e;--faint:#6e5c64;--teal:#a33245;--green:#a8823f;--money:#cba24a;--amber:#cba24a;--clay:#a33245;--cat-web:#a33245;--cat-drone:#cba24a;--cat-ecom:#7a5a8a;--cat-photo:#8a5a5a;--cat-sub:#5a7a8a;--cat-dig:#6e5c64;--serif:Georgia,"Times New Roman",serif;}
+  :root[data-style="frontier"]{--paper:#f3e9d6;--ink:#33261a;--card:#fbf4e6;--line:#ddc9a8;--muted:#7a6448;--faint:#a89072;--teal:#9a5a2f;--green:#6f7a3f;--money:#9a6a2f;--amber:#c99a4a;--clay:#8a4a2f;--cat-web:#9a5a2f;--cat-drone:#c99a4a;--cat-ecom:#8a6f4a;--cat-photo:#6f7a3f;--cat-sub:#a3813f;--cat-dig:#a89072;--serif:Georgia,"Times New Roman",serif;}
+  :root[data-style="arcade"]{--paper:#0a0a12;--ink:#e8e8f0;--card:#14141f;--line:#2a2a3a;--muted:#9a9ab0;--faint:#5a5a72;--teal:#22c1d6;--green:#3ad66a;--money:#f0d63a;--amber:#f0a63a;--clay:#e0409a;--cat-web:#22c1d6;--cat-drone:#f0a63a;--cat-ecom:#e0409a;--cat-photo:#8a6af0;--cat-sub:#3ad66a;--cat-dig:#5a5a72;--serif:ui-monospace,"Cascadia Mono",Menlo,Consolas,monospace;}
+  :root[data-style="atlas"]{--paper:#f4efe3;--ink:#26221a;--card:#fbf7ec;--line:#ddd3bf;--muted:#6a6250;--faint:#9a9078;--teal:#3a5a7a;--green:#4a7d5a;--money:#3a6a5a;--amber:#b08a3a;--clay:#8a5a3a;--cat-web:#3a5a7a;--cat-drone:#b08a3a;--cat-ecom:#8a5a7a;--cat-photo:#5a7a6a;--cat-sub:#4a7d5a;--cat-dig:#9a9078;--serif:Georgia,"Times New Roman",serif;}
+  :root[data-style="swiss"]{--paper:#ffffff;--ink:#111111;--card:#fafafa;--line:#e0e0e0;--muted:#5a5a5a;--faint:#909090;--teal:#e03127;--green:#2f8f4f;--money:#111111;--amber:#d98a1a;--clay:#e03127;--cat-web:#111111;--cat-drone:#e03127;--cat-ecom:#5a5a5a;--cat-photo:#909090;--cat-sub:#2f8f4f;--cat-dig:#c0c0c0;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="bauhaus"]{--paper:#f2ede2;--ink:#1a1a1a;--card:#fbf8f0;--line:#dcd5c5;--muted:#5a5648;--faint:#8f8a78;--teal:#2b4fa0;--green:#3a8f5a;--money:#d0332a;--amber:#e8b62a;--clay:#d0332a;--cat-web:#2b4fa0;--cat-drone:#e8b62a;--cat-ecom:#d0332a;--cat-photo:#3a8f5a;--cat-sub:#1a1a1a;--cat-dig:#8f8a78;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="brutalist"]{--paper:#ffffff;--ink:#000000;--card:#ffffff;--line:#000000;--muted:#333333;--faint:#666666;--teal:#2b2bff;--green:#00994d;--money:#000000;--amber:#ff8a00;--clay:#ff2b6b;--cat-web:#2b2bff;--cat-drone:#ff8a00;--cat-ecom:#ff2b6b;--cat-photo:#00994d;--cat-sub:#000000;--cat-dig:#666666;--serif:ui-monospace,"Cascadia Mono",Menlo,Consolas,monospace;}
+  :root[data-style="glass"]{--paper:#eef1fb;--ink:#2a2f45;--card:#ffffff;--line:#dde3f5;--muted:#5f6785;--faint:#9aa2c0;--teal:#6a8ae0;--green:#4aae9a;--money:#3f9e7a;--amber:#e0a24a;--clay:#c87ab0;--cat-web:#6a8ae0;--cat-drone:#e0a24a;--cat-ecom:#c87ab0;--cat-photo:#8a7ae0;--cat-sub:#4aae9a;--cat-dig:#9aa2c0;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="material"]{--paper:#fafafa;--ink:#212121;--card:#ffffff;--line:#e0e0e0;--muted:#616161;--faint:#9e9e9e;--teal:#3f51b5;--green:#43a047;--money:#43a047;--amber:#fb8c00;--clay:#e53935;--cat-web:#3f51b5;--cat-drone:#fb8c00;--cat-ecom:#e53935;--cat-photo:#8e24aa;--cat-sub:#00897b;--cat-dig:#9e9e9e;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="stripe"]{--paper:#ffffff;--ink:#1a1f36;--card:#ffffff;--line:#e6e8ee;--muted:#5a627a;--faint:#9aa0b5;--teal:#635bff;--green:#3fae6a;--money:#3f9e7a;--amber:#e0913a;--clay:#c85a8a;--cat-web:#635bff;--cat-drone:#e0913a;--cat-ecom:#c85a8a;--cat-photo:#4a7fd0;--cat-sub:#3fae6a;--cat-dig:#9aa0b5;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="terminal"]{--paper:#0b0f0c;--ink:#c8f0c8;--card:#111811;--line:#1f2a1f;--muted:#7aa07a;--faint:#4a5f4a;--teal:#39d353;--green:#39d353;--money:#7ee787;--amber:#e3b341;--clay:#f0883e;--cat-web:#39d353;--cat-drone:#e3b341;--cat-ecom:#f0883e;--cat-photo:#58a6ff;--cat-sub:#7ee787;--cat-dig:#4a5f4a;--serif:ui-monospace,"Cascadia Mono",Menlo,Consolas,monospace;}
+  :root[data-style="luxe"]{--paper:#0d0d0d;--ink:#eee6d6;--card:#161514;--line:#2c2926;--muted:#a89f8c;--faint:#6a6458;--teal:#c8a24a;--green:#b0923f;--money:#d4b45a;--amber:#c8a24a;--clay:#9a6a4a;--cat-web:#c8a24a;--cat-drone:#b0923f;--cat-ecom:#8a7a6a;--cat-photo:#a88a5a;--cat-sub:#7a8a6a;--cat-dig:#6a6458;--serif:Georgia,"Times New Roman",serif;}
+  :root[data-style="scandi"]{--paper:#f5f3ee;--ink:#2e302c;--card:#fdfcf9;--line:#e2ded5;--muted:#66695f;--faint:#9a9c92;--teal:#7d9a7f;--green:#5f8a5f;--money:#4f7a5f;--amber:#c99a6a;--clay:#b08a7a;--cat-web:#7d9a7f;--cat-drone:#c99a6a;--cat-ecom:#b08a7a;--cat-photo:#8a9a8a;--cat-sub:#5f8a5f;--cat-dig:#9a9c92;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="memphis"]{--paper:#fbf6ec;--ink:#232020;--card:#ffffff;--line:#e6dccb;--muted:#5f5850;--faint:#938a7c;--teal:#00b3b3;--green:#3fae5a;--money:#e0402f;--amber:#f5c518;--clay:#e0402f;--cat-web:#00b3b3;--cat-drone:#f5c518;--cat-ecom:#e0402f;--cat-photo:#8a5ad0;--cat-sub:#3fae5a;--cat-dig:#938a7c;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  :root[data-style="vapor"]{--paper:#160e26;--ink:#f0e6ff;--card:#1f1533;--line:#33254f;--muted:#b0a0d0;--faint:#6f5f8f;--teal:#2de2e6;--green:#3ad6a0;--money:#ff5edb;--amber:#ffb84a;--clay:#ff5edb;--cat-web:#2de2e6;--cat-drone:#ffb84a;--cat-ecom:#ff5edb;--cat-photo:#9a6aff;--cat-sub:#3ad6a0;--cat-dig:#6f5f8f;--serif:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  .styler{position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;gap:6px;align-items:center;background:color-mix(in srgb,var(--paper) 85%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:12px;padding:8px 10px;margin-bottom:26px;box-shadow:var(--shadow);}
+  .styler .sl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:0 6px 0 4px;}
+  .styler button{font-family:var(--sans);font-size:12.5px;font-weight:600;color:var(--muted);background:transparent;border:1px solid var(--line);padding:6px 12px;border-radius:20px;cursor:pointer;transition:background .15s,color .15s,border-color .15s;}
+  .styler button[aria-pressed="true"]{background:var(--teal);color:#fff;border-color:var(--teal);}
+  .styler button:focus-visible{outline:2px solid var(--teal);outline-offset:2px;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1040px;margin:0 auto;padding:clamp(20px,5vw,56px) clamp(16px,4vw,40px) 80px;}
+  .num{font-family:var(--mono);font-variant-numeric:tabular-nums;}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);font-weight:600;margin:0 0 14px;}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,5.2vw,50px);line-height:1.06;margin:0 0 16px;text-wrap:balance;letter-spacing:-.01em;}
+  .standfirst{font-size:clamp(15px,2vw,18px);color:var(--muted);max-width:68ch;margin:0 0 6px;}
+  .meta{font-size:12.5px;color:var(--faint);margin-top:14px;font-family:var(--mono);}
+
+  .phases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:34px 0 6px;}
+  .ph{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 18px;box-shadow:var(--shadow);}
+  .ph .tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);font-weight:700;}
+  .ph .big{font-family:var(--serif);font-size:clamp(22px,3.4vw,30px);font-weight:600;margin:6px 0 2px;color:var(--money);letter-spacing:-.01em;}
+  .ph .sub{font-size:12.5px;color:var(--muted);}
+  .ph.p2 .big{color:var(--clay);} .ph.p3 .big{color:var(--teal);}
+
+  section{margin-top:52px;}
+  h2{font-family:var(--serif);font-size:clamp(20px,3vw,27px);font-weight:600;margin:0 0 6px;letter-spacing:-.01em;}
+  .kicker{font-size:13.5px;color:var(--muted);margin:0 0 22px;max-width:74ch;}
+
+  .chartcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 18px 14px;box-shadow:var(--shadow);}
+  .chartwrap{overflow-x:auto;}
+  svg.curve{width:100%;min-width:640px;height:auto;display:block;}
+  .clabels{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:12px;color:var(--muted);}
+  .clabels span{display:inline-flex;align-items:center;gap:7px;}
+  .sw{width:14px;height:3px;border-radius:2px;display:inline-block;}
+  .sw.dot{width:9px;height:9px;border-radius:50%;}
+
+  .comp{display:grid;gap:8px;}
+  .crow{display:grid;grid-template-columns:180px 1fr 70px;align-items:center;gap:12px;font-size:13px;}
+  .cbar{height:22px;border-radius:5px;background:var(--teal);position:relative;}
+  .crow.capped .cbar{background:var(--amber);}
+  .cname{font-weight:600;} .cname small{display:block;font-weight:400;color:var(--faint);font-size:11px;}
+  .cval{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums;color:var(--money);font-weight:600;}
+  .comp-legend{display:flex;gap:16px;margin:4px 0 0;font-size:12px;color:var(--muted);}
+  @media (max-width:560px){.crow{grid-template-columns:120px 1fr 56px;}}
+
+  .road{display:grid;gap:14px;}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow);}
+  .q .qh{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:8px;}
+  .q .qn{font-family:var(--mono);font-size:12px;color:var(--teal);font-weight:700;letter-spacing:.04em;}
+  .q .qt{font-family:var(--serif);font-size:17px;font-weight:600;}
+  .q .qexit{margin-left:auto;font-family:var(--mono);font-size:12.5px;color:var(--money);font-weight:600;}
+  .q ul{margin:0;padding-left:18px;} .q li{font-size:13.5px;color:var(--muted);margin:4px 0;}
+  .q li b{color:var(--ink);font-weight:600;}
+
+  .leverage{background:color-mix(in srgb,var(--teal) 8%,var(--card));border:1px solid color-mix(in srgb,var(--teal) 30%,var(--line));border-radius:12px;padding:20px 22px;box-shadow:var(--shadow);}
+  .leverage p{margin:0 0 10px;font-size:14px;} .leverage p:last-child{margin:0;}
+  .leverage b{color:var(--ink);}
+
+  .ladder{display:grid;gap:10px;}
+  .rung{display:grid;grid-template-columns:96px 1fr auto;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);}
+  .rung .when{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--teal);}
+  .rung.life .when{color:var(--clay);}
+  .rung .g{font-size:14px;font-weight:600;} .rung .g small{display:block;font-weight:400;color:var(--faint);font-size:12px;}
+  .rung .amt{font-family:var(--mono);font-size:13px;color:var(--money);font-weight:600;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap;}
+
+  .caveats{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;box-shadow:var(--shadow);}
+  .caveats ul{margin:8px 0 0;padding-left:18px;} .caveats li{font-size:13px;color:var(--muted);margin:6px 0;} .caveats b{color:var(--ink);}
+  footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--faint);font-family:var(--mono);}
+  @media (max-width:640px){.phases{grid-template-columns:1fr;}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+
+<div class="wrap">
+  <div class="styler">
+    <span class="sl">Style</span>
+    <select id="stylesel" aria-label="Page style">
+      <option value="">Classic Slate</option>
+      <optgroup label="From your projects">
+        <option value="homestead">Botanical Homestead — Tapestry</option>
+        <option value="greenhouse">Fresh Greenhouse — Verdant</option>
+        <option value="obscura">Obscura Noir — photography</option>
+        <option value="peptidelab">Peptide Lab — ORP bio</option>
+        <option value="aerial">Twilight Aerial — Harris Aerial</option>
+        <option value="corral">Golden Corral Warmth — Backline</option>
+        <option value="steel">Bannerlord Steel — ModReady</option>
+        <option value="requiem">Dark Requiem — sample packs</option>
+        <option value="frontier">Frontier Cut — RDR2 western</option>
+        <option value="arcade">Retro Arcade — Commander Keen</option>
+        <option value="atlas">Knowledge Atlas — the vault</option>
+      </optgroup>
+      <optgroup label="Designer styles">
+        <option value="editorial">Soft Editorial</option>
+        <option value="golden">Golden Hour</option>
+        <option value="swiss">Swiss International</option>
+        <option value="bauhaus">Bauhaus</option>
+        <option value="brutalist">Brutalist</option>
+        <option value="glass">Glassmorphism</option>
+        <option value="material">Material Design</option>
+        <option value="stripe">Stripe Clean</option>
+        <option value="terminal">Terminal / Hacker</option>
+        <option value="luxe">Luxury Noir</option>
+        <option value="scandi">Scandinavian Minimal</option>
+        <option value="memphis">Memphis Pop</option>
+        <option value="vapor">Synthwave</option>
+      </optgroup>
+    </select>
+  </div>
+  <style>.styler select{font-family:var(--sans);font-size:13px;font-weight:600;color:var(--ink);background:var(--card);border:1px solid var(--line);padding:7px 12px;border-radius:9px;cursor:pointer;max-width:100%;}</style>
+  <script>
+  (function(){
+    var root=document.documentElement, sel=document.getElementById('stylesel');
+    sel.addEventListener('change',function(){var s=sel.value; if(s){root.setAttribute('data-style',s);}else{root.removeAttribute('data-style');}});
+  })();
+  </script>
+  <p class="eyebrow">Orion · Income Strategy · 24-Month Plan</p>
+  <h1>The 2-Year Plan: from $1.5k/mo to $30k+/mo</h1>
+  <p class="standfirst">Your goals split into two phases. Phase 1 (months) gets income past $6k/mo so Dani can stop working. Phase 2 (years) scales the leveraged lines to $30k+/mo and funds the life goals — Dani's car, the Thor build, and the dream house — with the farm's own seasonal income (a full engine in its own right, below) helping fund them. This page is the route between them.</p>
+  <p class="meta">Starts Jul 19, 2026 · runs to all-goals-complete (~2030) · living ~$3,500/mo · 20 hrs/week · ORP anchored to ~$1,400/mo · Tapestry folded in at your 33% profit share</p>
+
+  <div class="phases">
+    <div class="ph p1"><div class="tag">Phase 1 · ~Nov–Dec 2026</div><div class="big">$6k/mo → Dani retires</div><div class="sub">income clears the household with room; she's free to stop working</div></div>
+    <div class="ph p3"><div class="tag">Target · ~Feb 2028</div><div class="big">$30k/mo run-rate</div><div class="sub">carried by ORP + Backline + Obscura SaaS, not by more hours</div></div>
+    <div class="ph p2"><div class="tag">Phase 2 · 2027–2030</div><div class="big">The life goals</div><div class="sub">clear debt → car → Thor → house, funded by surplus</div></div>
+  </div>
+
+  <section>
+    <h2>The income run-rate, month by month</h2>
+    <p class="kicker">Recurring monthly income (excluding lumpy one-off builds), Jul 2026 → mid-2028. It crosses $6k around Nov 2026 (the repair-flip lane's Q4 peak pulls it in a month), $10k around Feb 2027, and $30k around Feb 2028. Life-goal purchases are flagged where accumulated surplus can fund them — the house (~2029) lands past this window and is noted below.</p>
+    <div class="chartcard">
+      <div class="chartwrap"><svg class="curve" id="curve" viewBox="0 0 760 340" role="img" aria-label="Income run-rate curve over 24 months"></svg></div>
+      <div class="clabels">
+        <span><i class="sw" style="background:var(--teal)"></i>Monthly run-rate</span>
+        <span><i class="sw" style="background:var(--money);opacity:.5"></i>Milestone thresholds</span>
+        <span><i class="sw dot" style="background:var(--clay)"></i>Life-goal purchase</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What the $30k/mo is actually made of</h2>
+    <p class="kicker">The target composition at month ~24. The teal lines scale with the software (they don't cost you hours as they grow); the amber lines are labor-capped by your 20-hr/week budget — which is exactly why they can't be the plan past ~$8–10k combined.</p>
+    <div class="chartcard">
+      <div class="comp" id="comp"></div>
+      <div class="comp-legend">
+        <span><i class="sw" style="background:var(--teal)"></i>Leveraged / recurring — scales without more hours</span>
+        <span><i class="sw" style="background:var(--amber)"></i>Labor-capped — limited by 20 hrs/week</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <style>
+      .tap-model{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px;}
+      .tap-model .tm{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:14px 16px;box-shadow:var(--shadow);}
+      .tap-model .tm .k{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--teal);font-weight:700;}
+      .tap-model .tm .v{font-family:var(--serif);font-size:19px;font-weight:600;margin:3px 0 2px;color:var(--ink);}
+      .tap-model .tm .s{font-size:12px;color:var(--muted);}
+      .tap-earn{display:grid;gap:8px;}
+      .ter{display:grid;grid-template-columns:210px 1fr 84px;align-items:center;gap:12px;font-size:13px;}
+      .ter .tbar{height:22px;border-radius:5px;background:var(--green);}
+      .ter.newline .tbar{background:var(--amber);}
+      .ter .tname{font-weight:600;} .ter .tname small{display:block;font-weight:400;color:var(--faint);font-size:11px;}
+      .ter .tval{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums;color:var(--money);font-weight:600;}
+      .tap-tot{display:grid;grid-template-columns:210px 1fr 84px;gap:12px;margin-top:4px;padding-top:9px;border-top:1px solid var(--line);align-items:center;}
+      .tap-tot .tname{font-weight:700;} .tap-tot .tval{font-family:var(--mono);text-align:right;color:var(--money);font-weight:700;font-size:15px;}
+      .tap-ramp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;}
+      .tap-ramp .rr{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:15px 17px;box-shadow:var(--shadow);}
+      .tap-ramp .rr .rk{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+      .tap-ramp .rr .rv{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--money);margin:4px 0 2px;}
+      .tap-ramp .rr .rs{font-size:12.5px;color:var(--muted);}
+      @media (max-width:640px){.tap-model{grid-template-columns:1fr;}.tap-ramp{grid-template-columns:1fr;}.ter,.tap-tot{grid-template-columns:132px 1fr 64px;}}
+    </style>
+    <h2>Tapestry Acres — the seasonal engine</h2>
+    <p class="kicker">Run right, the farm is a real income line now. The model: <b>open spring &amp; fall only</b> (Mar–Jun + Sep–Nov, about 7 months), <b>2 weddings a month</b> on the property at a <b>50-guest cap</b>, glamping onsite (2 tents + a yurt today, growing to <b>6 units</b>), in-house photography and catering, plus the alpaca store (in-person + website) and alpaca walks. The proof it works: <b>Whispering Oaks cleared ~$80k/yr in Prior Lake</b> on the store and walks alone, most of it at weekend open houses and farmers markets, before it ever became Tapestry. This model rebuilds that base and stacks the high-ticket lines on top.</p>
+
+    <div class="tap-model">
+      <div class="tm"><div class="k">Season</div><div class="v">7 months open</div><div class="s">Mar–Jun &amp; Sep–Nov; dark in the summer heat and winter</div></div>
+      <div class="tm"><div class="k">Weddings</div><div class="v">14 / year</div><div class="s">2 per open month, 50-guest cap each</div></div>
+      <div class="tm"><div class="k">Glamping</div><div class="v">3 → 6 units</div><div class="s">2 tents + yurt now, adding 3 more</div></div>
+    </div>
+
+    <div class="chartcard">
+      <div class="tap-earn">
+        <div class="ter"><div class="tname">Glamping, 6 units<small>~$165/night, in-season weekends + wedding blocks</small></div><div><div class="tbar" style="width:100%"></div></div><div class="tval">$80k</div></div>
+        <div class="ter"><div class="tname">Alpaca store<small>open houses + farmers markets + website</small></div><div><div class="tbar" style="width:69%"></div></div><div class="tval">$55k</div></div>
+        <div class="ter"><div class="tname">Weddings, venue fee<small>14/yr, event fee only (photo + catering below)</small></div><div><div class="tbar" style="width:61%"></div></div><div class="tval">$49k</div></div>
+        <div class="ter"><div class="tname">Catering<small>food-truck, weddings + markets, ~35% food COGS</small></div><div><div class="tbar" style="width:40%"></div></div><div class="tval">$32k</div></div>
+        <div class="ter"><div class="tname">Photography<small>wedding attach + on-farm mini-sessions</small></div><div><div class="tbar" style="width:31%"></div></div><div class="tval">$25k</div></div>
+        <div class="ter"><div class="tname">Alpaca walks<small>the other proven top item, ~$40/head</small></div><div><div class="tbar" style="width:25%"></div></div><div class="tval">$20k</div></div>
+        <div class="ter newline"><div class="tname">Silkie breeding<small>NEW: chicks, started birds, hatching eggs</small></div><div><div class="tbar" style="width:13%"></div></div><div class="tval">$10k</div></div>
+      </div>
+      <div class="tap-tot"><div class="tname">Target-buildout gross / yr</div><div></div><div class="tval">~$271k</div></div>
+      <div class="comp-legend" style="margin-top:12px">
+        <span><i class="sw" style="background:var(--green)"></i>Established or rebuilt line</span>
+        <span><i class="sw" style="background:var(--amber)"></i>New this plan</span>
+      </div>
+    </div>
+
+    <div class="tap-ramp">
+      <div class="rr"><div class="rk">2027 · rebuild season</div><div class="rv">~$120k</div><div class="rs">Store + walks back to the Whispering Oaks base, first weddings, the current 3 glamping units. Roughly $10k/mo blended, front-loaded into the open months.</div></div>
+      <div class="rr"><div class="rk">2028–29 · full buildout</div><div class="rv">~$271k</div><div class="rs">6 glamping units, 14 weddings a year, catering and silkies mature. About $39k/mo in-season, near-zero in the dark months, blending to ~$22k/mo.</div></div>
+    </div>
+
+    <div class="leverage" style="margin-top:16px">
+      <p><b>Where it sits in the plan.</b> Tapestry is a <b>seasonal, asset-and-experience</b> line, not leveraged software, so it stays out of the $30k/mo run-rate curve above to keep that number honest. Its <b>profit</b>, though, is real household money and <b>does</b> feed the goal-funding timeline below. It's also the clearest expression of the whole thesis: <b>you own the land, the herd, and the customer relationship</b>, and the revenue rides on those assets rather than on selling your hours by the clock.</p>
+      <p><b>Your share of it.</b> Margins split by line: <b>~50% net on sold products</b> (store, catering, silkie stock), but <b>weddings, glamping, walks, and photography run ~75–85%</b> — they're your time and existing assets, not COGS. Blended across the ~$271k buildout, Tapestry nets <b>~$180k/yr profit</b> (~65%). The farm is a three-way with Tari &amp; Dale, so <b>your 33% share ≈ $60k/yr</b> (ramping from ~$25k in 2027). That's the number folded into the funding timeline, and it pulls the finish in by about a year.</p>
+    </div>
+  </section>
+
+  <section id="repair">
+    <h2>Repair &amp; flip — the winter engine</h2>
+    <p class="kicker">Buy broken game consoles cheap, fix the one fault they nearly all share, resell. Added Jul 2026 after the GPU-repair research: consoles (PS5 HDMI ports, controller stick drift) are the predictable money, because the fault is mechanical and visible in listing photos before you buy. GPUs stay opportunistic high-ticket snipes, taken only when the fault is visibly fixable or the seller offers free returns. Runs at ~8–10 hrs/week inside the 20-hr budget, and it is <b>counter-seasonal to Tapestry</b>: its Q4 selling peak and Jan–Feb sourcing season land exactly in the farm's dark months.</p>
+
+    <div class="tap-model">
+      <div class="tm"><div class="k">PS5 HDMI flip</div><div class="v">~$90 net / unit</div><div class="s">buy ~$190 broken → $10 port → sell ~$380 · ~2 hrs · dud-adjusted (15% part out)</div></div>
+      <div class="tm"><div class="k">Drift controller</div><div class="v">~$18 net / unit</div><div class="s">$15 in, $3 module, $50 out · batched, ~30 min each · near-zero risk</div></div>
+      <div class="tm"><div class="k">GPU snipe</div><div class="v">$300–700 / hit</div><div class="s">free-return sellers only — a miss costs return-shipping tape, not capital</div></div>
+    </div>
+
+    <div class="leverage">
+      <p><b>The seasonal rhythm is the whole strategy.</b> Q4 (Oct–Dec) is the selling peak, roughly 2× volume at full prices. <b>Jan–Feb is dead for selling:</b> post-holiday wallets are empty, credit-card bills land, everyone who wanted a console got one for Christmas, and returned/unwanted-gift units flood supply (sold prices dip 10–20%). But that same glut makes Jan–Feb the <b>cheapest buying window of the year</b> for broken units. So the dark months become the acquisition-and-bench season: stack inventory at trough prices, repair through the winter, sell into the <b>tax-refund demand wave (late Feb–Apr)</b> at recovered prices. Buy in the trough, sell into the spike, and all of it happens while the farm is closed.</p>
+      <p><b>What it earns inside this plan.</b> At ~8–10 hrs/week: 2–3 consoles plus a controller batch per week ≈ <b>$1,000–1,400/mo</b> steady, spiking past $2k in Q4 and easing off (by design) during Tapestry's open-season crunch. Run full-time instead, it models at ~$45k/yr flipping alone, or ~$70–85k with a local repair-service lane: the fallback job if the software lines stall. The service upgrade path is the real $/hr play regardless, since a mail-in/local HDMI job bills $120–190 against a $10 part with zero inventory float. Startup: ~$400 of tools + ~$2k revolving float, self-funding after month one.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>The 2-year scaling roadmap</h2>
+    <p class="kicker">Quarter by quarter. Early on, service work pays the bills while the leveraged lines seed. By year 2 the software carries it — and the 20-hr cap holds only because the Orion AI workforce + a VA/contractor absorb the support, content, and onboarding that would otherwise eat your time.</p>
+    <div class="road">
+      <div class="q">
+        <div class="qh"><span class="qn">Q1 · JUL–SEP ’26</span><span class="qt">Turn on every tap</span><span class="qexit">exit ~$5–6k/mo</span></div>
+        <ul>
+          <li><b>Web:</b> invoice Tapestry + Livingston; publish the productized offer ($1.5k build + $99/mo care) and book the next build.</li>
+          <li><b>Harris Aerial:</b> finish go-live (GBP verify, Droners/Thumbtack, send the 130-lead outreach) → first paid jobs.</li>
+          <li><b>Photography:</b> launch booking on the new Meet-the-Herd site for fall mini season.</li>
+          <li><b>SaaS:</b> flip Obscura Sites + Studio to paid at the researched prices ($19/mo · $19/1TB).</li>
+          <li><b>Design:</b> open the print/laser storefront (Etsy + local); seed listings.</li>
+          <li><b>Tapestry:</b> fall season open — weekend open houses + farmers markets; put the alpaca store online (Square); book fall weddings.</li>
+          <li><b>Milestone:</b> cross $6k/mo → <b>Dani stops working.</b></li>
+        </ul>
+      </div>
+      <div class="q">
+        <div class="qh"><span class="qn">Q2 · OCT–DEC ’26</span><span class="qt">Seed the B2B engine</span><span class="qexit">exit ~$10–11k/mo</span></div>
+        <ul>
+          <li><b>Backline:</b> ship the Zoho integration, package the suite, land <b>Golden Corral franchisee #1</b> as the reference customer at $199/loc/mo.</li>
+          <li><b>ORP:</b> the SEO content wave + email engine start compounding → ~$4k/mo.</li>
+          <li><b>Obscura:</b> first paying photographer + site cohorts.</li>
+          <li><b>Leverage now:</b> hand ORP content + support to the Orion workforce so growth doesn't add hours.</li>
+          <li><b>Tapestry:</b> close the fall season; start the silkie breeding flock (NPIP + biosecurity); lock the spring wedding calendar (2/mo).</li>
+          <li><b>Repair lane:</b> tool up (hot-air station, ~$400), burn through practice units, first console flips into the Q4 selling peak.</li>
+        </ul>
+      </div>
+      <div class="q">
+        <div class="qh"><span class="qn">Q3–Q4 · JAN–JUN ’27</span><span class="qt">Recurring overtakes labor</span><span class="qexit">exit ~$18k/mo</span></div>
+        <ul>
+          <li><b>Backline:</b> franchisee #1 → referrals inside the tight GC operator network → 5–8 locations.</li>
+          <li><b>ORP:</b> ~$8.5k/mo by month 12 as pages rank and the list grows; test wholesale/B2B accounts.</li>
+          <li><b>Obscura:</b> 50–100 paying subscribers.</li>
+          <li><b>Delegate:</b> a VA/contractor for Backline onboarding keeps you ≤20 hrs/week.</li>
+          <li><b>Life goal:</b> buy <b>Dani's car</b> (~$50k) from year-1 surplus — a luxury midsize SUV (<a href="https://trashpanda62.github.io/plans/danis-car.html" style="color:var(--clay)">shortlist for Dani here</a>).</li>
+          <li><b>Tapestry:</b> spring season — first on-property weddings + glamping live (3 units); add units toward 6; ~$25k first-year profit share.</li>
+          <li><b>Repair lane:</b> Jan–Feb sourcing season — stack broken consoles at trough prices, sell into the Mar–Apr tax-refund wave; test a local repair-service offer.</li>
+        </ul>
+      </div>
+      <div class="q">
+        <div class="qh"><span class="qn">Y2 H1 · JUL–DEC ’27</span><span class="qt">Scale the winners</span><span class="qexit">exit ~$29k/mo</span></div>
+        <ul>
+          <li><b>Backline:</b> 20–30 locations; case studies open other franchise brands beyond GC.</li>
+          <li><b>ORP:</b> ~$14k/mo; wholesale channel live.</li>
+          <li><b>Obscura:</b> 200+ subs; push the agency tier ($39–49).</li>
+          <li><b>Tapestry:</b> 6-unit glamping buildout; catering + silkies maturing toward the ~$271k gross run.</li>
+        </ul>
+      </div>
+      <div class="q">
+        <div class="qh"><span class="qn">Y2 H2 · JAN–JUN ’28</span><span class="qt">Cross $30k/mo</span><span class="qexit">exit ~$42k/mo</span></div>
+        <ul>
+          <li><b>Backline:</b> 40+ locations (~$8k/mo); <b>ORP</b> ~$21k/mo (traffic-researched); <b>Obscura</b> mature (~$5k/mo).</li>
+          <li><b>Systematize + delegate</b> so $30k/mo holds inside the time budget.</li>
+          <li><b>Life goal:</b> start the <b>Thor custom build</b> (~$75k); begin the war-chest for the house.</li>
+          <li><b>Tapestry:</b> full buildout (~$271k gross); your 33% profit share (~$60k/yr) starts feeding the war-chest.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Why 20 hrs/week forces this exact shape</h2>
+    <div class="leverage">
+      <p><b>Service work can't get you there.</b> Drone, photography, print/laser, repair flips, and web builds are billed by your time. Inside 20 hrs/week they top out around <b>$8–10k/mo combined</b> — real money, and enough to pay the bills and retire Dani, but a hard ceiling. Every hour spent shooting or flying is an hour not spent building the businesses.</p>
+      <p><b>Only three lines scale past that:</b> ORP (near-passive at 75–89% margin), the Backline franchise suite (recurring B2B — one sale = a location that pays every month), and Obscura SaaS (self-serve subscriptions). These earn while you sleep, so the plan pours your limited hours into <b>building and selling them</b>, not into more service labor.</p>
+      <p><b>The catch, stated plainly:</b> holding $30k/mo inside 20 hrs/week is only possible if the parts that scale with revenue — ORP fulfillment + content, customer support, Backline onboarding — are <b>absorbed by the Orion AI workforce and a contractor/VA.</b> Without that delegation, $30k/mo needs 40–50 hours. The AI company you already built is the thing that makes the time budget survivable.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>The full goal ladder, with target timing</h2>
+    <p class="kicker">Income milestones (teal) then life goals (clay), ordered by monetary value. Dates assume the base-case roadmap holds; the house compounds past the 2-year window on ~$150–200k/yr of surplus at $30k+/mo, plus your 33% share of Tapestry profit (~$60k/yr) — which pulls the tail date in by about a year.</p>
+    <div class="ladder">
+      <div class="rung"><span class="when">Now · Jul ’26</span><span class="g">$100 &amp; $1,000 / mo<small>already cleared — ORP is at ~$1,400/mo today</small></span><span class="amt">done</span></div>
+      <div class="rung"><span class="when">~Oct 2026</span><span class="g">$3,000 / mo — “a real job”<small>your end-of-Feb-2027 floor; base case clears it by ~October</small></span><span class="amt">$3k/mo</span></div>
+      <div class="rung"><span class="when">~Nov–Dec ’26</span><span class="g">$6,000 / mo sustained<small>Dani stops working — income covers the ~$3,500/mo household; repair lane's Q4 pulls it in ~a month</small></span><span class="amt">Phase 1 ✓</span></div>
+      <div class="rung"><span class="when">~Feb 2027</span><span class="g">First $10,000 month<small>a build spike + peak season crosses it early</small></span><span class="amt">$10k</span></div>
+      <div class="rung life"><span class="when">~Oct 2027</span><span class="g">Clear the Beyond Finance debt<small>first payoff priority — kills the drag before any discretionary goal</small></span><span class="amt">$55k</span></div>
+      <div class="rung life"><span class="when">~Jan 2028</span><span class="g">Dani's car<small>luxury midsize SUV — reliable + most comfortable · <a href="https://trashpanda62.github.io/plans/danis-car.html" style="color:var(--teal)">shortlist</a></small></span><span class="amt">~$50k</span></div>
+      <div class="rung"><span class="when">~Feb 2028</span><span class="g">$30,000 / mo run-rate<small>carried by ORP + Backline + Obscura</small></span><span class="amt">$30k/mo</span></div>
+      <div class="rung life"><span class="when">~May 2028</span><span class="g">Thor → custom build<small>begins once the $30k run-rate frees the cash</small></span><span class="amt">~$75k</span></div>
+      <div class="rung life"><span class="when">~2029</span><span class="g">House in a great-weather area — all goals complete<small>funded by accumulated surplus + farm share; farm share pulls it ~a year early</small></span><span class="amt">~$475k</span></div>
+    </div>
+  </section>
+
+  <section>
+    <style>
+      .fl{display:grid;gap:8px;}
+      .fy{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);}
+      .fy .yr{font-family:var(--mono);font-weight:700;color:var(--teal);font-size:13px;}
+      .fy .ev{font-size:13.5px;color:var(--muted);} .fy .ev b{font-weight:600;color:var(--ink);}
+      .fy .cum{font-family:var(--mono);font-size:12.5px;color:var(--money);font-weight:600;text-align:right;white-space:nowrap;}
+      .fy.done{border-color:color-mix(in srgb,var(--clay) 45%,var(--line));}
+      .fy.finish{border-color:color-mix(in srgb,var(--money) 55%,var(--line));background:color-mix(in srgb,var(--money) 8%,var(--card));}
+    </style>
+    <h2>The finish line — funding every goal</h2>
+    <p class="kicker">Past the 24-month income sprint, the plan runs until the last goal is bought. This is accumulated surplus — income (the run-rate above, which now includes the repair-flip lane's ~$12–18k/yr) minus ~28% tax, ~$3,500/mo living, and ~10% reinvested, plus <b>your 33% share of Tapestry profit</b> (~$25k in 2027 ramping to ~$60k/yr) — funding each goal in order, starting with clearing the $55k Beyond Finance debt. Every goal is complete around <b>2030</b> (swings 2029–31 with how income holds); the farm share is what pulls it in ~a year.</p>
+    <div class="fl">
+      <div class="fy"><span class="yr">’26–27</span><span class="ev">Machine built; income ramps toward ~$18k/mo. Surplus + first Tapestry share (~$25k) seed the war-chest.</span><span class="cum">~$56k saved</span></div>
+      <div class="fy done"><span class="yr">’27–28</span><span class="ev"><b>Beyond Finance debt cleared ($55k)</b> first, then <b>Dani's car</b> + <b>Thor build</b> (~$180k); income exits ~$42k/mo.</span><span class="cum">~$79k banked</span></div>
+      <div class="fy"><span class="yr">’28–29</span><span class="ev">Hold ~$46k/mo + ~$60k/yr farm share; bank toward the house.</span><span class="cum">~$452k banked</span></div>
+      <div class="fy finish"><span class="yr">’29–30</span><span class="ev"><b>House in a great-weather area</b> bought (~$475k). All goals complete, ~a year early on the farm share.</span><span class="cum">🏁 done</span></div>
+    </div>
+  </section>
+
+  <section>
+    <style>
+      .wk{display:grid;gap:8px;}
+      .wr{display:grid;grid-template-columns:52px 1fr;gap:14px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 15px;box-shadow:var(--shadow);}
+      .wr .wn{font-family:var(--mono);font-weight:700;color:var(--teal);font-size:12px;padding-top:2px;}
+      .wr .wa{font-size:13.5px;color:var(--muted);} .wr .wa b{color:var(--ink);font-weight:600;}
+      .wr.cash{border-left:none;background:color-mix(in srgb,var(--money) 5%,var(--card));}
+    </style>
+    <h2>Start Monday — Q1 week by week</h2>
+    <p class="kicker">The first 12 weeks — the weeks of Jul 21 through mid-Oct 2026 — fastest cash first. Most of these are "Pending Steve" items already built and waiting in the vault, so this is execution, not new building. Target: exit Q1 near $6k/mo with Dani's exit in sight.</p>
+    <div class="wk">
+      <div class="wr cash"><span class="wn">Wk 1</span><span class="wa"><b>Invoice Tapestry + Livingston</b> (Square) for the builds — money you may already be owed. Finish the <b>Harris Aerial GBP video verification</b>.</span></div>
+      <div class="wr cash"><span class="wn">Wk 2</span><span class="wa">Create <b>Droners.io + Thumbtack</b> profiles; <b>send the first 20 outreach messages</b> (list + drafts staged in Inbox/reports). Flip <b>Obscura Studio + Sites to paid</b> ($19/1TB · $19/mo).</span></div>
+      <div class="wr cash"><span class="wn">Wk 3</span><span class="wa"><b>Launch photography booking</b> on the Meet-the-Herd site; post fall mini-session dates. <b>Publish ModReady on Nexus</b> + opt into Donation Points.</span></div>
+      <div class="wr"><span class="wn">Wk 4</span><span class="wa"><b>Open the Design storefront</b> (Etsy + local); list 10–15 print/laser SKUs. <b>Publish the productized web offer</b> ($1.5k build + $99/mo care); pitch 3–5 local businesses. <b>Put the Tapestry alpaca store online</b> (Square) so weekend + market sales also sell on the website.</span></div>
+      <div class="wr cash"><span class="wn">Wk 5</span><span class="wa">Execute + deliver the <b>first drone jobs / photo sessions</b>. <b>ORP trust pass</b> — confirm the 4 cron tasks live, add reviews + COA scans (trust = conversion).</span></div>
+      <div class="wr"><span class="wn">Wk 6</span><span class="wa"><b>Order cosmetic-skincare white-label samples</b> (Nardo's, ~100-unit MOQ); begin <b>MoCRA registration</b> on Cosmetics Direct.</span></div>
+      <div class="wr"><span class="wn">Wk 7</span><span class="wa"><b>Scope the Backline → Zoho integration</b> (delegate the build to Codex); open the franchisee-#1 conversation.</span></div>
+      <div class="wr"><span class="wn">Wk 8</span><span class="wa">Skincare: <b>finalize the 4 SKUs + labels</b> (claims appearance-only); submit the product listings. <b>Tapestry:</b> book fall open houses + farmers markets; start the silkie breeding setup (NPIP).</span></div>
+      <div class="wr"><span class="wn">Wk 9</span><span class="wa"><b>Ship the Zoho integration</b>; first <b>Obscura marketing push</b> to photographer communities.</span></div>
+      <div class="wr cash"><span class="wn">Wk 10</span><span class="wa"><b>Launch the skincare SKUs</b> on the ORP store + email the list. Clear the drone/photo delivery backlog.</span></div>
+      <div class="wr"><span class="wn">Wk 11</span><span class="wa"><b>Demo Backline to franchisee #1</b>. Push the web offer to the next 5 leads.</span></div>
+      <div class="wr"><span class="wn">Wk 12</span><span class="wa"><b>Review Q1 numbers; double down on the top earner.</b> Confirm the $6k/mo trajectory → Dani's exit.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Assumptions &amp; honest caveats</h2>
+    <div class="caveats">
+      <ul>
+        <li><b>This is a stretch plan, not a forecast.</b> $30k/mo in 24 months requires the B2B and e-commerce lines to actually scale — 40+ Backline locations, ORP ranking and converting, a real Obscura subscriber base. Each is plausible; all three hitting on schedule is the optimistic path.</li>
+        <li><b>ORP now has real traffic research behind it:</b> ranked competitors do $330k–$1M+/mo, and the former leader (Peptide Sciences) did ~$7.4M/mo before voluntarily shutting down March 2026 — a demand vacuum a new US vendor can capture. ORP's base case reaches <b>~$21k/mo by month 24 on just ~6,000 visits/mo</b>, a fraction of any competitor, so its ceiling is traffic + trust, not market size. Two flags: the climb still depends on SEO ranking (slow, 6–12 mo) and it grows to ~half the $30k — a <b>concentration + regulatory risk</b> (a top vendor just chose to shut down). Backline + Obscura are the deliberate diversification against it.</li>
+        <li><b>ORP's diversification is now researched — a cosmetic peptide skincare brand:</b> 4 SKUs (GHK-Cu copper serum, Matrixyl, Argireline, peptide eye cream), white-labeled (Nardo's, ~100-unit MOQ), ~$5 COGS at $38–58 retail = <b>~90% gross margin</b>, MoCRA-registered, claims kept appearance-only. Base case ~$10–15k/mo by month 18 off the existing ORP email list. It makes the ORP contribution <b>legal, durable, and less concentration-prone</b> — the hedge against the RUO regulatory risk. Systemic/edible research peptides stay off the table as unapproved drugs.</li>
+        <li><b>The 20-hr/week cap only holds with delegation.</b> The plan explicitly leans on the Orion workforce + a contractor/VA for the revenue-scaling grunt work. Without that, the same income needs roughly double the hours.</li>
+        <li><b>Tapestry's ~$271k is a target buildout, anchored to a real proof point.</b> Whispering Oaks did ~$80k/yr on the store + walks alone; this model rebuilds that floor and layers weddings, glamping, and catering on top. It's seasonal (7 open months) and labor-heavy while open, and the wedding + glamping figures assume the full 6-unit buildout and a booked 2-weddings-a-month calendar — those are the two swing factors. The store + walks (~$75k) are the safe floor; the events are the upside. Silkie breeding (~$10k) needs NPIP certification + biosecurity to ship birds or eggs across state lines. <b>Folding into the timeline:</b> the funding math counts <b>your 33% profit share</b> (a three-way with Tari &amp; Dale). Margins run ~50% on sold products but ~75–85% on weddings + experiences, so the blend is ~65% net (~$180k/yr profit) — your share ~$60k/yr at buildout, ~$25k in 2027, which pulls the finish to ~2030; the $30k/mo run-rate curve itself stays software-only.</li>
+        <li><b>Taxes + reinvestment are in the surplus math</b> (~25–30% effective, ~10% back into the business). Phase-2 dates use net-of-both surplus over ~$3,500/mo living costs.</li>
+        <li><b>The house (~Year 3–4) is the plan's tail</b> — funded by accumulated surplus once income holds at $30k+/mo, plus the farm profit share. The 24-month sprint builds the machine; 2027–2030 pays off the goal list (the $55k Beyond Finance debt first, the house last). The finish swings a year either way with how income and taxes land.</li>
+        <li><b>The repair-flip lane rides on eBay's rails.</b> New-seller limits and payout holds throttle the first 60–90 days, a suspended account is a stopped lane, and the first month of consoles includes tuition units (a lifted pad kills the board). Margins assume category-norm success rates after ~20 practice units. The local service lane is the hedge, and figures here are the part-time (~8–10 hr/wk) case, not the full-time model.</li>
+        <li><b>Two inputs still refine this:</b> the ORP traffic ceiling, and whether Backline can move as fast through the GC franchise network as modeled. Both move the $30k date more than anything else.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>Model updated 2026-07-30 (repair &amp; flip lane added) · Orion 24-month income strategy · figures are planning estimates anchored to live 2026 rate cards + current ORP run-rate · Tapestry folded in at your 33% profit share</footer>
+</div>
+
+<script>
+(function(){
+  // ---- run-rate curve ----
+  // 24 monthly recurring run-rate values ($k), Jul '26 → Jun '28.
+  // Includes the repair & flip lane from Oct '26: ~+0.3→1.2 through Q4 '26 peak,
+  // dips Jan '27 (dead selling window), +1.2–1.4 through the refund wave, ~+1.0
+  // during farm season, ~+2.0 Q4 '27 peak, ~+1.0 Jan–Feb '28, +1.4 after.
+  var RR=[2.3,3.0,3.8,4.9,6.4,8.0,8.7,10.5,12.5,14.3,16.0,17.2,18.4,20,22,24.6,27,28.8,29.6,32,35.4,38.4,41.4,44];
+  var svg=document.getElementById('curve');
+  var W=760,H=340,padL=44,padR=16,padT=16,padB=42;
+  var plotW=W-padL-padR, plotH=H-padT-padB;
+  var maxY=46; // $k
+  var n=RR.length;
+  function x(i){return padL + (i/(n-1))*plotW;}
+  function y(v){return padT + (1-v/maxY)*plotH;}
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+
+  // threshold guides
+  [ [6,'$6k · Dani retires'],[10,'$10k'],[30,'$30k'] ].forEach(function(g){
+    svg.appendChild(el('line',{x1:padL,y1:y(g[0]),x2:W-padR,y2:y(g[0]),stroke:'var(--money)','stroke-opacity':.35,'stroke-dasharray':'4 4','stroke-width':1}));
+    var t=el('text',{x:W-padR,y:y(g[0])-5,'text-anchor':'end','font-size':11,fill:'var(--faint)','font-family':'var(--mono)'});t.textContent=g[1];svg.appendChild(t);
+  });
+  // y axis labels
+  [0,10,20,30,40].forEach(function(v){
+    var t=el('text',{x:padL-8,y:y(v)+4,'text-anchor':'end','font-size':10.5,fill:'var(--faint)','font-family':'var(--mono)'});t.textContent='$'+v+'k';svg.appendChild(t);
+  });
+  // area + line path
+  var d='M '+x(0)+' '+y(RR[0]);
+  for(var i=1;i<n;i++) d+=' L '+x(i)+' '+y(RR[i]);
+  var area=d+' L '+x(n-1)+' '+y(0)+' L '+x(0)+' '+y(0)+' Z';
+  svg.appendChild(el('path',{d:area,fill:'var(--teal)','fill-opacity':.12}));
+  svg.appendChild(el('path',{d:d,fill:'none',stroke:'var(--teal)','stroke-width':2.5,'stroke-linejoin':'round'}));
+
+  // x axis date ticks (every 3 months from Jul 2026)
+  var XL=['Jul ’26','Oct ’26','Jan ’27','Apr ’27','Jul ’27','Oct ’27','Jan ’28','Apr ’28'];
+  for(var m=0,ix=0;m<n;m+=3,ix++){
+    var t=el('text',{x:x(m),y:H-padB+18,'text-anchor':'middle','font-size':10,fill:'var(--faint)','font-family':'var(--mono)'});t.textContent=XL[ix]||'';svg.appendChild(t);
+  }
+  var t2=el('text',{x:x(n-1),y:H-padB+18,'text-anchor':'middle','font-size':10,fill:'var(--faint)','font-family':'var(--mono)'});t2.textContent='Jul ’28';svg.appendChild(t2);
+
+  // milestone + life-goal markers
+  var marks=[
+    {m:3,label:'$3k · real job',type:'ms'},
+    {m:4,label:'Dani retires',type:'ms'},
+    {m:7,label:'$10k mo',type:'ms'},
+    {m:15,label:'debt clear',type:'life'},
+    {m:19,label:'$30k/mo',type:'ms'},
+    {m:22,label:'Thor',type:'life'}
+  ];
+  marks.forEach(function(mk){
+    var col = mk.type==='life' ? 'var(--clay)' : 'var(--money)';
+    var yy = y(RR[mk.m]);
+    svg.appendChild(el('circle',{cx:x(mk.m),cy:yy,r:5,fill:col,stroke:'var(--card)','stroke-width':2}));
+    var above = mk.type==='life';
+    var ty = above ? yy-12 : yy-12;
+    var tx = x(mk.m);
+    var anchor = mk.m>20?'end':(mk.m<3?'start':'middle');
+    var lab=el('text',{x:tx,y:ty,'text-anchor':anchor,'font-size':10.5,fill:col,'font-family':'var(--mono)','font-weight':700});
+    lab.textContent=mk.label;svg.appendChild(lab);
+  });
+
+  // ---- $30k composition ----
+  var COMP=[
+    {name:'ORP — research peptides',note:'RUO · high margin',v:11,cap:false},
+    {name:'ORP — cosmetic skincare',note:'legal topical · ~90% margin',v:10,cap:false},
+    {name:'Backline suite',note:'~40 GC locations @ $199',v:8,cap:false},
+    {name:'Obscura SaaS',note:'Studio + Sites subscribers',v:5,cap:false},
+    {name:'Web design',note:'builds + care plans',v:4,cap:false},
+    {name:'Design — 3D/laser',note:'semi-passive machine time',v:3,cap:false},
+    {name:'Photography',note:'labor-capped',v:2.4,cap:true},
+    {name:'Repair & flip',note:'consoles + GPU snipes · labor-capped',v:2,cap:true},
+    {name:'Harris Aerial',note:'labor-capped',v:1.8,cap:true},
+    {name:'Digital tail',note:'mods · packs · content',v:0.6,cap:false}
+  ];
+  var comp=document.getElementById('comp');
+  var maxV=Math.max.apply(null,COMP.map(function(c){return c.v;}));
+  COMP.forEach(function(c){
+    var row=document.createElement('div');row.className='crow'+(c.cap?' capped':'');
+    row.innerHTML='<div class="cname">'+c.name+'<small>'+c.note+'</small></div>'+
+      '<div><div class="cbar" style="width:'+(c.v/maxV*100)+'%"></div></div>'+
+      '<div class="cval">$'+c.v.toFixed(c.v<1?1:0)+'k</div>';
+    comp.appendChild(row);
+  });
+  var tot=COMP.reduce(function(a,b){return a+b.v;},0);
+  var trow=document.createElement('div');trow.className='crow';
+  trow.innerHTML='<div class="cname">Total run-rate</div><div></div><div class="cval" style="font-size:15px">$'+tot.toFixed(0)+'k</div>';
+  comp.appendChild(trow);
+})();
+</script>
+
+</body>
+</html>
