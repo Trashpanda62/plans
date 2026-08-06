@@ -5,8 +5,8 @@
     "render": "remotion render src/index.ts BookOpen out/book-open.mp4"
   },
   "dependencies": {
-    "@remotion/cli": "4.0.315",
-    "remotion": "4.0.315",
+    "@remotion/cli": "4.0.410",
+    "remotion": "4.0.410",
     "react": "19.0.0",
     "react-dom": "19.0.0"
   }
