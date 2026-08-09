@@ -98,6 +98,17 @@ h2{
 }
 .free::before{color:var(--sage)}
 .free b{color:var(--sage)}
+.script{
+  background:var(--card);border:1px solid var(--rule);border-radius:12px;
+  padding:1rem 1.1rem;margin:1rem 0;
+}
+.script p:last-child{
+  margin:0;font-family:Georgia,serif;font-size:1.04rem;line-height:1.55;color:var(--ink);
+}
+.script-label{
+  margin:0 0 .5rem;font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;
+  font-weight:700;color:var(--clay);
+}
 ol.steps{margin:.6rem 0 0;padding-left:1.2rem}
 ol.steps li{margin-bottom:.55rem}
 footer{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--rule);
@@ -117,27 +128,70 @@ footer a{color:var(--teal)}
 <header>
   <p class="eyebrow">Tapestry Acres &middot; Crunchy Rainbows</p>
   <h1>Order sheet</h1>
-  <p class="sub">Everything to buy for the first 500-unit run, in the order it matters.
-  Every card is a tappable link straight to the product.</p>
+  <p class="sub">Settle the bag size first for the price of a coffee, then buy in bulk once
+  you have weighed a real filled bag. Every card is a tappable link straight to the product.</p>
   <div class="total">
-    <b>$634.85</b>
-    <span>first order, confirmed prices, includes candy &mdash; sealer is the only one-time cost</span>
+    <b>$7.99</b>
+    <span>to decide the size &middot; then about $635 for the full 500-unit run once you know
+    which bag won</span>
   </div>
 </header>
 
 <h2 style="margin-top:2rem">Do these in this order</h2>
 <ol class="steps">
-  <li>Order pouches, candy, desiccant and the sealer today.</li>
-  <li>When they arrive, <b>fill one bag and weigh it.</b> That number is the net weight claim
-    and nothing gets printed until it exists.</li>
-  <li>Send the printers a quote request for 4&nbsp;&times;&nbsp;2.5 and 4&nbsp;&times;&nbsp;5
-    BOPP, 500 and 1,000.</li>
+  <li><b>Order the $7.99 sample kit</b> below. Eight pouches across four sizes, free shipping.</li>
+  <li>Freeze-dry a batch, fill one of each size, <b>weigh them</b>. Now you know both the size
+    and the net weight, and neither is a guess.</li>
+  <li>Order the winning size in bulk, plus candy, desiccant and the sealer.</li>
+  <li>Send printers a quote request for the label sizes that suit the bag you picked.</li>
   <li>Buy the GTIN; the barcode regenerates from it.</li>
   <li>Print a test label and <b>scan it with a real scanner</b> before committing to a run.</li>
   <li>Call insurance. File the two FDA forms.</li>
 </ol>
 
-<h2>Pouches</h2>
+<h2>Start here &mdash; settle the size for $8</h2>
+<p class="why">There is no point guessing the bag. Fill one of each and look at it.</p>
+
+<a class="buy" href="https://packfreshusa.com/stand-up-pouch-sample-kit/">
+  <span class="vendor">PackFreshUSA</span>
+  <span class="what">Stand-Up Pouch Sample Kit &mdash; 8 pouches, 4 sizes<span class="pick">Do this first</span></span>
+  <span class="meta"><span class="price">$7.99</span><span>free shipping &middot; 4x6x2.5, 5x8.5x3, 6x9.5x3.5, 7.5x11.5x3.5</span></span>
+</a>
+
+<div class="flag" data-label="Know what you are getting">
+  These sample pouches are <b>heat-seal only, no zipper</b>, so they are not sellable stock.
+  That does not matter for what you are using them for: you are deciding size and net weight,
+  and a bag with no zipper fills and weighs exactly the same. Two of the eight are clear or
+  silver/clear so you can see how the colour reads through the film.
+</div>
+
+<a class="buy alt" href="https://www.vistaprint.com/packaging/custom-pouches/custom-pouches-sample-kit">
+  <span class="vendor">Vistaprint</span>
+  <span class="what">Custom Pouches Sample Kit &mdash; 20 samples</span>
+  <span class="meta"><span class="price">$4.99</span><span>free shipping &middot; mixed sizes and materials, some with zippers</span></span>
+</a>
+
+<h2>Then: 100 of the winning size, to test-sell</h2>
+<p class="why">Real zippered retail stock in one size, before committing to a thousand.
+These are the price-confirmed options.</p>
+
+<a class="buy" href="https://www.clearbags.com/4-x-2-3-8-x-6-outer-dimensions-matte-black-stand-up-zipper-pouch-bag-w-vertical-window-100-pieces-zbgv2mb.html">
+  <span class="vendor">ClearBags</span>
+  <span class="what">4 x 2.4 x 6 in, window, zipper + notch</span>
+  <span class="meta"><span class="price">$23.27</span><span>100 bags &middot; $0.23 each &middot; the sampler size</span></span>
+</a>
+<a class="buy" href="https://www.clearbags.com/kraft-stand-up-zipper-pouch-w-vertical-window-5-1-8-x-3-1-8-x-8-1-8-100-pack-zbgv3k.html">
+  <span class="vendor">ClearBags</span>
+  <span class="what">5.1 x 3.1 x 8.1 in, window, zipper + notch<span class="pick">Likely</span></span>
+  <span class="meta"><span class="price">$38.14</span><span>100 bags &middot; $0.38 each &middot; matches the market's 4&ndash;6 oz unit</span></span>
+</a>
+<a class="buy" href="https://www.clearbags.com/zipper-pouch-fda-gusset-bag-6-x-2-1-2-x-9-zbg69.html">
+  <span class="vendor">ClearBags</span>
+  <span class="what">7 x 3.9 x 9.9 in, fully clear, zipper + notch</span>
+  <span class="meta"><span class="price">$33.41</span><span>100 bags &middot; $0.33 each &middot; the 8 oz step-up</span></span>
+</a>
+
+<h2>Pouches &mdash; bulk, after the size is settled</h2>
 <p class="why">5&nbsp;&times;&nbsp;8&nbsp;&times;&nbsp;3&nbsp;in, clear front so the colour sells
 itself, foil back, zipper plus a tear notch. The notch matters: it means the bag is built to be
 heat-sealed above the zipper.</p>
@@ -276,13 +330,29 @@ but show another company as the brand owner, and buying offices reject them at o
   <span class="meta"><span class="price">Free</span><span>needs your EIN &middot; renewed even years</span></span>
 </a>
 
-<h2>The one phone call</h2>
-<p class="why">Product liability, with the retailer named as additional insured. Your property
-policy is not product liability. This is the longest lead time on the whole list and the one
-thing that stops a deal &mdash; no buying office takes a case without a certificate. Start it
-before you pitch anyone.</p>
+<h2>The one phone call &mdash; product liability</h2>
+<p class="why">Insurance that covers you if someone eats the candy and gets hurt, sick, or
+chips a tooth, and sues. The farm policy covers the <em>farm</em> &mdash; someone tripping in
+the barn. It stops at the property line. Once a bag leaves in a customer's hands it covers
+nothing.</p>
+<p class="why">Stores care because if a customer sues over your candy they sue the shop too,
+for selling it. No buying office will take a case until your insurance covers them as well.
+That is what &ldquo;additional insured&rdquo; means.</p>
 
+<div class="script">
+  <p class="script-label">Say this to whoever writes the farm policy</p>
+  <p>&ldquo;I've started manufacturing and wholesaling a packaged food product from the farm.
+  I need product liability coverage, and I'll need to name retail stores as additional insured
+  on it. What does that cost, and can you send me a certificate of insurance I can forward to
+  buyers?&rdquo;</p>
+</div>
 
+<p class="why">Three phrases do all the work: <b>product liability</b>, <b>additional
+insured</b>, and <b>certificate of insurance</b> &mdash; a COI, the one-page proof they issue
+you. Ask for $1M per occurrence and $2M aggregate; that is what small retailers ask for.
+Budget roughly $400&ndash;1,200 a year at this size.</p>
+<p class="why">It sits early on the list because underwriting takes days, not because it is
+hard. The call itself is ten minutes.</p>
 
 <footer>
   <p><a href="tapestry-candy-label-proof.html">&larr; Label proof</a> &middot;
