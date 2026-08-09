@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="light dark">
+<title>Crunchy Rainbows — order sheet · Tapestry Acres</title>
+<style>
+:root{
+  --parchment:#f3efe7; --ink:#2b2620; --sage:#7a8b5a; --clay:#b9824f;
+  --teal:#0b5566; --rule:#ddd5c6; --card:#fbf9f4; --muted:#6b6357;
+  --ok:#4a7c3f; --warn:#a8621c;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --parchment:#171512; --ink:#e9e3d8; --sage:#9db076; --clay:#d79a61;
+    --teal:#4fb5cf; --rule:#332e27; --card:#1f1c18; --muted:#a29889;
+    --ok:#7fbf6e; --warn:#e0a05a;
+  }
+}
+:root[data-theme="dark"]{
+  --parchment:#171512; --ink:#e9e3d8; --sage:#9db076; --clay:#d79a61;
+  --teal:#4fb5cf; --rule:#332e27; --card:#1f1c18; --muted:#a29889;
+  --ok:#7fbf6e; --warn:#e0a05a;
+}
+:root[data-theme="light"]{
+  --parchment:#f3efe7; --ink:#2b2620; --sage:#7a8b5a; --clay:#b9824f;
+  --teal:#0b5566; --rule:#ddd5c6; --card:#fbf9f4; --muted:#6b6357;
+  --ok:#4a7c3f; --warn:#a8621c;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;padding:0 0 4rem;background:var(--parchment);color:var(--ink);
+  font:16px/1.6 -apple-system,"Segoe UI",system-ui,sans-serif;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.1rem}
+header{padding:2.25rem 0 1.25rem}
+.eyebrow{
+  margin:0 0 .5rem;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--clay);font-weight:700;
+}
+h1{
+  font-family:Georgia,"Iowan Old Style",serif;font-weight:700;
+  margin:0 0 .5rem;font-size:clamp(1.7rem,6vw,2.4rem);line-height:1.1;
+  letter-spacing:-.015em;color:var(--teal);text-wrap:balance;
+}
+.sub{margin:0;color:var(--muted);font-size:1.02rem}
+.total{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:.6rem;
+  margin:1.25rem 0 0;padding:.9rem 1.1rem;background:var(--card);
+  border:1px solid var(--rule);border-radius:12px;
+}
+.total b{font-size:1.6rem;font-family:Georgia,serif;color:var(--teal);
+  font-variant-numeric:tabular-nums}
+.total span{color:var(--muted);font-size:.9rem}
+h2{
+  font-family:Georgia,serif;font-size:1.15rem;margin:2.25rem 0 .25rem;
+  color:var(--ink);letter-spacing:-.01em;
+  border-bottom:2px solid var(--sage);padding-bottom:.35rem;
+}
+.why{margin:.5rem 0 .9rem 0;color:var(--muted);font-size:.93rem}
+.buy{
+  display:block;background:var(--card);border:1px solid var(--rule);
+  border-radius:12px;padding:.95rem 1.05rem;margin:0 0 .7rem;
+  text-decoration:none;color:inherit;
+}
+.buy:hover,.buy:focus-visible{border-color:var(--sage);outline:none}
+.buy:focus-visible{box-shadow:0 0 0 3px color-mix(in srgb,var(--sage) 35%,transparent)}
+.buy .vendor{
+  font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--clay);font-weight:700;
+}
+.buy .what{display:block;margin:.2rem 0 .3rem;font-weight:600;font-size:1.02rem;color:var(--teal)}
+.buy .meta{display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;font-size:.9rem;color:var(--muted)}
+.buy .price{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.pick{
+  display:inline-block;margin-left:.4rem;font-size:.68rem;letter-spacing:.09em;
+  text-transform:uppercase;font-weight:700;color:#fff;background:var(--ok);
+  padding:.13rem .45rem;border-radius:99px;
+}
+.alt{opacity:.82}
+.flag{
+  border:1px solid color-mix(in srgb,var(--warn) 45%,var(--rule));
+  background:color-mix(in srgb,var(--warn) 7%,transparent);
+  padding:.9rem 1.05rem;border-radius:10px;margin:.9rem 0;font-size:.95rem;
+}
+.flag::before{
+  content:attr(data-label);display:block;margin-bottom:.35rem;
+  font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;
+  font-weight:700;color:var(--warn);
+}
+.flag b{color:var(--warn)}
+.free{
+  border-color:color-mix(in srgb,var(--sage) 50%,var(--rule));
+  background:color-mix(in srgb,var(--sage) 10%,transparent);
+}
+.free::before{color:var(--sage)}
+.free b{color:var(--sage)}
+ol.steps{margin:.6rem 0 0;padding-left:1.2rem}
+ol.steps li{margin-bottom:.55rem}
+footer{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--rule);
+  color:var(--muted);font-size:.88rem}
+footer a{color:var(--teal)}
+@media print{
+  body{background:#fff}
+  .buy{break-inside:avoid;border-color:#bbb}
+  a[href]::after{content:" (" attr(href) ")";font-size:.72em;color:#555;word-break:break-all}
+  .noprint{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Tapestry Acres &middot; Crunchy Rainbows</p>
+  <h1>Order sheet</h1>
+  <p class="sub">Everything to buy for the first 500-unit run, in the order it matters.
+  Every card is a tappable link straight to the product.</p>
+  <div class="total">
+    <b>$634.85</b>
+    <span>first order, confirmed prices, includes candy &mdash; sealer is the only one-time cost</span>
+  </div>
+</header>
+
+<h2 style="margin-top:2rem">Do these in this order</h2>
+<ol class="steps">
+  <li>Order pouches, candy, desiccant and the sealer today.</li>
+  <li>When they arrive, <b>fill one bag and weigh it.</b> That number is the net weight claim
+    and nothing gets printed until it exists.</li>
+  <li>Send the printers a quote request for 4&nbsp;&times;&nbsp;2.5 and 4&nbsp;&times;&nbsp;5
+    BOPP, 500 and 1,000.</li>
+  <li>Buy the GTIN; the barcode regenerates from it.</li>
+  <li>Print a test label and <b>scan it with a real scanner</b> before committing to a run.</li>
+  <li>Call insurance. File the two FDA forms.</li>
+</ol>
+
+<h2>Pouches</h2>
+<p class="why">5&nbsp;&times;&nbsp;8&nbsp;&times;&nbsp;3&nbsp;in, clear front so the colour sells
+itself, foil back, zipper plus a tear notch. The notch matters: it means the bag is built to be
+heat-sealed above the zipper.</p>
+
+<a class="buy" href="https://store.standuppouches.net/products/stand-up-pouch-5x8x3-clear-front-silver-foil-back-1-000pcs">
+  <span class="vendor">StandUpPouches.net</span>
+  <span class="what">5x8x3 clear front / silver foil back, 5 mil<span class="pick">Pick</span></span>
+  <span class="meta"><span class="price">$202.00</span><span>1,000 bags &middot; $0.20 each</span></span>
+</a>
+<a class="buy alt" href="https://www.amazon.com/PackFreshUSA-Professional-Packaging-Resealable-Heat-Sealable/dp/B013PWJHZS">
+  <span class="vendor">Amazon &middot; PackFreshUSA</span>
+  <span class="what">Same size, sold in 500s</span>
+  <span class="meta"><span class="price">verify price</span><span>500 bags &middot; smaller first commitment</span></span>
+</a>
+<a class="buy alt" href="https://www.impakcorporation.com/BMMPF03ZRC">
+  <span class="vendor">Impak</span>
+  <span class="what">5x8x3 frosted clear, zipper + notch</span>
+  <span class="meta"><span class="price">$167.75</span><span>1,000 &middot; cheapest, but no foil back</span></span>
+</a>
+
+<h2>Candy</h2>
+<p class="why">About 50&nbsp;oz of finished product per 54&nbsp;oz jar &mdash; freeze-drying takes
+water, not much weight. Twenty jars covers roughly 1,000&nbsp;oz.</p>
+
+<a class="buy" href="https://www.samsclub.com/ip/Skittles-Original-Chewy-Candy-Bulk-Jar-54-oz/2200002260">
+  <span class="vendor">Sam's Club</span>
+  <span class="what">Skittles Original, 54 oz bulk jar<span class="pick">Pick</span></span>
+  <span class="meta"><span class="price">$10.63</span><span>$0.20/oz &middot; buy 20</span></span>
+</a>
+<a class="buy alt" href="https://www.costco.com/skittles-bite-size-candies,-original,-54-oz.product.100640009.html">
+  <span class="vendor">Costco</span>
+  <span class="what">Skittles Original, 54 oz</span>
+  <span class="meta"><span class="price">$9.99&ndash;$10.49</span><span>cheaper if you have a membership</span></span>
+</a>
+
+<h2>Desiccant</h2>
+<p class="why">Silica gel, not oxygen absorbers. Candy fails by picking up moisture and going
+tacky, and O2 absorbers do nothing about that. Tyvek so it can't shed dust into the product.</p>
+
+<a class="buy" href="https://www.widgetco.com/2g-silica-gel-desiccant-packs-tyvek">
+  <span class="vendor">WidgetCo</span>
+  <span class="what">2 g Tyvek silica gel, food grade<span class="pick">Pick</span></span>
+  <span class="meta"><span class="price">$51.00</span><span>1,000 packets &middot; $0.05 each</span></span>
+</a>
+<a class="buy alt" href="https://www.widgetco.com/products/1g-silica-gel-desiccant-tyvek-packs-1000-packs">
+  <span class="vendor">WidgetCo</span>
+  <span class="what">1 g Tyvek, same spec</span>
+  <span class="meta"><span class="price">$42.00</span><span>1,000 &middot; a bit small for this bag</span></span>
+</a>
+
+<h2>Sealer</h2>
+<p class="why">Seal width is the spec that matters, not length. A 5&nbsp;mm band holds on 7-mil
+foil laminate; the narrow 1.6&nbsp;mm units are built for thin poly and can channel. Bought once.</p>
+
+<a class="buy" href="https://www.impakcorporation.com/IPK-305H">
+  <span class="vendor">Impak</span>
+  <span class="what">IPK-305H, 12 in, 5 mm seal<span class="pick">Pick</span></span>
+  <span class="meta"><span class="price">$58.25</span><span>on sale from $98.50</span></span>
+</a>
+<a class="buy alt" href="https://bluealpinefreezedryers.com/products/impulse-heat-sealer-12in">
+  <span class="vendor">Blue Alpine</span>
+  <span class="what">PFS-300, 12 in, 5 mm, with stand</span>
+  <span class="meta"><span class="price">$78.40</span><span>sturdier body</span></span>
+</a>
+
+<h2>Labels</h2>
+
+<div class="flag" data-label="Check before ordering">
+  <b>Get a quote, don't just order.</b> The label sizes changed after these prices were
+  gathered. Required statements have to print at about 9&nbsp;pt, and at that size the copy
+  does not fit a 3&nbsp;&times;&nbsp;3 label. You need <b>4&nbsp;&times;&nbsp;2.5&nbsp;in</b>
+  for the front and <b>4&nbsp;&times;&nbsp;5&nbsp;in</b> for the back &mdash; both custom sizes,
+  both dearer than the $0.16 each quoted below. Ask each printer for those two sizes at 500
+  and 1,000, on <b>white BOPP</b>. Never paper: it wicks oil off people's hands and goes
+  translucent on a shelf.
+</div>
+
+<a class="buy" href="https://www.nextdayflyers.com/label-printing/custom-labels">
+  <span class="vendor">NextDayFlyers</span>
+  <span class="what">Custom BOPP labels<span class="pick">Quote first</span></span>
+  <span class="meta"><span class="price">$0.16 at 3x3</span><span>1-day turnaround &middot; ask for 4x2.5 + 4x5</span></span>
+</a>
+<a class="buy alt" href="https://www.uprinting.com/product-label-printing.html">
+  <span class="vendor">UPrinting</span>
+  <span class="what">BOPP roll labels</span>
+  <span class="meta"><span class="price">$0.23 at 2x4</span><span>3-day &middot; better at 1,000+</span></span>
+</a>
+<a class="buy alt" href="https://www.stickermule.com/custom-labels">
+  <span class="vendor">Sticker Mule</span>
+  <span class="what">BOPP, food/oil/water rated</span>
+  <span class="meta"><span class="price">quote</span><span>any custom size</span></span>
+</a>
+
+<p class="why" style="margin-top:1.1rem">To ship before the printed labels land, print at home
+on weatherproof stock. Match the stock to the printer you actually own &mdash; the wrong one
+smears the first time a customer handles it.</p>
+
+<a class="buy alt" href="https://www.onlinelabels.com/products/ol600">
+  <span class="vendor">OnlineLabels</span>
+  <span class="what">OL600, 4 x 2.5 in weatherproof &mdash; inkjet only</span>
+  <span class="meta"><span class="price">$15.50</span><span>80 labels &middot; matches the front size exactly</span></span>
+</a>
+<a class="buy alt" href="https://www.onlinelabels.com/products/ol500">
+  <span class="vendor">OnlineLabels</span>
+  <span class="what">OL500, 4 x 3 in weatherproof &mdash; laser only</span>
+  <span class="meta"><span class="price">$14.10</span><span>60 labels</span></span>
+</a>
+
+<h2>Barcode</h2>
+<p class="why">Retailers scan a GTIN. Buy it from GS1 itself &mdash; resold barcodes scan fine
+but show another company as the brand owner, and buying offices reject them at onboarding.</p>
+
+<a class="buy" href="https://www.gs1us.org/upcs-barcodes-prefixes/how-to-get-a-upc-barcode/get-upc-barcodes">
+  <span class="vendor">GS1 US</span>
+  <span class="what">Single GTIN<span class="pick">Pick</span></span>
+  <span class="meta"><span class="price">$30.00</span><span>no annual renewal &middot; one per product size</span></span>
+</a>
+
+<h2>Paperwork, free</h2>
+
+<div class="flag free" data-label="Free, but easy to miss">
+  <b>File this or the exemption lapses.</b> At 200 bags a week you sell about 10,400 a year,
+  which is over the 10,000-unit line where no filing is needed. Form FDA 3570 keeps your
+  nutrition-labelling exemption, costs nothing, and has to be filed <b>every year</b>. The FDA
+  sends no reminder and no confirmation of receipt.
+</div>
+
+<a class="buy" href="https://www.fda.gov/food/labeling-nutrition-guidance-documents-regulatory-information/small-business-nutrition-labeling-exemption-notice-model-form">
+  <span class="vendor">FDA</span>
+  <span class="what">Form 3570 &mdash; nutrition labelling exemption</span>
+  <span class="meta"><span class="price">Free</span><span>annual &middot; set a calendar reminder</span></span>
+</a>
+<a class="buy" href="https://www.fda.gov/food/online-registration-food-facilities">
+  <span class="vendor">FDA</span>
+  <span class="what">Food Facility Registration</span>
+  <span class="meta"><span class="price">Free</span><span>needs your EIN &middot; renewed even years</span></span>
+</a>
+
+<h2>The one phone call</h2>
+<p class="why">Product liability, with the retailer named as additional insured. Your property
+policy is not product liability. This is the longest lead time on the whole list and the one
+thing that stops a deal &mdash; no buying office takes a case without a certificate. Start it
+before you pitch anyone.</p>
+
+
+
+<footer>
+  <p><a href="tapestry-candy-label-proof.html">&larr; Label proof</a> &middot;
+  Prices gathered 2026-08-09 from the vendor pages linked above. Amazon and Uline block
+  automated price checks, so anything marked &ldquo;verify price&rdquo; needs a look before
+  you buy.</p>
+</footer>
+
+</div>
+<script>
+if (new URLSearchParams(location.search).has('print')) window.print();
+</script>
+</body>
+</html>
