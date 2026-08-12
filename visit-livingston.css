@@ -346,8 +346,13 @@ a:hover { color: var(--accent); }
 }
 
 @media print {
-  .site-head, .jump, .filters, .cta, .hero-media, .hero::after { display: none !important; }
+  .site-head, .jump, .filters, .cta, .hero-media, .hero::after,
+  .gallery, .photo-grid { display: none !important; }
   .hero { color: #000; background: #fff; }
-  .listing { break-inside: avoid; }
+  .band--ink { background: #fff; color: #000; }
+  .band--ink h2, .band--ink h3, .band--ink p { color: #000; }
+  .listing, .card, .photo-strip, .faq details { break-inside: avoid; }
+  .photo-strip img { max-height: 6cm; }
+  .faq details { display: block; }
   body { font-size: 11pt; }
 }
