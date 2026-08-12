@@ -1,0 +1,996 @@
+<!doctype html>
+<html lang="en" data-style="advisor" data-palette="advisor" data-type="advisor" data-layout="review" data-density="comfortable">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Ten Best Printing Companies in Middle Tennessee (Aug 12, 2026)</title>
+<meta name="description" content="An unranked guide to ten commercial printing companies serving Nashville and Middle Tennessee — what each one is actually built for, how they were chosen, and how to specify a print job.">
+<link rel="canonical" href="https://middletnprinters.com/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Ten Best Printing Companies in Middle Tennessee">
+<meta property="og:description" content="Ten Middle Tennessee print shops worth knowing, listed alphabetically, with what each one is actually good at.">
+<meta property="og:url" content="https://middletnprinters.com/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖨️</text></svg>">
+<style>
+/* design tokens — inlined so the document is self-contained */
+/*
+ * mtn-printers.themes.css
+ * Design-axis token pack for a Middle Tennessee commercial-printers directory.
+ *
+ * Axes and option ids:
+ *   data-style   : pressroom | broadsheet | civic
+ *   data-palette : ink | press-red | sage | slate
+ *   data-type    : serif-body | sans-body | mixed
+ *   data-layout  : cards | rows | columns
+ *   data-density : comfortable | compact
+ *
+ * This file defines ONLY custom-property tokens (base :root + per-axis
+ * overrides + dark-mode palette repaints). No component/layout selectors.
+ */
+
+:root {
+  /* -- palette (base = ink) -- */
+  --bg: #faf8f4;
+  --bg-alt: #f2efe7;
+  --surface: #ffffff;
+  --fg: #1a1a18;
+  --fg-muted: #5a564c;
+  --accent: #8a3324;
+  --accent-fg: #ffffff;
+  --border: #ddd8cc;
+  --border-strong: #1a1a18;
+
+  /* -- typography (base = mixed) -- */
+  --font-heading: Georgia, "Times New Roman", Times, serif;
+  --font-body: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --fs-base: 1rem;
+  --fs-h1: 2.25rem;
+  --fs-h2: 1.5rem;
+  --fs-card-title: 1.125rem;
+  --lh-body: 1.55;
+  --tracking-heading: 0;
+
+  /* -- style/character (base = broadsheet) -- */
+  --radius: 2px;
+  --border-width: 1px;
+  --shadow: none;
+
+  /* -- density (base = comfortable) -- */
+  --space-unit: 8px;
+  --gap-card: 24px;
+  --pad-card: 24px;
+  --section-gap: 48px;
+  --maxw: 1180px;
+
+  /* -- layout (base = cards) -- */
+  --card-grid: repeat(auto-fit, minmax(300px, 1fr));
+  --card-display: grid;
+
+  /* -- transition tokens (reduced-motion safe defaults) -- */
+  --transition-fast: 120ms ease;
+  --transition-base: 200ms ease;
+}
+
+/* =========================================================
+   AXIS: data-style — overall character
+   Owns: --radius, --border-width, --shadow, --tracking-heading
+   May lightly touch: --section-gap, --maxw (structural rhythm only)
+   ========================================================= */
+
+:root[data-style="pressroom"] {
+  --radius: 0px;
+  --border-width: 3px;
+  --shadow: 4px 4px 0 var(--border-strong);
+  --tracking-heading: 0.01em;
+}
+
+:root[data-style="broadsheet"] {
+  --radius: 1px;
+  --border-width: 1px;
+  --shadow: none;
+  --tracking-heading: 0.02em;
+}
+
+:root[data-style="civic"] {
+  --radius: 12px;
+  --border-width: 1px;
+  --shadow: 0 2px 10px rgba(20, 20, 15, 0.08);
+  --tracking-heading: 0;
+}
+
+/* =========================================================
+   AXIS: data-palette — color only
+   Owns: --bg, --bg-alt, --surface, --fg, --fg-muted,
+         --accent, --accent-fg, --border, --border-strong
+   ========================================================= */
+
+/* ink: #1a1a18 on #faf8f4 = 15.7:1 */
+:root[data-palette="ink"] {
+  --bg: #faf8f4;
+  --bg-alt: #f2efe7;
+  --surface: #ffffff;
+  --fg: #1a1a18;
+  --fg-muted: #5a564c;
+  --accent: #8a3324;
+  --accent-fg: #ffffff;
+  --border: #ddd8cc;
+  --border-strong: #1a1a18;
+}
+
+/* press-red: #241a17 on #faf6f0 = 15.1:1; accent #b5241c on white = 5.9:1 */
+:root[data-palette="press-red"] {
+  --bg: #faf6f0;
+  --bg-alt: #f3ece2;
+  --surface: #ffffff;
+  --fg: #241a17;
+  --fg-muted: #675650;
+  --accent: #b5241c;
+  --accent-fg: #ffffff;
+  --border: #e3d6ca;
+  --border-strong: #241a17;
+}
+
+/* sage: #23271f on #f5f3ea = 14.9:1 */
+:root[data-palette="sage"] {
+  --bg: #f5f3ea;
+  --bg-alt: #eae6d6;
+  --surface: #fbfaf3;
+  --fg: #23271f;
+  --fg-muted: #565d4c;
+  --accent: #4b6b3d;
+  --accent-fg: #ffffff;
+  --border: #d6d3bf;
+  --border-strong: #23271f;
+}
+
+/* slate: #16202a on #eef2f5 = 15.0:1 */
+:root[data-palette="slate"] {
+  --bg: #eef2f5;
+  --bg-alt: #e2e8ed;
+  --surface: #ffffff;
+  --fg: #16202a;
+  --fg-muted: #4d5c6b;
+  --accent: #235a8a;
+  --accent-fg: #ffffff;
+  --border: #cbd6df;
+  --border-strong: #16202a;
+}
+
+/* ---- dark mode: repaint palette tokens only, per-palette ---- */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* ink dark: #ece8de on #171613 = 15.5:1 */
+    --bg: #171613;
+    --bg-alt: #201f1a;
+    --surface: #1e1d19;
+    --fg: #ece8de;
+    --fg-muted: #b3ada0;
+    --accent: #d98a70;
+    --accent-fg: #171613;
+    --border: #3a382f;
+    --border-strong: #ece8de;
+  }
+  :root[data-palette="press-red"]:not([data-theme="light"]) {
+    /* press-red dark: #f1e7df on #1c1512 = 14.5:1; accent #e2685c on #1c1512 = 6.2:1 */
+    --bg: #1c1512;
+    --bg-alt: #241b17;
+    --surface: #221a16;
+    --fg: #f1e7df;
+    --fg-muted: #c2ada2;
+    --accent: #e2685c;
+    --accent-fg: #1c1512;
+    --border: #43332c;
+    --border-strong: #f1e7df;
+  }
+  :root[data-palette="sage"]:not([data-theme="light"]) {
+    /* sage dark: #e9e8dc on #181b14 = 14.9:1 */
+    --bg: #181b14;
+    --bg-alt: #20241a;
+    --surface: #1d2017;
+    --fg: #e9e8dc;
+    --fg-muted: #b1b39f;
+    --accent: #8fb377;
+    --accent-fg: #12140f;
+    --border: #383c2e;
+    --border-strong: #e9e8dc;
+  }
+  :root[data-palette="slate"]:not([data-theme="light"]) {
+    /* slate dark: #e6ebef on #131a20 = 15.0:1 */
+    --bg: #131a20;
+    --bg-alt: #1a232b;
+    --surface: #182029;
+    --fg: #e6ebef;
+    --fg-muted: #a9b6c0;
+    --accent: #74a6d6;
+    --accent-fg: #10171d;
+    --border: #33414c;
+    --border-strong: #e6ebef;
+  }
+}
+
+:root[data-theme="dark"] {
+  /* ink dark: #ece8de on #171613 = 15.5:1 */
+  --bg: #171613;
+  --bg-alt: #201f1a;
+  --surface: #1e1d19;
+  --fg: #ece8de;
+  --fg-muted: #b3ada0;
+  --accent: #d98a70;
+  --accent-fg: #171613;
+  --border: #3a382f;
+  --border-strong: #ece8de;
+}
+:root[data-theme="dark"][data-palette="press-red"] {
+  /* press-red dark: #f1e7df on #1c1512 = 14.5:1; accent #e2685c on #1c1512 = 6.2:1 */
+  --bg: #1c1512;
+  --bg-alt: #241b17;
+  --surface: #221a16;
+  --fg: #f1e7df;
+  --fg-muted: #c2ada2;
+  --accent: #e2685c;
+  --accent-fg: #1c1512;
+  --border: #43332c;
+  --border-strong: #f1e7df;
+}
+:root[data-theme="dark"][data-palette="sage"] {
+  /* sage dark: #e9e8dc on #181b14 = 14.9:1 */
+  --bg: #181b14;
+  --bg-alt: #20241a;
+  --surface: #1d2017;
+  --fg: #e9e8dc;
+  --fg-muted: #b1b39f;
+  --accent: #8fb377;
+  --accent-fg: #12140f;
+  --border: #383c2e;
+  --border-strong: #e9e8dc;
+}
+:root[data-theme="dark"][data-palette="slate"] {
+  /* slate dark: #e6ebef on #131a20 = 15.0:1 */
+  --bg: #131a20;
+  --bg-alt: #1a232b;
+  --surface: #182029;
+  --fg: #e6ebef;
+  --fg-muted: #a9b6c0;
+  --accent: #74a6d6;
+  --accent-fg: #10171d;
+  --border: #33414c;
+  --border-strong: #e6ebef;
+}
+
+/* =========================================================
+   AXIS: data-type — typography only
+   Owns: --font-heading, --font-body, --fs-base, --fs-h1, --fs-h2,
+         --fs-card-title, --lh-body, --tracking-heading (leading nudge only)
+   ========================================================= */
+
+:root[data-type="serif-body"] {
+  --font-heading: Georgia, "Times New Roman", Times, serif;
+  --font-body: Georgia, "Times New Roman", Times, serif;
+  --fs-base: 1.0625rem;
+  --fs-h1: 2.25rem;
+  --fs-h2: 1.5rem;
+  --fs-card-title: 1.1875rem;
+  --lh-body: 1.6;
+}
+
+:root[data-type="sans-body"] {
+  --font-heading: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-body: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --fs-base: 1rem;
+  --fs-h1: 2.125rem;
+  --fs-h2: 1.4375rem;
+  --fs-card-title: 1.0625rem;
+  --lh-body: 1.5;
+}
+
+:root[data-type="mixed"] {
+  --font-heading: Georgia, "Times New Roman", Times, serif;
+  --font-body: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --fs-base: 1rem;
+  --fs-h1: 2.1875rem;
+  --fs-h2: 1.4375rem;
+  --fs-card-title: 1.125rem;
+  --lh-body: 1.55;
+}
+
+/* =========================================================
+   AXIS: data-layout — listing arrangement
+   Owns: --card-grid, --card-display, --gap-card
+   ========================================================= */
+
+:root[data-layout="cards"] {
+  --card-display: grid;
+  --card-grid: repeat(auto-fit, minmax(300px, 1fr));
+  --gap-card: 24px;
+}
+
+:root[data-layout="rows"] {
+  --card-display: flex;
+  --card-grid: none;
+  --gap-card: 0px;
+}
+
+:root[data-layout="columns"] {
+  --card-display: grid;
+  --card-grid: repeat(2, 1fr);
+  --gap-card: 20px;
+}
+
+/* =========================================================
+   AXIS: data-density — spacing/size scale only
+   Owns: --space-unit, --gap-card (scale factor), --pad-card,
+         --section-gap, --maxw
+   ========================================================= */
+
+:root[data-density="comfortable"] {
+  --space-unit: 8px;
+  --pad-card: 24px;
+  --section-gap: 48px;
+  --maxw: 1180px;
+}
+
+:root[data-density="compact"] {
+  --space-unit: 5px;
+  --pad-card: 14px;
+  --section-gap: 28px;
+  --maxw: 1040px;
+}
+
+/* Reduced motion: zero any transition tokens introduced above */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-base: 0ms;
+  }
+}
+
+/* =========================================================
+   ADDED 2026-08-12 — "advisor" options, matching the
+   Forbes Advisor editorial-review layout Steve asked for.
+   Measured from the live page: H2 rules are 4px solid
+   #181716 with 20px top padding; accent/link/CTA is
+   #007ac8; stat labels 12px/700, values 16px/400.
+   ========================================================= */
+
+/* advisor: #1a1a1a on #ffffff = 17.4:1; accent #007ac8 on #ffffff = 4.6:1 */
+:root[data-palette="advisor"] {
+  --bg: #ffffff;
+  --bg-alt: #f7f7f5;
+  --surface: #ffffff;
+  --fg: #1a1a1a;
+  --fg-muted: #55555a;
+  --accent: #00629f;
+  --accent-fg: #ffffff;
+  --border: #dcdcd8;
+  --border-strong: #181716;
+}
+
+/* advisor dark: #ececec on #141414 = 15.9:1; accent #6fb6e8 on #141414 = 8.7:1 */
+@media (prefers-color-scheme: dark) {
+  :root[data-palette="advisor"]:not([data-theme="light"]) {
+    --bg: #141414;
+    --bg-alt: #1c1c1c;
+    --surface: #191919;
+    --fg: #ececec;
+    --fg-muted: #b0b0b4;
+    --accent: #6fb6e8;
+    --accent-fg: #141414;
+    --border: #343434;
+    --border-strong: #ececec;
+  }
+}
+:root[data-theme="dark"][data-palette="advisor"] {
+  --bg: #141414;
+  --bg-alt: #1c1c1c;
+  --surface: #191919;
+  --fg: #ececec;
+  --fg-muted: #b0b0b4;
+  --accent: #6fb6e8;
+  --accent-fg: #141414;
+  --border: #343434;
+  --border-strong: #ececec;
+}
+
+/* the editorial-review character: square, ruled, no card shadows */
+:root[data-style="advisor"] {
+  --radius: 8px;
+  --border-width: 4px;
+  --shadow: none;
+  --tracking-heading: -0.01em;
+}
+
+/* display serif headline over a sans body, the Advisor pairing */
+:root[data-type="advisor"] {
+  --font-heading: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* 18px base, not 16px: at the 660px column that lands running text near 70
+     characters a line. The serif also runs deeper than the h1 now — section
+     headings and company names take --font-heading, so the page reads as a
+     type system rather than one serif headline sitting on OS default sans. */
+  --fs-base: 1.125rem;
+  --fs-h1: 3rem;
+  --fs-h2: 1.5rem;
+  --fs-card-title: 1.5rem;
+  --lh-body: 1.6;
+  --tracking-heading: -0.01em;
+}
+
+/* stacked full-width review entries */
+:root[data-layout="review"] {
+  --card-display: flex;
+  --card-grid: none;
+  --gap-card: 0px;
+}
+
+</style>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body);
+         font-size: var(--fs-base); line-height: var(--lh-body); -webkit-text-size-adjust: 100%; }
+  /* 660px minus 40px of padding puts running text at roughly 70 characters a
+     line at the 18px body size. It was 760px at 16px, which measured out at 93
+     — half again the comfortable maximum, on every paragraph on the page. */
+  .wrap { max-width: 660px; margin: 0 auto; padding: 0 20px; }
+  .wrap-wide { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+  a { color: var(--accent); }
+  h1, h2, h3 { letter-spacing: var(--tracking-heading); }
+
+  /* ---- masthead ---- */
+  /* ---- skip link ---- */
+  .skip { position: absolute; left: -9999px; top: 0; z-index: 99; display: inline-flex;
+           align-items: center; min-height: 44px; padding: 0 18px; font-weight: 600;
+           background: var(--accent); color: var(--accent-fg); text-decoration: none; }
+  .skip:focus { left: 0; }
+
+  /* ---- hero ---- */
+  /* The art sits on the same 660px column as the headline beneath it. It used
+     to span a 1040px band while the text ran 760px, so nothing lined up with
+     anything and the illustration read as pasted on top of the page. */
+  .hero { background: var(--bg-alt); border-bottom: 1px solid var(--border); }
+  .hero-inner { max-width: 660px; margin: 0 auto; padding: 18px 20px; }
+  .hero-art { display: block; width: 100%; height: auto; color: var(--fg); }
+
+  .kicker { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+             color: var(--fg-muted); padding: 28px 0 0; }
+  h1 { font-family: var(--font-heading); font-size: var(--fs-h1); font-weight: 400;
+        line-height: 1.12; margin: 12px 0 20px; }
+  .byline { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+             padding: 14px 0; display: flex; flex-wrap: wrap; gap: 28px; font-size: 15px; margin-bottom: 28px; }
+  .byline .who { display: flex; flex-direction: column; gap: 2px; }
+  .byline .role { font-size: 11px; font-weight: 700; letter-spacing: .07em;
+                   text-transform: uppercase; color: var(--fg-muted); }
+  .byline .name { font-weight: 600; }
+  .standfirst { font-size: 20px; line-height: 1.55; }
+  .disclosure { font-size: 18px; color: var(--fg-muted); border-top: 1px solid var(--border);
+                 padding-top: 16px; margin: 24px 0 0; }
+
+  /* ---- the Advisor section rule: heavy bar above every h2 ---- */
+  h2 { font-family: var(--font-heading); font-size: var(--fs-h2); font-weight: 400; line-height: 1.2;
+        border-top: var(--border-width) solid var(--border-strong);
+        padding-top: 20px; margin: 52px 0 12px; }
+  .lede { color: var(--fg-muted); margin: 0 0 24px; }
+
+  /* ---- top picks + toc ---- */
+  .picks, .toc { list-style: none; padding: 0; margin: 0 0 8px;
+                  columns: 2; column-gap: 32px; }
+  .picks li, .toc li { break-inside: avoid; border-bottom: 1px solid var(--border); }
+  .picks a, .toc a { display: flex; align-items: center; min-height: 44px;
+                      text-decoration: none; font-weight: 600; }
+  .picks a:hover, .toc a:hover { text-decoration: underline; }
+
+  /* ---- comparison table ---- */
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  caption { text-align: left; font-size: 13px; color: var(--fg-muted); padding-bottom: 10px; }
+  thead th { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+              text-align: left; color: var(--fg-muted); border-bottom: 2px solid var(--border-strong);
+              padding: 10px 14px 10px 0; white-space: nowrap; }
+  tbody th, tbody td { text-align: left; vertical-align: top; padding: 14px 14px 14px 0;
+                        border-bottom: 1px solid var(--border); }
+  tbody th { font-weight: 700; }
+  tbody th a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
+  tbody th a:hover { text-decoration: underline; }
+  .td-sub { display: block; font-size: 13px; color: var(--fg-muted); }
+  #methodology td, #methodology th { padding: 16px 20px 16px 0; }
+  #methodology tbody th { width: 30%; }
+
+  /* ---- filter toolbar ---- */
+  .toolbar { background: var(--bg-alt); border-top: 1px solid var(--border);
+              border-bottom: 1px solid var(--border); padding: 16px 0; margin: 28px 0 0; }
+  .toolbar-inner { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label { font-size: 11px; font-weight: 700; letter-spacing: .07em;
+                  text-transform: uppercase; color: var(--fg-muted); }
+  .field select, .field input { font: inherit; font-size: 15px; color: var(--fg);
+    background: var(--surface); border: 1px solid var(--border-strong); border-radius: 4px;
+    padding: 9px 10px; min-width: 11rem; }
+  .field input { min-width: 13rem; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .btn { font: inherit; font-size: 15px; cursor: pointer; color: var(--fg); background: transparent;
+          border: 1px solid var(--border-strong); border-radius: 4px; padding: 9px 14px; }
+  #count { font-size: 15px; color: var(--fg-muted); margin: 0 0 0 auto; padding-bottom: 8px; }
+
+  /* ---- review blocks ---- */
+  .reviews { display: var(--card-display); flex-direction: column; gap: var(--gap-card);
+              grid-template-columns: var(--card-grid); }
+  .review { border-bottom: 1px solid var(--border); padding: 32px 0; }
+  .review:first-child { padding-top: 24px; }
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+              color: var(--fg-muted); margin: 0 0 8px; }
+  .review-name { font-family: var(--font-heading); font-size: var(--fs-card-title); font-weight: 400;
+                  line-height: 1.15; margin: 0 0 5px; }
+  .review-where { font-size: 15px; color: var(--fg-muted); margin: 0 0 14px; }
+  .blurb { margin: 0 0 16px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0 0 16px; }
+  .chip { font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+           border: 1px solid var(--border); padding: 5px 10px; color: var(--fg-muted); }
+  /* Phone first, and in the open. On a local trade directory the number is the
+     thing people came for; it does not belong behind a disclosure widget. */
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
+  .act { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px;
+          font-size: 15px; font-weight: 600; text-decoration: none; }
+  .act-tel { background: var(--accent); color: var(--accent-fg); }
+  .act-web { border: 1px solid var(--border-strong); color: var(--fg); }
+  .act:hover { text-decoration: underline; }
+  .review[hidden] { display: none; }
+  .empty { display: none; padding: 28px 0; color: var(--fg-muted); }
+  .empty.on { display: block; }
+
+  /* ---- guide + faq ---- */
+  .prose p, .prose li { margin: 0 0 16px; }
+  .prose ul { padding-left: 20px; }
+  .faq-q { font-size: 18px; font-weight: 700; margin: 30px 0 8px; }
+  #trust p { margin: 0 0 16px; }
+
+  footer { border-top: var(--border-width) solid var(--border-strong); margin-top: 56px;
+            padding: 28px 0 48px; color: var(--fg-muted); font-size: 15px; }
+
+  /* jump links must not park their target under the top edge */
+  :target, .review, section[id] { scroll-margin-top: 20px; }
+  html { scroll-behavior: smooth; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+              overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  .to-top { display: inline-flex; align-items: center; min-height: 44px;
+             font-size: 15px; font-weight: 600; text-decoration: none; }
+  .to-top-row { border-top: 1px solid var(--border); margin-top: 8px; }
+
+  @media (max-width: 700px) {
+    h1 { font-size: 2rem; }
+    .picks, .toc { columns: 1; }
+    .field, .field select, .field input, .btn { width: 100%; min-width: 0; }
+    .field select, .field input, .btn { min-height: 44px; }
+    #count { margin-left: 0; }
+    .act { flex: 1 1 auto; justify-content: center; }
+    .review { overflow-wrap: anywhere; }
+    .reviews { display: flex; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  @media print {
+    .toolbar, .toc { display: none !important; }
+    body { background: #fff; color: #000; font-size: 11pt; }
+    .review { break-inside: avoid; }
+    .ext::after { content: " (" attr(href) ")"; font-size: 9pt; word-break: break-all; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#reviews">Skip to the ten companies</a>
+
+<div class="hero" aria-hidden="false">
+  <div class="hero-inner"><svg class="hero-art" viewBox="0 0 660 200" role="img"
+     aria-label="Process colour overprint chart: overlapping cyan, magenta and yellow circles with a registration target and a CMYK press colour bar"
+     preserveAspectRatio="xMidYMid meet" focusable="false">
+  <defs>
+    <pattern id="halftone" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="6" cy="6" r="1.4" fill="currentColor" opacity=".16"/>
+    </pattern>
+    <clipPath id="rosC"><circle cx="150" cy="76" r="52"/></clipPath>
+    <clipPath id="rosM"><circle cx="198" cy="76" r="52"/></clipPath>
+  </defs>
+
+  <rect width="660" height="200" fill="url(#halftone)"/>
+
+  <!-- process triad: cyan, magenta, yellow, with every overprint drawn out -->
+  <g>
+    <circle cx="150" cy="76" r="52" fill="#00AEEF"/>
+    <circle cx="198" cy="76" r="52" fill="#EC008C"/>
+    <circle cx="174" cy="118" r="52" fill="#FFF200"/>
+    <g clip-path="url(#rosC)"><circle cx="198" cy="76" r="52" fill="#2E3192"/></g>
+    <g clip-path="url(#rosC)"><circle cx="174" cy="118" r="52" fill="#00A651"/></g>
+    <g clip-path="url(#rosM)"><circle cx="174" cy="118" r="52" fill="#ED1C24"/></g>
+    <g clip-path="url(#rosC)"><g clip-path="url(#rosM)">
+      <circle cx="174" cy="118" r="52" fill="#231F20"/>
+    </g></g>
+  </g>
+
+  <!-- registration target -->
+  <g transform="translate(470,92)" stroke="currentColor" fill="none" stroke-width="2">
+    <circle r="34"/><circle r="18"/>
+    <path d="M-52 0H-8M8 0H52M0 -52V-8M0 8V52"/>
+  </g>
+  <g transform="translate(578,52)" stroke="currentColor" fill="none" stroke-width="1.5" opacity=".7">
+    <circle r="15"/><path d="M-25 0H25M0 -25V25"/>
+  </g>
+
+  <!-- press colour bar, solids then overprints -->
+  <g>
+    <rect x="352" y="150" width="44" height="26" fill="#00AEEF"/>
+    <rect x="396" y="150" width="44" height="26" fill="#EC008C"/>
+    <rect x="440" y="150" width="44" height="26" fill="#FFF200"/>
+    <rect x="484" y="150" width="44" height="26" fill="#231F20"/>
+    <rect x="528" y="150" width="44" height="26" fill="#ED1C24"/>
+    <rect x="572" y="150" width="44" height="26" fill="#00A651"/>
+    <rect x="352" y="150" width="264" height="26" fill="none"
+          stroke="currentColor" stroke-width="1.5" opacity=".45"/>
+  </g>
+</svg></div>
+</div>
+
+<header class="wrap">
+  <p class="kicker">Directory · Middle Tennessee · Commercial printing</p>
+  <h1>The Ten Best Printing Companies in Middle Tennessee</h1>
+  <div class="byline">
+    <div class="who"><span class="role">Audited &amp; verified</span><span class="name">Aug 12, 2026</span></div>
+    <div class="who"><span class="role">Researched by</span><span class="name">Barnraised</span></div>
+    <div class="who"><span class="role">Listings checked</span><span class="name">32 shops considered, 10 published</span></div>
+  </div>
+  <p class="standfirst">Commercial printing is not one trade. The shop that can hold color across a 20,000-piece
+  offset run is rarely the shop you want carving a letterpress poster, and neither of them is set up to put
+  vinyl on a truck. This list covers ten Middle Tennessee printers that are each clearly the right answer to
+  a specific question — and says which question.</p>
+  <p class="standfirst" style="font-size:18px;color:var(--fg-muted);margin-top:16px">The ten are listed
+  alphabetically and nothing here is numbered. Ordering a narrow-web label converter against a museum
+  letterpress shop would produce a number that means nothing, so the page declines to produce one.</p>
+  <p class="disclosure">Nothing here is ranked, so there is no position to sell. The ten shops were researched and
+  added on merit, none of them paid to appear, none was contacted before publication, and no link on this
+  page is an affiliate link. The directory is run by Barnraised, which builds and hosts websites; a listing
+  is part of what its web design customers pay for, and any entry that arrives that way is labeled. Every
+  website and phone number here was checked against the source on Aug 12, 2026.</p>
+</header>
+
+<main>
+  <section class="wrap" id="top-picks">
+    <h2>Our top picks</h2>
+    <ul class="picks"><li><a href="#anderson-printing-solutions">Anderson Printing Solutions</a></li><li><a href="#crown-label-inc">Crown Label, Inc.</a></li><li><a href="#franklin-web-printing-co">Franklin Web Printing Co.</a></li><li><a href="#hatch-show-print">Hatch Show Print</a></li><li><a href="#joyner-hogan-printers">Joyner &amp; Hogan Printers</a></li><li><a href="#ledbetter-signs">LedBetter Signs</a></li><li><a href="#phillips-printing-company">Phillips Printing Company</a></li><li><a href="#pollock-printing">Pollock Printing</a></li><li><a href="#quality-printing-company">Quality Printing Company</a></li><li><a href="#that-s-printing-inc">That&#x27;s Printing, Inc.</a></li></ul>
+  </section>
+
+  <section class="wrap" id="contents">
+    <h2>Table of contents</h2>
+    <ul class="toc"><li><a href="#top-picks">Our top picks</a></li><li><a href="#compare">Compare the ten</a></li><li><a href="#reviews">The ten, reviewed</a></li><li><a href="#how-to-choose">How to choose a print shop</a></li><li><a href="#what-to-send">What to send your printer</a></li><li><a href="#methodology">Methodology</a></li><li><a href="#trust">Why you can trust this list</a></li><li><a href="#faq">Frequently asked questions</a></li></ul>
+  </section>
+
+  <section class="wrap-wide" id="compare">
+    <h2>Compare the ten</h2>
+    <p class="lede">Alphabetical. There is no rating column and no starting price, because commercial print is
+    quoted per job — sheet size, stock, run length and finishing all move the number, and any figure printed
+    here would be invented.</p>
+    <div class="table-scroll">
+      <table>
+        <caption>Ten Middle Tennessee commercial printers, listed alphabetically.</caption>
+        <thead><tr><th scope="col">Company</th><th scope="col">Best for</th><th scope="col">Location</th><th scope="col">Established</th><th scope="col">Core capabilities</th></tr></thead>
+        <tbody><tr>
+          <th scope="row"><a href="#anderson-printing-solutions">Anderson Printing Solutions</a></th>
+          <td>One-stop shop for the Upper Cumberland</td>
+          <td>Cookeville<span class="td-sub">Putnam County</span></td>
+          <td>1976</td>
+          <td>Offset, Digital, Signs</td>
+        </tr><tr>
+          <th scope="row"><a href="#crown-label-inc">Crown Label, Inc.</a></th>
+          <td>Product labels and tags at volume</td>
+          <td>La Vergne<span class="td-sub">Rutherford County</span></td>
+          <td>1976</td>
+          <td>Packaging, Labels, Digital</td>
+        </tr><tr>
+          <th scope="row"><a href="#franklin-web-printing-co">Franklin Web Printing Co.</a></th>
+          <td>Publications, tabloids, and newspapers</td>
+          <td>Franklin<span class="td-sub">Williamson County</span></td>
+          <td>1977</td>
+          <td>Offset, Web press, Mailing</td>
+        </tr><tr>
+          <th scope="row"><a href="#hatch-show-print">Hatch Show Print</a></th>
+          <td>Letterpress posters with genuine craft</td>
+          <td>Nashville<span class="td-sub">Davidson County</span></td>
+          <td>1879</td>
+          <td>Letterpress, Posters</td>
+        </tr><tr>
+          <th scope="row"><a href="#joyner-hogan-printers">Joyner &amp; Hogan Printers</a></th>
+          <td>Direct mail, forms, and campaign work</td>
+          <td>Nashville<span class="td-sub">Davidson County</span></td>
+          <td>1937</td>
+          <td>Offset, Digital, Mailing</td>
+        </tr><tr>
+          <th scope="row"><a href="#ledbetter-signs">LedBetter Signs</a></th>
+          <td>Signage, decals, and vehicle wraps</td>
+          <td>Clarksville<span class="td-sub">Montgomery County</span></td>
+          <td>1956</td>
+          <td>Signs, Wide format, Apparel</td>
+        </tr><tr>
+          <th scope="row"><a href="#phillips-printing-company">Phillips Printing Company</a></th>
+          <td>Color-critical offset runs</td>
+          <td>Nashville<span class="td-sub">Davidson County</span></td>
+          <td>1959</td>
+          <td>Offset, Digital, Mailing</td>
+        </tr><tr>
+          <th scope="row"><a href="#pollock-printing">Pollock Printing</a></th>
+          <td>Print plus kitting and fulfillment</td>
+          <td>Nashville<span class="td-sub">Davidson County</span></td>
+          <td>1972</td>
+          <td>Offset, Digital, Wide format</td>
+        </tr><tr>
+          <th scope="row"><a href="#quality-printing-company">Quality Printing Company</a></th>
+          <td>The hometown shop in Sumner County</td>
+          <td>Gallatin<span class="td-sub">Sumner County</span></td>
+          <td>1969</td>
+          <td>Offset, Digital, Signs</td>
+        </tr><tr>
+          <th scope="row"><a href="#that-s-printing-inc">That&#x27;s Printing, Inc.</a></th>
+          <td>Bindery and specialty finishing</td>
+          <td>Franklin<span class="td-sub">Williamson County</span></td>
+          <td>1985</td>
+          <td>Offset, Digital, Bindery</td>
+        </tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="toolbar">
+    <div class="wrap-wide toolbar-inner">
+      <div class="field">
+        <label for="f-county">County</label>
+        <select id="f-county"><option value="">All counties</option><option value="Davidson">Davidson County</option><option value="Montgomery">Montgomery County</option><option value="Putnam">Putnam County</option><option value="Rutherford">Rutherford County</option><option value="Sumner">Sumner County</option><option value="Williamson">Williamson County</option></select>
+      </div>
+      <div class="field">
+        <label for="f-service">Capability</label>
+        <select id="f-service"><option value="">Any capability</option><option value="apparel">Apparel</option><option value="bindery">Bindery</option><option value="digital">Digital</option><option value="finishing">Finishing</option><option value="flexo">Flexography</option><option value="labels">Labels</option><option value="letterpress">Letterpress</option><option value="mailing">Mailing</option><option value="offset">Offset</option><option value="packaging">Packaging</option><option value="posters">Posters</option><option value="promo">Promotional</option><option value="publications">Publications</option><option value="signs">Signs</option><option value="web-press">Web press</option><option value="wide-format">Wide format</option></select>
+      </div>
+      <div class="field">
+        <label for="f-text">Search</label>
+        <input id="f-text" type="search" placeholder="Name or city" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-sort">Order</label>
+        <select id="f-sort">
+          <option value="name">Alphabetical</option>
+          <option value="county">By county</option>
+          <option value="founded">By year established</option>
+        </select>
+      </div>
+      <button id="f-reset" class="btn" type="button">Reset</button>
+      <p id="count" role="status" aria-live="polite">Showing all 10 companies</p>
+    </div>
+  </div>
+
+  <section class="wrap" id="reviews">
+    <h2>The ten, reviewed</h2>
+    <p class="lede">Alphabetical, unranked, and unnumbered. Every website and phone number below was
+    re-fetched and matched against that company&#x27;s own homepage on Aug 12, 2026.</p>
+    <div class="reviews">
+      <article class="review" id="anderson-printing-solutions" data-county="Putnam" data-city="Cookeville" data-services="offset digital signs apparel mailing promo" data-name="anderson printing solutions" data-founded="1976">
+        <p class="eyebrow">One-stop shop for the Upper Cumberland</p>
+        <h3 class="review-name">Anderson Printing Solutions</h3>
+        <p class="review-where">Cookeville, Putnam County · Established 1976</p>
+        <p class="blurb">For an Upper Cumberland business the appeal is arithmetic: offset, digital, embroidery, screen printing, signage and mailing all come out of one family-owned shop, so three purchase orders become one. Cookeville, since 1976.</p>
+        <ul class="chips"><li class="chip">Offset</li><li class="chip">Digital</li><li class="chip">Signs</li><li class="chip">Apparel</li><li class="chip">Mailing</li><li class="chip">Promotional</li></ul>
+        <p class="actions"><a class="act act-tel" href="tel:+19315281561">(931) 528-1561</a><a class="act act-web" href="https://andersonps.com/" rel="noopener nofollow external" target="_blank">andersonps.com</a></p>
+      </article>
+      <article class="review" id="crown-label-inc" data-county="Rutherford" data-city="La Vergne" data-services="packaging labels digital flexo" data-name="crown label, inc." data-founded="1976">
+        <p class="eyebrow">Product labels and tags at volume</p>
+        <h3 class="review-name">Crown Label, Inc.</h3>
+        <p class="review-where">La Vergne, Rutherford County · Established 1976</p>
+        <p class="blurb">Eight narrow-web presses — Aquaflex, Webtron and Mark Andy — running flexographic and digital label work from blank stock up to seven colors, at sizes to roughly 18 by 22 inches. Prepress and platemaking are in the building, which is what keeps a color correction from turning into a week. This is a roll-label converter rather than a commercial printer that also does labels; for business cards, call somebody else on this list.</p>
+        <ul class="chips"><li class="chip">Packaging</li><li class="chip">Labels</li><li class="chip">Digital</li><li class="chip">Flexography</li></ul>
+        <p class="actions"><a class="act act-tel" href="tel:+16157939877">(615) 793-9877</a><a class="act act-web" href="https://crownlabelinc.com/" rel="noopener nofollow external" target="_blank">crownlabelinc.com</a></p>
+      </article>
+      <article class="review" id="franklin-web-printing-co" data-county="Williamson" data-city="Franklin" data-services="offset web-press mailing publications" data-name="franklin web printing co." data-founded="1977">
+        <p class="eyebrow">Publications, tabloids, and newspapers</p>
+        <h3 class="review-name">Franklin Web Printing Co.</h3>
+        <p class="review-where">Franklin, Williamson County · Established 1977</p>
+        <p class="blurb">A non-heatset web printer since 1977, built for the long-run publication work most commercial shops turn down — trade magazines, newspapers, specialty tabloids. Ink-jetting, inserting and direct mail happen in the same building, so a title can be printed, addressed and dropped without leaving Franklin. Short runs are not the point here.</p>
+        <ul class="chips"><li class="chip">Offset</li><li class="chip">Web press</li><li class="chip">Mailing</li><li class="chip">Publications</li></ul>
+        <p class="actions"><a class="act act-tel" href="tel:+16157947181">(615) 794-7181</a><a class="act act-web" href="https://www.fwpco.com/" rel="noopener nofollow external" target="_blank">fwpco.com</a></p>
+      </article>
+      <article class="review" id="hatch-show-print" data-county="Davidson" data-city="Nashville" data-services="letterpress posters" data-name="hatch show print" data-founded="1879">
+        <p class="eyebrow">Letterpress posters with genuine craft</p>
+        <h3 class="review-name">Hatch Show Print</h3>
+        <p class="review-where">Nashville, Davidson County · Established 1879</p>
+        <p class="blurb">Operating since 1879, and one of the oldest working letterpress shops in America. It is now part of the Country Music Hall of Fame and Museum, so the presses run where people can watch them. Blocks are hand-carved and posters are pulled from vintage wood and metal type. All of which makes it the wrong shop for a cheap impression and the right one when the artifact itself is the point — a poster somebody keeps rather than reads.</p>
+        <ul class="chips"><li class="chip">Letterpress</li><li class="chip">Posters</li></ul>
+        <p class="actions"><a class="act act-tel" href="tel:+16155777710">(615) 577-7710</a><a class="act act-web" href="https://hatchshowprint.com/" rel="noopener nofollow external" target="_blank">hatchshowprint.com</a></p>
+      </article>
+      <article class="review" id="joyner-hogan-printers" data-county="Davidson" data-city="Nashville" data-services="offset digital mailing bindery" data-name="joyner &amp; hogan printers" data-founded="1937">
+        <p class="eyebrow">Direct mail, forms, and campaign work</p>
+        <h3 class="review-name">Joyner &amp; Hogan Printers</h3>
+        <p class="review-where">Nashville, Davidson County · Established 1937</p>
+        <p class="blurb">Woman-owned, printing since 1937, and specialized in the categories nobody puts in a portfolio: multi-part business forms, letterhead systems, campaign printing and direct mail. Nearly ninety years in that niche buys one specific kind of knowledge — the postal rules that quietly wreck a mail drop somewhere between the loading dock and the bulk mail center.</p>
+        <ul class="chips"><li class="chip">Offset</li><li class="chip">Digital</li><li class="chip">Mailing</li><li class="chip">Bindery</li></ul>
+        <p class="actions"><a class="act act-tel" href="tel:+16155621362">(615) 562-1362</a><a class="act act-web" href="https://www.joynerhogan.net/" rel="noopener nofollow external" target="_blank">joynerhogan.net</a></p>
+      </article>
+      <article class="review" id="ledbetter-signs" data-county="Montgomery" data-city="Clarksville" data-services="signs wide-format apparel digital" data-name="ledbetter signs" data-founded="1956">
+        <p class="eyebrow">Signage, decals, and vehicle wraps</p>
+        <h3 class="review-name">LedBetter Signs</h3>
+        <p class="review-where">Clarksville, Montgomery County · Established 1956</p>
+        <p class="blurb">Seventy years in one Clarksville market, family owned and operated, covering signage, decals, vehicle wraps and screen printing alongside general print work. In the sign trade the things that actually vary are fabrication quality and whether the installation crew turns up; seven decades in the same town is the closest thing to a public record of both.</p>
+        <ul class="chips"><li class="chip">Signs</li><li class="chip">Wide format</li><li class="chip">Apparel</li><li class="chip">Digital</li></ul>
+        <p class="actions"><a class="act act-tel" href="tel:+19316473629">(931) 647-3629</a><a class="act act-web" href="https://ledbettersigns.net/" rel="noopener nofollow external" target="_blank">ledbettersigns.net</a></p>
+      </article>
+      <article class="review" id="phillips-printing-company" data-county="Davidson" data-city="Nashville" data-services="offset digital mailing bindery" data-name="phillips printing company" data-founded="1959">
+        <p class="eyebrow">Color-critical offset runs</p>
+        <h3 class="review-name">Phillips Printing Company</h3>
+        <p class="review-where">Nashville, Davidson County · Established 1959</p>
+        <p class="blurb">A six-color Heidelberg CX102 with in-line coating, and G7 Master certification — the calibration standard that holds color from proof to press, and from this run to the reprint eighteen months later. Better than 95% of the work stays in the building. That combination is why annual reports and packaging-adjacent jobs with tight color tolerances tend to end up here. Family-owned since 1959.</p>
+        <ul class="chips"><li class="chip">Offset</li><li class="chip">Digital</li><li class="chip">Mailing</li><li class="chip">Bindery</li></ul>
+        <p class="actions"><a class="act act-tel" href="tel:+18882757445">(888) 275-7445</a><a class="act act-web" href="https://philprint.com/" rel="noopener nofollow external" target="_blank">philprint.com</a></p>
+      </article>
+      <article class="review" id="pollock-printing" data-county="Davidson" data-city="Nashville" data-services="offset digital wide-format bindery mailing packaging" data-name="pollock printing" data-founded="1972">
+        <p class="eyebrow">Print plus kitting and fulfillment</p>
+        <h3 class="review-name">Pollock Printing</h3>
+        <p class="review-where">Nashville, Davidson County · Established 1972</p>
+        <p class="blurb">Web, sheetfed offset and digital, and then the part most shops hand off: finishing, kitting, warehousing, shipping to a hundred addresses. If the job is not done when the ink dries — dealer kits, seasonal mailings, anything that has to arrive assembled — this is the shop set up to carry it the whole way instead of subcontracting the last mile.</p>
+        <ul class="chips"><li class="chip">Offset</li><li class="chip">Digital</li><li class="chip">Wide format</li><li class="chip">Bindery</li><li class="chip">Mailing</li><li class="chip">Packaging</li></ul>
+        <p class="actions"><a class="act act-tel" href="tel:+16152550526">(615) 255-0526</a><a class="act act-web" href="https://www.pollockprinting.com/" rel="noopener nofollow external" target="_blank">pollockprinting.com</a></p>
+      </article>
+      <article class="review" id="quality-printing-company" data-county="Sumner" data-city="Gallatin" data-services="offset digital signs promo mailing" data-name="quality printing company" data-founded="1969">
+        <p class="eyebrow">The hometown shop in Sumner County</p>
+        <h3 class="review-name">Quality Printing Company</h3>
+        <p class="review-where">Gallatin, Sumner County · Established 1969</p>
+        <p class="blurb">The Gallatin counter, family-run since 1969: everyday business printing, signs, promotional items and mailing for Sumner County. It has since joined The Print Authority&#x27;s production network, which widens what it can produce without changing where you go to ask for it.</p>
+        <ul class="chips"><li class="chip">Offset</li><li class="chip">Digital</li><li class="chip">Signs</li><li class="chip">Promotional</li><li class="chip">Mailing</li></ul>
+        <p class="actions"><a class="act act-tel" href="tel:+16154527653">(615) 452-7653</a><a class="act act-web" href="https://www.printshopgallatintn.com/" rel="noopener nofollow external" target="_blank">printshopgallatintn.com</a></p>
+      </article>
+      <article class="review" id="that-s-printing-inc" data-county="Williamson" data-city="Franklin" data-services="offset digital bindery finishing" data-name="that&#x27;s printing, inc." data-founded="1985">
+        <p class="eyebrow">Bindery and specialty finishing</p>
+        <h3 class="review-name">That&#x27;s Printing, Inc.</h3>
+        <p class="review-where">Franklin, Williamson County · Established 1985</p>
+        <p class="blurb">The finishing department is the reason to call: folding, saddle-stitching, die-cutting, coil and perfect binding, foil stamping, embossing. All of it happens in Franklin, alongside the offset, digital and variable-data printing. Keeping the bindery in the same building removes the handoff that usually adds three days and one chance of damage to a complicated piece.</p>
+        <ul class="chips"><li class="chip">Offset</li><li class="chip">Digital</li><li class="chip">Bindery</li><li class="chip">Finishing</li></ul>
+        <p class="actions"><a class="act act-tel" href="tel:+16157941488">(615) 794-1488</a><a class="act act-web" href="https://www.thatsprinting.com/" rel="noopener nofollow external" target="_blank">thatsprinting.com</a></p>
+      </article>
+    </div>
+    <p class="empty" id="empty">No company matches those filters.
+      <button class="btn" type="button" onclick="document.getElementById('f-reset').click()">Clear filters</button></p>
+    <p class="to-top-row"><a class="to-top" href="#top-picks">Back to the top picks</a></p>
+  </section>
+
+  <section class="wrap prose" id="how-to-choose">
+    <h2>How to choose a print shop</h2>
+<p><strong>First work out whether you want a printer or a converter.</strong> These are different trades that share a word. Crown Label runs narrow-web presses and makes roll labels; LedBetter cuts vinyl and wraps trucks; Franklin Web runs non-heatset web for publications; Hatch Show Print carves blocks. None of them is a worse version of the others, and asking a label converter for business cards wastes everybody's afternoon. Four of the ten shops on this page will decline your job outright, and that is the system working.</p>
+<p><strong>Ask where the bindery is.</strong> Folding, stitching, die-cutting and binding are where schedules break, because a subcontracted bindery means the job leaves the building, waits in somebody else's queue, and comes back with nobody accountable for the damage. That's Printing and Pollock both keep finishing in-house — worth knowing before you compare their quote against a shop that doesn't and looks cheaper on paper.</p>
+<p><strong>If color is contractual, ask about G7 and ask for a press check.</strong> A monitor proof is a suggestion; screens are not calibrated to each other, let alone to a press. Phillips holds G7 Master certification, which is the specific answer to "will the reprint match" — if your job is a brand book or an annual report, that certification is the thing to ask other shops whether they hold too.</p>
+<p><strong>For mail, the print is the easy half.</strong> Postal rules decide whether a drop goes out on time, and they are not the printer's problem unless the printer makes them their problem. Joyner &amp; Hogan have been doing forms and direct mail since 1937, Franklin Web ink-jets and inserts in-house, Pollock warehouses and ships. Ask who is presorting, who is holding the permit, and what happens if the list is dirty.</p>
+  </section>
+
+  <section class="wrap prose" id="what-to-send">
+    <h2>What to send your printer</h2>
+<ul>
+<li>PDF/X, not a Word file, not a JPEG, not a Canva link.</li>
+<li>CMYK, not RGB — RGB will be converted for you, and you will not like how.</li>
+<li>300 dpi at final printed size. Not 300 dpi at thumbnail size scaled up.</li>
+<li>0.125" bleed on every side that runs to the edge.</li>
+<li>Critical text and logos 0.125–0.25" clear of the trim.</li>
+<li>Fonts embedded or text outlined.</li>
+<li>Spot colors called out by PMS number if a brand color has to be exact.</li>
+<li>Finished size and quantity written down, in the file name if nowhere else.</li>
+</ul>
+    <h3 class="faq-q">Questions worth asking before a first order</h3>
+<ul>
+<li>Is the bindery in this building, or does the job leave?</li>
+<li>Can I see a hard proof, and can I stand at the press?</li>
+<li>What is the real turnaround, and what does rush actually cost?</li>
+<li>Who handles the mail drop and the postal permit?</li>
+<li>What file format do you actually want from me?</li>
+</ul>
+  </section>
+
+  <section class="wrap" id="methodology">
+    <h2>Methodology</h2>
+    <p class="lede">Thirty-two commercial printers across eight Middle Tennessee counties were researched for
+    this list. Ten are published. These are the factors that decided it.</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th scope="col">Decision factor</th><th scope="col">What it meant in practice</th></tr></thead>
+        <tbody><tr><th scope="row">A real, reachable website</th><td>Every business considered had to have its own working website that was actually fetched and read, not just an entry in a listings aggregator. Thirty-two shops cleared that bar; anything that failed to load, or that turned out to be a parked domain, was dropped before it could be considered.</td></tr><tr><th scope="row">A specialty that can be described concretely</th><td>A shop earned a place by being clearly the answer to a specific question — labels at volume, publication web-press work, in-house foil and die-cutting — rather than by being generally good. That is why each entry carries a &quot;best for&quot; line instead of a position.</td></tr><tr><th scope="row">Verifiable operating history</th><td>Founding years come from each company&#x27;s own site copy. Every shop listed here has been in business for decades; the youngest opened in 1985 and the oldest in 1879. Longevity proves survival rather than quality, but in commercial print it is a strong signal that the equipment and the crew are real.</td></tr><tr><th scope="row">Contact details checked against the source</th><td>Every phone number published here was re-fetched from that company&#x27;s own homepage and matched digit for digit. All ten confirmed. A directory that sends you to a dead number is worse than no directory.</td></tr><tr><th scope="row">Regional spread, not just Nashville</th><td>Nashville has the deepest bench, but a Clarksville or Cookeville business should not have to drive to Davidson County for a sign or a mailing. The list deliberately covers six counties.</td></tr><tr><th scope="row">Position is not for sale</th><td>Nothing here is ranked, so there is no position to buy. None of the ten paid to appear and none was contacted for input before publication. Barnraised runs this directory and a listing is part of what its web design customers pay for; those entries are labeled, held to the same checks, and they never displace anybody.</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="wrap" id="trust">
+    <h2>Why you can trust this list</h2>
+    <p>This page carries no ratings and no prices, and that limit is chosen. Star ratings
+    on a local trade directory are almost always recycled aggregator scores dressed up as independent
+    judgement, and a "starting price" for commercial print is close to meaningless when the same brochure can
+    triple in cost on stock and finishing alone. Publishing either would make the page look more authoritative
+    while making it less true.</p>
+    <p>What is here instead is checkable. Every company's website was fetched and read rather than taken from a
+    listings scrape. Every phone number was matched digit for digit against that company's own homepage — all
+    ten confirmed. Every founding year is drawn from the company's own site copy. If something here is wrong,
+    it is wrong because the source changed after Aug 12, 2026, and it can be checked against the same
+    sources in a few minutes.</p>
+    <p>Order is not for sale. Barnraised runs this directory and includes a listing in what its web design customers pay for; those entries are labeled, held to the same checks, and they do not displace anybody. There is no advertising on this page, no affiliate tracking on the
+    outbound links, and no mechanism by which a shop could pay to be added or moved.</p>
+  </section>
+
+  <section class="wrap prose" id="faq">
+    <h2>Frequently asked questions</h2>
+<h3 class="faq-q">Digital or offset — which do I want?</h3>
+<p>Short runs and anything where each piece differs go digital. Long runs go offset: the plates cost money up front and then the per-piece price falls off a cliff, and offset holds color more tightly. The crossover depends on the piece, so ask for both numbers rather than guessing.</p>
+<h3 class="faq-q">What is a bleed, and why does my printer keep asking about it?</h3>
+<p>It is artwork extending past the trim line, usually by 0.125 inches, so that when the guillotine wanders by a hair you get color to the edge instead of a white sliver. Trimming is never perfect. Bleed is how you make imperfect trimming invisible.</p>
+<h3 class="faq-q">Is there a minimum order?</h3>
+<p>Digital work often has none. Offset effectively does, because the plate and makeready costs have to be spread across something — below a few thousand pieces the per-unit price stops making sense against digital.</p>
+<h3 class="faq-q">Can I supply my own paper?</h3>
+<p>Sometimes, and it is usually a false economy. The shop knows how its own stock behaves through its own presses, and once you supply the paper, spoilage is your problem rather than theirs.</p>
+<h3 class="faq-q">How is a print job actually quoted?</h3>
+<p>Quantity, flat and finished size, number of colors, stock, and finishing — with finishing the line that most often doubles a job people thought was simple. This is why no page, including this one, can honestly publish a starting price for commercial print.</p>
+<h3 class="faq-q">Do any of these shops sponsor this list?</h3>
+<p>No. None of the ten paid to appear, and nothing here is ranked, so there is no position to sell. The directory is run by Barnraised, which builds and hosts websites; a listing is part of what its web design customers pay for, and any entry that arrives that way is labeled.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Middle TN Printers</strong> — an independent directory of commercial printing companies in Middle
+    Tennessee. Not affiliated with any listed business. Last reviewed Aug 12, 2026.</p>
+  </div>
+</footer>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "The Ten Best Printing Companies in Middle Tennessee", "description": "An unranked, alphabetically listed set of ten commercial printing companies serving Middle Tennessee.", "numberOfItems": 10, "itemListOrder": "https://schema.org/ItemListUnordered", "itemListElement": [{"@type": "ListItem", "item": {"@type": "LocalBusiness", "name": "Anderson Printing Solutions", "url": "https://andersonps.com/", "description": "One-stop shop for the Upper Cumberland", "address": {"@type": "PostalAddress", "addressLocality": "Cookeville", "addressRegion": "TN", "addressCountry": "US"}, "telephone": "(931) 528-1561", "foundingDate": "1976"}}, {"@type": "ListItem", "item": {"@type": "LocalBusiness", "name": "Crown Label, Inc.", "url": "https://crownlabelinc.com/", "description": "Product labels and tags at volume", "address": {"@type": "PostalAddress", "addressLocality": "La Vergne", "addressRegion": "TN", "addressCountry": "US"}, "telephone": "(615) 793-9877", "foundingDate": "1976"}}, {"@type": "ListItem", "item": {"@type": "LocalBusiness", "name": "Franklin Web Printing Co.", "url": "https://www.fwpco.com/", "description": "Publications, tabloids, and newspapers", "address": {"@type": "PostalAddress", "addressLocality": "Franklin", "addressRegion": "TN", "addressCountry": "US"}, "telephone": "(615) 794-7181", "foundingDate": "1977"}}, {"@type": "ListItem", "item": {"@type": "LocalBusiness", "name": "Hatch Show Print", "url": "https://hatchshowprint.com/", "description": "Letterpress posters with genuine craft", "address": {"@type": "PostalAddress", "addressLocality": "Nashville", "addressRegion": "TN", "addressCountry": "US"}, "telephone": "(615) 577-7710", "foundingDate": "1879"}}, {"@type": "ListItem", "item": {"@type": "LocalBusiness", "name": "Joyner & Hogan Printers", "url": "https://www.joynerhogan.net/", "description": "Direct mail, forms, and campaign work", "address": {"@type": "PostalAddress", "addressLocality": "Nashville", "addressRegion": "TN", "addressCountry": "US"}, "telephone": "(615) 562-1362", "foundingDate": "1937"}}, {"@type": "ListItem", "item": {"@type": "LocalBusiness", "name": "LedBetter Signs", "url": "https://ledbettersigns.net/", "description": "Signage, decals, and vehicle wraps", "address": {"@type": "PostalAddress", "addressLocality": "Clarksville", "addressRegion": "TN", "addressCountry": "US"}, "telephone": "(931) 647-3629", "foundingDate": "1956"}}, {"@type": "ListItem", "item": {"@type": "LocalBusiness", "name": "Phillips Printing Company", "url": "https://philprint.com/", "description": "Color-critical offset runs", "address": {"@type": "PostalAddress", "addressLocality": "Nashville", "addressRegion": "TN", "addressCountry": "US"}, "telephone": "888-275-7445", "foundingDate": "1959"}}, {"@type": "ListItem", "item": {"@type": "LocalBusiness", "name": "Pollock Printing", "url": "https://www.pollockprinting.com/", "description": "Print plus kitting and fulfillment", "address": {"@type": "PostalAddress", "addressLocality": "Nashville", "addressRegion": "TN", "addressCountry": "US"}, "telephone": "(615) 255-0526", "foundingDate": "1972"}}, {"@type": "ListItem", "item": {"@type": "LocalBusiness", "name": "Quality Printing Company", "url": "https://www.printshopgallatintn.com/", "description": "The hometown shop in Sumner County", "address": {"@type": "PostalAddress", "addressLocality": "Gallatin", "addressRegion": "TN", "addressCountry": "US"}, "telephone": "(615) 452-7653", "foundingDate": "1969"}}, {"@type": "ListItem", "item": {"@type": "LocalBusiness", "name": "That's Printing, Inc.", "url": "https://www.thatsprinting.com/", "description": "Bindery and specialty finishing", "address": {"@type": "PostalAddress", "addressLocality": "Franklin", "addressRegion": "TN", "addressCountry": "US"}, "telephone": "615.794.1488", "foundingDate": "1985"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Digital or offset — which do I want?", "acceptedAnswer": {"@type": "Answer", "text": "Short runs and anything where each piece differs go digital. Long runs go offset: the plates cost money up front and then the per-piece price falls off a cliff, and offset holds color more tightly. The crossover depends on the piece, so ask for both numbers rather than guessing."}}, {"@type": "Question", "name": "What is a bleed, and why does my printer keep asking about it?", "acceptedAnswer": {"@type": "Answer", "text": "It is artwork extending past the trim line, usually by 0.125 inches, so that when the guillotine wanders by a hair you get color to the edge instead of a white sliver. Trimming is never perfect. Bleed is how you make imperfect trimming invisible."}}, {"@type": "Question", "name": "Is there a minimum order?", "acceptedAnswer": {"@type": "Answer", "text": "Digital work often has none. Offset effectively does, because the plate and makeready costs have to be spread across something — below a few thousand pieces the per-unit price stops making sense against digital."}}, {"@type": "Question", "name": "Can I supply my own paper?", "acceptedAnswer": {"@type": "Answer", "text": "Sometimes, and it is usually a false economy. The shop knows how its own stock behaves through its own presses, and once you supply the paper, spoilage is your problem rather than theirs."}}, {"@type": "Question", "name": "How is a print job actually quoted?", "acceptedAnswer": {"@type": "Answer", "text": "Quantity, flat and finished size, number of colors, stock, and finishing — with finishing the line that most often doubles a job people thought was simple. This is why no page, including this one, can honestly publish a starting price for commercial print."}}, {"@type": "Question", "name": "Do any of these shops sponsor this list?", "acceptedAnswer": {"@type": "Answer", "text": "No. None of the ten paid to appear, and nothing here is ranked, so there is no position to sell. The directory is run by Barnraised, which builds and hosts websites; a listing is part of what its web design customers pay for, and any entry that arrives that way is labeled."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "The Ten Best Printing Companies in Middle Tennessee", "description": "An unranked guide to ten commercial printing companies serving Middle Tennessee.", "datePublished": "2026-08-12", "dateModified": "2026-08-12", "inLanguage": "en-US", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Middle TN Printers", "url": "https://middletnprinters.com/"}, "publisher": {"@type": "Organization", "name": "Middle TN Printers", "url": "https://middletnprinters.com/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://middletnprinters.com/"}, "about": {"@type": "Thing", "name": "Commercial printing in Middle Tennessee"}, "spatialCoverage": [{"@type": "AdministrativeArea", "name": "Davidson County, Tennessee"}, {"@type": "AdministrativeArea", "name": "Montgomery County, Tennessee"}, {"@type": "AdministrativeArea", "name": "Putnam County, Tennessee"}, {"@type": "AdministrativeArea", "name": "Rutherford County, Tennessee"}, {"@type": "AdministrativeArea", "name": "Sumner County, Tennessee"}, {"@type": "AdministrativeArea", "name": "Williamson County, Tennessee"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Middle TN Printers", "item": "https://middletnprinters.com/"}, {"@type": "ListItem", "position": 2, "name": "Commercial printing companies", "item": "https://middletnprinters.com/#reviews"}]}</script>
+<script>
+(function () {
+  var county = document.getElementById('f-county'), service = document.getElementById('f-service'),
+      text = document.getElementById('f-text'), reset = document.getElementById('f-reset'),
+      sort = document.getElementById('f-sort'),
+      count = document.getElementById('count'), empty = document.getElementById('empty'),
+      list = document.querySelector('.reviews'),
+      items = Array.prototype.slice.call(document.querySelectorAll('.review'));
+
+  // Re-order only. None of these are quality orderings — the page states that
+  // the set is unranked, and sorting by county or founding year does not imply
+  // that the first entry is better than the last.
+  function applySort() {
+    var mode = sort.value, copy = items.slice();
+    copy.sort(function (a, b) {
+      if (mode === 'county') {
+        return a.dataset.county.localeCompare(b.dataset.county)
+            || a.dataset.name.localeCompare(b.dataset.name);
+      }
+      if (mode === 'founded') {
+        return (+a.dataset.founded) - (+b.dataset.founded)
+            || a.dataset.name.localeCompare(b.dataset.name);
+      }
+      return a.dataset.name.localeCompare(b.dataset.name);
+    });
+    copy.forEach(function (el) { list.appendChild(el); });
+  }
+
+  function apply() {
+    var c = county.value, s = service.value, q = text.value.trim().toLowerCase(), shown = 0;
+    items.forEach(function (el) {
+      var ok = (!c || el.dataset.county === c)
+        && (!s || (' ' + el.dataset.services + ' ').indexOf(' ' + s + ' ') !== -1)
+        && (!q || el.dataset.name.indexOf(q) !== -1 || el.dataset.city.toLowerCase().indexOf(q) !== -1);
+      el.hidden = !ok;
+      if (ok) shown++;
+    });
+    count.textContent = shown === items.length
+      ? 'Showing all ' + items.length + ' companies'
+      : 'Showing ' + shown + ' of ' + items.length + ' companies';
+    empty.classList.toggle('on', shown === 0);
+  }
+
+  [county, service].forEach(function (el) { el.addEventListener('change', apply); });
+  text.addEventListener('input', apply);
+  sort.addEventListener('change', applySort);
+  reset.addEventListener('click', function () {
+    county.value = ''; service.value = ''; text.value = ''; sort.value = 'name';
+    applySort(); apply(); text.focus();
+  });
+  apply();
+})();
+</script>
+</body>
+</html>
