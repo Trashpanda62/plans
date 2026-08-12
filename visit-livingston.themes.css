@@ -1,0 +1,503 @@
+/* =========================================================================
+   Visit Livingston TN — theme token layer
+   =========================================================================
+   Design-axis stylesheet for a small-town travel/visitor directory page
+   ("Visit Livingston TN" — things to do in Livingston & Overton County, TN).
+
+   This file owns TOKENS ONLY. It never styles page-specific component
+   classes (no .place-card, no .hero, etc.) — the page's own CSS owns
+   component layout and reads these custom properties. A live preset
+   switcher sets attributes on <html> (i.e. :root):
+
+     data-style   editorial | warm-craft | modern-flat | field-guide
+     data-palette cumberland | courthouse | lakeside | harvest
+     data-type    serif-display | all-sans | slab-mix
+     data-layout  grid | list | masonry-ish
+     data-density airy | standard | compact
+     data-theme   (unset = light) | dark
+
+   The five attributes are INDEPENDENT axes. Each axis owns a distinct,
+   non-overlapping slice of the token set so flipping one attribute never
+   fights another for the same property:
+
+     data-style   -> --radius, --radius-sm, --shadow, --shadow-lg,
+                     --border-width, --tracking-display
+     data-palette -> --bg, --bg-alt, --surface, --surface-2, --border,
+                     --text, --text-muted, --accent, --accent-contrast,
+                     --accent-soft   (+ data-theme="dark" combinations)
+     data-type    -> --font-display, --font-body
+     data-layout  -> --grid-min, --grid-gap, --maxw, --card-aspect,
+                     --card-flow
+     data-density -> --space-unit, --card-pad, --section-gap,
+                     --scale-h1/h2/h3/body/small, --leading-tight,
+                     --leading-body
+
+   No external resources are loaded anywhere in this file: no @import, no
+   remote fonts, no network requests. All font stacks are system/web-safe.
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   Base tokens — sensible defaults (no data-* attributes set)
+   Contrast check, default light: bg #f7f4ec vs text #20241c = 14.36:1 (AA pass)
+   ------------------------------------------------------------------------- */
+:root {
+  /* color */
+  --bg: #f7f4ec;
+  --bg-alt: #efe9db;
+  --surface: #ffffff;
+  --surface-2: #ece5d3;
+  --border: #d6cdb4;
+  --text: #20241c;
+  --text-muted: #55584a;
+  --accent: #3b6e4d;
+  --accent-contrast: #ffffff;
+  --accent-soft: #e2e8dd;
+
+  /* type */
+  --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --scale-h1: 2.75rem;
+  --scale-h2: 1.9rem;
+  --scale-h3: 1.35rem;
+  --scale-body: 1rem;
+  --scale-small: 0.85rem;
+  --leading-tight: 1.15;
+  --leading-body: 1.6;
+
+  /* surface character */
+  --radius: 10px;
+  --radius-sm: 6px;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.14);
+  --border-width: 1px;
+  --tracking-display: 0em;
+
+  /* rhythm & layout */
+  --space-unit: 8px;
+  --card-pad: 1.25rem;
+  --section-gap: 3rem;
+  --grid-min: 260px;
+  --grid-gap: 1.5rem;
+  --maxw: 1180px;
+  --card-aspect: auto;
+  --card-flow: row;
+}
+
+/* -------------------------------------------------------------------------
+   Generic base styling — reads tokens only, targets plain HTML elements.
+   The page owns its own component classes; this is just enough so the
+   token set is visibly "live" without any component CSS present.
+   ------------------------------------------------------------------------- */
+html {
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--scale-body);
+  line-height: var(--leading-body);
+  max-width: var(--maxw);
+  margin-inline: auto;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  color: var(--text);
+}
+
+h1 { font-size: var(--scale-h1); }
+h2 { font-size: var(--scale-h2); }
+h3 { font-size: var(--scale-h3); }
+
+small, .small, figcaption, time {
+  font-size: var(--scale-small);
+  color: var(--text-muted);
+}
+
+p { color: var(--text); }
+
+a {
+  color: var(--accent);
+}
+
+a:hover, a:focus-visible {
+  color: var(--accent);
+  outline-color: var(--accent);
+}
+
+hr {
+  border: none;
+  border-top: var(--border-width) solid var(--border);
+  margin-block: var(--section-gap);
+}
+
+blockquote {
+  border-inline-start: var(--border-width) solid var(--accent);
+  background: var(--accent-soft);
+  padding: var(--card-pad);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+}
+
+button, input, select, textarea {
+  font-family: var(--font-body);
+  font-size: var(--scale-body);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+}
+
+button {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: calc(var(--space-unit) * 1.25) calc(var(--space-unit) * 2);
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border-bottom: var(--border-width) solid var(--border);
+  padding: var(--space-unit) calc(var(--space-unit) * 1.5);
+  text-align: left;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+/* =========================================================================
+   AXIS 1 — data-style
+   Surface character: radius, shadow, border weight, heading tracking.
+   Never touches color or type-family tokens.
+   ========================================================================= */
+
+/* editorial — magazine, restrained, hairline rules */
+:root[data-style="editorial"] {
+  --radius: 2px;
+  --radius-sm: 2px;
+  --shadow: none;
+  --shadow-lg: 0 1px 0 rgba(0, 0, 0, 0.1);
+  --border-width: 1px;
+  --tracking-display: 0.01em;
+}
+
+/* warm-craft — hand-made small-town feel, soft shadows, rounded */
+:root[data-style="warm-craft"] {
+  --radius: 18px;
+  --radius-sm: 10px;
+  --shadow: 0 4px 14px rgba(60, 40, 20, 0.14);
+  --shadow-lg: 0 18px 40px rgba(60, 40, 20, 0.2);
+  --border-width: 1px;
+  --tracking-display: 0em;
+}
+
+/* modern-flat — crisp, flat, high-contrast borders, no shadows */
+:root[data-style="modern-flat"] {
+  --radius: 0px;
+  --radius-sm: 0px;
+  --shadow: none;
+  --shadow-lg: none;
+  --border-width: 2px;
+  --tracking-display: -0.01em;
+}
+
+/* field-guide — parks-department signage feel, slab accents, boxy */
+:root[data-style="field-guide"] {
+  --radius: 4px;
+  --radius-sm: 2px;
+  --shadow: 0 3px 0 rgba(0, 0, 0, 0.28);
+  --shadow-lg: 0 6px 0 rgba(0, 0, 0, 0.28);
+  --border-width: 3px;
+  --tracking-display: 0.04em;
+}
+
+/* =========================================================================
+   AXIS 2 — data-palette (light, default theme)
+   Only color tokens. Dark-theme combinations for each palette follow in
+   the data-theme section below.
+   ========================================================================= */
+
+/* cumberland — deep forest green + limestone
+   Contrast (WCAG 2.x relative-luminance formula):
+     bg #f2efe6 vs text  #16241b -> 14.03:1  (AA 4.5:1 pass, AAA 7:1 pass)
+     bg #f2efe6 vs muted #4a5a4e ->  6.38:1  (AA pass)
+     accent #3b6e4d vs accent-contrast #ffffff -> 5.96:1 (AA pass) */
+:root[data-palette="cumberland"] {
+  --bg: #f2efe6;
+  --bg-alt: #eae5d6;
+  --surface: #ffffff;
+  --surface-2: #e7e2d3;
+  --border: #c9c0aa;
+  --text: #16241b;
+  --text-muted: #4a5a4e;
+  --accent: #3b6e4d;
+  --accent-contrast: #ffffff;
+  --accent-soft: #dfe9e0;
+}
+
+/* courthouse — brick red + cream + navy
+   Contrast:
+     bg #f7f0e3 vs text  #1b2340 -> 13.61:1 (AA pass, AAA pass)
+     bg #f7f0e3 vs muted #5a5647 ->  6.49:1 (AA pass)
+     accent #a3342a vs accent-contrast #ffffff -> 6.81:1 (AA pass) */
+:root[data-palette="courthouse"] {
+  --bg: #f7f0e3;
+  --bg-alt: #efe5d2;
+  --surface: #ffffff;
+  --surface-2: #ece0c9;
+  --border: #d3c3a3;
+  --text: #1b2340;
+  --text-muted: #5a5647;
+  --accent: #a3342a;
+  --accent-contrast: #ffffff;
+  --accent-soft: #f3ded9;
+}
+
+/* lakeside — deep teal/blue + sand
+   Contrast:
+     bg #f3ecd9 vs text  #0e2f36 -> 12.05:1 (AA pass, AAA pass)
+     bg #f3ecd9 vs muted #5a5647 ->  6.23:1 (AA pass)
+     accent #1c6672 vs accent-contrast #ffffff -> 6.58:1 (AA pass) */
+:root[data-palette="lakeside"] {
+  --bg: #f3ecd9;
+  --bg-alt: #ebe1c7;
+  --surface: #ffffff;
+  --surface-2: #e8ddc0;
+  --border: #c9bd9a;
+  --text: #0e2f36;
+  --text-muted: #5a5647;
+  --accent: #1c6672;
+  --accent-contrast: #ffffff;
+  --accent-soft: #dcebe9;
+}
+
+/* harvest — burnt orange + warm brown + oat
+   Contrast:
+     bg #f5efe0 vs text  #3a2418 -> 12.66:1 (AA pass, AAA pass)
+     bg #f5efe0 vs muted #6b5a48 ->  5.75:1 (AA pass)
+     accent #a8551a vs accent-contrast #ffffff -> 5.28:1 (AA pass;
+       plain burnt-orange #c1621f only reached 4.17:1, so accent was
+       darkened to #a8551a to clear 4.5:1 against white) */
+:root[data-palette="harvest"] {
+  --bg: #f5efe0;
+  --bg-alt: #ede2c9;
+  --surface: #ffffff;
+  --surface-2: #ecdfc2;
+  --border: #d0bb92;
+  --text: #3a2418;
+  --text-muted: #6b5a48;
+  --accent: #a8551a;
+  --accent-contrast: #ffffff;
+  --accent-soft: #f0ddc4;
+}
+
+/* =========================================================================
+   AXIS 2b — data-theme="dark" combined with each palette
+   Each combo selector has higher specificity than a lone [data-palette]
+   or lone [data-theme] rule, so it correctly wins whenever both
+   attributes are present together.
+   ========================================================================= */
+
+/* default dark fallback (data-theme="dark", no data-palette set)
+   Contrast: bg #171a15 vs text #eee8da -> 14.39:1 (AA pass, AAA pass) */
+:root[data-theme="dark"] {
+  --bg: #171a15;
+  --bg-alt: #1e2219;
+  --surface: #20251b;
+  --surface-2: #262b1e;
+  --border: #3a4030;
+  --text: #eee8da;
+  --text-muted: #b7b6a2;
+  --accent: #8fae74;
+  --accent-contrast: #16220f;
+  --accent-soft: #2a3322;
+}
+
+/* cumberland, dark
+   Contrast:
+     bg #13221a vs text  #eee8d8 -> 13.50:1 (AA pass, AAA pass)
+     bg #13221a vs muted #b9c4b8 ->  9.16:1 (AA pass)
+     accent #7fbf98 vs accent-contrast #0d1a12 -> 7.71:1 (AA pass) */
+:root[data-theme="dark"][data-palette="cumberland"] {
+  --bg: #13221a;
+  --bg-alt: #1a2e22;
+  --surface: #1c3226;
+  --surface-2: #22392b;
+  --border: #34503e;
+  --text: #eee8d8;
+  --text-muted: #b9c4b8;
+  --accent: #7fbf98;
+  --accent-contrast: #0d1a12;
+  --accent-soft: #234133;
+}
+
+/* courthouse, dark
+   Contrast:
+     bg #171b2c vs text  #f3ead8 -> 14.29:1 (AA pass, AAA pass)
+     bg #171b2c vs muted #b9bccb ->  9.04:1 (AA pass)
+     accent #e0796e vs accent-contrast #201013 -> 5.80:1 (AA pass) */
+:root[data-theme="dark"][data-palette="courthouse"] {
+  --bg: #171b2c;
+  --bg-alt: #1f2438;
+  --surface: #212841;
+  --surface-2: #262d4a;
+  --border: #3b4463;
+  --text: #f3ead8;
+  --text-muted: #b9bccb;
+  --accent: #e0796e;
+  --accent-contrast: #201013;
+  --accent-soft: #3a2530;
+}
+
+/* lakeside, dark
+   Contrast:
+     bg #0d2a30 vs text  #efe6cf -> 12.14:1 (AA pass, AAA pass)
+     bg #0d2a30 vs muted #a9c0c4 ->  7.93:1 (AA pass)
+     accent #5fb4c2 vs accent-contrast #08272c -> 6.32:1 (AA pass) */
+:root[data-theme="dark"][data-palette="lakeside"] {
+  --bg: #0d2a30;
+  --bg-alt: #143740;
+  --surface: #163b44;
+  --surface-2: #1b4751;
+  --border: #2c5b64;
+  --text: #efe6cf;
+  --text-muted: #a9c0c4;
+  --accent: #5fb4c2;
+  --accent-contrast: #08272c;
+  --accent-soft: #1c4952;
+}
+
+/* harvest, dark
+   Contrast:
+     bg #2a1a10 vs text  #f0e6d0 -> 13.51:1 (AA pass, AAA pass)
+     bg #2a1a10 vs muted #cdb89f ->  8.74:1 (AA pass)
+     accent #e0964f vs accent-contrast #241206 -> 6.90:1 (AA pass) */
+:root[data-theme="dark"][data-palette="harvest"] {
+  --bg: #2a1a10;
+  --bg-alt: #35230f;
+  --surface: #382417;
+  --surface-2: #40291a;
+  --border: #56381f;
+  --text: #f0e6d0;
+  --text-muted: #cdb89f;
+  --accent: #e0964f;
+  --accent-contrast: #241206;
+  --accent-soft: #4a2f1a;
+}
+
+/* =========================================================================
+   AXIS 3 — data-type
+   Only font-family tokens. Web-safe system stacks only — no @import, no
+   remote font hosts, no network requests.
+   ========================================================================= */
+
+/* serif-display — serif headings, sans body */
+:root[data-type="serif-display"] {
+  --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', 'Times New Roman', serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* all-sans — humanist sans throughout */
+:root[data-type="all-sans"] {
+  --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* slab-mix — slab/condensed headings, sans body */
+:root[data-type="slab-mix"] {
+  --font-display: Rockwell, 'Roboto Slab', 'Arial Narrow', 'Segoe UI', Arial, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* =========================================================================
+   AXIS 4 — data-layout
+   Only grid/flow tokens. The page reads --card-aspect and --card-flow to
+   drive its own component grid (e.g. aspect-ratio and grid-auto-flow).
+   ========================================================================= */
+
+/* grid — multi-column card grid */
+:root[data-layout="grid"] {
+  --grid-min: 280px;
+  --grid-gap: 1.75rem;
+  --maxw: 1200px;
+  --card-aspect: 4 / 3;
+  --card-flow: row;
+}
+
+/* list — single wide column, row cards */
+:root[data-layout="list"] {
+  --grid-min: 100%;
+  --grid-gap: 1.25rem;
+  --maxw: 800px;
+  --card-aspect: auto;
+  --card-flow: row;
+}
+
+/* masonry-ish — staggered varied-height grid */
+:root[data-layout="masonry-ish"] {
+  --grid-min: 220px;
+  --grid-gap: 1rem;
+  --maxw: 1320px;
+  --card-aspect: auto;
+  --card-flow: dense;
+}
+
+/* =========================================================================
+   AXIS 5 — data-density
+   Only rhythm/spacing tokens and the type scale, per spec.
+   ========================================================================= */
+
+/* airy */
+:root[data-density="airy"] {
+  --space-unit: 10px;
+  --card-pad: 2rem;
+  --section-gap: 4.5rem;
+  --scale-h1: 3.1rem;
+  --scale-h2: 2.1rem;
+  --scale-h3: 1.45rem;
+  --scale-body: 1.05rem;
+  --scale-small: 0.9rem;
+  --leading-tight: 1.15;
+  --leading-body: 1.75;
+}
+
+/* standard */
+:root[data-density="standard"] {
+  --space-unit: 8px;
+  --card-pad: 1.25rem;
+  --section-gap: 3rem;
+  --scale-h1: 2.75rem;
+  --scale-h2: 1.9rem;
+  --scale-h3: 1.35rem;
+  --scale-body: 1rem;
+  --scale-small: 0.85rem;
+  --leading-tight: 1.15;
+  --leading-body: 1.6;
+}
+
+/* compact */
+:root[data-density="compact"] {
+  --space-unit: 5px;
+  --card-pad: 0.75rem;
+  --section-gap: 1.75rem;
+  --scale-h1: 2.2rem;
+  --scale-h2: 1.55rem;
+  --scale-h3: 1.15rem;
+  --scale-body: 0.925rem;
+  --scale-small: 0.78rem;
+  --leading-tight: 1.1;
+  --leading-body: 1.45;
+}

@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en" data-style="editorial" data-palette="cumberland" data-type="serif-display" data-layout="grid" data-density="standard">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Things to Do in Livingston, Tennessee — Visit Livingston TN</title>
+<meta name="description" content="A plain-spoken guide to Livingston and Overton County, Tennessee: state parks and lakes, the courthouse square, local kitchens, museums and annual events. No rankings, no ads.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%8F%9E%3C/text%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem("vltn_theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}catch(e){document.documentElement.dataset.theme="light";}</script>
+<link rel="stylesheet" href="visit-livingston.themes.css">
+<link rel="stylesheet" href="design-selectors/preset-switcher.css">
+<style>
+/* ---- component layer: reads tokens from visit-livingston.themes.css ---- */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);
+     font-size:var(--scale-body);line-height:var(--leading-body);overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:var(--accent);text-underline-offset:.18em}
+h1,h2,h3{font-family:var(--font-display);line-height:var(--leading-tight);margin:0 0 .4em}
+h1{font-size:var(--scale-h1)}
+h2{font-size:var(--scale-h2)}
+h3{font-size:var(--scale-h3)}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1rem,4vw,2.5rem)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:1rem;top:1rem;z-index:60;background:var(--surface);color:var(--text);
+            padding:.6rem 1rem;border:var(--border-width) solid var(--border);border-radius:var(--radius-sm)}
+
+/* header */
+.site-head{border-bottom:var(--border-width) solid var(--border);background:var(--surface);
+           position:sticky;top:0;z-index:40}
+.site-head .wrap{display:flex;align-items:center;gap:1rem;
+                 padding-block:calc(var(--space-unit) * 1.5);flex-wrap:wrap}
+.brand{font-family:var(--font-display);font-weight:700;font-size:1.05rem;letter-spacing:.02em;
+       margin-right:auto;color:var(--text);text-decoration:none}
+.brand span{color:var(--accent)}
+.head-links{display:flex;gap:1rem;flex-wrap:wrap;font-size:var(--scale-small)}
+.head-links a{color:var(--text-muted);text-decoration:none}
+.head-links a:hover,.head-links a:focus-visible{color:var(--accent);text-decoration:underline}
+.theme-toggle{font:inherit;font-size:var(--scale-small);cursor:pointer;background:var(--surface-2);
+              color:var(--text);border:var(--border-width) solid var(--border);
+              border-radius:var(--radius-sm);padding:.35rem .7rem}
+
+/* hero */
+.hero{padding-block:calc(var(--section-gap) * .9) var(--section-gap);background:var(--bg-alt);
+      border-bottom:var(--border-width) solid var(--border)}
+.hero p.lede{font-size:calc(var(--scale-body) * 1.12);color:var(--text-muted);max-width:60ch;margin:0 0 1.25rem}
+.hero .kicker{font-size:var(--scale-small);letter-spacing:.14em;text-transform:uppercase;
+              color:var(--accent);margin:0 0 .75rem;font-weight:600}
+.stat-row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.25rem}
+.stat{background:var(--surface);border:var(--border-width) solid var(--border);border-radius:var(--radius-sm);
+      padding:.4rem .8rem;font-size:var(--scale-small);color:var(--text-muted)}
+.stat b{color:var(--text)}
+
+/* sections */
+main section{padding-block:var(--section-gap)}
+main section + section{border-top:var(--border-width) solid var(--border)}
+.section-intro{color:var(--text-muted);max-width:62ch;margin:0 0 calc(var(--space-unit) * 3)}
+
+/* featured itinerary */
+.itin{display:grid;gap:var(--grid-gap);grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.itin-step{background:var(--surface);border:var(--border-width) solid var(--border);
+           border-radius:var(--radius);padding:var(--card-pad);box-shadow:var(--shadow)}
+.itin-step .when{font-size:var(--scale-small);letter-spacing:.1em;text-transform:uppercase;
+                 color:var(--accent);font-weight:600;margin:0 0 .5rem}
+.itin-step h3{margin-bottom:.35rem}
+.itin-step p{margin:0;color:var(--text-muted);font-size:var(--scale-small)}
+
+/* filters */
+.filters{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;
+         margin-bottom:calc(var(--space-unit) * 3)}
+.filters .flabel{font-size:var(--scale-small);color:var(--text-muted);margin-right:.25rem}
+.chip{font:inherit;font-size:var(--scale-small);cursor:pointer;background:var(--surface);
+      color:var(--text);border:var(--border-width) solid var(--border);
+      border-radius:999px;padding:.4rem .85rem;transition:background .15s,color .15s,border-color .15s}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-contrast);border-color:var(--accent)}
+.chip:focus-visible,.theme-toggle:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.result-count{font-size:var(--scale-small);color:var(--text-muted);margin:0 0 calc(var(--space-unit) * 2)}
+
+/* place cards */
+.places{display:grid;gap:var(--grid-gap);grid-template-columns:repeat(auto-fill,minmax(min(100%,var(--grid-min)),1fr));
+        list-style:none;padding:0;margin:0}
+:root[data-layout="list"] .places{grid-template-columns:1fr}
+.place{background:var(--surface);border:var(--border-width) solid var(--border);border-radius:var(--radius);
+       padding:var(--card-pad);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:.6rem}
+.place:hover{box-shadow:var(--shadow-lg)}
+.place .cat{font-size:var(--scale-small);letter-spacing:.09em;text-transform:uppercase;
+            color:var(--accent);font-weight:600}
+.place h3{margin:0}
+.place .blurb{margin:0;color:var(--text-muted);flex:1}
+.place .meta{margin:0;font-size:var(--scale-small);color:var(--text-muted);
+             display:flex;flex-direction:column;gap:.2rem}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem;list-style:none;padding:0;margin:0}
+.tags li{font-size:calc(var(--scale-small) * .92);background:var(--surface-2);color:var(--text-muted);
+         border:var(--border-width) solid var(--border);border-radius:var(--radius-sm);padding:.15rem .5rem}
+.place .src{font-size:var(--scale-small)}
+.empty{color:var(--text-muted);padding:2rem 0}
+
+.cat-intro{color:var(--text-muted);max-width:62ch;margin:0 0 calc(var(--space-unit) * 2)}
+.practical p{color:var(--text-muted);max-width:66ch;margin:0 0 1rem}
+.practical strong{color:var(--text)}
+
+/* faq + footer */
+.faq details{border-bottom:var(--border-width) solid var(--border);padding-block:.9rem}
+.faq summary{cursor:pointer;font-family:var(--font-display);font-size:var(--scale-h3);
+             line-height:var(--leading-tight)}
+.faq p{color:var(--text-muted);margin:.6rem 0 0;max-width:65ch}
+.nearby{color:var(--text-muted);font-size:var(--scale-small)}
+footer{border-top:var(--border-width) solid var(--border);background:var(--surface);
+       color:var(--text-muted);font-size:var(--scale-small);padding-block:calc(var(--section-gap) * .7)}
+footer p{margin:0 0 .5rem;max-width:70ch}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media print{.site-head,.filters,.theme-toggle,.preset-switcher{display:none!important}
+             .place{break-inside:avoid;box-shadow:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#directory">Skip to the directory</a>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="#top">Visit <span>Livingston</span> TN</a>
+    <nav class="head-links" aria-label="Sections">
+      <a href="#perfect-day">One good day</a>
+      <a href="#directory">Everything to do</a>
+      <a href="#practical">Getting around</a>
+      <a href="#faq">Know before you go</a>
+    </nav>
+    <button class="theme-toggle" type="button" id="themeToggle" aria-pressed="false">Dark</button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="wrap">
+      <p class="kicker">Overton County, Tennessee</p>
+      <h1 id="hero-h">Things to do in Livingston, Tennessee</h1>
+      <p class="lede" id="heroLede">A plain guide to a small county seat on the Upper Cumberland plateau — the courthouse square, a state park with a stone dam, lake water, and kitchens that have been open a long time. Nothing here is ranked; it is all just listed, and every place was checked against a live source.</p>
+      <div class="stat-row" id="statRow"></div>
+    </div>
+  </section>
+
+  <section id="perfect-day" aria-labelledby="perfect-day-h">
+    <div class="wrap">
+      <h2 id="perfect-day-h">If you only have one day</h2>
+      <p class="section-intro" id="itinIntro"></p>
+      <div class="itin" id="itin"></div>
+    </div>
+  </section>
+
+  <section id="directory" aria-labelledby="directory-h">
+    <div class="wrap">
+      <h2 id="directory-h">Everything to do in Livingston &amp; Overton County</h2>
+      <p class="section-intro" id="dirIntro">Listed by category, not by rank. Filter it down to what you are actually in the mood for.</p>
+
+      <div class="filters" role="group" aria-label="Filter places by category">
+        <span class="flabel" id="catLabel">Category:</span>
+        <span id="catChips"></span>
+      </div>
+      <div class="filters" role="group" aria-label="Filter places by trait">
+        <span class="flabel">Good for:</span>
+        <button class="chip" type="button" data-trait="good_with_kids" aria-pressed="false">Kids</button>
+        <button class="chip" type="button" data-trait="free" aria-pressed="false">Free</button>
+      </div>
+
+      <p class="cat-intro" id="catIntro"></p>
+      <p class="result-count" id="resultCount" role="status" aria-live="polite"></p>
+      <ul class="places" id="places"></ul>
+      <p class="empty" id="emptyMsg" hidden>No places match that combination. Clear a filter to see more.</p>
+      <p class="nearby" id="nearby"></p>
+    </div>
+  </section>
+
+  <section id="practical" aria-labelledby="practical-h">
+    <div class="wrap">
+      <h2 id="practical-h">Weather, terrain and what a county seat is like</h2>
+      <div class="practical" id="practicalList"></div>
+    </div>
+  </section>
+
+  <section id="faq" aria-labelledby="faq-h">
+    <div class="wrap">
+      <h2 id="faq-h">Know before you go</h2>
+      <div class="faq" id="faqList"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p id="footNote">Visit Livingston TN is an independent guide to Livingston and Overton County, Tennessee. No ads, no affiliate links, no paid placement, and no ranking — places are listed alphabetically inside each category.</p>
+    <p id="footVerified"></p>
+  </div>
+</footer>
+
+<script id="places-data" type="application/json">
+{"verified":"2026-08-12","categories":{"outdoors":{"label":"Outdoors & water","intro":"Overton County sits on the western edge of the Cumberland Plateau, where the farmland flattens out and then drops into creek gorges. That gives the county a mix most small counties do not have: a state park, lake water, and creeks all inside a short drive of the same square. Most of it is free to walk into."},"square":{"label":"Square, shops & history","intro":"Livingston is a county seat, and county seats keep their history on the square. The courthouse anchors a block of storefronts that still hold a museum, a library, antique dealers and an arts organization, and the town's calendar runs on annual events — a fair, a fall festival, a Christmas parade — rather than a year-round attraction circuit."},"eats":{"label":"Places to eat","intro":"Eating in Livingston means locally owned kitchens rather than a restaurant district. Expect meat-and-three plates, barbecue, a coffee shop or two, and family-run Mexican and Italian counters — most of them within a few blocks of the courthouse, most of them closed by early evening."},"events":{"label":"Annual events","intro":"Overton County's calendar runs on annual events rather than year-round attractions. Dates move — check the organizer before planning a trip around one."}},"intros":{"all":"Twenty-nine places, listed alphabetically inside each category. Nothing here is ranked."},"places":[{"name":"Central Park Livingston","category":"outdoors","city":"Livingston","address":"140 S Spring St, Livingston, TN 38570","phone":"(931) 823-1269","website":"https://www.centralparklivingston.com/","source_url":"https://www.centralparklivingston.com/","blurb":"A downtown municipal park opened in 2017 with a guitar-shaped splash pad, playground, walking trail, picnic shelter and an amphitheater that hosts the seasonal Live in Livingston concert series. Free, and a short walk from the square.","good_with_kids":true,"free":true,"seasonal_notes":"Open dawn to 10pm daily; splash pad most used in warmer months.","when":null,"featured":true},{"name":"Cub Mountain ATV Park & Campground","category":"outdoors","city":"Crawford","address":"306 Threet Road, Crawford, TN 38554","phone":"931-445-3032","website":"https://cubmountain.com/","source_url":"https://cubmountain.com/","blurb":"A privately owned ATV park on roughly 1,900 acres at Crawford, with about fifty miles of trails for ATVs, UTVs and dirt bikes, a stocked four-acre fishing lake, waterfalls, old coal-mining sites and camping. Paid admission.","good_with_kids":true,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Cumberland National Scenic Byway - Overton County segment","category":"outdoors","city":"Livingston","address":null,"phone":null,"website":"https://cumberlandnationalscenicbyway.com/overton-county/","source_url":"https://cumberlandnationalscenicbyway.com/overton-county/","blurb":"The byway's Overton County stretch runs SR 42 south of Livingston and SR 52 northwest toward Standing Stone, passing the courthouse square on the way. It is the drive to take if you want the county without a trail.","good_with_kids":true,"free":true,"seasonal_notes":null,"when":null,"featured":false},{"name":"Dale Hollow Lake - Overton County access (Mitchell Creek Marina / Livingston Boat Dock)","category":"outdoors","city":"Allons","address":"1260 Livingston Boat Dock Road, Allons, TN 38541","phone":"(931) 823-6666","website":"https://mitchellcreekmarina.com/","source_url":"https://mitchellcreekmarina.com/contact-us/","blurb":"Dale Hollow is a 27,700-acre reservoir on the Obey River with water clear enough to see the bottom in the shallows, and a national reputation for smallmouth bass. Overton County's access point is Mitchell Creek Marina near Allons, formerly the Livingston Boat Dock.","good_with_kids":true,"free":false,"seasonal_notes":"Marina hours Mon-Sat 8am-4pm, closed Sunday per one listed source.","when":null,"featured":false},{"name":"Hidden Valley Golf & Country Club","category":"outdoors","city":"Livingston","address":"201 Valley Drive, Livingston, TN 38570","phone":"(931) 823-1313","website":"https://hvccgolf.com/","source_url":"https://hvccgolf.com/","blurb":"A semi-private nine-hole course in Livingston built in 1966, open to the public most days. Sundays are members and guests only.","good_with_kids":false,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Livingston City Park (Recreation Park / City Ballpark)","category":"outdoors","city":"Livingston","address":null,"phone":null,"website":"https://www.cityoflivingston.net/community","source_url":"https://www.cityoflivingston.net/community","blurb":"The city's recreation complex, roughly fifteen acres of ball fields, pickleball courts, walking paths and a public swimming pool. This is where the town's own ball games happen rather than a visitor attraction.","good_with_kids":true,"free":false,"seasonal_notes":"Pool is seasonal (summer months).","when":null,"featured":false},{"name":"Obey River Park Campground","category":"outdoors","city":"Monroe","address":"100 Obey Park Rd, Monroe, TN 38573","phone":"931-864-6388","website":"https://www.recreation.gov/camping/campgrounds/232654","source_url":"https://www.recreation.gov/camping/campgrounds/232654","blurb":"A Corps of Engineers campground on Dale Hollow near Monroe with more than 120 sites, the lake's largest swimming beach, a boat ramp and winter bald-eagle viewing. Reservations run through recreation.gov.","good_with_kids":true,"free":false,"seasonal_notes":"Typically open mid-April through late October; day-use fee around $5 per vehicle.","when":null,"featured":false},{"name":"Standing Stone State Forest (WMA)","category":"outdoors","city":null,"address":null,"phone":null,"website":"https://www.tn.gov/twra/wildlife-management-areas/cumberland-plateau-r3/standing-stone.html","source_url":"https://www.tn.gov/twra/wildlife-management-areas/cumberland-plateau-r3/standing-stone.html","blurb":"Nearly 11,000 acres of TWRA-managed forest wrapping around the state park, open for hunting and dog training in season and for hiking and wildlife watching otherwise. Check TWRA season dates and wear orange during big-game seasons.","good_with_kids":false,"free":true,"seasonal_notes":"Dog training season Sept 1 - Mar 15; hunting follows statewide seasons; license/WMA permit fees may apply.","when":null,"featured":false},{"name":"Standing Stone State Park","category":"outdoors","city":"Hilham","address":null,"phone":null,"website":"https://tnstateparks.com/parks/standing-stone","source_url":"https://en.wikipedia.org/wiki/Standing_Stone_State_Park","blurb":"An 855-acre state park about ten miles northwest of town, built around 69-acre Standing Stone Lake on dammed Mill Creek. Trails, rental cabins, a campground and rowboats, plus the CCC-era stonework the park is known for. Day use is free.","good_with_kids":true,"free":true,"seasonal_notes":"Pool and swimming are seasonal (warm months); camping and cabins available year-round. Hosts the National Rolley Hole Marbles Championship each September.","when":null,"featured":true},{"name":"Livingston Mural Trail","category":"square","city":"Livingston","address":"Historic Downtown Square, Livingston, TN 38570","phone":null,"website":"https://discoverlivingstontn.com/mural-trail/","source_url":"https://discoverlivingstontn.com/mural-trail/","blurb":"A self-guided walk past hand-painted murals downtown, starting from the Greetings from Overton County mural on the courthouse square. Free, walkable, and about as long as you want to make it.","good_with_kids":true,"free":true,"seasonal_notes":null,"when":null,"featured":false},{"name":"Livingston-Overton County Farmers Market","category":"square","city":"Livingston","address":"141 First Street, Livingston, TN 38570","phone":"931-823-1269","website":null,"source_url":"https://www.picktnproducts.org/picktn-producers/picktn-listing.902.html","blurb":"Locally grown produce and goods from area farmers, operating seasonally from May through November.","good_with_kids":true,"free":true,"seasonal_notes":null,"when":"May to November","featured":false},{"name":"Millard Oakley Public Library","category":"square","city":"Livingston","address":"107 E Main St, Livingston, TN 38570","phone":"(931) 823-1888","website":"https://millardoakleylibrary.org","source_url":"https://overtoncountytn.com/library/","blurb":"The public library for Livingston and Overton County, with books, audiobooks, movies, internet access and a program calendar that runs from preschool storytime to teen events. A reasonable rainy-afternoon stop, and free.","good_with_kids":true,"free":true,"seasonal_notes":null,"when":null,"featured":false},{"name":"Overton County Arts","category":"square","city":"Livingston","address":null,"phone":null,"website":"https://www.overtoncountyarts.org","source_url":"https://www.overtoncountyarts.org/about","blurb":"A nonprofit that runs art classes, bimonthly Art Mixers, K-12 art education and the Libby Allen Art Contest. Worth checking their calendar before a visit; much of what they do is open to the public.","good_with_kids":true,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Overton County Courthouse","category":"square","city":"Livingston","address":"100 East Court Square, Livingston, TN 38570","phone":null,"website":null,"source_url":"https://courthouses.co/us-states/o-u/tennessee/overton-county/","blurb":"A two-story brick Federal-style courthouse built in 1868-69, replacing the one burned during the Civil War, and listed on the National Register of Historic Places. It anchors the square that everything else downtown is arranged around.","good_with_kids":true,"free":true,"seasonal_notes":null,"when":null,"featured":true},{"name":"Overton County Heritage Museum","category":"square","city":"Livingston","address":"West Broad Street, Livingston, TN 38570","phone":"(931) 403-0909","website":null,"source_url":"https://tngenweb.org/ofp/overton-county-heritage-museum/","blurb":"The county's museum occupies the former sheriff's office and jail on West Broad Street and opened in March 2002 as a project of the Overton County Historical Society. The collection includes one of roughly thirty-five surviving iron lungs in the country.","good_with_kids":true,"free":true,"seasonal_notes":null,"when":null,"featured":true},{"name":"Roaring River Church and Cemetery","category":"square","city":null,"address":"Old Highway 42, between Livingston and Rickman, Overton County, TN","phone":null,"website":null,"source_url":"https://tngenweb.org/ofp/roaring-river-church-and-cemetery-overton-county/","blurb":"One of the oldest church and burial grounds in the county, founded by Revolutionary War veteran Colonel Stephen Copeland in the late 1700s; the Baptist congregation was chartered in 1801. It sits on Old Highway 42 between Livingston and Rickman, with no visitor facilities — it is a stop, not a site.","good_with_kids":false,"free":true,"seasonal_notes":null,"when":null,"featured":false},{"name":"The Antique Market","category":"square","city":"Livingston","address":"116 N Court Sq, Livingston, TN 38570","phone":"(931) 823-4943","website":null,"source_url":"https://cumberlandriverbasin.org/place/the-antique-market-livingston/","blurb":"A shop on the courthouse square housing booths from more than forty antique dealers — estate and costume jewelry, primitive furniture, pottery, quilts and the rest of it.","good_with_kids":false,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"1806 BBQ","category":"eats","city":"Livingston","address":"114 N Court Square, Livingston, TN 38570","phone":"(931) 823-1806","website":"https://1806bbq.com/","source_url":"https://1806bbq.com/","blurb":"Barbecue right on the courthouse square — pulled pork, smoked brisket, wings and a salad bar, plus burgers. Dine-in, takeout and delivery.","good_with_kids":false,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Angelina's Italian Subs & More","category":"eats","city":"Livingston","address":"920 Overton Plz, Livingston, TN 38570","phone":"(931) 823-2867","website":null,"source_url":"https://www.cookevillebites.com/restaurants/angelinas-italian-subs-more-livingston-tn","blurb":"A counter-service sub shop making Italian subs and pasta from family recipes, named for the owner's husband's grandmother. Takeout.","good_with_kids":false,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Brazen Que","category":"eats","city":"Livingston","address":"5172 Bradford Hicks Dr, Livingston, TN 38570","phone":"(931) 300-2228","website":"https://www.brazenque.com/","source_url":"https://www.tripadvisor.com/Restaurant_Review-g55162-d28006323-Reviews-Brazen_Que-Livingston_Tennessee.html","blurb":"Texas-style craft barbecue cooked over live oak: brisket, sausage and ribs. Outdoor dining, catering, and wheelchair accessible.","good_with_kids":false,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Casa Mexicana","category":"eats","city":"Livingston","address":"440 Market Square Plaza, Livingston, TN 38570","phone":"(931) 823-8870","website":null,"source_url":"https://www.restaurantji.com/tn/livingston/casa-mexicana-/","blurb":"A sit-down Mexican restaurant near the square serving standard Tex-Mex.","good_with_kids":false,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Ruby & Lee Coffee and Bakehouse","category":"eats","city":"Livingston","address":"101 S Court Square, Livingston, TN 38570","phone":"(931) 823-2253","website":null,"source_url":"https://www.restaurantji.com/tn/livingston/ruby-and-lee-coffee-and-bakehouse-/","blurb":"A bakery and coffee counter on the downtown square inside the Market on Main boutique — cinnamon rolls, muffins, breakfast sandwiches and espresso.","good_with_kids":false,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Stover's Country Kitchen","category":"eats","city":"Livingston","address":"511 E Main St, Livingston, TN 38570","phone":"(931) 823-9550","website":null,"source_url":"https://www.restaurantji.com/tn/livingston/stovers-country-kitchen-/","blurb":"A hometown diner serving breakfast all day alongside hamburger steak, pinto beans and cornbread. Counter-and-table service, Southern plates, the kind of place the town actually eats at.","good_with_kids":true,"free":false,"seasonal_notes":null,"when":null,"featured":true},{"name":"The Sno Shack","category":"eats","city":"Livingston","address":"718 W Main St, Livingston, TN 38570","phone":"(931) 823-7669","website":null,"source_url":"https://www.tripadvisor.com/Restaurant_Review-g55162-d6611617-Reviews-The_Sno_Shack-Livingston_Tennessee.html","blurb":"A walk-up shaved ice stand with dozens of flavor combinations, plus a short food menu of hamburger steaks and baked potatoes. Afternoons and evenings, closed Sundays.","good_with_kids":true,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Wired Coffee Co","category":"eats","city":"Livingston","address":"1185 Preston St, Livingston, TN 38570","phone":"(931) 403-9417","website":"https://wiredcoffeeco.square.site/","source_url":"https://www.tripadvisor.com/Restaurant_Review-g55162-d13507274-Reviews-Wired_Coffee_Co-Livingston_Tennessee.html","blurb":"A locally owned coffee shop open since 2017 doing espresso, cold brew and smoothies, plus a chicken salad sandwich it is known for locally.","good_with_kids":true,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Fall-O-Ween in Livingston","category":"events","city":"Livingston","address":"Historic Livingston Square and Central Park, Livingston, TN 38570","phone":null,"website":null,"source_url":"https://www.ucbjournal.com/fall-o-ween-sets-return-date-to-livingston-square-with-month-of-festivities/","blurb":"An autumn run of events on the historic square and in Central Park, stretching from September through late October and finishing with a Halloween weekend of trick-or-treating.","good_with_kids":true,"free":false,"seasonal_notes":null,"when":"September to late October","featured":false},{"name":"Livingston-Overton County Christmas Parade","category":"events","city":"Livingston","address":"Main Street, Livingston, TN 38570","phone":null,"website":null,"source_url":"https://www.overtoncountynews.com/calendar/livingston---overton-county-56th-annual-christmas-parade/event_a6dad57a-75a6-11ed-9b1a-e786fb4aa457.html","blurb":"A long-running holiday parade down Main Street with floats, marching bands and Santa. December.","good_with_kids":true,"free":true,"seasonal_notes":null,"when":"December","featured":false},{"name":"Overton County Fair","category":"events","city":"Livingston","address":"610 Monterey Highway, Livingston, TN 38570","phone":null,"website":null,"source_url":"https://overtoncountytn.com/eventss/overton-county-fair/","blurb":"The county's annual agricultural fair at the Overton County Fairgrounds — cattle and livestock shows, pageants, wild mule shows and the rest of the fair calendar.","good_with_kids":true,"free":false,"seasonal_notes":null,"when":"July","featured":false},{"name":"Paint Livingston","category":"events","city":"Livingston","address":"Livingston Downtown Square, Livingston, TN 38570","phone":null,"website":"https://www.overtoncountyarts.org/events","source_url":"https://www.overtoncountyarts.org/events","blurb":"An annual plein air painting competition run by Overton County Arts that draws painters from several states to paint around town, ending with a Quick Paint contest on the square.","good_with_kids":true,"free":false,"seasonal_notes":null,"when":"late September to early October","featured":false}],"itinerary":{"intro":"Livingston is small enough to see properly in a day, if you take it in the right order. Start on the square, get out of town by early afternoon, and be back for supper.","steps":[{"when":"Morning","name":"Overton County Courthouse and the square","text":"Start where the town starts. The 1868-69 brick courthouse is on the National Register, and the block around it holds most of what is worth walking to — the antique dealers, the coffee counters, the Greetings from Overton County mural. Half an hour on foot, longer if you shop."},{"when":"Late morning","name":"Overton County Heritage Museum","text":"Two blocks off the square, in the county's old sheriff's office and jail. It is a small local museum run by the historical society, and it holds an iron lung — one of roughly thirty-five left in the country. Check the hours before you drive up; they are short."},{"when":"Noon","name":"Stover's Country Kitchen","text":"Lunch, plainly. Breakfast is served all day, and the rest is hamburger steak, pinto beans and cornbread. Small-town kitchens here close early, so eat before one."},{"when":"Afternoon","name":"Standing Stone State Park","text":"Ten miles northwest, and the reason most people leave the highway. An 855-acre park around a 69-acre lake, with CCC stonework, trails off the lake loop, and rowboats in season. Free to enter. Give it two hours minimum, or the whole afternoon."},{"when":"Evening","name":"Central Park Livingston","text":"Back in town. A 2017 downtown park with a splash pad, a walking loop and an amphitheater that runs the Live in Livingston series in warm months. Free, and it is where the evening actually happens."}]},"practical":[{"head":"Weather and terrain.","text":"Livingston sits at roughly 1,000 feet on the western edge of the Cumberland Plateau, with rolling farmland, wooded ridges and creek bottoms. Elevation changes are moderate but real: a trail that starts flat can drop into a gorge. Weather moves quickly here, summer thunderstorms build in the afternoon, and nights run cooler than the valley towns to the west. Check a forecast before anything on the water."},{"head":"What a rural county seat is like.","text":"This is a working town of under four thousand people, not a resort. The pace is slower, the hours are shorter, and cell coverage thins out once you leave the highways. Bring cash for small vendors and roadside stands, fill the tank before heading toward the lake, and expect people to speak to you on the sidewalk."}],"faq":[{"q":"Where is Livingston, and how do I get there?","a":"Livingston is the county seat of Overton County, in the Upper Cumberland region of Middle Tennessee, approximately 15 miles north-northeast of Cookeville. Cookeville is the nearest town on Interstate 40, so most visitors exit there and drive north. There is no commercial air service or passenger rail in the county."},{"q":"What is the best season to visit?","a":"Spring and fall are the most comfortable for anything outdoors. Summer is hot and humid, and the water — lake and creek — is the point of the season. Winter is quiet and cold; some seasonal attractions and campgrounds reduce hours or close, so call ahead between November and March."},{"q":"Do I need a car?","a":"Yes. Points of interest are spread across a rural county, there is no meaningful public transit, and the distances between the square, the state park and the lake are driving distances, not walking ones."},{"q":"What should I know about small-town hours?","a":"Many businesses here keep weekday hours, close early, and are closed Sundays; some close Saturday afternoons as well. Kitchens in particular often stop serving well before big-city dinner hours. Check hours the day you go rather than trusting a listing — including the ones on this page."},{"q":"Where do people stay?","a":"Lodging in the county runs to a small number of motels, cabins and short-term rentals, plus campgrounds and lakeside sites in season. Visitors wanting a wider choice of chain hotels generally stay in Cookeville and drive up."},{"q":"Is the town walkable?","a":"The courthouse square is, and that is the part worth walking — the museum, library, shops and several kitchens are within a few blocks of each other. Everything past the square assumes a car."}],"nearby":[{"name":"Dale Hollow National Fish Hatchery","county":"Clay"},{"name":"Willow Grove Campground","county":"Clay"}]}
+</script>
+<script>
+(function(){
+  "use strict";
+  var DATA = JSON.parse(document.getElementById("places-data").textContent);
+  var state = { cat: "all", traits: {} };
+
+  /* theme toggle */
+  var toggle = document.getElementById("themeToggle");
+  function paintToggle(){
+    var dark = document.documentElement.dataset.theme === "dark";
+    toggle.textContent = dark ? "Light" : "Dark";
+    toggle.setAttribute("aria-pressed", String(dark));
+    toggle.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
+  }
+  toggle.addEventListener("click", function(){
+    var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem("vltn_theme", next); } catch(e){}
+    paintToggle();
+  });
+  paintToggle();
+
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+  function host(url){ try { return new URL(url).hostname.replace(/^www\./,""); } catch(e){ return "source"; } }
+
+  /* stats */
+  var cats = DATA.categories || {};
+  var catKeys = Object.keys(cats);
+  var statRow = document.getElementById("statRow");
+  if (statRow) {
+    var stats = [["Places listed", DATA.places.length], ["Categories", catKeys.length],
+                 ["All in", "Overton County"], ["Sources checked", DATA.verified || "—"]];
+    statRow.innerHTML = stats.map(function(s){
+      return '<span class="stat">' + esc(s[0]) + ' <b>' + esc(s[1]) + '</b></span>';
+    }).join("");
+  }
+
+  /* itinerary */
+  var itin = DATA.itinerary || {steps:[]};
+  document.getElementById("itinIntro").textContent = itin.intro || "";
+  document.getElementById("itin").innerHTML = (itin.steps || []).map(function(step){
+    return '<article class="itin-step"><p class="when">' + esc(step.when) + '</p>' +
+           '<h3>' + esc(step.name) + '</h3><p>' + esc(step.text) + '</p></article>';
+  }).join("");
+
+  /* category chips */
+  var chipHost = document.getElementById("catChips");
+  var chipHtml = ['<button class="chip" type="button" data-cat="all" aria-pressed="true">All</button>'];
+  catKeys.forEach(function(key){
+    chipHtml.push('<button class="chip" type="button" data-cat="' + esc(key) + '" aria-pressed="false">' +
+                  esc(cats[key].label || key) + '</button>');
+  });
+  chipHost.innerHTML = chipHtml.join(" ");
+
+  function cardHtml(p){
+    var tags = [];
+    if (p.good_with_kids) tags.push("Good with kids");
+    if (p.free) tags.push("Free");
+    if (p.seasonal_notes) tags.push(p.seasonal_notes);
+    if (p.when) tags.push(p.when);
+    var meta = [];
+    if (p.address) meta.push('<span>' + esc(p.address) + '</span>');
+    else if (p.city) meta.push('<span>' + esc(p.city) + ', TN</span>');
+    if (p.phone) meta.push('<span>' + esc(p.phone) + '</span>');
+    var link = p.website || p.source_url;
+    return '<li class="place" data-cat="' + esc(p.category) + '"' +
+             (p.good_with_kids ? ' data-good_with_kids="1"' : '') +
+             (p.free ? ' data-free="1"' : '') + '>' +
+           '<p class="cat">' + esc((cats[p.category] || {}).label || p.category) + '</p>' +
+           '<h3>' + esc(p.name) + '</h3>' +
+           '<p class="blurb">' + esc(p.blurb || p.what_it_is) + '</p>' +
+           (tags.length ? '<ul class="tags">' + tags.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join("") + '</ul>' : '') +
+           (meta.length ? '<p class="meta">' + meta.join("") + '</p>' : '') +
+           (link ? '<p class="src"><a href="' + esc(link) + '" rel="noopener nofollow" target="_blank">' + esc(host(link)) + ' ↗</a></p>' : '') +
+           '</li>';
+  }
+
+  var listEl = document.getElementById("places");
+  var countEl = document.getElementById("resultCount");
+  var emptyEl = document.getElementById("emptyMsg");
+
+  function render(){
+    var visible = DATA.places.filter(function(p){
+      if (state.cat !== "all" && p.category !== state.cat) return false;
+      if (state.traits.good_with_kids && !p.good_with_kids) return false;
+      if (state.traits.free && !p.free) return false;
+      return true;
+    });
+    listEl.innerHTML = visible.map(cardHtml).join("");
+    countEl.textContent = visible.length + (visible.length === 1 ? " place" : " places") +
+      (state.cat === "all" ? "" : " in " + ((cats[state.cat] || {}).label || state.cat));
+    emptyEl.hidden = visible.length !== 0;
+    paintCatIntro();
+  }
+
+  chipHost.addEventListener("click", function(ev){
+    var btn = ev.target.closest("button[data-cat]");
+    if (!btn) return;
+    state.cat = btn.dataset.cat;
+    chipHost.querySelectorAll("button[data-cat]").forEach(function(b){
+      b.setAttribute("aria-pressed", String(b === btn));
+    });
+    render();
+  });
+  document.querySelectorAll("button[data-trait]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var on = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", String(on));
+      state.traits[btn.dataset.trait] = on;
+      render();
+    });
+  });
+
+  /* category intro follows the active filter */
+  var catIntroEl = document.getElementById("catIntro");
+  function paintCatIntro(){
+    var text = state.cat === "all"
+      ? (DATA.intros && DATA.intros.all) || ""
+      : ((cats[state.cat] || {}).intro || "");
+    catIntroEl.textContent = text;
+    catIntroEl.hidden = !text;
+  }
+
+  /* practical notes */
+  document.getElementById("practicalList").innerHTML = (DATA.practical || []).map(function(block){
+    return "<p><strong>" + esc(block.head) + "</strong> " + esc(block.text) + "</p>";
+  }).join("");
+
+  /* faq */
+  document.getElementById("faqList").innerHTML = (DATA.faq || []).map(function(f){
+    return '<details><summary>' + esc(f.q) + '</summary><p>' + esc(f.a) + '</p></details>';
+  }).join("");
+
+  /* nearby footnote */
+  var nb = DATA.nearby || [];
+  document.getElementById("nearby").innerHTML = nb.length
+    ? 'Worth the drive, but outside Overton County: ' + nb.map(function(n){
+        return esc(n.name) + ' (' + esc(n.county) + ')';
+      }).join(", ") + '.'
+    : "";
+
+  document.getElementById("footVerified").textContent = DATA.verified
+    ? "Every listing was checked against a live source on " + DATA.verified + ". Hours and seasons change — call ahead."
+    : "";
+
+  render();
+})();
+</script>
+<script src="design-selectors/preset-switcher.js"></script>
+<script>
+if (window.PresetSwitcher) {
+  PresetSwitcher.init({
+    storageKey: "visit-livingston",
+    themeToggle: true,
+    axes: {
+      style:   { label: "Style",   options: [
+        { id: "editorial",   label: "Editorial" },
+        { id: "warm-craft",  label: "Warm craft" },
+        { id: "modern-flat", label: "Modern flat" },
+        { id: "field-guide", label: "Field guide" }
+      ]},
+      palette: { label: "Palette", options: [
+        { id: "cumberland", label: "Cumberland" },
+        { id: "courthouse", label: "Courthouse" },
+        { id: "lakeside",   label: "Lakeside" },
+        { id: "harvest",    label: "Harvest" }
+      ]},
+      type:    { label: "Type",    options: [
+        { id: "serif-display", label: "Serif display" },
+        { id: "all-sans",      label: "All sans" },
+        { id: "slab-mix",      label: "Slab mix" }
+      ]},
+      layout:  { label: "Layout",  options: [
+        { id: "grid",        label: "Grid" },
+        { id: "list",        label: "List" },
+        { id: "masonry-ish", label: "Staggered" }
+      ]},
+      density: { label: "Density", options: [
+        { id: "airy",     label: "Airy" },
+        { id: "standard", label: "Standard" },
+        { id: "compact",  label: "Compact" }
+      ]}
+    }
+  });
+}
+</script>
+</body>
+</html>
