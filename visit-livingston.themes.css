@@ -10,7 +10,7 @@
    switcher sets attributes on <html> (i.e. :root):
 
      data-style   editorial | warm-craft | modern-flat | field-guide
-     data-palette rolley-hole | tin-roof | dale-hollow | cornbread
+     data-palette courthouse | night-fishing | pond-water | marbles
      data-type    serif-display | all-sans | slab-mix
      data-layout  grid | list | masonry-ish
      data-density airy | standard | compact
@@ -232,100 +232,100 @@ th, td {
    these comments was computed by scripts/build_palettes.py, not estimated.
    ========================================================================= */
 
-/* rolley-hole — Rolley Hole
-   Drawn from the National Rolley Hole Marbles Championship at Standing Stone — flint marbles, a packed-clay yard, oak shade.
+/* courthouse — Courthouse
+   Drawn from the 1868 brick courthouse: white trim, red brick, black ironwork. Crisp and high-contrast, closest to newsprint..
    Measured contrast (WCAG 2.x relative luminance):
-     body text on page          #241c14 on #f4eee2 -> 14.53:1 (min 4.5)
-     body text on card          #241c14 on #fffcf6 -> 16.39:1 (min 4.5)
-     muted text on page         #5d5140 on #f4eee2 ->  6.69:1 (min 4.5)
-     muted text on card         #5d5140 on #fffcf6 ->  7.55:1 (min 4.5)
-     link/accent text on card   #a8482a on #fffcf6 ->  5.66:1 (min 4.5)
-     accent text on page        #a8482a on #f4eee2 ->  5.01:1 (min 4.5)
-     text on accent fill        #ffffff on #a8482a ->  5.79:1 (min 4.5)
-     card border vs card        #b5a077 on #fffcf6 ->  2.48:1 (min 2.4) */
-:root[data-palette="rolley-hole"] {
-  --bg: #f4eee2;
-  --bg-alt: #ebe2d0;
-  --surface: #fffcf6;
-  --surface-2: #e9dfc9;
-  --border: #b5a077;
-  --text: #241c14;
-  --text-muted: #5d5140;
-  --accent: #a8482a;
-  --accent-contrast: #ffffff;
-  --accent-soft: #f2ded2;
-}
-
-/* tin-roof — Tin Roof
-   Drawn from a Cumberland tobacco barn — galvanized tin gone grey, oxidized barn-red paint.
-   Measured contrast (WCAG 2.x relative luminance):
-     body text on page          #1f2327 on #f2f1ec -> 13.98:1 (min 4.5)
-     body text on card          #1f2327 on #ffffff -> 15.81:1 (min 4.5)
-     muted text on page         #545b60 on #f2f1ec ->  6.10:1 (min 4.5)
-     muted text on card         #545b60 on #ffffff ->  6.90:1 (min 4.5)
-     link/accent text on card   #93342c on #ffffff ->  7.59:1 (min 4.5)
-     accent text on page        #93342c on #f2f1ec ->  6.71:1 (min 4.5)
-     text on accent fill        #ffffff on #93342c ->  7.59:1 (min 4.5)
-     card border vs card        #a6a79f on #ffffff ->  2.43:1 (min 2.4) */
-:root[data-palette="tin-roof"] {
-  --bg: #f2f1ec;
-  --bg-alt: #e6e5de;
+     body text on page          #101114 on #ffffff -> 18.88:1 (min 4.5)
+     body text on card          #101114 on #ffffff -> 18.88:1 (min 4.5)
+     muted text on page         #4c4f55 on #ffffff ->  8.21:1 (min 4.5)
+     muted text on card         #4c4f55 on #ffffff ->  8.21:1 (min 4.5)
+     link/accent text on card   #c02026 on #ffffff ->  6.04:1 (min 4.5)
+     accent text on page        #c02026 on #ffffff ->  6.04:1 (min 4.5)
+     text on accent fill        #ffffff on #c02026 ->  6.04:1 (min 4.5)
+     card border vs card        #9a958c on #ffffff ->  2.98:1 (min 2.4) */
+:root[data-palette="courthouse"] {
+  --bg: #ffffff;
+  --bg-alt: #f1f0ee;
   --surface: #ffffff;
-  --surface-2: #e2e2da;
-  --border: #a6a79f;
-  --text: #1f2327;
-  --text-muted: #545b60;
-  --accent: #93342c;
+  --surface-2: #eceae6;
+  --border: #9a958c;
+  --text: #101114;
+  --text-muted: #4c4f55;
+  --accent: #c02026;
   --accent-contrast: #ffffff;
-  --accent-soft: #f0dddA;
+  --accent-soft: #fbe4e4;
 }
 
-/* dale-hollow — Dale Hollow
-   Drawn from the reservoir itself — limestone sand at the waterline and the green-blue clear water the lake is known for.
+/* night-fishing — Night Fishing
+   Drawn from a dock light on Dale Hollow after dark. Dark ground even in light mode, with one hot amber the whole page hangs off..
    Measured contrast (WCAG 2.x relative luminance):
-     body text on page          #16211f on #f3f1e8 -> 14.60:1 (min 4.5)
-     body text on card          #16211f on #ffffff -> 16.52:1 (min 4.5)
-     muted text on page         #4b5a57 on #f3f1e8 ->  6.40:1 (min 4.5)
-     muted text on card         #4b5a57 on #ffffff ->  7.24:1 (min 4.5)
-     link/accent text on card   #0f6e66 on #ffffff ->  6.10:1 (min 4.5)
-     accent text on page        #0f6e66 on #f3f1e8 ->  5.39:1 (min 4.5)
-     text on accent fill        #ffffff on #0f6e66 ->  6.10:1 (min 4.5)
-     card border vs card        #9ea592 on #ffffff ->  2.55:1 (min 2.4) */
-:root[data-palette="dale-hollow"] {
-  --bg: #f3f1e8;
-  --bg-alt: #e7e7da;
+     body text on page          #eef2f8 on #0e1420 -> 16.40:1 (min 4.5)
+     body text on card          #eef2f8 on #182132 -> 14.35:1 (min 4.5)
+     muted text on page         #a9b6c9 on #0e1420 ->  8.97:1 (min 4.5)
+     muted text on card         #a9b6c9 on #182132 ->  7.85:1 (min 4.5)
+     link/accent text on card   #f2a73b on #182132 ->  7.96:1 (min 4.5)
+     accent text on page        #f2a73b on #0e1420 ->  9.10:1 (min 4.5)
+     text on accent fill        #1a1206 on #f2a73b ->  9.15:1 (min 4.5)
+     card border vs card        #5b6a83 on #182132 ->  2.94:1 (min 2.4) */
+:root[data-palette="night-fishing"] {
+  --bg: #0e1420;
+  --bg-alt: #141c2b;
+  --surface: #182132;
+  --surface-2: #1f2a3d;
+  --border: #5b6a83;
+  --text: #eef2f8;
+  --text-muted: #a9b6c9;
+  --accent: #f2a73b;
+  --accent-contrast: #1a1206;
+  --accent-soft: #2b2a1e;
+}
+
+/* pond-water — Pond Water
+   Drawn from spring-fed water over limestone, with a coral counterweight. Cool ground, warm accent, the only temperature clash in the set..
+   Measured contrast (WCAG 2.x relative luminance):
+     body text on page          #08211f on #e9f1ee -> 14.65:1 (min 4.5)
+     body text on card          #08211f on #ffffff -> 16.83:1 (min 4.5)
+     muted text on page         #3c5a56 on #e9f1ee ->  6.55:1 (min 4.5)
+     muted text on card         #3c5a56 on #ffffff ->  7.53:1 (min 4.5)
+     link/accent text on card   #c03a26 on #ffffff ->  5.42:1 (min 4.5)
+     accent text on page        #c03a26 on #e9f1ee ->  4.72:1 (min 4.5)
+     text on accent fill        #ffffff on #c03a26 ->  5.42:1 (min 4.5)
+     card border vs card        #7f9c95 on #ffffff ->  2.96:1 (min 2.4) */
+:root[data-palette="pond-water"] {
+  --bg: #e9f1ee;
+  --bg-alt: #dbe8e4;
   --surface: #ffffff;
-  --surface-2: #e3e6dc;
-  --border: #9ea592;
-  --text: #16211f;
-  --text-muted: #4b5a57;
-  --accent: #0f6e66;
+  --surface-2: #d6e5e0;
+  --border: #7f9c95;
+  --text: #08211f;
+  --text-muted: #3c5a56;
+  --accent: #c03a26;
   --accent-contrast: #ffffff;
-  --accent-soft: #d8e8e4;
+  --accent-soft: #fbe0da;
 }
 
-/* cornbread — Cornbread
-   Drawn from a meat-and-three plate — cast iron, cornbread crust, field green.
+/* marbles — Marbles
+   Drawn from a Rolley Hole marble bag: cobalt glass and clay on ivory. The only blue in the set, and the most saturated..
    Measured contrast (WCAG 2.x relative luminance):
-     body text on page          #241f17 on #faf4e4 -> 14.90:1 (min 4.5)
-     body text on card          #241f17 on #fffdf7 -> 16.09:1 (min 4.5)
-     muted text on page         #5b5340 on #faf4e4 ->  6.94:1 (min 4.5)
-     muted text on card         #5b5340 on #fffdf7 ->  7.49:1 (min 4.5)
-     link/accent text on card   #8a5a12 on #fffdf7 ->  5.81:1 (min 4.5)
-     accent text on page        #8a5a12 on #faf4e4 ->  5.38:1 (min 4.5)
-     text on accent fill        #ffffff on #8a5a12 ->  5.91:1 (min 4.5)
-     card border vs card        #bba262 on #fffdf7 ->  2.44:1 (min 2.4) */
-:root[data-palette="cornbread"] {
-  --bg: #faf4e4;
-  --bg-alt: #f1e8d0;
-  --surface: #fffdf7;
-  --surface-2: #efe4c7;
-  --border: #bba262;
-  --text: #241f17;
-  --text-muted: #5b5340;
-  --accent: #8a5a12;
+     body text on page          #141b2e on #fbf9f4 -> 16.28:1 (min 4.5)
+     body text on card          #141b2e on #ffffff -> 17.13:1 (min 4.5)
+     muted text on page         #4a5164 on #fbf9f4 ->  7.53:1 (min 4.5)
+     muted text on card         #4a5164 on #ffffff ->  7.92:1 (min 4.5)
+     link/accent text on card   #1f4fd8 on #ffffff ->  6.63:1 (min 4.5)
+     accent text on page        #1f4fd8 on #fbf9f4 ->  6.30:1 (min 4.5)
+     text on accent fill        #ffffff on #1f4fd8 ->  6.63:1 (min 4.5)
+     card border vs card        #a9a08a on #ffffff ->  2.60:1 (min 2.4) */
+:root[data-palette="marbles"] {
+  --bg: #fbf9f4;
+  --bg-alt: #f0ecdf;
+  --surface: #ffffff;
+  --surface-2: #eee9da;
+  --border: #a9a08a;
+  --text: #141b2e;
+  --text-muted: #4a5164;
+  --accent: #1f4fd8;
   --accent-contrast: #ffffff;
-  --accent-soft: #f4e4be;
+  --accent-soft: #e0e6fb;
 }
 
 /* =========================================================================
@@ -336,117 +336,117 @@ th, td {
 
 /* default dark fallback (no data-palette set)
    Measured contrast:
-     body text on page          #f0e7d7 on #16130f -> 15.09:1 (min 4.5)
-     body text on card          #f0e7d7 on #1f1a14 -> 14.07:1 (min 4.5)
-     muted text on page         #bdae95 on #16130f ->  8.51:1 (min 4.5)
-     muted text on card         #bdae95 on #1f1a14 ->  7.94:1 (min 4.5)
-     link/accent text on card   #e08a63 on #1f1a14 ->  6.57:1 (min 4.5)
-     accent text on page        #e08a63 on #16130f ->  7.04:1 (min 4.5)
-     text on accent fill        #1e120b on #e08a63 ->  6.96:1 (min 4.5)
-     card border vs card        #6b5944 on #1f1a14 ->  2.58:1 (min 2.4) */
+     body text on page          #f4f4f5 on #0c0d10 -> 17.68:1 (min 4.5)
+     body text on card          #f4f4f5 on #141519 -> 16.60:1 (min 4.5)
+     muted text on page         #b3b5bb on #0c0d10 ->  9.48:1 (min 4.5)
+     muted text on card         #b3b5bb on #141519 ->  8.90:1 (min 4.5)
+     link/accent text on card   #ff5a5f on #141519 ->  5.98:1 (min 4.5)
+     accent text on page        #ff5a5f on #0c0d10 ->  6.37:1 (min 4.5)
+     text on accent fill        #140607 on #ff5a5f ->  6.50:1 (min 4.5)
+     card border vs card        #6b6d75 on #141519 ->  3.54:1 (min 2.4) */
 :root[data-theme="dark"] {
-  --bg: #16130f;
-  --bg-alt: #1c1813;
-  --surface: #1f1a14;
-  --surface-2: #272119;
-  --border: #6b5944;
-  --text: #f0e7d7;
-  --text-muted: #bdae95;
-  --accent: #e08a63;
-  --accent-contrast: #1e120b;
-  --accent-soft: #33241b;
+  --bg: #0c0d10;
+  --bg-alt: #141519;
+  --surface: #141519;
+  --surface-2: #1c1d22;
+  --border: #6b6d75;
+  --text: #f4f4f5;
+  --text-muted: #b3b5bb;
+  --accent: #ff5a5f;
+  --accent-contrast: #140607;
+  --accent-soft: #2a1415;
 }
 
-/* rolley-hole, dark
+/* courthouse, dark
    Measured contrast:
-     body text on page          #f0e6d6 on #191410 -> 14.79:1 (min 4.5)
-     body text on card          #f0e6d6 on #241c16 -> 13.57:1 (min 4.5)
-     muted text on page         #bcac94 on #191410 ->  8.24:1 (min 4.5)
-     muted text on card         #bcac94 on #241c16 ->  7.56:1 (min 4.5)
-     link/accent text on card   #e08a63 on #241c16 ->  6.37:1 (min 4.5)
-     accent text on page        #e08a63 on #191410 ->  6.95:1 (min 4.5)
-     text on accent fill        #1e120b on #e08a63 ->  6.96:1 (min 4.5)
-     card border vs card        #6a5643 on #241c16 ->  2.41:1 (min 2.4) */
-:root[data-theme="dark"][data-palette="rolley-hole"] {
-  --bg: #191410;
-  --bg-alt: #211a14;
-  --surface: #241c16;
-  --surface-2: #2c231b;
-  --border: #6a5643;
-  --text: #f0e6d6;
-  --text-muted: #bcac94;
-  --accent: #e08a63;
-  --accent-contrast: #1e120b;
-  --accent-soft: #33241b;
+     body text on page          #f4f4f5 on #0c0d10 -> 17.68:1 (min 4.5)
+     body text on card          #f4f4f5 on #141519 -> 16.60:1 (min 4.5)
+     muted text on page         #b3b5bb on #0c0d10 ->  9.48:1 (min 4.5)
+     muted text on card         #b3b5bb on #141519 ->  8.90:1 (min 4.5)
+     link/accent text on card   #ff5a5f on #141519 ->  5.98:1 (min 4.5)
+     accent text on page        #ff5a5f on #0c0d10 ->  6.37:1 (min 4.5)
+     text on accent fill        #140607 on #ff5a5f ->  6.50:1 (min 4.5)
+     card border vs card        #6b6d75 on #141519 ->  3.54:1 (min 2.4) */
+:root[data-theme="dark"][data-palette="courthouse"] {
+  --bg: #0c0d10;
+  --bg-alt: #141519;
+  --surface: #141519;
+  --surface-2: #1c1d22;
+  --border: #6b6d75;
+  --text: #f4f4f5;
+  --text-muted: #b3b5bb;
+  --accent: #ff5a5f;
+  --accent-contrast: #140607;
+  --accent-soft: #2a1415;
 }
 
-/* tin-roof, dark
+/* night-fishing, dark
    Measured contrast:
-     body text on page          #e9eae5 on #14171a -> 14.88:1 (min 4.5)
-     body text on card          #e9eae5 on #1d2126 -> 13.38:1 (min 4.5)
-     muted text on page         #a9b0b5 on #14171a ->  8.19:1 (min 4.5)
-     muted text on card         #a9b0b5 on #1d2126 ->  7.37:1 (min 4.5)
-     link/accent text on card   #e0705f on #1d2126 ->  5.13:1 (min 4.5)
-     accent text on page        #e0705f on #14171a ->  5.70:1 (min 4.5)
-     text on accent fill        #16100e on #e0705f ->  5.97:1 (min 4.5)
-     card border vs card        #515f6e on #1d2126 ->  2.47:1 (min 2.4) */
-:root[data-theme="dark"][data-palette="tin-roof"] {
-  --bg: #14171a;
-  --bg-alt: #1a1e22;
-  --surface: #1d2126;
-  --surface-2: #24292e;
-  --border: #515f6e;
-  --text: #e9eae5;
-  --text-muted: #a9b0b5;
-  --accent: #e0705f;
-  --accent-contrast: #16100e;
-  --accent-soft: #2c2020;
+     body text on page          #eef2f8 on #080c14 -> 17.42:1 (min 4.5)
+     body text on card          #eef2f8 on #101827 -> 15.81:1 (min 4.5)
+     muted text on page         #a3b1c5 on #080c14 ->  9.00:1 (min 4.5)
+     muted text on card         #a3b1c5 on #101827 ->  8.17:1 (min 4.5)
+     link/accent text on card   #ffb84d on #101827 -> 10.33:1 (min 4.5)
+     accent text on page        #ffb84d on #080c14 -> 11.38:1 (min 4.5)
+     text on accent fill        #140e03 on #ffb84d -> 11.17:1 (min 4.5)
+     card border vs card        #4d5c74 on #101827 ->  2.62:1 (min 2.4) */
+:root[data-theme="dark"][data-palette="night-fishing"] {
+  --bg: #080c14;
+  --bg-alt: #0d131e;
+  --surface: #101827;
+  --surface-2: #161f31;
+  --border: #4d5c74;
+  --text: #eef2f8;
+  --text-muted: #a3b1c5;
+  --accent: #ffb84d;
+  --accent-contrast: #140e03;
+  --accent-soft: #241f13;
 }
 
-/* dale-hollow, dark
+/* pond-water, dark
    Measured contrast:
-     body text on page          #e6ede9 on #0f1a1b -> 14.91:1 (min 4.5)
-     body text on card          #e6ede9 on #16292a -> 12.75:1 (min 4.5)
-     muted text on page         #a8bcb8 on #0f1a1b ->  8.91:1 (min 4.5)
-     muted text on card         #a8bcb8 on #16292a ->  7.62:1 (min 4.5)
-     link/accent text on card   #4fc2b2 on #16292a ->  7.00:1 (min 4.5)
-     accent text on page        #4fc2b2 on #0f1a1b ->  8.19:1 (min 4.5)
-     text on accent fill        #06201c on #4fc2b2 ->  7.87:1 (min 4.5)
-     card border vs card        #426869 on #16292a ->  2.47:1 (min 2.4) */
-:root[data-theme="dark"][data-palette="dale-hollow"] {
-  --bg: #0f1a1b;
-  --bg-alt: #142324;
-  --surface: #16292a;
-  --surface-2: #1c3234;
-  --border: #426869;
-  --text: #e6ede9;
-  --text-muted: #a8bcb8;
-  --accent: #4fc2b2;
-  --accent-contrast: #06201c;
-  --accent-soft: #1e3a38;
+     body text on page          #e7f2f0 on #07171a -> 16.01:1 (min 4.5)
+     body text on card          #e7f2f0 on #0d272c -> 13.66:1 (min 4.5)
+     muted text on page         #9fbcb8 on #07171a ->  9.04:1 (min 4.5)
+     muted text on card         #9fbcb8 on #0d272c ->  7.71:1 (min 4.5)
+     link/accent text on card   #ff7a5c on #0d272c ->  6.10:1 (min 4.5)
+     accent text on page        #ff7a5c on #07171a ->  7.14:1 (min 4.5)
+     text on accent fill        #1c0803 on #ff7a5c ->  7.55:1 (min 4.5)
+     card border vs card        #3f6a72 on #0d272c ->  2.62:1 (min 2.4) */
+:root[data-theme="dark"][data-palette="pond-water"] {
+  --bg: #07171a;
+  --bg-alt: #0b2126;
+  --surface: #0d272c;
+  --surface-2: #123138;
+  --border: #3f6a72;
+  --text: #e7f2f0;
+  --text-muted: #9fbcb8;
+  --accent: #ff7a5c;
+  --accent-contrast: #1c0803;
+  --accent-soft: #2e1913;
 }
 
-/* cornbread, dark
+/* marbles, dark
    Measured contrast:
-     body text on page          #f3ead5 on #17140e -> 15.35:1 (min 4.5)
-     body text on card          #f3ead5 on #211c13 -> 14.14:1 (min 4.5)
-     muted text on page         #c0b392 on #17140e ->  8.84:1 (min 4.5)
-     muted text on card         #c0b392 on #211c13 ->  8.15:1 (min 4.5)
-     link/accent text on card   #e5a93c on #211c13 ->  8.12:1 (min 4.5)
-     accent text on page        #e5a93c on #17140e ->  8.81:1 (min 4.5)
-     text on accent fill        #1b1305 on #e5a93c ->  8.82:1 (min 4.5)
-     card border vs card        #67583a on #211c13 ->  2.45:1 (min 2.4) */
-:root[data-theme="dark"][data-palette="cornbread"] {
-  --bg: #17140e;
-  --bg-alt: #1e1a12;
-  --surface: #211c13;
-  --surface-2: #292318;
-  --border: #67583a;
-  --text: #f3ead5;
-  --text-muted: #c0b392;
-  --accent: #e5a93c;
-  --accent-contrast: #1b1305;
-  --accent-soft: #302614;
+     body text on page          #f0eee6 on #0d1020 -> 16.26:1 (min 4.5)
+     body text on card          #f0eee6 on #151a33 -> 14.73:1 (min 4.5)
+     muted text on page         #b0b3c6 on #0d1020 ->  9.09:1 (min 4.5)
+     muted text on card         #b0b3c6 on #151a33 ->  8.24:1 (min 4.5)
+     link/accent text on card   #7d9bff on #151a33 ->  6.52:1 (min 4.5)
+     accent text on page        #7d9bff on #0d1020 ->  7.20:1 (min 4.5)
+     text on accent fill        #080c1c on #7d9bff ->  7.41:1 (min 4.5)
+     card border vs card        #5a628a on #151a33 ->  2.89:1 (min 2.4) */
+:root[data-theme="dark"][data-palette="marbles"] {
+  --bg: #0d1020;
+  --bg-alt: #12162b;
+  --surface: #151a33;
+  --surface-2: #1b2140;
+  --border: #5a628a;
+  --text: #f0eee6;
+  --text-muted: #b0b3c6;
+  --accent: #7d9bff;
+  --accent-contrast: #080c1c;
+  --accent-soft: #1d2445;
 }
 
 /* =========================================================================
