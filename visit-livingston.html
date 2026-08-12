@@ -1,392 +1,823 @@
 <!doctype html>
-<html lang="en" data-style="warm-craft" data-palette="courthouse" data-type="serif-display" data-layout="list" data-density="standard">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Things to Do in Livingston, Tennessee — Visit Livingston TN</title>
-<meta name="description" content="A plain-spoken guide to Livingston and Overton County, Tennessee: state parks and lakes, the courthouse square, local kitchens, museums and annual events. No rankings, no ads.">
+<title>Things to Do in Livingston, Tennessee | Visit Livingston TN</title>
+<meta name="description" content="A first-timer&#x27;s guide to Livingston and Overton County, Tennessee: the courthouse square, Standing Stone State Park, Dale Hollow Lake, local kitchens and the county calendar. Every place checked against a live source.">
+<link rel="canonical" href="https://visitlivingstontn.com/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Visit Livingston TN">
+<meta property="og:title" content="Things to Do in Livingston, Tennessee | Visit Livingston TN">
+<meta property="og:description" content="A first-timer&#x27;s guide to Livingston and Overton County, Tennessee: the courthouse square, Standing Stone State Park, Dale Hollow Lake, local kitchens and the county calendar. Every place checked against a live source.">
+<meta property="og:url" content="https://visitlivingstontn.com/">
+<meta property="og:image" content="https://visitlivingstontn.com/assets/visit-livingston/square-overton-county-courthouse-livingston-tn-national-register--4332.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%8F%9E%3C/text%3E%3C/svg%3E">
-<script>try{var t=localStorage.getItem("vltn_theme2");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}catch(e){document.documentElement.dataset.theme="light";}</script>
-<link rel="stylesheet" href="visit-livingston.themes.css">
-<link rel="stylesheet" href="design-selectors/preset-switcher.css">
-<style>
-/* ---- component layer: reads tokens from visit-livingston.themes.css ---- */
-*,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);
-     font-size:var(--scale-body);line-height:var(--leading-body);overflow-x:hidden}
-img{max-width:100%;display:block}
-a{color:var(--accent);text-underline-offset:.18em}
-h1,h2,h3{font-family:var(--font-display);line-height:var(--leading-tight);margin:0 0 .4em}
-h1{font-size:var(--scale-h1)}
-h2{font-size:var(--scale-h2)}
-h3{font-size:var(--scale-h3)}
-.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1rem,4vw,2.5rem)}
-.skip{position:absolute;left:-9999px}
-.skip:focus{left:1rem;top:1rem;z-index:60;background:var(--surface);color:var(--text);
-            padding:.6rem 1rem;border:var(--border-width) solid var(--border);border-radius:var(--radius-sm)}
-
-/* header */
-.site-head{border-bottom:var(--border-width) solid var(--border);background:var(--surface);
-           position:sticky;top:0;z-index:40}
-.site-head .wrap{display:flex;align-items:center;gap:1rem;
-                 padding-block:calc(var(--space-unit) * 1.5);flex-wrap:wrap}
-.brand{font-family:var(--font-display);font-weight:700;font-size:1.05rem;letter-spacing:.02em;
-       margin-right:auto;color:var(--text);text-decoration:none}
-.brand span{color:var(--accent)}
-.head-links{display:flex;gap:1rem;flex-wrap:wrap;font-size:var(--scale-small)}
-.head-links a{color:var(--text-muted);text-decoration:none}
-.head-links a:hover,.head-links a:focus-visible{color:var(--accent);text-decoration:underline}
-.theme-toggle{font:inherit;font-size:var(--scale-small);cursor:pointer;background:var(--surface-2);
-              color:var(--text);border:var(--border-width) solid var(--border);
-              border-radius:var(--radius-sm);padding:.35rem .7rem}
-
-/* hero */
-.hero{padding-block:calc(var(--section-gap) * .9) var(--section-gap);background:var(--bg-alt);
-      border-bottom:var(--border-width) solid var(--border)}
-.hero p.lede{font-size:calc(var(--scale-body) * 1.12);color:var(--text-muted);max-width:60ch;margin:0 0 1.25rem}
-.hero .kicker{font-size:var(--scale-small);letter-spacing:.14em;text-transform:uppercase;
-              color:var(--accent);margin:0 0 .75rem;font-weight:600}
-.stat-row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.25rem}
-.stat{background:var(--surface);border:var(--border-width) solid var(--border);border-radius:var(--radius-sm);
-      padding:.4rem .8rem;font-size:var(--scale-small);color:var(--text-muted)}
-.stat b{color:var(--text)}
-
-/* sections */
-main section{padding-block:var(--section-gap)}
-main section + section{border-top:var(--border-width) solid var(--border)}
-.section-intro{color:var(--text-muted);max-width:62ch;margin:0 0 calc(var(--space-unit) * 3)}
-
-/* featured itinerary */
-.itin{display:grid;gap:var(--grid-gap);grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
-.itin-step{background:var(--surface);border:var(--border-width) solid var(--border);
-           border-radius:var(--radius);padding:var(--card-pad);box-shadow:var(--shadow)}
-.itin-step .when{font-size:var(--scale-small);letter-spacing:.1em;text-transform:uppercase;
-                 color:var(--accent);font-weight:600;margin:0 0 .5rem}
-.itin-step h3{margin-bottom:.35rem}
-.itin-step p{margin:0;color:var(--text-muted);font-size:var(--scale-small)}
-
-/* filters */
-.filters{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;
-         margin-bottom:calc(var(--space-unit) * 3)}
-.filters .flabel{font-size:var(--scale-small);color:var(--text-muted);margin-right:.25rem}
-.chip{font:inherit;font-size:var(--scale-small);cursor:pointer;background:var(--surface);
-      color:var(--text);border:var(--border-width) solid var(--border);
-      border-radius:999px;padding:.4rem .85rem;transition:background .15s,color .15s,border-color .15s}
-.chip:hover{border-color:var(--accent)}
-.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-contrast);border-color:var(--accent)}
-.chip:focus-visible,.theme-toggle:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.result-count{font-size:var(--scale-small);color:var(--text-muted);margin:0 0 calc(var(--space-unit) * 2)}
-
-/* place cards */
-.places{display:grid;gap:var(--grid-gap);grid-template-columns:repeat(auto-fill,minmax(min(100%,var(--grid-min)),1fr));
-        list-style:none;padding:0;margin:0}
-:root[data-layout="list"] .places{grid-template-columns:1fr}
-.place{background:var(--surface);border:var(--border-width) solid var(--border);border-radius:var(--radius);
-       padding:var(--card-pad);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:.6rem}
-.place:hover{box-shadow:var(--shadow-lg)}
-.place .cat{font-size:var(--scale-small);letter-spacing:.09em;text-transform:uppercase;
-            color:var(--accent);font-weight:600}
-.place h3{margin:0}
-.place .blurb{margin:0;color:var(--text-muted);flex:1}
-.place .meta{margin:0;font-size:var(--scale-small);color:var(--text-muted);
-             display:flex;flex-direction:column;gap:.2rem}
-.tags{display:flex;flex-wrap:wrap;gap:.35rem;list-style:none;padding:0;margin:0}
-.tags li{font-size:calc(var(--scale-small) * .92);background:var(--surface-2);color:var(--text-muted);
-         border:var(--border-width) solid var(--border);border-radius:var(--radius-sm);padding:.15rem .5rem}
-.place .src{font-size:var(--scale-small)}
-.empty{color:var(--text-muted);padding:2rem 0}
-
-.cat-intro{color:var(--text-muted);max-width:62ch;margin:0 0 calc(var(--space-unit) * 2)}
-.practical p{color:var(--text-muted);max-width:66ch;margin:0 0 1rem}
-.practical strong{color:var(--text)}
-
-/* faq + footer */
-.faq details{border-bottom:var(--border-width) solid var(--border);padding-block:.9rem}
-.faq summary{cursor:pointer;font-family:var(--font-display);font-size:var(--scale-h3);
-             line-height:var(--leading-tight)}
-.faq p{color:var(--text-muted);margin:.6rem 0 0;max-width:65ch}
-.nearby{color:var(--text-muted);font-size:var(--scale-small)}
-footer{border-top:var(--border-width) solid var(--border);background:var(--surface);
-       color:var(--text-muted);font-size:var(--scale-small);padding-block:calc(var(--section-gap) * .7)}
-footer p{margin:0 0 .5rem;max-width:70ch}
-
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-@media print{.site-head,.filters,.theme-toggle,.preset-switcher{display:none!important}
-             .place{break-inside:avoid;box-shadow:none}}
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="visit-livingston.css">
+<script type="application/ld+json" data-injected-by="add_schema.py">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "Visit Livingston TN",
+      "url": "https://visitlivingstontn.com/"
+    },
+    {
+      "@type": "Article",
+      "headline": "Things to Do in Livingston, Tennessee | Visit Livingston TN",
+      "description": "A first-timer's guide to Livingston and Overton County, Tennessee: the courthouse square, Standing Stone State Park, Dale Hollow Lake, local kitchens and the county calendar. Every place checked against a live source.",
+      "image": "https://visitlivingstontn.com/assets/visit-livingston/square-overton-county-courthouse-livingston-tn-national-register--4332.jpg",
+      "datePublished": "2026-08-12"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://visitlivingstontn.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Things to Do in Livingston, Tennessee | Visit Livingston TN",
+          "item": "https://visitlivingstontn.com/"
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Things to do in Livingston, Tennessee",
+      "numberOfItems": 29,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Park",
+            "name": "Central Park Livingston",
+            "description": "A downtown municipal park opened in 2017 with a guitar-shaped splash pad, playground, walking trail, picnic shelter and an amphitheater that hosts the seasonal Live in Livingston concert series. Free, and a short walk from the square.",
+            "url": "https://www.centralparklivingston.com/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "140 S Spring St, Livingston, TN 38570"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Park",
+            "name": "Cub Mountain ATV Park & Campground",
+            "description": "A privately owned ATV park on roughly 1,900 acres at Crawford, with about fifty miles of trails for ATVs, UTVs and dirt bikes, a stocked four-acre fishing lake, waterfalls, old coal-mining sites and camping. Paid admission.",
+            "url": "https://cubmountain.com/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Crawford",
+              "streetAddress": "306 Threet Road, Crawford, TN 38554"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "TouristAttraction",
+            "name": "Cumberland National Scenic Byway - Overton County segment",
+            "description": "The byway's Overton County stretch runs SR 42 south of Livingston and SR 52 northwest toward Standing Stone, passing the courthouse square on the way. It is the drive to take if you want the county without a trail.",
+            "url": "https://cumberlandnationalscenicbyway.com/overton-county/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "TouristAttraction",
+            "name": "Dale Hollow Lake - Overton County access (Mitchell Creek Marina / Livingston Boat Dock)",
+            "description": "Dale Hollow is a 27,700-acre reservoir on the Obey River with water clear enough to see the bottom in the shallows, and a national reputation for smallmouth bass. Overton County's access point is Mitchell Creek Marina near Allons, formerly the Livingston Boat Dock.",
+            "url": "https://mitchellcreekmarina.com/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Allons",
+              "streetAddress": "1260 Livingston Boat Dock Road, Allons, TN 38541"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "TouristAttraction",
+            "name": "Hidden Valley Golf & Country Club",
+            "description": "A semi-private nine-hole course in Livingston built in 1966, open to the public most days. Sundays are members and guests only.",
+            "url": "https://hvccgolf.com/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "201 Valley Drive, Livingston, TN 38570"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "Park",
+            "name": "Livingston City Park (Recreation Park / City Ballpark)",
+            "description": "The city's recreation complex, roughly fifteen acres of ball fields, pickleball courts, walking paths and a public swimming pool. This is where the town's own ball games happen rather than a visitor attraction.",
+            "url": "https://www.cityoflivingston.net/community",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "TouristAttraction",
+            "name": "Obey River Park Campground",
+            "description": "A Corps of Engineers campground on Dale Hollow near Monroe with more than 120 sites, the lake's largest swimming beach, a boat ramp and winter bald-eagle viewing. Reservations run through recreation.gov.",
+            "url": "https://www.recreation.gov/camping/campgrounds/232654",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Monroe",
+              "streetAddress": "100 Obey Park Rd, Monroe, TN 38573"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "Park",
+            "name": "Standing Stone State Forest (WMA)",
+            "description": "Nearly 11,000 acres of TWRA-managed forest wrapping around the state park, open for hunting and dog training in season and for hiking and wildlife watching otherwise. Check TWRA season dates and wear orange during big-game seasons.",
+            "url": "https://www.tn.gov/twra/wildlife-management-areas/cumberland-plateau-r3/standing-stone.html"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "Park",
+            "name": "Standing Stone State Park",
+            "description": "An 855-acre state park about ten miles northwest of town, built around 69-acre Standing Stone Lake on dammed Mill Creek. Trails, rental cabins, a campground and rowboats, plus the CCC-era stonework the park is known for. Day use is free.",
+            "url": "https://tnstateparks.com/parks/standing-stone",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Hilham"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@type": "TouristAttraction",
+            "name": "Livingston Mural Trail",
+            "description": "A self-guided walk past hand-painted murals downtown, starting from the Greetings from Overton County mural on the courthouse square. Free, walkable, and about as long as you want to make it.",
+            "url": "https://discoverlivingstontn.com/mural-trail/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "Historic Downtown Square, Livingston, TN 38570"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@type": "TouristAttraction",
+            "name": "Livingston-Overton County Farmers Market",
+            "description": "Locally grown produce and goods from area farmers, operating seasonally from May through November.",
+            "url": "https://www.picktnproducts.org/picktn-producers/picktn-listing.902.html",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "141 First Street, Livingston, TN 38570"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@type": "Library",
+            "name": "Millard Oakley Public Library",
+            "description": "The public library for Livingston and Overton County, with books, audiobooks, movies, internet access and a program calendar that runs from preschool storytime to teen events. A reasonable rainy-afternoon stop, and free.",
+            "url": "https://millardoakleylibrary.org",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "107 E Main St, Livingston, TN 38570"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@type": "TouristAttraction",
+            "name": "Overton County Arts",
+            "description": "A nonprofit that runs art classes, bimonthly Art Mixers, K-12 art education and the Libby Allen Art Contest. Worth checking their calendar before a visit; much of what they do is open to the public.",
+            "url": "https://www.overtoncountyarts.org",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@type": "LandmarksOrHistoricalBuildings",
+            "name": "Overton County Courthouse",
+            "description": "A two-story brick Federal-style courthouse built in 1868-69, replacing the one burned during the Civil War, and listed on the National Register of Historic Places. It anchors the square that everything else downtown is arranged around.",
+            "url": "https://courthouses.co/us-states/o-u/tennessee/overton-county/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "100 East Court Square, Livingston, TN 38570"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "item": {
+            "@type": "Museum",
+            "name": "Overton County Heritage Museum",
+            "description": "The county's museum occupies the former sheriff's office and jail on West Broad Street and opened in March 2002 as a project of the Overton County Historical Society. The collection includes one of roughly thirty-five surviving iron lungs in the country.",
+            "url": "https://tngenweb.org/ofp/overton-county-heritage-museum/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "West Broad Street, Livingston, TN 38570"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "item": {
+            "@type": "LandmarksOrHistoricalBuildings",
+            "name": "Roaring River Church and Cemetery",
+            "description": "One of the oldest church and burial grounds in the county, founded by Revolutionary War veteran Colonel Stephen Copeland in the late 1700s; the Baptist congregation was chartered in 1801. It sits on Old Highway 42 between Livingston and Rickman, with no visitor facilities — it is a stop, not a site.",
+            "url": "https://tngenweb.org/ofp/roaring-river-church-and-cemetery-overton-county/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "streetAddress": "Old Highway 42, between Livingston and Rickman, Overton County, TN"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "item": {
+            "@type": "TouristAttraction",
+            "name": "The Antique Market",
+            "description": "A shop on the courthouse square housing booths from more than forty antique dealers — estate and costume jewelry, primitive furniture, pottery, quilts and the rest of it.",
+            "url": "https://cumberlandriverbasin.org/place/the-antique-market-livingston/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "116 N Court Sq, Livingston, TN 38570"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 18,
+          "item": {
+            "@type": "Restaurant",
+            "name": "1806 BBQ",
+            "description": "Barbecue right on the courthouse square — pulled pork, smoked brisket, wings and a salad bar, plus burgers. Dine-in, takeout and delivery.",
+            "url": "https://1806bbq.com/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "114 N Court Square, Livingston, TN 38570"
+            },
+            "servesCuisine": "Barbecue"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 19,
+          "item": {
+            "@type": "Restaurant",
+            "name": "Angelina's Italian Subs & More",
+            "description": "A counter-service sub shop making Italian subs and pasta from family recipes, named for the owner's husband's grandmother. Takeout.",
+            "url": "https://www.cookevillebites.com/restaurants/angelinas-italian-subs-more-livingston-tn",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "920 Overton Plz, Livingston, TN 38570"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 20,
+          "item": {
+            "@type": "Restaurant",
+            "name": "Brazen Que",
+            "description": "Texas-style craft barbecue cooked over live oak: brisket, sausage and ribs. Outdoor dining, catering, and wheelchair accessible.",
+            "url": "https://www.brazenque.com/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "5172 Bradford Hicks Dr, Livingston, TN 38570"
+            },
+            "servesCuisine": "Barbecue"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 21,
+          "item": {
+            "@type": "Restaurant",
+            "name": "Casa Mexicana",
+            "description": "A sit-down Mexican restaurant near the square serving standard Tex-Mex.",
+            "url": "https://www.restaurantji.com/tn/livingston/casa-mexicana-/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "440 Market Square Plaza, Livingston, TN 38570"
+            },
+            "servesCuisine": "Mexican"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 22,
+          "item": {
+            "@type": "Restaurant",
+            "name": "Ruby & Lee Coffee and Bakehouse",
+            "description": "A bakery and coffee counter on the downtown square inside the Market on Main boutique — cinnamon rolls, muffins, breakfast sandwiches and espresso.",
+            "url": "https://www.restaurantji.com/tn/livingston/ruby-and-lee-coffee-and-bakehouse-/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "101 S Court Square, Livingston, TN 38570"
+            },
+            "servesCuisine": "Bakery"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 23,
+          "item": {
+            "@type": "Restaurant",
+            "name": "Stover's Country Kitchen",
+            "description": "A hometown diner serving breakfast all day alongside hamburger steak, pinto beans and cornbread. Counter-and-table service, Southern plates, the kind of place the town actually eats at.",
+            "url": "https://www.restaurantji.com/tn/livingston/stovers-country-kitchen-/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "511 E Main St, Livingston, TN 38570"
+            },
+            "servesCuisine": "American"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 24,
+          "item": {
+            "@type": "Restaurant",
+            "name": "The Sno Shack",
+            "description": "A walk-up shaved ice stand with dozens of flavor combinations, plus a short food menu of hamburger steaks and baked potatoes. Afternoons and evenings, closed Sundays.",
+            "url": "https://www.tripadvisor.com/Restaurant_Review-g55162-d6611617-Reviews-The_Sno_Shack-Livingston_Tennessee.html",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "718 W Main St, Livingston, TN 38570"
+            },
+            "servesCuisine": "Ice Cream"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 25,
+          "item": {
+            "@type": "Restaurant",
+            "name": "Wired Coffee Co",
+            "description": "A locally owned coffee shop open since 2017 doing espresso, cold brew and smoothies, plus a chicken salad sandwich it is known for locally.",
+            "url": "https://wiredcoffeeco.square.site/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "1185 Preston St, Livingston, TN 38570"
+            },
+            "servesCuisine": "Coffee"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 26,
+          "item": {
+            "@type": "Event",
+            "name": "Fall-O-Ween in Livingston",
+            "description": "An autumn run of events on the historic square and in Central Park, stretching from September through late October and finishing with a Halloween weekend of trick-or-treating.",
+            "url": "https://www.ucbjournal.com/fall-o-ween-sets-return-date-to-livingston-square-with-month-of-festivities/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "Historic Livingston Square and Central Park, Livingston, TN 38570"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 27,
+          "item": {
+            "@type": "Event",
+            "name": "Livingston-Overton County Christmas Parade",
+            "description": "A long-running holiday parade down Main Street with floats, marching bands and Santa. December.",
+            "url": "https://www.overtoncountynews.com/calendar/livingston---overton-county-56th-annual-christmas-parade/event_a6dad57a-75a6-11ed-9b1a-e786fb4aa457.html",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "Main Street, Livingston, TN 38570"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 28,
+          "item": {
+            "@type": "Event",
+            "name": "Overton County Fair",
+            "description": "The county's annual agricultural fair at the Overton County Fairgrounds — cattle and livestock shows, pageants, wild mule shows and the rest of the fair calendar.",
+            "url": "https://overtoncountytn.com/eventss/overton-county-fair/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "610 Monterey Highway, Livingston, TN 38570"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 29,
+          "item": {
+            "@type": "Event",
+            "name": "Paint Livingston",
+            "description": "An annual plein air painting competition run by Overton County Arts that draws painters from several states to paint around town, ending with a Quick Paint contest on the square.",
+            "url": "https://www.overtoncountyarts.org/events",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "TN",
+              "addressCountry": "US",
+              "addressLocality": "Livingston",
+              "streetAddress": "Livingston Downtown Square, Livingston, TN 38570"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Where is Livingston, and how do I get there?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Livingston is the county seat of Overton County, in the Upper Cumberland region of Middle Tennessee, approximately 15 miles north-northeast of Cookeville. Cookeville is the nearest town on Interstate 40, so most visitors exit there and drive north. There is no commercial air service or passenger rail in the county."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the best season to visit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Spring and fall are the most comfortable for anything outdoors. Summer is hot and humid, and the water — lake and creek — is the point of the season. Winter is quiet and cold; some seasonal attractions and campgrounds reduce hours or close, so call ahead between November and March."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a car?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Points of interest are spread across a rural county, there is no meaningful public transit, and the distances between the square, the state park and the lake are driving distances, not walking ones."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What should I know about small-town hours?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Many businesses here keep weekday hours, close early, and are closed Sundays; some close Saturday afternoons as well. Kitchens in particular often stop serving well before big-city dinner hours. Check hours the day you go rather than trusting a listing — including the ones on this page."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where do people stay?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lodging in the county runs to a small number of motels, cabins and short-term rentals, plus campgrounds and lakeside sites in season. Visitors wanting a wider choice of chain hotels generally stay in Cookeville and drive up."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the town walkable?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The courthouse square is, and that is the part worth walking — the museum, library, shops and several kitchens are within a few blocks of each other. Everything past the square assumes a car."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
-<a class="skip" href="#directory">Skip to the directory</a>
+<a class="skip" href="#square">Skip to the guide</a>
 
 <header class="site-head">
-  <div class="wrap">
-    <a class="brand" href="#top">Visit <span>Livingston</span> TN</a>
-    <nav class="head-links" aria-label="Sections">
-      <a href="#perfect-day">One good day</a>
-      <a href="#directory">Everything to do</a>
-      <a href="#practical">Getting around</a>
-      <a href="#faq">Know before you go</a>
-    </nav>
-    <button class="theme-toggle" type="button" id="themeToggle" aria-pressed="false">Dark</button>
+  <div class="shell">
+    <a class="wordmark" href="#top">Visit <em>Livingston</em> TN</a>
+    <nav class="head-nav" aria-label="Guide sections"><a href="#square">The square</a><a href="#standing-stone">Standing Stone</a><a href="#water">The water</a><a href="#eat">Where to eat</a><a href="#calendar">The calendar</a><a href="#directory">Everything</a></nav>
   </div>
 </header>
 
 <main id="top">
-  <section class="hero" aria-labelledby="hero-h">
-    <div class="wrap">
-      <p class="kicker">Overton County, Tennessee</p>
-      <h1 id="hero-h">Things to do in Livingston, Tennessee</h1>
-      <p class="lede" id="heroLede">A plain guide to a small county seat on the Upper Cumberland plateau — the courthouse square, a state park with a stone dam, lake water, and kitchens that have been open a long time. Nothing here is ranked; it is all just listed, and every place was checked against a live source.</p>
-      <div class="stat-row" id="statRow"></div>
+<section class="hero">
+  <div class="hero-media"><img src="assets/visit-livingston/square-overton-county-courthouse-livingston-tn-national-register--4332.jpg" alt="The Overton County Courthouse and the courthouse square in Livingston, Tennessee, wide view" fetchpriority="high" decoding="async" width="1500" height="1000"></div>
+  <div class="shell">
+    <p class="kicker">Overton County, Tennessee</p>
+    <h1>Things to do in Livingston</h1>
+    <p class="standfirst">A county seat of under four thousand people, fifteen miles north of
+      Cookeville, with a state park, a famously clear lake and a courthouse square you can walk
+      in an afternoon. Here is what is actually here.</p>
+    <p class="stamp">Updated 2026-08-12 · 29 places, every one checked against a live source</p>
+  </div>
+  <p class="hero-credit"><a href="https://commons.wikimedia.org/wiki/File%3ALivingston-courthouse-square-tn.jpg" rel="noopener nofollow" target="_blank">Brian Stansberry / Wikimedia Commons</a> · CC BY 4.0</p>
+</section>
+
+<nav class="jump" aria-label="Jump to a section">
+  <div class="shell"><span class="label">On this page</span><a href="#square">The square</a><a href="#standing-stone">Standing Stone</a><a href="#water">The water</a><a href="#eat">Where to eat</a><a href="#calendar">The calendar</a>
+    <a href="#one-day">One good day</a><a href="#directory">Everything</a><a href="#faq">Before you go</a></div>
+</nav>
+
+<section class="band" id="square" aria-labelledby="square-h">
+  <div class="shell">
+    <div class="band-head">
+      <p class="kicker">Where to start</p>
+      <h2 id="square-h">Start on the square</h2>
     </div>
-  </section>
+    <figure class="photo-strip"><img src="assets/visit-livingston/square-livingston-tn-courthouse-square-downtown-storefronts-772.jpg" alt="View along the south side of the courthouse square in Livingston, Tennessee, with Main Street storefronts" loading="lazy" decoding="async" width="1600" height="1067"><figcaption><span>View along the south side of the courthouse square in Livingston, Tennessee, with Main Street storefronts</span><span><a href="https://commons.wikimedia.org/wiki/File%3ALivingston-courthouse-square-main-tn.jpg" rel="noopener nofollow" target="_blank">Brian Stansberry / Wikimedia Commons</a> · CC BY 4.0</span></figcaption></figure>
+    <div class="section-body"><p>Livingston is a county seat, and county seats keep their business in one place. The <a href="https://courthouses.co/us-states/o-u/tennessee/overton-county/" rel="noopener nofollow" target="_blank">Overton County Courthouse</a> went up in 1868-69, replacing the one that burned during the Civil War, and it is on the National Register of Historic Places. Everything downtown is arranged around it, close enough that you can park once and walk the rest.</p><p>Two blocks off the square, the <a href="https://tngenweb.org/ofp/overton-county-heritage-museum/" rel="noopener nofollow" target="_blank">Overton County Heritage Museum</a> occupies the county&#x27;s old sheriff&#x27;s office and jail. It opened in March 2002 as a project of the Overton County Historical Society, and the collection includes one of roughly thirty-five surviving iron lungs in the country. Hours are short, so check before you drive up.</p><h3 class="subhead">On foot</h3><p>The <a href="https://discoverlivingstontn.com/mural-trail/" rel="noopener nofollow" target="_blank">Livingston Mural Trail</a> is a self-guided walk that starts from the Greetings from Overton County mural on the courthouse square. <a href="https://cumberlandriverbasin.org/place/the-antique-market-livingston/" rel="noopener nofollow" target="_blank">The Antique Market</a>, also on the square, holds booths from more than forty dealers, and the <a href="https://millardoakleylibrary.org" rel="noopener nofollow" target="_blank">Millard Oakley Public Library</a> is a block from it, free, and a reasonable place to sit out a wet afternoon.</p><h3 class="subhead">Two parks in town</h3><p><a href="https://www.centralparklivingston.com/" rel="noopener nofollow" target="_blank">Central Park Livingston</a> opened downtown in 2017 with a guitar-shaped splash pad, a walking loop and an amphitheater that runs the Live in Livingston concert series in warm months. <a href="https://www.cityoflivingston.net/community" rel="noopener nofollow" target="_blank">Livingston City Park (Recreation Park / City Ballpark)</a> is the working end of the same idea: ball fields, pickleball courts, walking paths and a public pool in summer.</p><h3 class="subhead">Also worth knowing</h3><p><a href="https://www.overtoncountyarts.org" rel="noopener nofollow" target="_blank">Overton County Arts</a> runs classes, bimonthly Art Mixers and a K-12 program, and much of it is open to the public. The <a href="https://www.picktnproducts.org/picktn-producers/picktn-listing.902.html" rel="noopener nofollow" target="_blank">Livingston-Overton County Farmers Market</a> runs seasonally from May through November. Out on Old Highway 42 between Livingston and Rickman, <a href="https://tngenweb.org/ofp/roaring-river-church-and-cemetery-overton-county/" rel="noopener nofollow" target="_blank">Roaring River Church and Cemetery</a> is one of the oldest burial grounds in the county, founded by Revolutionary War veteran Colonel Stephen Copeland in the late 1700s with the congregation chartered in 1801. There are no facilities there. It is a stop, not a site.</p></div>
+  </div>
+</section>
 
-  <section id="perfect-day" aria-labelledby="perfect-day-h">
-    <div class="wrap">
-      <h2 id="perfect-day-h">If you only have one day</h2>
-      <p class="section-intro" id="itinIntro"></p>
-      <div class="itin" id="itin"></div>
+<section class="band band--warm" id="standing-stone" aria-labelledby="standing-stone-h">
+  <div class="shell">
+    <div class="band-head">
+      <p class="kicker">Out of town</p>
+      <h2 id="standing-stone-h">Standing Stone and the woods</h2>
     </div>
-  </section>
+    <figure class="photo-strip"><img src="assets/visit-livingston/outdoors-standing-stone-state-park-tn-4077.jpg" alt="Standing Stone Lake viewed from the Overton Lodge, looking northwest, at Standing Stone State Park" loading="lazy" decoding="async" width="1600" height="1198"><figcaption><span>Standing Stone Lake viewed from the Overton Lodge, looking northwest, at Standing Stone State Park</span><span><a href="https://commons.wikimedia.org/wiki/File%3AStanding-stone-lake-tn2.jpg" rel="noopener nofollow" target="_blank">Brian Stansberry / Wikimedia Commons</a> · CC BY 3.0</span></figcaption></figure>
+    <div class="section-body"><p>About ten miles northwest of the square, <a href="https://tnstateparks.com/parks/standing-stone" rel="noopener nofollow" target="_blank">Standing Stone State Park</a> covers 855 acres around a 69-acre lake made by damming Mill Creek. The stonework is CCC-era and it is what most people remember about the place. There are trails, rental cabins, a campground and rowboats in season, and day use is free. Give it an afternoon.</p><p>Wrapped around the park, <a href="https://www.tn.gov/twra/wildlife-management-areas/cumberland-plateau-r3/standing-stone.html" rel="noopener nofollow" target="_blank">Standing Stone State Forest (WMA)</a> adds nearly 11,000 acres managed by TWRA. It is open for hunting and dog training in season and for walking and wildlife watching the rest of the year. Check TWRA season dates before you go, and wear orange during big-game seasons.</p><aside class="note"><strong>Rolley Hole</strong><p>Standing Stone hosts the National Rolley Hole Marbles Championship each September. It is a serious tournament of a game most of the country has never heard of, and it is the single most Overton County thing on this page.</p></aside><figure class="photo-strip"><img src="assets/visit-livingston/culture-marbles-rolley-hole-marbles-4162.jpg" alt="Children playing marbles at an organized marble tournament" loading="lazy" decoding="async" width="1600" height="1287"><figcaption><span>Children playing marbles at an organized marble tournament</span><span><a href="https://commons.wikimedia.org/wiki/File%3AMarble_Tournament_1947_Oak_Ridge_%2822614540300%29.jpg" rel="noopener nofollow" target="_blank">doe-oakridge / Wikimedia Commons</a> · Public domain</span><span class="generic-note">Illustrative photo, taken in Oak Ridge, Tennessee (photographed May 17, 1947), not in Overton County.</span></figcaption></figure><h3 class="subhead">If you brought a machine</h3><p><a href="https://cubmountain.com/" rel="noopener nofollow" target="_blank">Cub Mountain ATV Park &amp; Campground</a> at Crawford runs about fifty miles of trails across roughly 1,900 acres, with a stocked four-acre fishing lake, waterfalls, old coal-mining sites and camping. Admission is paid. If you would rather stay in the car, the <a href="https://cumberlandnationalscenicbyway.com/overton-county/" rel="noopener nofollow" target="_blank">Cumberland National Scenic Byway - Overton County segment</a> runs SR 42 south of town and SR 52 northwest toward the park, passing the square on the way. For nine holes, <a href="https://hvccgolf.com/" rel="noopener nofollow" target="_blank">Hidden Valley Golf &amp; Country Club</a> has been in Livingston since 1966 and is open to the public most days, members and guests only on Sundays.</p></div>
+  </div>
+</section>
 
-  <section id="directory" aria-labelledby="directory-h">
-    <div class="wrap">
-      <h2 id="directory-h">Everything to do in Livingston &amp; Overton County</h2>
-      <p class="section-intro" id="dirIntro">Listed by category, not by rank. Filter it down to what you are actually in the mood for.</p>
-
-      <div class="filters" role="group" aria-label="Filter places by category">
-        <span class="flabel" id="catLabel">Category:</span>
-        <span id="catChips"></span>
-      </div>
-      <div class="filters" role="group" aria-label="Filter places by trait">
-        <span class="flabel">Good for:</span>
-        <button class="chip" type="button" data-trait="good_with_kids" aria-pressed="false">Kids</button>
-        <button class="chip" type="button" data-trait="free" aria-pressed="false">Free</button>
-      </div>
-
-      <p class="cat-intro" id="catIntro"></p>
-      <p class="result-count" id="resultCount" role="status" aria-live="polite"></p>
-      <ul class="places" id="places"></ul>
-      <p class="empty" id="emptyMsg" hidden>No places match that combination. Clear a filter to see more.</p>
-      <p class="nearby" id="nearby"></p>
+<section class="band" id="water" aria-labelledby="water-h">
+  <div class="shell">
+    <div class="band-head">
+      <p class="kicker">The big one</p>
+      <h2 id="water-h">Out on the water</h2>
     </div>
-  </section>
+    <figure class="photo-strip"><img src="assets/visit-livingston/outdoors-dale-hollow-lake-tn-1986.jpg" alt="Dale Hollow Lake (Obey River), viewed at dusk from an overlook along Tennessee State Highway 111 near Byrdstown, Pickett County" loading="lazy" decoding="async" width="1600" height="1062"><figcaption><span>Dale Hollow Lake (Obey River), viewed at dusk from an overlook along Tennessee State Highway 111 near Byrdstown, Pickett County</span><span><a href="https://commons.wikimedia.org/wiki/File%3ADale-hollow-lake-tn111-tn1.jpg" rel="noopener nofollow" target="_blank">Brian Stansberry / Wikimedia Commons</a> · CC BY 3.0</span></figcaption></figure>
+    <div class="section-body"><p>Dale Hollow is a 27,700-acre reservoir on the Obey River, and the water is clear enough to see the bottom in the shallows. It has a national reputation for smallmouth bass. Overton County&#x27;s own access point is <a href="https://mitchellcreekmarina.com/" rel="noopener nofollow" target="_blank">Dale Hollow Lake - Overton County access (Mitchell Creek Marina / Livingston Boat Dock)</a> near Allons, which older maps and older people still call the Livingston Boat Dock.</p><p>For staying the night on the lake, <a href="https://www.recreation.gov/camping/campgrounds/232654" rel="noopener nofollow" target="_blank">Obey River Park Campground</a> near Monroe is a Corps of Engineers park with more than 120 sites, the largest swimming beach on Dale Hollow, a boat ramp, and bald eagles in winter. Reservations go through recreation.gov and the season runs roughly mid-April to late October.</p></div>
+  </div>
+</section>
 
-  <section id="practical" aria-labelledby="practical-h">
-    <div class="wrap">
-      <h2 id="practical-h">Weather, terrain and what a county seat is like</h2>
-      <div class="practical" id="practicalList"></div>
+<section class="band band--warm" id="eat" aria-labelledby="eat-h">
+  <div class="shell">
+    <div class="band-head">
+      <p class="kicker">Eating</p>
+      <h2 id="eat-h">Where to eat</h2>
     </div>
-  </section>
+    <figure class="photo-strip"><img src="assets/visit-livingston/culture-barbecue-6620.jpg" alt="Pulled pork, brisket, baked beans, and mac &amp; cheese plate from a Nashville barbecue restaurant" loading="lazy" decoding="async" width="1600" height="1200"><figcaption><span>Pulled pork, brisket, baked beans, and mac &amp; cheese plate from a Nashville barbecue restaurant</span><span><a href="https://commons.wikimedia.org/wiki/File%3APulled_pork%2C_brisket%2C_baked_beans_and_mac_%26_cheese_from_Martin%27s_BBQ_in_Nashville%2C_TN.jpg" rel="noopener nofollow" target="_blank">Gatorfan252525 / Wikimedia Commons</a> · CC BY-SA 4.0</span><span class="generic-note">Illustrative photo, taken in Nashville, Tennessee, not in Overton County.</span></figcaption></figure>
+    <div class="section-body"><p>There is no restaurant district here. There are locally owned kitchens, most of them within a few blocks of the courthouse, and most of them done serving before a city dinner hour. Eat early.</p><h3 class="subhead">Plates and barbecue</h3><p><a href="https://www.restaurantji.com/tn/livingston/stovers-country-kitchen-/" rel="noopener nofollow" target="_blank">Stover&#x27;s Country Kitchen</a> serves breakfast all day alongside hamburger steak, pinto beans and cornbread, and it is the closest thing to a default answer in town. For barbecue there are two different arguments: <a href="https://1806bbq.com/" rel="noopener nofollow" target="_blank">1806 BBQ</a> sits right on the courthouse square doing pulled pork, brisket, wings and a salad bar, while <a href="https://www.brazenque.com/" rel="noopener nofollow" target="_blank">Brazen Que</a> cooks Texas-style over live oak. <a href="https://www.restaurantji.com/tn/livingston/casa-mexicana-/" rel="noopener nofollow" target="_blank">Casa Mexicana</a> covers Tex-Mex near the square, and <a href="https://www.cookevillebites.com/restaurants/angelinas-italian-subs-more-livingston-tn" rel="noopener nofollow" target="_blank">Angelina&#x27;s Italian Subs &amp; More</a> is a counter making Italian subs and pasta from family recipes.</p><h3 class="subhead">Coffee and afternoon</h3><p><a href="https://wiredcoffeeco.square.site/" rel="noopener nofollow" target="_blank">Wired Coffee Co</a> has been going since 2017 on espresso, cold brew and a chicken salad sandwich people order by name. <a href="https://www.restaurantji.com/tn/livingston/ruby-and-lee-coffee-and-bakehouse-/" rel="noopener nofollow" target="_blank">Ruby &amp; Lee Coffee and Bakehouse</a> is on the square inside the Market on Main boutique, doing cinnamon rolls, muffins and breakfast sandwiches. In summer, <a href="https://www.tripadvisor.com/Restaurant_Review-g55162-d6611617-Reviews-The_Sno_Shack-Livingston_Tennessee.html" rel="noopener nofollow" target="_blank">The Sno Shack</a> is a walk-up shaved ice stand with a short food menu attached, afternoons and evenings, closed Sundays.</p></div>
+  </div>
+</section>
 
-  <section id="faq" aria-labelledby="faq-h">
-    <div class="wrap">
+<section class="band" id="calendar" aria-labelledby="calendar-h">
+  <div class="shell">
+    <div class="band-head">
+      <p class="kicker">Timing</p>
+      <h2 id="calendar-h">The town&#x27;s calendar</h2>
+    </div>
+    
+    <div class="section-body"><p>Overton County runs on annual events more than on year-round attractions, so when you come changes what there is to do. The <a href="https://overtoncountytn.com/eventss/overton-county-fair/" rel="noopener nofollow" target="_blank">Overton County Fair</a> is the county&#x27;s agricultural fair at the fairgrounds, with cattle and livestock shows, pageants and wild mule shows.</p><p>In autumn, <a href="https://www.ucbjournal.com/fall-o-ween-sets-return-date-to-livingston-square-with-month-of-festivities/" rel="noopener nofollow" target="_blank">Fall-O-Ween in Livingston</a> spreads across the historic square and Central Park from September into late October, finishing with a Halloween weekend of trick-or-treating. <a href="https://www.overtoncountyarts.org/events" rel="noopener nofollow" target="_blank">Paint Livingston</a>, run by Overton County Arts, brings plein air painters from several states to work around town and ends with a Quick Paint contest on the square. In December the <a href="https://www.overtoncountynews.com/calendar/livingston---overton-county-56th-annual-christmas-parade/event_a6dad57a-75a6-11ed-9b1a-e786fb4aa457.html" rel="noopener nofollow" target="_blank">Livingston-Overton County Christmas Parade</a> comes down Main Street with floats, marching bands and Santa.</p><aside class="note"><strong>Dates move</strong><p>Every event on this page shifts year to year. Check the organizer before you plan a trip around one.</p></aside></div>
+  </div>
+</section>
+
+<section class="band band--ink" id="one-day" aria-labelledby="one-day-h">
+  <div class="shell">
+    <div class="band-head">
+      <p class="kicker">If you only have one day</p>
+      <h2 id="one-day-h">One good day in Livingston</h2>
+      <p>Livingston is small enough to see properly in a day, if you take it in the right order. Start on the square, get out of town by early afternoon, and be back for supper.</p>
+    </div>
+    <ul class="cards"><li class="card"><div class="card-body"><span class="step">Morning</span><h3>Overton County Courthouse and the square</h3><p>Start where the town starts. The 1868-69 brick courthouse is on the National Register, and the block around it holds most of what is worth walking to — the antique dealers, the coffee counters, the Greetings from Overton County mural. Half an hour on foot, longer if you shop.</p></div></li><li class="card"><div class="card-body"><span class="step">Late morning</span><h3>Overton County Heritage Museum</h3><p>Two blocks off the square, in the county&#x27;s old sheriff&#x27;s office and jail. It is a small local museum run by the historical society, and it holds an iron lung — one of roughly thirty-five left in the country. Check the hours before you drive up; they are short.</p></div></li><li class="card"><div class="card-body"><span class="step">Noon</span><h3>Stover&#x27;s Country Kitchen</h3><p>Lunch, plainly. Breakfast is served all day, and the rest is hamburger steak, pinto beans and cornbread. Small-town kitchens here close early, so eat before one.</p></div></li><li class="card"><div class="card-body"><span class="step">Afternoon</span><h3>Standing Stone State Park</h3><p>Ten miles northwest, and the reason most people leave the highway. An 855-acre park around a 69-acre lake, with CCC stonework, trails off the lake loop, and rowboats in season. Free to enter. Give it two hours minimum, or the whole afternoon.</p></div></li><li class="card"><div class="card-body"><span class="step">Evening</span><h3>Central Park Livingston</h3><p>Back in town. A 2017 downtown park with a splash pad, a walking loop and an amphitheater that runs the Live in Livingston series in warm months. Free, and it is where the evening actually happens.</p></div></li></ul>
+  </div>
+</section>
+
+<section class="band" id="directory" aria-labelledby="directory-h">
+  <div class="shell">
+    <div class="band-head">
+      <p class="kicker">The whole list</p>
+      <h2 id="directory-h">Everything in Livingston &amp; Overton County</h2>
+      <p>Listed alphabetically inside each category. Nothing here is ranked, and nothing is paid for.</p>
+    </div>
+    <div class="filters" role="group" aria-label="Filter by category">
+      <span class="flabel">Category</span><button class="chip" type="button" data-cat="all" aria-pressed="true">All</button><button class="chip" type="button" data-cat="outdoors" aria-pressed="false">Outdoors &amp; water</button><button class="chip" type="button" data-cat="square" aria-pressed="false">Square, shops &amp; history</button><button class="chip" type="button" data-cat="eats" aria-pressed="false">Places to eat</button><button class="chip" type="button" data-cat="events" aria-pressed="false">Annual events</button>
+    </div>
+    <div class="filters" role="group" aria-label="Filter by trait">
+      <span class="flabel">Good for</span>
+      <button class="chip" type="button" data-trait="kids" aria-pressed="false">Kids</button>
+      <button class="chip" type="button" data-trait="free" aria-pressed="false">Free</button>
+    </div>
+    <p class="result-count" id="resultCount" role="status" aria-live="polite">29 places</p>
+    <ul class="listings" id="listings"><li class="listing" data-cat="outdoors" data-kids="1" data-free="1"><span class="lcat">Outdoors &amp; water</span><div><h3>Central Park Livingston</h3><p class="lblurb">A downtown municipal park opened in 2017 with a guitar-shaped splash pad, playground, walking trail, picnic shelter and an amphitheater that hosts the seasonal Live in Livingston concert series. Free, and a short walk from the square.</p><ul class="ltags"><li>Good with kids</li><li>Free</li><li>Open dawn to 10pm daily; splash pad most used in warmer months.</li></ul><p class="lmeta"><span>140 S Spring St, Livingston, TN 38570</span><span>(931) 823-1269</span></p></div><a class="lgo" href="https://www.centralparklivingston.com/" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="outdoors" data-kids="1"><span class="lcat">Outdoors &amp; water</span><div><h3>Cub Mountain ATV Park &amp; Campground</h3><p class="lblurb">A privately owned ATV park on roughly 1,900 acres at Crawford, with about fifty miles of trails for ATVs, UTVs and dirt bikes, a stocked four-acre fishing lake, waterfalls, old coal-mining sites and camping. Paid admission.</p><ul class="ltags"><li>Good with kids</li></ul><p class="lmeta"><span>306 Threet Road, Crawford, TN 38554</span><span>931-445-3032</span></p></div><a class="lgo" href="https://cubmountain.com/" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="outdoors" data-kids="1" data-free="1"><span class="lcat">Outdoors &amp; water</span><div><h3>Cumberland National Scenic Byway - Overton County segment</h3><p class="lblurb">The byway&#x27;s Overton County stretch runs SR 42 south of Livingston and SR 52 northwest toward Standing Stone, passing the courthouse square on the way. It is the drive to take if you want the county without a trail.</p><ul class="ltags"><li>Good with kids</li><li>Free</li></ul><p class="lmeta"><span>Livingston, TN</span></p></div><a class="lgo" href="https://cumberlandnationalscenicbyway.com/overton-county/" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="outdoors" data-kids="1"><span class="lcat">Outdoors &amp; water</span><div><h3>Dale Hollow Lake - Overton County access (Mitchell Creek Marina / Livingston Boat Dock)</h3><p class="lblurb">Dale Hollow is a 27,700-acre reservoir on the Obey River with water clear enough to see the bottom in the shallows, and a national reputation for smallmouth bass. Overton County&#x27;s access point is Mitchell Creek Marina near Allons, formerly the Livingston Boat Dock.</p><ul class="ltags"><li>Good with kids</li><li>Marina hours Mon-Sat 8am-4pm, closed Sunday per one listed source.</li></ul><p class="lmeta"><span>1260 Livingston Boat Dock Road, Allons, TN 38541</span><span>(931) 823-6666</span></p></div><a class="lgo" href="https://mitchellcreekmarina.com/" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="outdoors"><span class="lcat">Outdoors &amp; water</span><div><h3>Hidden Valley Golf &amp; Country Club</h3><p class="lblurb">A semi-private nine-hole course in Livingston built in 1966, open to the public most days. Sundays are members and guests only.</p><p class="lmeta"><span>201 Valley Drive, Livingston, TN 38570</span><span>(931) 823-1313</span></p></div><a class="lgo" href="https://hvccgolf.com/" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="outdoors" data-kids="1"><span class="lcat">Outdoors &amp; water</span><div><h3>Livingston City Park (Recreation Park / City Ballpark)</h3><p class="lblurb">The city&#x27;s recreation complex, roughly fifteen acres of ball fields, pickleball courts, walking paths and a public swimming pool. This is where the town&#x27;s own ball games happen rather than a visitor attraction.</p><ul class="ltags"><li>Good with kids</li><li>Pool is seasonal (summer months).</li></ul><p class="lmeta"><span>Livingston, TN</span></p></div><a class="lgo" href="https://www.cityoflivingston.net/community" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="outdoors" data-kids="1"><span class="lcat">Outdoors &amp; water</span><div><h3>Obey River Park Campground</h3><p class="lblurb">A Corps of Engineers campground on Dale Hollow near Monroe with more than 120 sites, the lake&#x27;s largest swimming beach, a boat ramp and winter bald-eagle viewing. Reservations run through recreation.gov.</p><ul class="ltags"><li>Good with kids</li><li>Typically open mid-April through late October; day-use fee around $5 per vehicle.</li></ul><p class="lmeta"><span>100 Obey Park Rd, Monroe, TN 38573</span><span>931-864-6388</span></p></div><a class="lgo" href="https://www.recreation.gov/camping/campgrounds/232654" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="outdoors" data-free="1"><span class="lcat">Outdoors &amp; water</span><div><h3>Standing Stone State Forest (WMA)</h3><p class="lblurb">Nearly 11,000 acres of TWRA-managed forest wrapping around the state park, open for hunting and dog training in season and for hiking and wildlife watching otherwise. Check TWRA season dates and wear orange during big-game seasons.</p><ul class="ltags"><li>Free</li><li>Dog training season Sept 1 - Mar 15; hunting follows statewide seasons; license/WMA permit fees may apply.</li></ul></div><a class="lgo" href="https://www.tn.gov/twra/wildlife-management-areas/cumberland-plateau-r3/standing-stone.html" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="outdoors" data-kids="1" data-free="1"><span class="lcat">Outdoors &amp; water</span><div><h3>Standing Stone State Park</h3><p class="lblurb">An 855-acre state park about ten miles northwest of town, built around 69-acre Standing Stone Lake on dammed Mill Creek. Trails, rental cabins, a campground and rowboats, plus the CCC-era stonework the park is known for. Day use is free.</p><ul class="ltags"><li>Good with kids</li><li>Free</li><li>Pool and swimming are seasonal (warm months); camping and cabins available year-round. Hosts the National Rolley Hole Marbles Championship each September.</li></ul><p class="lmeta"><span>Hilham, TN</span></p></div><a class="lgo" href="https://tnstateparks.com/parks/standing-stone" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="square" data-kids="1" data-free="1"><span class="lcat">Square, shops &amp; history</span><div><h3>Livingston Mural Trail</h3><p class="lblurb">A self-guided walk past hand-painted murals downtown, starting from the Greetings from Overton County mural on the courthouse square. Free, walkable, and about as long as you want to make it.</p><ul class="ltags"><li>Good with kids</li><li>Free</li></ul><p class="lmeta"><span>Historic Downtown Square, Livingston, TN 38570</span></p></div><a class="lgo" href="https://discoverlivingstontn.com/mural-trail/" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="square" data-kids="1" data-free="1"><span class="lcat">Square, shops &amp; history</span><div><h3>Livingston-Overton County Farmers Market</h3><p class="lblurb">Locally grown produce and goods from area farmers, operating seasonally from May through November.</p><ul class="ltags"><li>Good with kids</li><li>Free</li><li>May to November</li></ul><p class="lmeta"><span>141 First Street, Livingston, TN 38570</span><span>931-823-1269</span></p></div><a class="lgo" href="https://www.picktnproducts.org/picktn-producers/picktn-listing.902.html" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="square" data-kids="1" data-free="1"><span class="lcat">Square, shops &amp; history</span><div><h3>Millard Oakley Public Library</h3><p class="lblurb">The public library for Livingston and Overton County, with books, audiobooks, movies, internet access and a program calendar that runs from preschool storytime to teen events. A reasonable rainy-afternoon stop, and free.</p><ul class="ltags"><li>Good with kids</li><li>Free</li></ul><p class="lmeta"><span>107 E Main St, Livingston, TN 38570</span><span>(931) 823-1888</span></p></div><a class="lgo" href="https://millardoakleylibrary.org" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="square" data-kids="1"><span class="lcat">Square, shops &amp; history</span><div><h3>Overton County Arts</h3><p class="lblurb">A nonprofit that runs art classes, bimonthly Art Mixers, K-12 art education and the Libby Allen Art Contest. Worth checking their calendar before a visit; much of what they do is open to the public.</p><ul class="ltags"><li>Good with kids</li></ul><p class="lmeta"><span>Livingston, TN</span></p></div><a class="lgo" href="https://www.overtoncountyarts.org" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="square" data-kids="1" data-free="1"><span class="lcat">Square, shops &amp; history</span><div><h3>Overton County Courthouse</h3><p class="lblurb">A two-story brick Federal-style courthouse built in 1868-69, replacing the one burned during the Civil War, and listed on the National Register of Historic Places. It anchors the square that everything else downtown is arranged around.</p><ul class="ltags"><li>Good with kids</li><li>Free</li></ul><p class="lmeta"><span>100 East Court Square, Livingston, TN 38570</span></p></div><a class="lgo" href="https://courthouses.co/us-states/o-u/tennessee/overton-county/" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="square" data-kids="1" data-free="1"><span class="lcat">Square, shops &amp; history</span><div><h3>Overton County Heritage Museum</h3><p class="lblurb">The county&#x27;s museum occupies the former sheriff&#x27;s office and jail on West Broad Street and opened in March 2002 as a project of the Overton County Historical Society. The collection includes one of roughly thirty-five surviving iron lungs in the country.</p><ul class="ltags"><li>Good with kids</li><li>Free</li></ul><p class="lmeta"><span>West Broad Street, Livingston, TN 38570</span><span>(931) 403-0909</span></p></div><a class="lgo" href="https://tngenweb.org/ofp/overton-county-heritage-museum/" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="square" data-free="1"><span class="lcat">Square, shops &amp; history</span><div><h3>Roaring River Church and Cemetery</h3><p class="lblurb">One of the oldest church and burial grounds in the county, founded by Revolutionary War veteran Colonel Stephen Copeland in the late 1700s; the Baptist congregation was chartered in 1801. It sits on Old Highway 42 between Livingston and Rickman, with no visitor facilities — it is a stop, not a site.</p><ul class="ltags"><li>Free</li></ul><p class="lmeta"><span>Old Highway 42, between Livingston and Rickman, Overton County, TN</span></p></div><a class="lgo" href="https://tngenweb.org/ofp/roaring-river-church-and-cemetery-overton-county/" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="square"><span class="lcat">Square, shops &amp; history</span><div><h3>The Antique Market</h3><p class="lblurb">A shop on the courthouse square housing booths from more than forty antique dealers — estate and costume jewelry, primitive furniture, pottery, quilts and the rest of it.</p><p class="lmeta"><span>116 N Court Sq, Livingston, TN 38570</span><span>(931) 823-4943</span></p></div><a class="lgo" href="https://cumberlandriverbasin.org/place/the-antique-market-livingston/" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="eats"><span class="lcat">Places to eat</span><div><h3>1806 BBQ</h3><p class="lblurb">Barbecue right on the courthouse square — pulled pork, smoked brisket, wings and a salad bar, plus burgers. Dine-in, takeout and delivery.</p><p class="lmeta"><span>114 N Court Square, Livingston, TN 38570</span><span>(931) 823-1806</span></p></div><a class="lgo" href="https://1806bbq.com/" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="eats"><span class="lcat">Places to eat</span><div><h3>Angelina&#x27;s Italian Subs &amp; More</h3><p class="lblurb">A counter-service sub shop making Italian subs and pasta from family recipes, named for the owner&#x27;s husband&#x27;s grandmother. Takeout.</p><p class="lmeta"><span>920 Overton Plz, Livingston, TN 38570</span><span>(931) 823-2867</span></p></div><a class="lgo" href="https://www.cookevillebites.com/restaurants/angelinas-italian-subs-more-livingston-tn" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="eats"><span class="lcat">Places to eat</span><div><h3>Brazen Que</h3><p class="lblurb">Texas-style craft barbecue cooked over live oak: brisket, sausage and ribs. Outdoor dining, catering, and wheelchair accessible.</p><p class="lmeta"><span>5172 Bradford Hicks Dr, Livingston, TN 38570</span><span>(931) 300-2228</span></p></div><a class="lgo" href="https://www.brazenque.com/" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="eats"><span class="lcat">Places to eat</span><div><h3>Casa Mexicana</h3><p class="lblurb">A sit-down Mexican restaurant near the square serving standard Tex-Mex.</p><p class="lmeta"><span>440 Market Square Plaza, Livingston, TN 38570</span><span>(931) 823-8870</span></p></div><a class="lgo" href="https://www.restaurantji.com/tn/livingston/casa-mexicana-/" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="eats"><span class="lcat">Places to eat</span><div><h3>Ruby &amp; Lee Coffee and Bakehouse</h3><p class="lblurb">A bakery and coffee counter on the downtown square inside the Market on Main boutique — cinnamon rolls, muffins, breakfast sandwiches and espresso.</p><p class="lmeta"><span>101 S Court Square, Livingston, TN 38570</span><span>(931) 823-2253</span></p></div><a class="lgo" href="https://www.restaurantji.com/tn/livingston/ruby-and-lee-coffee-and-bakehouse-/" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="eats" data-kids="1"><span class="lcat">Places to eat</span><div><h3>Stover&#x27;s Country Kitchen</h3><p class="lblurb">A hometown diner serving breakfast all day alongside hamburger steak, pinto beans and cornbread. Counter-and-table service, Southern plates, the kind of place the town actually eats at.</p><ul class="ltags"><li>Good with kids</li></ul><p class="lmeta"><span>511 E Main St, Livingston, TN 38570</span><span>(931) 823-9550</span></p></div><a class="lgo" href="https://www.restaurantji.com/tn/livingston/stovers-country-kitchen-/" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="eats" data-kids="1"><span class="lcat">Places to eat</span><div><h3>The Sno Shack</h3><p class="lblurb">A walk-up shaved ice stand with dozens of flavor combinations, plus a short food menu of hamburger steaks and baked potatoes. Afternoons and evenings, closed Sundays.</p><ul class="ltags"><li>Good with kids</li></ul><p class="lmeta"><span>718 W Main St, Livingston, TN 38570</span><span>(931) 823-7669</span></p></div><a class="lgo" href="https://www.tripadvisor.com/Restaurant_Review-g55162-d6611617-Reviews-The_Sno_Shack-Livingston_Tennessee.html" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="eats" data-kids="1"><span class="lcat">Places to eat</span><div><h3>Wired Coffee Co</h3><p class="lblurb">A locally owned coffee shop open since 2017 doing espresso, cold brew and smoothies, plus a chicken salad sandwich it is known for locally.</p><ul class="ltags"><li>Good with kids</li></ul><p class="lmeta"><span>1185 Preston St, Livingston, TN 38570</span><span>(931) 403-9417</span></p></div><a class="lgo" href="https://wiredcoffeeco.square.site/" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="events" data-kids="1"><span class="lcat">Annual events</span><div><h3>Fall-O-Ween in Livingston</h3><p class="lblurb">An autumn run of events on the historic square and in Central Park, stretching from September through late October and finishing with a Halloween weekend of trick-or-treating.</p><ul class="ltags"><li>Good with kids</li><li>September to late October</li></ul><p class="lmeta"><span>Historic Livingston Square and Central Park, Livingston, TN 38570</span></p></div><a class="lgo" href="https://www.ucbjournal.com/fall-o-ween-sets-return-date-to-livingston-square-with-month-of-festivities/" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="events" data-kids="1" data-free="1"><span class="lcat">Annual events</span><div><h3>Livingston-Overton County Christmas Parade</h3><p class="lblurb">A long-running holiday parade down Main Street with floats, marching bands and Santa. December.</p><ul class="ltags"><li>Good with kids</li><li>Free</li><li>December</li></ul><p class="lmeta"><span>Main Street, Livingston, TN 38570</span></p></div><a class="lgo" href="https://www.overtoncountynews.com/calendar/livingston---overton-county-56th-annual-christmas-parade/event_a6dad57a-75a6-11ed-9b1a-e786fb4aa457.html" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="events" data-kids="1"><span class="lcat">Annual events</span><div><h3>Overton County Fair</h3><p class="lblurb">The county&#x27;s annual agricultural fair at the Overton County Fairgrounds — cattle and livestock shows, pageants, wild mule shows and the rest of the fair calendar.</p><ul class="ltags"><li>Good with kids</li><li>July</li></ul><p class="lmeta"><span>610 Monterey Highway, Livingston, TN 38570</span></p></div><a class="lgo" href="https://overtoncountytn.com/eventss/overton-county-fair/" rel="noopener nofollow" target="_blank">Visit site ↗</a></li><li class="listing" data-cat="events" data-kids="1"><span class="lcat">Annual events</span><div><h3>Paint Livingston</h3><p class="lblurb">An annual plein air painting competition run by Overton County Arts that draws painters from several states to paint around town, ending with a Quick Paint contest on the square.</p><ul class="ltags"><li>Good with kids</li><li>late September to early October</li></ul><p class="lmeta"><span>Livingston Downtown Square, Livingston, TN 38570</span></p></div><a class="lgo" href="https://www.overtoncountyarts.org/events" rel="noopener nofollow" target="_blank">Visit site ↗</a></li></ul>
+    <p class="empty" id="emptyMsg" hidden>No places match that combination. Clear a filter to see more.</p>
+    <p class="result-count" style="margin-top:2rem">Worth the drive but outside Overton County: Dale Hollow National Fish Hatchery (Clay County), Willow Grove Campground (Clay County).</p>
+  </div>
+</section>
+
+<section class="band band--warm" id="faq" aria-labelledby="faq-h">
+  <div class="shell">
+    <div class="band-head">
+      <p class="kicker">Before you go</p>
       <h2 id="faq-h">Know before you go</h2>
-      <div class="faq" id="faqList"></div>
     </div>
-  </section>
+    <div class="faq"><details><summary>Where is Livingston, and how do I get there?</summary><p>Livingston is the county seat of Overton County, in the Upper Cumberland region of Middle Tennessee, approximately 15 miles north-northeast of Cookeville. Cookeville is the nearest town on Interstate 40, so most visitors exit there and drive north. There is no commercial air service or passenger rail in the county.</p></details><details><summary>What is the best season to visit?</summary><p>Spring and fall are the most comfortable for anything outdoors. Summer is hot and humid, and the water — lake and creek — is the point of the season. Winter is quiet and cold; some seasonal attractions and campgrounds reduce hours or close, so call ahead between November and March.</p></details><details><summary>Do I need a car?</summary><p>Yes. Points of interest are spread across a rural county, there is no meaningful public transit, and the distances between the square, the state park and the lake are driving distances, not walking ones.</p></details><details><summary>What should I know about small-town hours?</summary><p>Many businesses here keep weekday hours, close early, and are closed Sundays; some close Saturday afternoons as well. Kitchens in particular often stop serving well before big-city dinner hours. Check hours the day you go rather than trusting a listing — including the ones on this page.</p></details><details><summary>Where do people stay?</summary><p>Lodging in the county runs to a small number of motels, cabins and short-term rentals, plus campgrounds and lakeside sites in season. Visitors wanting a wider choice of chain hotels generally stay in Cookeville and drive up.</p></details><details><summary>Is the town walkable?</summary><p>The courthouse square is, and that is the part worth walking — the museum, library, shops and several kitchens are within a few blocks of each other. Everything past the square assumes a car.</p></details></div>
+  </div>
+</section>
+
+<section class="band cta" aria-labelledby="cta-h">
+  <div class="shell">
+    <h2 id="cta-h">Plan the drive</h2>
+    <p>Livingston is about fifteen miles north of Cookeville, the nearest town on Interstate 40.
+       Start with the state park, the lake, or the square, and work outward.</p>
+    <div class="cta-row">
+      <a class="btn btn--solid" href="#one-day">See the one-day plan</a>
+      <a class="btn" href="#directory">Browse everything</a>
+      <a class="btn" href="#faq">Practical questions</a>
+    </div>
+  </div>
+</section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <p id="footNote">Visit Livingston TN is an independent guide to Livingston and Overton County, Tennessee. No ads, no affiliate links, no paid placement, and no ranking — places are listed alphabetically inside each category.</p>
-    <p id="footVerified"></p>
+<footer class="site-foot">
+  <div class="shell">
+    <div class="foot-grid">
+      <div>
+        <h3 class="foot-h">Visit Livingston TN</h3>
+        <p>An independent guide to Livingston and Overton County, Tennessee. No ads, no affiliate
+           links, no paid placement, and no ranking.</p>
+      </div>
+      <div>
+        <h3 class="foot-h">On this page</h3>
+        <ul><li><a href="#square">The square</a></li><li><a href="#standing-stone">Standing Stone</a></li><li><a href="#water">The water</a></li><li><a href="#eat">Where to eat</a></li><li><a href="#calendar">The calendar</a></li><li><a href="#directory">Everything</a></li><li><a href="#faq">Before you go</a></li></ul>
+      </div>
+      <div>
+        <h3 class="foot-h">How this was made</h3>
+        <p>Every place listed was checked against a live source on 2026-08-12.
+           Businesses whose operating status could not be confirmed were left off rather than guessed at.
+           Hours and seasons change, so call ahead.</p>
+      </div>
+      <div>
+        <h3 class="foot-h">Photography</h3>
+        <ul><li><a href="https://commons.wikimedia.org/wiki/File%3AStanding-stone-lake-tn2.jpg" rel="noopener nofollow" target="_blank">Brian Stansberry / Wikimedia Commons</a> · CC BY 3.0</li><li><a href="https://commons.wikimedia.org/wiki/File%3ADale-hollow-lake-tn111-tn1.jpg" rel="noopener nofollow" target="_blank">Brian Stansberry / Wikimedia Commons</a> · CC BY 3.0</li><li><a href="https://commons.wikimedia.org/wiki/File%3ALivingston-courthouse-square-tn.jpg" rel="noopener nofollow" target="_blank">Brian Stansberry / Wikimedia Commons</a> · CC BY 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File%3ALivingston-courthouse-square-main-tn.jpg" rel="noopener nofollow" target="_blank">Brian Stansberry / Wikimedia Commons</a> · CC BY 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File%3APulled_pork%2C_brisket%2C_baked_beans_and_mac_%26_cheese_from_Martin%27s_BBQ_in_Nashville%2C_TN.jpg" rel="noopener nofollow" target="_blank">Gatorfan252525 / Wikimedia Commons</a> · CC BY-SA 4.0</li><li><a href="https://commons.wikimedia.org/wiki/File%3AMarble_Tournament_1947_Oak_Ridge_%2822614540300%29.jpg" rel="noopener nofollow" target="_blank">doe-oakridge / Wikimedia Commons</a> · Public domain</li></ul>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <p>Livingston is the county seat of Overton County, Tennessee, population 3,905 at the 2020
+         census, at roughly 1,000 feet on the western edge of the Cumberland Plateau.</p>
+      <p>&copy; 2026 Visit Livingston TN. Not affiliated with the City of Livingston, Overton County, or any
+         business listed.</p>
+    </div>
   </div>
 </footer>
 
-<script id="places-data" type="application/json">
-{"verified":"2026-08-12","categories":{"outdoors":{"label":"Outdoors & water","intro":"Overton County sits on the western edge of the Cumberland Plateau, where the farmland flattens out and then drops into creek gorges. That gives the county a mix most small counties do not have: a state park, lake water, and creeks all inside a short drive of the same square. Most of it is free to walk into."},"square":{"label":"Square, shops & history","intro":"Livingston is a county seat, and county seats keep their history on the square. The courthouse anchors a block of storefronts that still hold a museum, a library, antique dealers and an arts organization, and the town's calendar runs on annual events — a fair, a fall festival, a Christmas parade — rather than a year-round attraction circuit."},"eats":{"label":"Places to eat","intro":"Eating in Livingston means locally owned kitchens rather than a restaurant district. Expect meat-and-three plates, barbecue, a coffee shop or two, and family-run Mexican and Italian counters — most of them within a few blocks of the courthouse, most of them closed by early evening."},"events":{"label":"Annual events","intro":"Overton County's calendar runs on annual events rather than year-round attractions. Dates move — check the organizer before planning a trip around one."}},"intros":{"all":"Twenty-nine places, listed alphabetically inside each category. Nothing here is ranked."},"places":[{"name":"Central Park Livingston","category":"outdoors","city":"Livingston","address":"140 S Spring St, Livingston, TN 38570","phone":"(931) 823-1269","website":"https://www.centralparklivingston.com/","source_url":"https://www.centralparklivingston.com/","blurb":"A downtown municipal park opened in 2017 with a guitar-shaped splash pad, playground, walking trail, picnic shelter and an amphitheater that hosts the seasonal Live in Livingston concert series. Free, and a short walk from the square.","good_with_kids":true,"free":true,"seasonal_notes":"Open dawn to 10pm daily; splash pad most used in warmer months.","when":null,"featured":true},{"name":"Cub Mountain ATV Park & Campground","category":"outdoors","city":"Crawford","address":"306 Threet Road, Crawford, TN 38554","phone":"931-445-3032","website":"https://cubmountain.com/","source_url":"https://cubmountain.com/","blurb":"A privately owned ATV park on roughly 1,900 acres at Crawford, with about fifty miles of trails for ATVs, UTVs and dirt bikes, a stocked four-acre fishing lake, waterfalls, old coal-mining sites and camping. Paid admission.","good_with_kids":true,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Cumberland National Scenic Byway - Overton County segment","category":"outdoors","city":"Livingston","address":null,"phone":null,"website":"https://cumberlandnationalscenicbyway.com/overton-county/","source_url":"https://cumberlandnationalscenicbyway.com/overton-county/","blurb":"The byway's Overton County stretch runs SR 42 south of Livingston and SR 52 northwest toward Standing Stone, passing the courthouse square on the way. It is the drive to take if you want the county without a trail.","good_with_kids":true,"free":true,"seasonal_notes":null,"when":null,"featured":false},{"name":"Dale Hollow Lake - Overton County access (Mitchell Creek Marina / Livingston Boat Dock)","category":"outdoors","city":"Allons","address":"1260 Livingston Boat Dock Road, Allons, TN 38541","phone":"(931) 823-6666","website":"https://mitchellcreekmarina.com/","source_url":"https://mitchellcreekmarina.com/contact-us/","blurb":"Dale Hollow is a 27,700-acre reservoir on the Obey River with water clear enough to see the bottom in the shallows, and a national reputation for smallmouth bass. Overton County's access point is Mitchell Creek Marina near Allons, formerly the Livingston Boat Dock.","good_with_kids":true,"free":false,"seasonal_notes":"Marina hours Mon-Sat 8am-4pm, closed Sunday per one listed source.","when":null,"featured":false},{"name":"Hidden Valley Golf & Country Club","category":"outdoors","city":"Livingston","address":"201 Valley Drive, Livingston, TN 38570","phone":"(931) 823-1313","website":"https://hvccgolf.com/","source_url":"https://hvccgolf.com/","blurb":"A semi-private nine-hole course in Livingston built in 1966, open to the public most days. Sundays are members and guests only.","good_with_kids":false,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Livingston City Park (Recreation Park / City Ballpark)","category":"outdoors","city":"Livingston","address":null,"phone":null,"website":"https://www.cityoflivingston.net/community","source_url":"https://www.cityoflivingston.net/community","blurb":"The city's recreation complex, roughly fifteen acres of ball fields, pickleball courts, walking paths and a public swimming pool. This is where the town's own ball games happen rather than a visitor attraction.","good_with_kids":true,"free":false,"seasonal_notes":"Pool is seasonal (summer months).","when":null,"featured":false},{"name":"Obey River Park Campground","category":"outdoors","city":"Monroe","address":"100 Obey Park Rd, Monroe, TN 38573","phone":"931-864-6388","website":"https://www.recreation.gov/camping/campgrounds/232654","source_url":"https://www.recreation.gov/camping/campgrounds/232654","blurb":"A Corps of Engineers campground on Dale Hollow near Monroe with more than 120 sites, the lake's largest swimming beach, a boat ramp and winter bald-eagle viewing. Reservations run through recreation.gov.","good_with_kids":true,"free":false,"seasonal_notes":"Typically open mid-April through late October; day-use fee around $5 per vehicle.","when":null,"featured":false},{"name":"Standing Stone State Forest (WMA)","category":"outdoors","city":null,"address":null,"phone":null,"website":"https://www.tn.gov/twra/wildlife-management-areas/cumberland-plateau-r3/standing-stone.html","source_url":"https://www.tn.gov/twra/wildlife-management-areas/cumberland-plateau-r3/standing-stone.html","blurb":"Nearly 11,000 acres of TWRA-managed forest wrapping around the state park, open for hunting and dog training in season and for hiking and wildlife watching otherwise. Check TWRA season dates and wear orange during big-game seasons.","good_with_kids":false,"free":true,"seasonal_notes":"Dog training season Sept 1 - Mar 15; hunting follows statewide seasons; license/WMA permit fees may apply.","when":null,"featured":false},{"name":"Standing Stone State Park","category":"outdoors","city":"Hilham","address":null,"phone":null,"website":"https://tnstateparks.com/parks/standing-stone","source_url":"https://en.wikipedia.org/wiki/Standing_Stone_State_Park","blurb":"An 855-acre state park about ten miles northwest of town, built around 69-acre Standing Stone Lake on dammed Mill Creek. Trails, rental cabins, a campground and rowboats, plus the CCC-era stonework the park is known for. Day use is free.","good_with_kids":true,"free":true,"seasonal_notes":"Pool and swimming are seasonal (warm months); camping and cabins available year-round. Hosts the National Rolley Hole Marbles Championship each September.","when":null,"featured":true},{"name":"Livingston Mural Trail","category":"square","city":"Livingston","address":"Historic Downtown Square, Livingston, TN 38570","phone":null,"website":"https://discoverlivingstontn.com/mural-trail/","source_url":"https://discoverlivingstontn.com/mural-trail/","blurb":"A self-guided walk past hand-painted murals downtown, starting from the Greetings from Overton County mural on the courthouse square. Free, walkable, and about as long as you want to make it.","good_with_kids":true,"free":true,"seasonal_notes":null,"when":null,"featured":false},{"name":"Livingston-Overton County Farmers Market","category":"square","city":"Livingston","address":"141 First Street, Livingston, TN 38570","phone":"931-823-1269","website":null,"source_url":"https://www.picktnproducts.org/picktn-producers/picktn-listing.902.html","blurb":"Locally grown produce and goods from area farmers, operating seasonally from May through November.","good_with_kids":true,"free":true,"seasonal_notes":null,"when":"May to November","featured":false},{"name":"Millard Oakley Public Library","category":"square","city":"Livingston","address":"107 E Main St, Livingston, TN 38570","phone":"(931) 823-1888","website":"https://millardoakleylibrary.org","source_url":"https://overtoncountytn.com/library/","blurb":"The public library for Livingston and Overton County, with books, audiobooks, movies, internet access and a program calendar that runs from preschool storytime to teen events. A reasonable rainy-afternoon stop, and free.","good_with_kids":true,"free":true,"seasonal_notes":null,"when":null,"featured":false},{"name":"Overton County Arts","category":"square","city":"Livingston","address":null,"phone":null,"website":"https://www.overtoncountyarts.org","source_url":"https://www.overtoncountyarts.org/about","blurb":"A nonprofit that runs art classes, bimonthly Art Mixers, K-12 art education and the Libby Allen Art Contest. Worth checking their calendar before a visit; much of what they do is open to the public.","good_with_kids":true,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Overton County Courthouse","category":"square","city":"Livingston","address":"100 East Court Square, Livingston, TN 38570","phone":null,"website":null,"source_url":"https://courthouses.co/us-states/o-u/tennessee/overton-county/","blurb":"A two-story brick Federal-style courthouse built in 1868-69, replacing the one burned during the Civil War, and listed on the National Register of Historic Places. It anchors the square that everything else downtown is arranged around.","good_with_kids":true,"free":true,"seasonal_notes":null,"when":null,"featured":true},{"name":"Overton County Heritage Museum","category":"square","city":"Livingston","address":"West Broad Street, Livingston, TN 38570","phone":"(931) 403-0909","website":null,"source_url":"https://tngenweb.org/ofp/overton-county-heritage-museum/","blurb":"The county's museum occupies the former sheriff's office and jail on West Broad Street and opened in March 2002 as a project of the Overton County Historical Society. The collection includes one of roughly thirty-five surviving iron lungs in the country.","good_with_kids":true,"free":true,"seasonal_notes":null,"when":null,"featured":true},{"name":"Roaring River Church and Cemetery","category":"square","city":null,"address":"Old Highway 42, between Livingston and Rickman, Overton County, TN","phone":null,"website":null,"source_url":"https://tngenweb.org/ofp/roaring-river-church-and-cemetery-overton-county/","blurb":"One of the oldest church and burial grounds in the county, founded by Revolutionary War veteran Colonel Stephen Copeland in the late 1700s; the Baptist congregation was chartered in 1801. It sits on Old Highway 42 between Livingston and Rickman, with no visitor facilities — it is a stop, not a site.","good_with_kids":false,"free":true,"seasonal_notes":null,"when":null,"featured":false},{"name":"The Antique Market","category":"square","city":"Livingston","address":"116 N Court Sq, Livingston, TN 38570","phone":"(931) 823-4943","website":null,"source_url":"https://cumberlandriverbasin.org/place/the-antique-market-livingston/","blurb":"A shop on the courthouse square housing booths from more than forty antique dealers — estate and costume jewelry, primitive furniture, pottery, quilts and the rest of it.","good_with_kids":false,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"1806 BBQ","category":"eats","city":"Livingston","address":"114 N Court Square, Livingston, TN 38570","phone":"(931) 823-1806","website":"https://1806bbq.com/","source_url":"https://1806bbq.com/","blurb":"Barbecue right on the courthouse square — pulled pork, smoked brisket, wings and a salad bar, plus burgers. Dine-in, takeout and delivery.","good_with_kids":false,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Angelina's Italian Subs & More","category":"eats","city":"Livingston","address":"920 Overton Plz, Livingston, TN 38570","phone":"(931) 823-2867","website":null,"source_url":"https://www.cookevillebites.com/restaurants/angelinas-italian-subs-more-livingston-tn","blurb":"A counter-service sub shop making Italian subs and pasta from family recipes, named for the owner's husband's grandmother. Takeout.","good_with_kids":false,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Brazen Que","category":"eats","city":"Livingston","address":"5172 Bradford Hicks Dr, Livingston, TN 38570","phone":"(931) 300-2228","website":"https://www.brazenque.com/","source_url":"https://www.tripadvisor.com/Restaurant_Review-g55162-d28006323-Reviews-Brazen_Que-Livingston_Tennessee.html","blurb":"Texas-style craft barbecue cooked over live oak: brisket, sausage and ribs. Outdoor dining, catering, and wheelchair accessible.","good_with_kids":false,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Casa Mexicana","category":"eats","city":"Livingston","address":"440 Market Square Plaza, Livingston, TN 38570","phone":"(931) 823-8870","website":null,"source_url":"https://www.restaurantji.com/tn/livingston/casa-mexicana-/","blurb":"A sit-down Mexican restaurant near the square serving standard Tex-Mex.","good_with_kids":false,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Ruby & Lee Coffee and Bakehouse","category":"eats","city":"Livingston","address":"101 S Court Square, Livingston, TN 38570","phone":"(931) 823-2253","website":null,"source_url":"https://www.restaurantji.com/tn/livingston/ruby-and-lee-coffee-and-bakehouse-/","blurb":"A bakery and coffee counter on the downtown square inside the Market on Main boutique — cinnamon rolls, muffins, breakfast sandwiches and espresso.","good_with_kids":false,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Stover's Country Kitchen","category":"eats","city":"Livingston","address":"511 E Main St, Livingston, TN 38570","phone":"(931) 823-9550","website":null,"source_url":"https://www.restaurantji.com/tn/livingston/stovers-country-kitchen-/","blurb":"A hometown diner serving breakfast all day alongside hamburger steak, pinto beans and cornbread. Counter-and-table service, Southern plates, the kind of place the town actually eats at.","good_with_kids":true,"free":false,"seasonal_notes":null,"when":null,"featured":true},{"name":"The Sno Shack","category":"eats","city":"Livingston","address":"718 W Main St, Livingston, TN 38570","phone":"(931) 823-7669","website":null,"source_url":"https://www.tripadvisor.com/Restaurant_Review-g55162-d6611617-Reviews-The_Sno_Shack-Livingston_Tennessee.html","blurb":"A walk-up shaved ice stand with dozens of flavor combinations, plus a short food menu of hamburger steaks and baked potatoes. Afternoons and evenings, closed Sundays.","good_with_kids":true,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Wired Coffee Co","category":"eats","city":"Livingston","address":"1185 Preston St, Livingston, TN 38570","phone":"(931) 403-9417","website":"https://wiredcoffeeco.square.site/","source_url":"https://www.tripadvisor.com/Restaurant_Review-g55162-d13507274-Reviews-Wired_Coffee_Co-Livingston_Tennessee.html","blurb":"A locally owned coffee shop open since 2017 doing espresso, cold brew and smoothies, plus a chicken salad sandwich it is known for locally.","good_with_kids":true,"free":false,"seasonal_notes":null,"when":null,"featured":false},{"name":"Fall-O-Ween in Livingston","category":"events","city":"Livingston","address":"Historic Livingston Square and Central Park, Livingston, TN 38570","phone":null,"website":null,"source_url":"https://www.ucbjournal.com/fall-o-ween-sets-return-date-to-livingston-square-with-month-of-festivities/","blurb":"An autumn run of events on the historic square and in Central Park, stretching from September through late October and finishing with a Halloween weekend of trick-or-treating.","good_with_kids":true,"free":false,"seasonal_notes":null,"when":"September to late October","featured":false},{"name":"Livingston-Overton County Christmas Parade","category":"events","city":"Livingston","address":"Main Street, Livingston, TN 38570","phone":null,"website":null,"source_url":"https://www.overtoncountynews.com/calendar/livingston---overton-county-56th-annual-christmas-parade/event_a6dad57a-75a6-11ed-9b1a-e786fb4aa457.html","blurb":"A long-running holiday parade down Main Street with floats, marching bands and Santa. December.","good_with_kids":true,"free":true,"seasonal_notes":null,"when":"December","featured":false},{"name":"Overton County Fair","category":"events","city":"Livingston","address":"610 Monterey Highway, Livingston, TN 38570","phone":null,"website":null,"source_url":"https://overtoncountytn.com/eventss/overton-county-fair/","blurb":"The county's annual agricultural fair at the Overton County Fairgrounds — cattle and livestock shows, pageants, wild mule shows and the rest of the fair calendar.","good_with_kids":true,"free":false,"seasonal_notes":null,"when":"July","featured":false},{"name":"Paint Livingston","category":"events","city":"Livingston","address":"Livingston Downtown Square, Livingston, TN 38570","phone":null,"website":"https://www.overtoncountyarts.org/events","source_url":"https://www.overtoncountyarts.org/events","blurb":"An annual plein air painting competition run by Overton County Arts that draws painters from several states to paint around town, ending with a Quick Paint contest on the square.","good_with_kids":true,"free":false,"seasonal_notes":null,"when":"late September to early October","featured":false}],"itinerary":{"intro":"Livingston is small enough to see properly in a day, if you take it in the right order. Start on the square, get out of town by early afternoon, and be back for supper.","steps":[{"when":"Morning","name":"Overton County Courthouse and the square","text":"Start where the town starts. The 1868-69 brick courthouse is on the National Register, and the block around it holds most of what is worth walking to — the antique dealers, the coffee counters, the Greetings from Overton County mural. Half an hour on foot, longer if you shop."},{"when":"Late morning","name":"Overton County Heritage Museum","text":"Two blocks off the square, in the county's old sheriff's office and jail. It is a small local museum run by the historical society, and it holds an iron lung — one of roughly thirty-five left in the country. Check the hours before you drive up; they are short."},{"when":"Noon","name":"Stover's Country Kitchen","text":"Lunch, plainly. Breakfast is served all day, and the rest is hamburger steak, pinto beans and cornbread. Small-town kitchens here close early, so eat before one."},{"when":"Afternoon","name":"Standing Stone State Park","text":"Ten miles northwest, and the reason most people leave the highway. An 855-acre park around a 69-acre lake, with CCC stonework, trails off the lake loop, and rowboats in season. Free to enter. Give it two hours minimum, or the whole afternoon."},{"when":"Evening","name":"Central Park Livingston","text":"Back in town. A 2017 downtown park with a splash pad, a walking loop and an amphitheater that runs the Live in Livingston series in warm months. Free, and it is where the evening actually happens."}]},"practical":[{"head":"Weather and terrain.","text":"Livingston sits at roughly 1,000 feet on the western edge of the Cumberland Plateau, with rolling farmland, wooded ridges and creek bottoms. Elevation changes are moderate but real: a trail that starts flat can drop into a gorge. Weather moves quickly here, summer thunderstorms build in the afternoon, and nights run cooler than the valley towns to the west. Check a forecast before anything on the water."},{"head":"What a rural county seat is like.","text":"This is a working town of under four thousand people, not a resort. The pace is slower, the hours are shorter, and cell coverage thins out once you leave the highways. Bring cash for small vendors and roadside stands, fill the tank before heading toward the lake, and expect people to speak to you on the sidewalk."}],"faq":[{"q":"Where is Livingston, and how do I get there?","a":"Livingston is the county seat of Overton County, in the Upper Cumberland region of Middle Tennessee, approximately 15 miles north-northeast of Cookeville. Cookeville is the nearest town on Interstate 40, so most visitors exit there and drive north. There is no commercial air service or passenger rail in the county."},{"q":"What is the best season to visit?","a":"Spring and fall are the most comfortable for anything outdoors. Summer is hot and humid, and the water — lake and creek — is the point of the season. Winter is quiet and cold; some seasonal attractions and campgrounds reduce hours or close, so call ahead between November and March."},{"q":"Do I need a car?","a":"Yes. Points of interest are spread across a rural county, there is no meaningful public transit, and the distances between the square, the state park and the lake are driving distances, not walking ones."},{"q":"What should I know about small-town hours?","a":"Many businesses here keep weekday hours, close early, and are closed Sundays; some close Saturday afternoons as well. Kitchens in particular often stop serving well before big-city dinner hours. Check hours the day you go rather than trusting a listing — including the ones on this page."},{"q":"Where do people stay?","a":"Lodging in the county runs to a small number of motels, cabins and short-term rentals, plus campgrounds and lakeside sites in season. Visitors wanting a wider choice of chain hotels generally stay in Cookeville and drive up."},{"q":"Is the town walkable?","a":"The courthouse square is, and that is the part worth walking — the museum, library, shops and several kitchens are within a few blocks of each other. Everything past the square assumes a car."}],"nearby":[{"name":"Dale Hollow National Fish Hatchery","county":"Clay"},{"name":"Willow Grove Campground","county":"Clay"}]}
-</script>
 <script>
-(function(){
+(function () {
   "use strict";
-  var DATA = JSON.parse(document.getElementById("places-data").textContent);
-  var state = { cat: "all", traits: {} };
+  var state = { cat: "all", kids: false, free: false };
+  var list = document.getElementById("listings");
+  var rows = Array.prototype.slice.call(list.querySelectorAll(".listing"));
+  var count = document.getElementById("resultCount");
+  var empty = document.getElementById("emptyMsg");
+  var catButtons = Array.prototype.slice.call(document.querySelectorAll("button[data-cat]"));
+  var labels = {};
+  catButtons.forEach(function (b) { labels[b.dataset.cat] = b.textContent; });
 
-  /* theme toggle */
-  var toggle = document.getElementById("themeToggle");
-  function paintToggle(){
-    var dark = document.documentElement.dataset.theme === "dark";
-    toggle.textContent = dark ? "Light" : "Dark";
-    toggle.setAttribute("aria-pressed", String(dark));
-    toggle.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
-  }
-  toggle.addEventListener("click", function(){
-    var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-    document.documentElement.dataset.theme = next;
-    try { localStorage.setItem("vltn_theme2", next); } catch(e){}
-    paintToggle();
-  });
-  paintToggle();
-
-  function esc(s){
-    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
-      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+  function render() {
+    var shown = 0;
+    rows.forEach(function (row) {
+      var ok = (state.cat === "all" || row.dataset.cat === state.cat)
+        && (!state.kids || row.dataset.kids === "1")
+        && (!state.free || row.dataset.free === "1");
+      row.hidden = !ok;
+      if (ok) shown++;
     });
-  }
-  function host(url){ try { return new URL(url).hostname.replace(/^www\./,""); } catch(e){ return "source"; } }
-
-  /* stats */
-  var cats = DATA.categories || {};
-  var catKeys = Object.keys(cats);
-  var statRow = document.getElementById("statRow");
-  if (statRow) {
-    var stats = [["Places listed", DATA.places.length], ["Categories", catKeys.length],
-                 ["All in", "Overton County"], ["Sources checked", DATA.verified || "—"]];
-    statRow.innerHTML = stats.map(function(s){
-      return '<span class="stat">' + esc(s[0]) + ' <b>' + esc(s[1]) + '</b></span>';
-    }).join("");
+    count.textContent = shown + (shown === 1 ? " place" : " places")
+      + (state.cat === "all" ? "" : " in " + labels[state.cat]);
+    empty.hidden = shown !== 0;
   }
 
-  /* itinerary */
-  var itin = DATA.itinerary || {steps:[]};
-  document.getElementById("itinIntro").textContent = itin.intro || "";
-  document.getElementById("itin").innerHTML = (itin.steps || []).map(function(step){
-    return '<article class="itin-step"><p class="when">' + esc(step.when) + '</p>' +
-           '<h3>' + esc(step.name) + '</h3><p>' + esc(step.text) + '</p></article>';
-  }).join("");
-
-  /* category chips */
-  var chipHost = document.getElementById("catChips");
-  var chipHtml = ['<button class="chip" type="button" data-cat="all" aria-pressed="true">All</button>'];
-  catKeys.forEach(function(key){
-    chipHtml.push('<button class="chip" type="button" data-cat="' + esc(key) + '" aria-pressed="false">' +
-                  esc(cats[key].label || key) + '</button>');
-  });
-  chipHost.innerHTML = chipHtml.join(" ");
-
-  function cardHtml(p){
-    var tags = [];
-    if (p.good_with_kids) tags.push("Good with kids");
-    if (p.free) tags.push("Free");
-    if (p.seasonal_notes) tags.push(p.seasonal_notes);
-    if (p.when) tags.push(p.when);
-    var meta = [];
-    if (p.address) meta.push('<span>' + esc(p.address) + '</span>');
-    else if (p.city) meta.push('<span>' + esc(p.city) + ', TN</span>');
-    if (p.phone) meta.push('<span>' + esc(p.phone) + '</span>');
-    var link = p.website || p.source_url;
-    return '<li class="place" data-cat="' + esc(p.category) + '"' +
-             (p.good_with_kids ? ' data-good_with_kids="1"' : '') +
-             (p.free ? ' data-free="1"' : '') + '>' +
-           '<p class="cat">' + esc((cats[p.category] || {}).label || p.category) + '</p>' +
-           '<h3>' + esc(p.name) + '</h3>' +
-           '<p class="blurb">' + esc(p.blurb || p.what_it_is) + '</p>' +
-           (tags.length ? '<ul class="tags">' + tags.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join("") + '</ul>' : '') +
-           (meta.length ? '<p class="meta">' + meta.join("") + '</p>' : '') +
-           (link ? '<p class="src"><a href="' + esc(link) + '" rel="noopener nofollow" target="_blank">' + esc(host(link)) + ' ↗</a></p>' : '') +
-           '</li>';
-  }
-
-  var listEl = document.getElementById("places");
-  var countEl = document.getElementById("resultCount");
-  var emptyEl = document.getElementById("emptyMsg");
-
-  function render(){
-    var visible = DATA.places.filter(function(p){
-      if (state.cat !== "all" && p.category !== state.cat) return false;
-      if (state.traits.good_with_kids && !p.good_with_kids) return false;
-      if (state.traits.free && !p.free) return false;
-      return true;
-    });
-    listEl.innerHTML = visible.map(cardHtml).join("");
-    countEl.textContent = visible.length + (visible.length === 1 ? " place" : " places") +
-      (state.cat === "all" ? "" : " in " + ((cats[state.cat] || {}).label || state.cat));
-    emptyEl.hidden = visible.length !== 0;
-    paintCatIntro();
-  }
-
-  chipHost.addEventListener("click", function(ev){
-    var btn = ev.target.closest("button[data-cat]");
-    if (!btn) return;
-    state.cat = btn.dataset.cat;
-    chipHost.querySelectorAll("button[data-cat]").forEach(function(b){
-      b.setAttribute("aria-pressed", String(b === btn));
-    });
-    render();
-  });
-  document.querySelectorAll("button[data-trait]").forEach(function(btn){
-    btn.addEventListener("click", function(){
-      var on = btn.getAttribute("aria-pressed") !== "true";
-      btn.setAttribute("aria-pressed", String(on));
-      state.traits[btn.dataset.trait] = on;
+  catButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      state.cat = btn.dataset.cat;
+      catButtons.forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
       render();
     });
   });
-
-  /* category intro follows the active filter */
-  var catIntroEl = document.getElementById("catIntro");
-  function paintCatIntro(){
-    var text = state.cat === "all"
-      ? (DATA.intros && DATA.intros.all) || ""
-      : ((cats[state.cat] || {}).intro || "");
-    catIntroEl.textContent = text;
-    catIntroEl.hidden = !text;
-  }
-
-  /* practical notes */
-  document.getElementById("practicalList").innerHTML = (DATA.practical || []).map(function(block){
-    return "<p><strong>" + esc(block.head) + "</strong> " + esc(block.text) + "</p>";
-  }).join("");
-
-  /* faq */
-  document.getElementById("faqList").innerHTML = (DATA.faq || []).map(function(f){
-    return '<details><summary>' + esc(f.q) + '</summary><p>' + esc(f.a) + '</p></details>';
-  }).join("");
-
-  /* nearby footnote */
-  var nb = DATA.nearby || [];
-  document.getElementById("nearby").innerHTML = nb.length
-    ? 'Worth the drive, but outside Overton County: ' + nb.map(function(n){
-        return esc(n.name) + ' (' + esc(n.county) + ')';
-      }).join(", ") + '.'
-    : "";
-
-  document.getElementById("footVerified").textContent = DATA.verified
-    ? "Every listing was checked against a live source on " + DATA.verified + ". Hours and seasons change — call ahead."
-    : "";
-
-  render();
-})();
-</script>
-<script src="design-selectors/preset-switcher.js"></script>
-<script>
-if (window.PresetSwitcher) {
-  PresetSwitcher.init({
-    storageKey: "visit-livingston-v3",
-    themeToggle: true,
-    axes: {
-      style:   { label: "Style",   options: [
-        { id: "editorial",   label: "Editorial" },
-        { id: "warm-craft",  label: "Warm craft" },
-        { id: "modern-flat", label: "Modern flat" },
-        { id: "field-guide", label: "Field guide" }
-      ]},
-      palette: { label: "Palette", options: [
-        { id: "courthouse",    label: "Courthouse" },
-        { id: "night-fishing", label: "Night Fishing" },
-        { id: "pond-water",    label: "Pond Water" },
-        { id: "marbles",       label: "Marbles" }
-      ]},
-      type:    { label: "Type",    options: [
-        { id: "serif-display", label: "Serif display" },
-        { id: "all-sans",      label: "All sans" },
-        { id: "slab-mix",      label: "Slab mix" }
-      ]},
-      layout:  { label: "Layout",  options: [
-        { id: "grid",        label: "Grid" },
-        { id: "list",        label: "List" },
-        { id: "masonry-ish", label: "Staggered" }
-      ]},
-      density: { label: "Density", options: [
-        { id: "airy",     label: "Airy" },
-        { id: "standard", label: "Standard" },
-        { id: "compact",  label: "Compact" }
-      ]}
-    }
+  document.querySelectorAll("button[data-trait]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var on = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", String(on));
+      state[btn.dataset.trait] = on;
+      render();
+    });
   });
-}
+})();
 </script>
 </body>
 </html>
