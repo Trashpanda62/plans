@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" data-style="editorial" data-palette="cumberland" data-type="serif-display" data-layout="grid" data-density="standard">
+<html lang="en" data-style="warm-craft" data-palette="rolley-hole" data-type="serif-display" data-layout="list" data-density="standard">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Things to Do in Livingston, Tennessee — Visit Livingston TN</title>
 <meta name="description" content="A plain-spoken guide to Livingston and Overton County, Tennessee: state parks and lakes, the courthouse square, local kitchens, museums and annual events. No rankings, no ads.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%8F%9E%3C/text%3E%3C/svg%3E">
-<script>try{var t=localStorage.getItem("vltn_theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}catch(e){document.documentElement.dataset.theme="light";}</script>
+<script>try{var t=localStorage.getItem("vltn_theme2");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}catch(e){document.documentElement.dataset.theme="light";}</script>
 <link rel="stylesheet" href="visit-livingston.themes.css">
 <link rel="stylesheet" href="design-selectors/preset-switcher.css">
 <style>
@@ -215,7 +215,7 @@ footer p{margin:0 0 .5rem;max-width:70ch}
   toggle.addEventListener("click", function(){
     var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = next;
-    try { localStorage.setItem("vltn_theme", next); } catch(e){}
+    try { localStorage.setItem("vltn_theme2", next); } catch(e){}
     paintToggle();
   });
   paintToggle();
@@ -354,7 +354,7 @@ footer p{margin:0 0 .5rem;max-width:70ch}
 <script>
 if (window.PresetSwitcher) {
   PresetSwitcher.init({
-    storageKey: "visit-livingston",
+    storageKey: "visit-livingston-v2",
     themeToggle: true,
     axes: {
       style:   { label: "Style",   options: [
@@ -364,10 +364,10 @@ if (window.PresetSwitcher) {
         { id: "field-guide", label: "Field guide" }
       ]},
       palette: { label: "Palette", options: [
-        { id: "cumberland", label: "Cumberland" },
-        { id: "courthouse", label: "Courthouse" },
-        { id: "lakeside",   label: "Lakeside" },
-        { id: "harvest",    label: "Harvest" }
+        { id: "rolley-hole", label: "Rolley Hole" },
+        { id: "tin-roof",    label: "Tin Roof" },
+        { id: "dale-hollow", label: "Dale Hollow" },
+        { id: "cornbread",   label: "Cornbread" }
       ]},
       type:    { label: "Type",    options: [
         { id: "serif-display", label: "Serif display" },
