@@ -81,6 +81,8 @@
     color: var(--head); margin: 0 0 14px; line-height: 1.1;
   }
   .hero p { max-width: 66ch; color: var(--muted); margin: 0; font-size: 17px; }
+  .hero-note { font-size: 13px; margin-top: 10px !important; }
+  .hero-note a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
   .hero-stats { display: flex; flex-wrap: wrap; gap: 30px; margin: 24px 0 0; padding: 0; list-style: none; }
   .hero-stats b {
     display: block; font-family: Oswald, sans-serif; font-weight: 500;
@@ -88,9 +90,21 @@
   }
   .hero-stats span { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 
-  /* Filters */
-  .filters { position: sticky; top: 0; z-index: 30; background: #fff; border-bottom: 1px solid var(--rule); padding: 12px 0; }
-  .filters .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  /* Filters: a short sticky bar; the pills live in a panel that can collapse.
+     The panel used to be sticky itself, which pinned 318px (39% of a phone
+     screen) over the content for the whole scroll. */
+  .filters { position: sticky; top: 0; z-index: 30; background: #fff; border-bottom: 1px solid var(--rule); padding: 10px 0; }
+  .filter-panel { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .filter-bar-top { display: none; align-items: center; gap: 12px; }
+  .filter-toggle {
+    font-family: Oswald, "Segoe UI", Arial, sans-serif; font-weight: 300;
+    font-size: 14px; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--teal); background: #fff; border: 1px solid var(--rule);
+    padding: 0 16px; min-height: 44px; border-radius: 2px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px; flex: none;
+  }
+  .filter-toggle[aria-expanded="true"] { border-color: var(--teal); }
+  .filter-toggle .chev { font-size: 10px; line-height: 1; }
   .filter-label {
     font-family: Oswald, sans-serif; font-weight: 300; font-size: 13px;
     letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
@@ -99,14 +113,18 @@
   .filter-label + .filter-label { margin-left: 14px; }
   .filter-pill {
     font-family: Oswald, "Segoe UI", Arial, sans-serif; font-weight: 300;
-    font-size: 14px; letter-spacing: .05em; text-transform: uppercase;
+    font-size: 13px; letter-spacing: .04em; text-transform: uppercase;
     color: var(--teal); background: #fff; border: 1px solid var(--rule);
-    padding: 9px 14px; min-height: 38px; border-radius: 2px; cursor: pointer;
+    padding: 6px 11px; min-height: 34px; border-radius: 2px; cursor: pointer;
     transition: background .12s ease, color .12s ease, border-color .12s ease;
   }
+  /* Phones get the full 44px target; the panel is a deliberate tap-to-open
+     surface there, so height costs nothing while it is closed. */
+  @media (max-width: 760px) { .filter-pill { min-height: 44px; padding: 10px 14px; font-size: 14px; } }
   .filter-pill:hover { border-color: var(--teal); }
   .filter-pill.is-active { background: var(--teal); border-color: var(--teal); color: #fff; }
-  .filter-count { width: 100%; font-size: 13px; color: var(--muted); margin: 2px 0 0; }
+  /* Sits at the end of the pill row rather than forcing a row of its own. */
+  .filter-count { font-size: 13px; color: var(--muted); margin: 0 0 0 auto; padding-left: 16px; white-space: nowrap; }
 
   /* Sections */
   .section { padding: 34px 0 6px; }
@@ -160,8 +178,19 @@
     font-family: Oswald, sans-serif; font-weight: 300; font-size: 12px;
     letter-spacing: .13em; text-transform: uppercase; color: var(--teal); margin: 0 0 4px;
   }
-  .tile h3 { font-size: 16px; font-weight: 600; line-height: 1.32; margin: 0 0 6px; color: var(--head); }
-  .tile-where { font-size: 13px; color: var(--muted); margin: 0 0 10px; }
+  .tile h3 { font-size: 19px; font-weight: 600; line-height: 1.28; letter-spacing: -.2px; margin: 0 0 5px; color: var(--head); }
+  .tile-where { font-size: 13px; color: var(--muted); margin: 0 0 9px; }
+  /* The description is the point of the card, so it reads on the card. Closed
+     it clamps to three lines; opening unclamps it rather than revealing a
+     second copy of the same text. */
+  .tile-summary {
+    font-size: 16px; line-height: 1.5; margin: 0 0 12px; color: var(--ink);
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3;
+    line-clamp: 3; overflow: hidden;
+  }
+  .tile.is-open .tile-summary {
+    display: block; -webkit-line-clamp: none; line-clamp: none; overflow: visible;
+  }
   .tile-toggle {
     font-family: Oswald, sans-serif; font-weight: 300; font-size: 13px;
     letter-spacing: .09em; text-transform: uppercase; color: var(--teal);
@@ -172,7 +201,7 @@
   .tile-toggle:hover { color: var(--teal-dark); }
   .tile-detail { display: none; padding-top: 10px; }
   .tile.is-open .tile-detail { display: block; }
-  .tile-detail p { margin: 0 0 12px; font-size: 15px; }
+  .tile-detail p { margin: 0 0 12px; font-size: 16px; }
   .tile-meta { font-size: 13px; color: var(--muted); margin: 0 0 12px; }
   .tile-meta div + div { margin-top: 5px; }
   .tile-meta b { color: var(--head); font-weight: 600; }
@@ -218,11 +247,32 @@
   :focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
 
   @media (max-width: 760px) {
-    .topbar .wrap { flex-direction: column; align-items: flex-start; gap: 6px; }
-    .topnav { gap: 16px; }
-    .hero { padding: 28px 0 20px; }
-    .hero-stats { gap: 22px; }
+    /* The nav used to wrap into a six-high column, which made the masthead
+       470px tall on a 812px phone. One scrollable row instead. */
+    .topbar .wrap { flex-direction: column; align-items: stretch; gap: 0; min-height: 0; padding-block: 10px; }
+    .topnav {
+      gap: 18px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none;
+      margin: 0 -20px; padding: 0 20px;
+    }
+    .topnav::-webkit-scrollbar { display: none; }
+    .topnav a { white-space: nowrap; padding: 8px 0; min-height: 40px; font-size: 15px; }
+    .wordmark b { font-size: 23px; }
+    .hero { padding: 20px 0 16px; }
+    .hero-stats { gap: 20px 26px; margin-top: 18px; }
+    .hero-stats b { font-size: 25px; }
     .tiles { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 22px; }
+
+    /* Sticky height on a phone is now one 44px row instead of 318px. The pills
+       collapse behind a button and the panel scrolls inside its own box, so it
+       can never grow to cover the page again. */
+    .filter-bar-top { display: flex; }
+    .filter-panel { display: none; padding-top: 12px; }
+    .filters.is-open .filter-panel {
+      display: flex; max-height: 45vh; overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .filters .filter-count { margin: 0; flex: 1; }
+    .filters.is-open .filter-count { width: 100%; flex-basis: 100%; }
   }
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; }
@@ -250,7 +300,8 @@
 <header class="hero">
   <div class="wrap">
     <h1>Things to do outside around Livingston</h1>
-    <p>Everything here is within about a 45 minute drive of Livingston, Tennessee. Nothing on this page is ranked, so no position is for sale. It is run by Barnraised, a web design business, and a listing is part of what its customers pay for; entries that arrive that way are labeled. Every place links to its own official page, because hours, fees and closures change and that page is the one that will be right.</p>
+    <p>Parks, lakes, waterfalls, overlooks and trails inside about a 45 minute drive of the Livingston square, sorted by how long it takes to get to each one. Every place links to its own official page, because hours, fees and closures change and that page is the one that will be right.</p>
+    <p class="hero-note">An independent guide, nothing on it ranked. Run by Barnraised; paid listings are labeled. <a href="#about">Full disclosure</a>.</p>
     <ul class="hero-stats">
       <li><b>27</b><span>places</span></li>
       <li><b>6</b><span>counties</span></li>
@@ -260,13 +311,22 @@
   </div>
 </header>
 
-<div class="filters">
+<div class="filters" id="filters">
   <div class="wrap" id="filter-bar">
-    <span class="filter-label">Doing what</span>
-    <span id="filter-activity"></span>
-    <span class="filter-label">Drive time</span>
-    <span id="filter-drive"></span>
-    <p class="filter-count" id="filter-count" aria-live="polite"></p>
+    <div class="filter-bar-top">
+      <button type="button" class="filter-toggle" id="filter-toggle"
+              aria-expanded="false" aria-controls="filter-panel">
+        Filter <span class="chev" aria-hidden="true">&#9662;</span>
+      </button>
+      <p class="filter-count" id="filter-count-compact" aria-hidden="true"></p>
+    </div>
+    <div class="filter-panel" id="filter-panel">
+      <span class="filter-label">Doing what</span>
+      <span id="filter-activity"></span>
+      <span class="filter-label">Drive time</span>
+      <span id="filter-drive"></span>
+      <p class="filter-count" id="filter-count" aria-live="polite"></p>
+    </div>
   </div>
 </div>
 
@@ -316,9 +376,9 @@
   </div>
 </section>
 
-<footer>
+<footer id="about">
   <div class="wrap">
-    <p>Livingston Outdoors is an independent guide. It is not affiliated with any park, agency or business listed on it, and nothing here is ranked, so no position is for sale. It is run by Barnraised, a web design business, and a listing is part of what its customers pay for; any entry that arrives that way is labeled. Details were checked against each place's official page on August 12, 2026, but conditions change, so check the official link before you drive out.</p>
+    <p>Livingston Outdoors is an independent guide. It is not affiliated with any park, agency or business listed on it, and nothing on it is ranked, so no position is for sale. Barnraised runs it, and a listing is part of what its web design customers pay for; those entries are labeled. Details were checked against each place's official page on August 12, 2026, but conditions change, so check the official link before you drive out.</p>
     <p>Photographs are used under the licence noted on each one. Closure and safety alerts come from Tennessee State Parks, the U.S. Army Corps of Engineers Nashville District and the National Park Service.</p>
   </div>
 </footer>
@@ -1082,16 +1142,16 @@
     tile.appendChild(el('p', 'tile-kicker', place.best_for));
     tile.appendChild(el('h3', null, place.name));
     tile.appendChild(el('p', 'tile-where', place.town + ', ' + place.county + ' County'));
+    tile.appendChild(el('p', 'tile-summary', place.blurb));
 
     var detailId = 'detail-' + index;
-    var toggle = el('button', 'tile-toggle', 'Read more +');
+    var toggle = el('button', 'tile-toggle', 'Details +');
     toggle.type = 'button';
     toggle.setAttribute('aria-expanded', 'false');
     toggle.setAttribute('aria-controls', detailId);
 
     var detail = el('div', 'tile-detail');
     detail.id = detailId;
-    detail.appendChild(el('p', null, place.blurb));
 
     if ((place.activities || []).length) {
       var tags = el('ul', 'tile-tags');
@@ -1129,7 +1189,7 @@
     toggle.addEventListener('click', function () {
       var open = tile.classList.toggle('is-open');
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      toggle.textContent = open ? 'Close -' : 'Read more +';
+      toggle.textContent = open ? 'Close -' : 'Details +';
     });
 
     tile.appendChild(toggle);
@@ -1211,9 +1271,11 @@
       var tally = section.querySelector('.tally');
       if (tally) tally.textContent = live + (live === 1 ? ' place' : ' places');
     });
-    document.getElementById('filter-count').textContent = shown === PLACES.length
+    var countText = shown === PLACES.length
       ? ('Showing all ' + shown + ' places')
       : ('Showing ' + shown + ' of ' + PLACES.length + ' places');
+    document.getElementById('filter-count').textContent = countText;
+    document.getElementById('filter-count-compact').textContent = countText;
     document.getElementById('empty-note').hidden = shown !== 0;
     Array.prototype.forEach.call(document.querySelectorAll('.filter-pill'), function (button) {
       var active = state[button.dataset.axis] === button.dataset.value;
@@ -1231,6 +1293,14 @@
       state[button.dataset.axis] = button.dataset.value;
       apply();
     });
+
+    var filters = document.getElementById('filters');
+    var filterToggle = document.getElementById('filter-toggle');
+    filterToggle.addEventListener('click', function () {
+      var open = filters.classList.toggle('is-open');
+      filterToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
     apply();
   }
 
