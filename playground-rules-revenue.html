@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<style>body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Playground Rules Revenue Model</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500..900&family=Instrument+Sans:wght@400..700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: a sticky control rail on the left drives a results column on the right:
+   hero (net + where the outcome sits on the real sales curve), then the money's path (waterfall + platform table),
+   then every outcome side by side. One column on phones. Chalk-slate neutrals, violet for the control accent,
+   and a four-hue validated series set for Steam / consoles / mobile / cosmetics. */
+:root{
+  --bg:#eceff3; --panel:#fbfcfd; --sunk:#e3e7ec; --rule:#d8dde4;
+  --ink:#111924; --ink-2:#465263; --ink-3:#7a8595;
+  --accent:#4a3aa7; --accent-wash:rgba(74,58,167,.10); --accent-ink:#ffffff;
+  --s-steam:#2a78d6; --s-console:#eb6834; --s-mobile:#1baf7a; --s-cosm:#eda100;
+  --neg:#c2412f; --pos:#1d7a47; --total:#465263;
+  --shadow:0 1px 0 rgba(17,25,36,.04),0 8px 24px -12px rgba(17,25,36,.12);
+  --f-display:'Gabarito','Segoe UI',system-ui,sans-serif;
+  --f-body:'Instrument Sans','Segoe UI',system-ui,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d131b; --panel:#151d28; --sunk:#1d2733; --rule:#273241;
+  --ink:#eef1f5; --ink-2:#a9b3c1; --ink-3:#768296;
+  --accent:#9085e9; --accent-wash:rgba(144,133,233,.14); --accent-ink:#0d131b;
+  --s-steam:#3987e5; --s-console:#d95926; --s-mobile:#199e70; --s-cosm:#c98500;
+  --neg:#ef7a6a; --pos:#5fc98d; --total:#8d99ab;
+  --shadow:0 1px 0 rgba(0,0,0,.2),0 10px 28px -14px rgba(0,0,0,.6);
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d131b; --panel:#151d28; --sunk:#1d2733; --rule:#273241;
+  --ink:#eef1f5; --ink-2:#a9b3c1; --ink-3:#768296;
+  --accent:#9085e9; --accent-wash:rgba(144,133,233,.14); --accent-ink:#0d131b;
+  --s-steam:#3987e5; --s-console:#d95926; --s-mobile:#199e70; --s-cosm:#c98500;
+  --neg:#ef7a6a; --pos:#5fc98d; --total:#8d99ab;
+  --shadow:0 1px 0 rgba(0,0,0,.2),0 10px 28px -14px rgba(0,0,0,.6);
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 14px/1.5 var(--f-body);padding-inline:16px;padding-block:16px 48px;-webkit-font-smoothing:antialiased}
+.app{max-width:760px;margin:0 auto}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* header */
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px 24px;margin-bottom:20px}
+.eyebrow{font:600 11px var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+h1{font:750 26px/1.05 var(--f-display);letter-spacing:-.025em;margin:4px 0 0;text-wrap:balance}
+.sub{color:var(--ink-2);margin:6px 0 0;max-width:62ch}
+.top-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.seg{display:inline-flex;background:var(--sunk);border-radius:9px;padding:3px;gap:2px}
+.seg button{font:600 13px var(--f-body);color:var(--ink-2);background:transparent;border:0;border-radius:7px;padding:6px 14px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.seg-label{font:500 12px var(--f-body);color:var(--ink-3)}
+.ghost{font:600 13px var(--f-body);color:var(--ink-2);background:transparent;border:1px solid var(--rule);border-radius:8px;padding:6px 12px;cursor:pointer}
+.ghost:hover{color:var(--ink);border-color:var(--ink-3)}
+
+.main{display:flex;flex-direction:column;gap:16px;min-width:0}
+
+/* rail */
+.rail{background:var(--panel);border-radius:14px;box-shadow:var(--shadow)}
+.rail-h{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:16px 18px 4px}
+.rail-h h2{font:700 17px/1.2 var(--f-display);margin:0}
+.rail-acts{display:flex;align-items:center;gap:8px}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;padding:6px 10px 0}
+.tabs button{font:600 12.5px var(--f-body);color:var(--ink-3);background:transparent;border:0;border-bottom:2px solid transparent;padding:8px 2px 9px;cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tabs-rule{height:1px;background:var(--rule);margin:0 10px}
+.pane{padding:16px 18px 20px;display:flex;flex-direction:column;gap:18px}
+.pane h3{font:650 11px var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:6px 0 -6px}
+.pane .hint{font-size:12px;color:var(--ink-3);margin:-8px 0 0;line-height:1.45}
+.ctl{display:flex;flex-direction:column;gap:6px}
+.ctl-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.ctl label{font:500 13px var(--f-body);color:var(--ink-2)}
+.est{font:600 9.5px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-wash);border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:1px;cursor:help}
+.val{display:inline-flex;align-items:baseline;gap:1px;font:600 13.5px var(--f-mono);font-variant-numeric:tabular-nums;color:var(--ink)}
+.val input{font:inherit;color:inherit;background:transparent;border:0;border-bottom:1px dashed var(--rule);width:7ch;text-align:right;padding:0 1px}
+.val input:hover,.val input:focus{border-bottom-color:var(--accent);outline:none}
+.val .u{color:var(--ink-3);font-weight:500}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:20px;background:transparent;cursor:pointer;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(90deg,var(--accent) var(--p,0%),var(--sunk) var(--p,0%))}
+input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:var(--sunk)}
+input[type=range]::-moz-range-progress{height:4px;border-radius:2px;background:var(--accent)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--panel);border:2px solid var(--accent);margin-top:-6px;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+input[type=range]::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:var(--panel);border:2px solid var(--accent)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+.mix{display:flex;height:8px;border-radius:4px;overflow:hidden;gap:2px;background:var(--panel)}
+.mix i{display:block;height:100%}
+.mix-key{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--ink-2)}
+.mix-key span{display:inline-flex;align-items:center;gap:5px}
+.sw{width:9px;height:9px;border-radius:2px;display:inline-block;flex:none}
+
+/* cards */
+.card{background:var(--panel);border-radius:14px;box-shadow:var(--shadow);padding:18px;min-width:0}
+@media(min-width:600px){.card{padding:20px 24px}}
+.card-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 16px;margin-bottom:14px}
+.card-h h2{font:700 17px/1.2 var(--f-display);letter-spacing:-.01em;margin:0}
+.card-h p{margin:0;font-size:12.5px;color:var(--ink-3)}
+
+/* hero */
+.hero{display:flex;flex-direction:column;gap:20px}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}
+.tile{background:var(--sunk);border-radius:10px;padding:10px 12px;min-width:0}
+.tile .l{font-size:11.5px;color:var(--ink-3)}
+.tile .v{font:600 17px var(--f-mono);font-variant-numeric:tabular-nums;letter-spacing:-.02em;overflow-wrap:anywhere}
+.tile .v.neg{color:var(--neg)}
+@media(max-width:420px){.tile .v{font-size:15px}.tile{padding:9px 10px}}
+.big-l{font:600 12px var(--f-body);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.big{font:800 clamp(40px,6vw,60px)/1 var(--f-display);letter-spacing:-.04em;margin:8px 0 6px;font-variant-numeric:tabular-nums}
+.big.neg{color:var(--neg)}
+.big-sub{color:var(--ink-2);font-size:13px;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 16px}
+.pill{display:inline-flex;align-items:center;gap:6px;font:600 12px var(--f-body);border-radius:999px;padding:4px 10px;background:var(--sunk);color:var(--ink-2)}
+.pill.tq{background:var(--accent-wash);color:var(--accent)}
+.pill b{font:600 12px var(--f-mono)}
+.ledger{display:grid;grid-template-columns:1fr auto;gap:7px 12px;font-size:13px;border-top:1px solid var(--rule);padding-top:14px}
+.ledger dt{color:var(--ink-2)}
+.ledger dd{margin:0;text-align:right;font:500 13px var(--f-mono);font-variant-numeric:tabular-nums}
+.ledger .m dd{color:var(--neg)}
+.ledger .t{border-top:1px solid var(--rule);padding-top:7px;font-weight:650}
+.ledger .t dd{font-weight:600}
+.curve-wrap{min-width:0;display:flex;flex-direction:column}
+.curve-h{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:6px}
+.curve-h strong{font:700 15px var(--f-display)}
+.curve-h span{font-size:12px;color:var(--ink-3)}
+#curve{width:100%;height:230px;display:block;touch-action:pan-y;cursor:crosshair}
+.jump{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.jump button{font:600 11.5px var(--f-body);color:var(--ink-2);background:var(--panel);border:1px solid var(--rule);border-radius:999px;padding:4px 10px;cursor:pointer}
+.jump button:hover{border-color:var(--ink-3);color:var(--ink)}
+.jump button[aria-pressed="true"]{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+
+/* row 2 */
+.row2{display:flex;flex-direction:column;gap:16px}
+.scroll-x{overflow-x:auto}
+#wf{display:block;width:100%;height:270px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--ink-2);margin-top:8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:600 11px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);text-align:right;padding:0 0 8px 10px;border-bottom:1px solid var(--rule)}
+th:first-child{text-align:left;padding-left:0}
+td{padding:9px 0 9px 10px;border-bottom:1px solid var(--rule);text-align:right;font:500 13px var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td:first-child{text-align:left;padding-left:0;font:500 13.5px var(--f-body)}
+td .nm{display:inline-flex;align-items:center;gap:8px}
+td.share{width:72px}
+.mini{height:6px;border-radius:3px;background:var(--sunk);overflow:hidden}
+.mini i{display:block;height:100%;border-radius:3px}
+tr.tot td{border-bottom:0;font-weight:650;padding-top:11px}
+tr.tot td:first-child{font-weight:700}
+.t-wrap{overflow-x:auto}
+@media(max-width:480px){.hide-sm{display:none}td,th{padding-left:8px}}
+
+/* ladder */
+.ladder{display:grid;grid-template-columns:minmax(150px,220px) minmax(0,1fr) auto;gap:4px 14px;align-items:center}
+@media(max-width:620px){.ladder{grid-template-columns:minmax(0,1fr) auto}.ladder .lt{grid-column:1/-1;height:12px}}
+.lr{display:contents;cursor:pointer}
+.ln{font-size:13px;color:var(--ink-2);padding:6px 0;display:flex;flex-direction:column;line-height:1.25}
+.ln small{font:500 11px var(--f-mono);color:var(--ink-3)}
+.lt{position:relative;height:18px}
+.lt i{position:absolute;left:0;top:0;bottom:0;border-radius:0 4px 4px 0;background:var(--ink-3);opacity:.45}
+.lt .q{position:absolute;top:-3px;bottom:-3px;width:1px;background:var(--rule)}
+.lv{font:600 13px var(--f-mono);font-variant-numeric:tabular-nums;text-align:right;min-width:9ch}
+.lv small{display:block;font:500 11px var(--f-mono);color:var(--ink-3)}
+.lr.tq .ln{color:var(--ink)}
+.lr.tq .lt i{background:var(--accent);opacity:.55}
+.lr.sel .ln{color:var(--ink);font-weight:650}
+.lr.sel .lt i{background:var(--accent);opacity:1}
+.lr:hover .lt i{opacity:.85}
+.divider{grid-column:1/-1;display:flex;align-items:center;gap:10px;font:650 10.5px var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:8px 0 2px}
+.divider::after{content:"";flex:1;height:1px;background:var(--accent);opacity:.35}
+
+/* notes */
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px 28px;font-size:12.5px;color:var(--ink-2)}
+.notes h4{font:650 11px var(--f-body);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0 0 4px}
+.notes p{margin:0;max-width:60ch}
+
+/* money split */
+.keepbar{display:flex;gap:2px;height:28px;border-radius:6px;overflow:hidden;background:var(--panel)}
+.keepbar i{display:block;height:100%;min-width:3px}
+.keepkey{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.keepkey div{display:grid;grid-template-columns:auto 1fr auto 3.5em;align-items:center;gap:10px;font-size:14px}
+.keepkey .k{color:var(--ink-2)}
+.keepkey b{font:600 15px var(--f-mono);font-variant-numeric:tabular-nums}
+.keepkey em{font:500 12px var(--f-mono);font-style:normal;color:var(--ink-3);text-align:right}
+.srow{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:7px 0}
+.sn{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink-2)}
+.sv{font:600 13.5px var(--f-mono);font-variant-numeric:tabular-nums;text-align:right}
+.st{grid-column:1/-1;height:10px;border-radius:0 4px 4px 0;background:var(--sunk);overflow:hidden}
+.st i{display:block;height:100%;border-radius:0 4px 4px 0}
+/* sticky summary */
+.sbar-wrap{height:0;position:sticky;top:0;z-index:20;margin:0 -16px}
+.sbar{padding:calc(env(safe-area-inset-top,0px) + 8px) 16px 8px;background:var(--bg);border-bottom:1px solid var(--rule);display:flex;align-items:baseline;justify-content:space-between;gap:12px;transform:translateY(-110%);opacity:0;transition:transform .2s,opacity .2s;pointer-events:none}
+.sbar.on{transform:none;opacity:1;pointer-events:auto}
+.sbar .n{font:800 20px var(--f-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.sbar .n.neg{color:var(--neg)}
+.sbar .m{font:500 12px var(--f-mono);color:var(--ink-2);text-align:right}
+/* tooltip + svg text */
+#tip{position:fixed;pointer-events:none;z-index:50;background:var(--ink);color:var(--panel);border-radius:8px;padding:8px 10px;font:500 12px/1.45 var(--f-body);box-shadow:0 8px 20px -8px rgba(0,0,0,.4);opacity:0;transition:opacity .12s;max-width:240px}
+#tip b{font:600 12.5px var(--f-mono)}
+#tip .r{display:flex;justify-content:space-between;gap:14px}
+svg text{font-family:var(--f-mono);font-size:11px;fill:var(--ink-3)}
+svg .lab{font-family:var(--f-body);fill:var(--ink-2);font-size:11.5px}
+svg .cap{fill:var(--ink);font-weight:600}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="sbar-wrap"><div class="sbar" id="sbar" aria-hidden="true"><span class="n" id="sbN"></span><span class="m" id="sbM"></span></div></div>
+<div class="app">
+  <header class="top">
+    <div>
+      <div class="eyebrow">Playground Rules · premium launch</div>
+      <h1>Revenue model</h1>
+      <p class="sub">Lifetime estimates in USD at Bloons-minus-a-dollar pricing with a 10% launch discount. Tap the curve to pick an outcome; the dials are at the bottom.</p>
+    </div>
+  </header>
+
+  <div class="main">
+    <section class="card hero" aria-label="Headline">
+      <div>
+        <div class="big-l">Net to studio, lifetime</div>
+        <div class="big" id="big">$0</div>
+        <p class="big-sub" id="bigSub"></p>
+        <div class="tiles" id="tiles"></div>
+        <div class="chips" id="pills"></div>
+      </div>
+      <div class="curve-wrap">
+        <div class="curve-h"><strong>Where this outcome sits</strong><span>1,443 comparable games</span></div>
+        <svg id="curve" role="img" aria-label="Steam copies sold by percentile with the selected outcome marked"></svg>
+        <div class="jump" id="jump"></div>
+      </div>
+    </section>
+
+    <div class="row2">
+      <section class="card">
+        <div class="card-h"><h2>Where every dollar goes</h2><p>Lifetime gross, split</p></div>
+        <div id="keep"></div>
+        <div class="card-h" style="margin:22px 0 12px"><h2>Where the money comes from</h2><p>Gross by store</p></div>
+        <div id="src"></div>
+      </section>
+      <section class="card">
+        <div class="card-h"><h2>By platform</h2><p>Lifetime units and money</p></div>
+        <div class="t-wrap"><table id="plat"></table></div>
+        <dl class="ledger" id="ledger" style="margin-top:14px"></dl>
+      </section>
+    </div>
+
+    <section class="card">
+      <div class="card-h"><h2>Every outcome at these settings</h2><p>After store cuts · tap a row to select it</p></div>
+      <div class="ladder" id="ladder"></div>
+    </section>
+
+    <section class="rail" aria-label="Model inputs" id="dials">
+      <div class="rail-h"><h2>Change the numbers</h2>
+        <div class="rail-acts"><div class="seg" id="presets" role="group" aria-label="Platform and cosmetic case"></div><button class="ghost" id="reset" type="button">Reset</button></div></div>
+      <div class="tabs" role="tablist" id="tabs"></div>
+      <div class="tabs-rule"></div>
+      <div id="panes"></div>
+    </section>
+
+    <section class="card">
+      <div class="notes">
+        <div><h4>Sales curve</h4><p>Gamalytic's public estimates for 1,443 Indie-class Steam games priced $13.99 to $15.99, released 2022 to 2024. The top 25% starts at 12,290 copies.</p></div>
+        <div><h4>Price per copy</h4><p>Launch copies sell at list minus the launch discount. Later copies sell at the realized share of list (about 70% for premium tower defense, from our market dossier) because of sales.</p></div>
+        <div><h4>Assumptions</h4><p>Console and mobile unit shares, the launch share, and both cosmetic rates have no source. Console defaults keep console revenue near 30%, 10% and 20% of Steam's at the higher console price.</p></div>
+        <div><h4>Not in the model</h4><p>Price elasticity, refunds, sales tax and VAT, regional pricing, DLC, a porting partner's share, and the 15% small-business store rate unless you set it.</p></div>
+      </div>
+    </section>
+  </div>
+</div>
+<div id="tip" role="tooltip"></div>
+
+<script>
+// Steam copies at each percentile 0..100 (Gamalytic, Indie class, $13.99-15.99, 2022-2024 releases).
+const P=[1,15,36,54,72,89,105,112,126,133,155,177,219,241,260,288,328,364,406,460,514,582,636,701,751,808,850,898,950,1018,1064,1139,1188,1277,1333,1409,1475,1544,1629,1671,1805,1882,1983,2073,2250,2354,2447,2571,2683,2782,2945,3092,3257,3474,3638,3818,4139,4401,4596,4862,5124,5501,5765,6112,6407,6845,7048,7511,8085,8378,8866,9570,10179,10691,11405,12290,13390,14235,15240,15964,16959,17748,18574,19602,21464,23322,25060,29140,31925,35964,40545,44430,50718,63342,79790,94040,123812,154003,239966,561479,2332683];
+const TIERS=[
+  {id:'p25',name:'Weak',d:'25th percentile',copies:808},
+  {id:'p50',name:'Typical',d:'Median',copies:2945},
+  {id:'p75',name:'Top 25% starts',d:'75th percentile',copies:12290,tq:1},
+  {id:'tqm',name:'Top 25% median',d:'87th percentile',copies:30598,tq:1},
+  {id:'p90',name:'Strong',d:'90th percentile',copies:40047,tq:1},
+  {id:'dos',name:'Dossier hybrid',d:'Hits-only median',copies:85000,tq:1},
+  {id:'p95',name:'Breakout',d:'95th percentile',copies:91706,tq:1},
+  {id:'tqa',name:'Top 25% average',d:'Mean of the top quarter',copies:98303,tq:1}];
+const D={copies:30598,steamPrice:12.99,consolePrice:28.99,mobilePrice:5.99,launchDisc:10,launchShare:25,realized:70,
+  switch:14,xbox:5,ps:9,mobile:20,cutPC:30,cutConsole:30,cutMobile:30,cutCosm:30,
+  attach:12,items:2,outfit:1.99,pack:3.99,bundle:19.99,mixOutfit:60,mixPack:35,fixed:0};
+const PRESETS={Low:{switch:7,xbox:2,ps:4,mobile:8,attach:5,items:1.5},Base:{switch:14,xbox:5,ps:9,mobile:20,attach:12,items:2},High:{switch:27,xbox:9,ps:18,mobile:40,attach:25,items:3}};
+const C={steam:'--s-steam',console:'--s-console',mobile:'--s-mobile',cosm:'--s-cosm'};
+
+const money=(v,d)=>{const a=Math.abs(v),s=v<0?'−':'';
+  if(a>=1e6)return s+'$'+(a/1e6).toFixed(a>=1e7?1:2)+'M';
+  if(a>=1e4)return s+'$'+Math.round(a/1e3)+'K';
+  if(a>=1e3)return s+'$'+(a/1e3).toFixed(1)+'K';
+  return s+'$'+(d?a.toFixed(2):Math.round(a))};
+const full=v=>(v<0?'−':'')+'$'+Math.round(Math.abs(v)).toLocaleString('en-US');
+const int=v=>Math.round(v).toLocaleString('en-US');
+const ord=n=>{n=Math.round(n);const s=['th','st','nd','rd'],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0])};
+
+let S={...D};
+try{const x=JSON.parse(localStorage.getItem('prRevModel2')||'null');if(x)S={...D,...x}}catch(e){}
+const save=()=>{try{localStorage.setItem('prRevModel2',JSON.stringify(S))}catch(e){}};
+
+function pctOf(c){if(c<=P[0])return 0;if(c>=P[100])return 100;
+  for(let i=0;i<100;i++)if(c<=P[i+1]){const a=Math.log(Math.max(P[i],1)),b=Math.log(P[i+1]);return i+(b===a?0:(Math.log(c)-a)/(b-a))}return 100}
+function copiesAt(p){p=Math.max(0,Math.min(100,p));const i=Math.min(99,Math.floor(p)),f=p-i;
+  return Math.exp(Math.log(Math.max(P[i],1))*(1-f)+Math.log(P[i+1])*f)}
+
+function calc(c,s){s=s||S;
+  const pf=s.launchShare/100*(1-s.launchDisc/100)+(1-s.launchShare/100)*s.realized/100;
+  const plat=[
+    {k:'Steam',c:C.steam,u:c,p:s.steamPrice,cut:s.cutPC},
+    {k:'Switch',c:C.console,u:c*s.switch/100,p:s.consolePrice,cut:s.cutConsole},
+    {k:'Xbox',c:C.console,u:c*s.xbox/100,p:s.consolePrice,cut:s.cutConsole},
+    {k:'PlayStation',c:C.console,u:c*s.ps/100,p:s.consolePrice,cut:s.cutConsole},
+    {k:'iOS + Android',c:C.mobile,u:c*s.mobile/100,p:s.mobilePrice,cut:s.cutMobile}];
+  let units=0,gross=0,net=0;
+  plat.forEach(x=>{x.g=x.u*x.p*pf;x.n=x.g*(1-x.cut/100);units+=x.u;gross+=x.g;net+=x.n});
+  const mb=Math.max(0,100-s.mixOutfit-s.mixPack);
+  const avg=(Math.min(100,s.mixOutfit)*s.outfit+Math.min(100-Math.min(100,s.mixOutfit),s.mixPack)*s.pack+mb*s.bundle)/100;
+  const buyers=units*s.attach/100,cg=buyers*s.items*avg,cn=cg*(1-s.cutCosm/100);
+  const tg=gross+cg,tn=net+cn;
+  return {plat,units,gross,net,cg,cn,buyers,avg,mb,pf,tg,tn,cuts:tg-tn,after:tn-s.fixed}}
+
+/* ---------- controls ---------- */
+const TABS=[
+ {id:'price',t:'Prices',f:[
+  {h:'List prices'},
+  {id:'steamPrice',l:'Steam',min:4.99,max:39.99,step:.01,pre:'$',dec:2},
+  {id:'consolePrice',l:'Switch, Xbox, PlayStation',min:4.99,max:59.99,step:.01,pre:'$',dec:2},
+  {id:'mobilePrice',l:'iOS and Android',min:.99,max:19.99,step:.01,pre:'$',dec:2},
+  {h:'Discounts'},
+  {id:'launchDisc',l:'Launch discount',min:0,max:50,step:1,suf:'%'},
+  {id:'launchShare',l:'Copies sold at launch price',min:0,max:100,step:1,suf:'%',est:1},
+  {id:'realized',l:'Realized price on later copies',min:40,max:100,step:1,suf:'%'},
+  {note:'Realized price covers seasonal sales after launch. Our dossier measured 65% to 75% of list on comparable games.'}]},
+ {id:'plat',t:'Platforms',f:[
+  {h:'Units as a share of Steam'},
+  {id:'switch',l:'Switch',min:0,max:100,step:1,suf:'%',est:1,sw:C.console},
+  {id:'xbox',l:'Xbox',min:0,max:100,step:1,suf:'%',est:1,sw:C.console},
+  {id:'ps',l:'PlayStation',min:0,max:100,step:1,suf:'%',est:1,sw:C.console},
+  {id:'mobile',l:'iOS + Android',min:0,max:100,step:1,suf:'%',est:1,sw:C.mobile},
+  {note:'No public data ties console sales to Steam sales. Developer reports range from about 5% of revenue to many times Steam.'}]},
+ {id:'cosm',t:'Cosmetics',f:[
+  {h:'Who buys'},
+  {id:'attach',l:'Buyers who buy cosmetics',min:0,max:60,step:1,suf:'%',est:1},
+  {id:'items',l:'Items per cosmetic buyer',min:.5,max:8,step:.1,dec:1,est:1},
+  {h:'Prices'},
+  {id:'outfit',l:'Outfit',min:.49,max:9.99,step:.01,pre:'$',dec:2},
+  {id:'pack',l:'Skin pack',min:.99,max:19.99,step:.01,pre:'$',dec:2},
+  {id:'bundle',l:'All ten packs',min:4.99,max:59.99,step:.01,pre:'$',dec:2},
+  {h:'Mix of items sold'},
+  {id:'mixOutfit',l:'Outfits',min:0,max:100,step:1,suf:'%',est:1},
+  {id:'mixPack',l:'Skin packs',min:0,max:100,step:1,suf:'%',est:1},
+  {mix:1}]},
+ {id:'cost',t:'Costs',f:[
+  {h:'Store cuts'},
+  {id:'cutPC',l:'Steam',min:0,max:40,step:1,suf:'%'},
+  {id:'cutConsole',l:'Consoles',min:0,max:40,step:1,suf:'%'},
+  {id:'cutMobile',l:'Apple and Google',min:0,max:40,step:1,suf:'%'},
+  {id:'cutCosm',l:'Cosmetic purchases',min:0,max:40,step:1,suf:'%'},
+  {note:'Apple and Google charge 15% on a developer’s first $1M a year under their small-business programs.'},
+  {h:'Your costs'},
+  {id:'fixed',l:'Development, ports, certification',min:0,max:3000000,step:5000,pre:'$',big:1}]}];
+
+const ctl={};let tab='price';
+function buildControls(){
+  const tabs=document.getElementById('tabs'),panes=document.getElementById('panes');
+  TABS.forEach(T=>{
+    const b=document.createElement('button');b.type='button';b.role='tab';b.id='tab-'+T.id;b.textContent=T.t;
+    b.setAttribute('aria-controls','pane-'+T.id);b.onclick=()=>{tab=T.id;showTab()};tabs.appendChild(b);
+    const p=document.createElement('div');p.className='pane';p.id='pane-'+T.id;p.role='tabpanel';p.setAttribute('aria-labelledby','tab-'+T.id);
+    T.f.forEach(f=>{
+      if(f.h){const h=document.createElement('h3');h.textContent=f.h;p.appendChild(h);return}
+      if(f.note){const n=document.createElement('p');n.className='hint';n.textContent=f.note;p.appendChild(n);return}
+      if(f.mix){const m=document.createElement('div');m.className='ctl';m.innerHTML='<div class="mix" id="mixBar"></div><div class="mix-key" id="mixKey"></div>';p.appendChild(m);return}
+      const w=document.createElement('div');w.className='ctl';
+      w.innerHTML='<div class="ctl-top"><label for="r-'+f.id+'">'+(f.sw?'<span class="sw" style="background:var('+f.sw+');margin-right:7px"></span>':'')+f.l+(f.est?'<span class="est" title="Assumption with no source">est.</span>':'')+'</label>'+
+        '<span class="val">'+(f.pre?'<span class="u">'+f.pre+'</span>':'')+'<input id="n-'+f.id+'" inputmode="decimal" aria-label="'+f.l+'"'+(f.big?' style="width:10ch"':'')+'>'+(f.suf?'<span class="u">'+f.suf+'</span>':'')+'</span></div>'+
+        '<input type="range" id="r-'+f.id+'" min="'+f.min+'" max="'+f.max+'" step="'+f.step+'">';
+      p.appendChild(w);
+      const r=w.querySelector('#r-'+f.id),n=w.querySelector('#n-'+f.id);
+      r.addEventListener('input',()=>{S[f.id]=+r.value;paint(f.id,true);update()});
+      n.addEventListener('change',()=>{const v=parseFloat(n.value.replace(/[^0-9.\-]/g,''));if(!isNaN(v))S[f.id]=Math.max(0,v);paint(f.id);update()});
+      n.addEventListener('keydown',e=>{if(e.key==='Enter')n.blur()});
+      ctl[f.id]={r,n,f};
+    });
+    panes.appendChild(p);
+  });
+  showTab();
+}
+function showTab(){TABS.forEach(T=>{document.getElementById('tab-'+T.id).setAttribute('aria-selected',T.id===tab);document.getElementById('pane-'+T.id).hidden=T.id!==tab});
+  try{localStorage.setItem('prRevTab',tab)}catch(e){}}
+function paint(id,fromRange){const {r,n,f}=ctl[id];const v=S[id];
+  r.value=v;r.style.setProperty('--p',((Math.min(Math.max(v,f.min),f.max)-f.min)/(f.max-f.min)*100)+'%');
+  if(!fromRange||document.activeElement!==n)n.value=f.big?int(v):(f.dec?(+v).toFixed(f.dec):Math.round(v))}
+function paintAll(){Object.keys(ctl).forEach(id=>paint(id))}
+
+/* ---------- presets / reset ---------- */
+const pres=document.getElementById('presets');
+Object.keys(PRESETS).forEach(k=>{const b=document.createElement('button');b.type='button';b.textContent=k;b.dataset.k=k;
+  b.onclick=()=>{Object.assign(S,PRESETS[k]);paintAll();update()};pres.appendChild(b)});
+document.getElementById('reset').onclick=()=>{S={...D};paintAll();update()};
+
+/* ---------- tooltip ---------- */
+const tip=document.getElementById('tip');
+function showTip(e,html){tip.innerHTML=html;tip.style.opacity=1;
+  const w=tip.offsetWidth,h=tip.offsetHeight;let x=e.clientX+14,y=e.clientY-h-12;
+  if(x+w>innerWidth-8)x=e.clientX-w-14;if(y<8)y=e.clientY+16;tip.style.left=x+'px';tip.style.top=y+'px'}
+const hideTip=()=>tip.style.opacity=0;
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const NS='http://www.w3.org/2000/svg';
+function el(tag,a,parent,txt){const e=document.createElementNS(NS,tag);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;if(parent)parent.appendChild(e);return e}
+
+/* ---------- percentile curve ---------- */
+const curve=document.getElementById('curve');let dragging=false;
+function drawCurve(){
+  const W=curve.clientWidth||600,H=curve.clientHeight||230,m={l:40,r:8,t:14,b:26};
+  curve.setAttribute('viewBox','0 0 '+W+' '+H);curve.innerHTML='';
+  const iw=W-m.l-m.r,ih=H-m.t-m.b,lo=Math.log10(10),hi=Math.log10(3e6);
+  const X=p=>m.l+p/100*iw,Y=c=>m.t+ih-(Math.log10(Math.max(c,10))-lo)/(hi-lo)*ih;
+  // top quarter band
+  el('rect',{x:X(75),y:m.t,width:X(100)-X(75),height:ih,fill:css('--accent-wash')},curve);
+  el('text',{x:X(87.5),y:m.t+14,'text-anchor':'middle',class:'lab',style:'fill:var(--accent);font-weight:650;font-size:11px'},curve,'Top 25%');
+  // grid
+  [10,100,1e3,1e4,1e5,1e6].forEach(v=>{const y=Y(v);
+    el('line',{x1:m.l,x2:W-m.r,y1:y,y2:y,stroke:css('--rule'),'stroke-width':1},curve);
+    el('text',{x:m.l-8,y:y+4,'text-anchor':'end'},curve,v>=1e6?'1M':v>=1e3?(v/1e3)+'K':v)});
+  [0,25,50,75,100].forEach(p=>el('text',{x:X(p),y:H-8,'text-anchor':p===0?'start':p===100?'end':'middle'},curve,p===50?'median':ord(p)));
+  // area + line
+  let d='';for(let p=0;p<=100;p+=1)d+=(p?'L':'M')+X(p).toFixed(1)+','+Y(P[p]).toFixed(1);
+  el('path',{d:d+'L'+X(100)+','+(m.t+ih)+'L'+X(0)+','+(m.t+ih)+'Z',fill:css('--accent-wash')},curve);
+  el('path',{d,fill:'none',stroke:css('--accent'),'stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round'},curve);
+  // tier ticks
+  TIERS.forEach(t=>{const p=pctOf(t.copies);el('circle',{cx:X(p),cy:Y(t.copies),r:2.5,fill:css('--ink-3')},curve)});
+  // selection
+  const p=pctOf(S.copies),cx=X(p),cy=Y(S.copies);
+  el('line',{x1:cx,x2:cx,y1:m.t,y2:m.t+ih,stroke:css('--ink'),'stroke-width':1,opacity:.35},curve);
+  el('line',{x1:m.l,x2:cx,y1:cy,y2:cy,stroke:css('--ink'),'stroke-width':1,opacity:.2},curve);
+  el('circle',{cx,cy,r:7,fill:css('--accent'),stroke:css('--panel'),'stroke-width':2.5},curve);
+  const lbl=int(S.copies)+' copies',right=cx>W-130;
+  const tx=el('text',{x:right?cx-12:cx+12,y:Math.max(cy-12,m.t+28),'text-anchor':right?'end':'start',class:'cap',style:'font-size:12px'},curve,lbl);
+  curve._map={X,Y,m,iw,W};
+}
+function curvePick(e){const r=curve.getBoundingClientRect(),{m,iw}=curve._map;
+  const p=Math.max(0,Math.min(100,(e.clientX-r.left-m.l)/iw*100));return p}
+curve.addEventListener('pointerdown',e=>{dragging=true;curve.setPointerCapture(e.pointerId);S.copies=Math.round(copiesAt(curvePick(e)));update()});
+curve.addEventListener('pointermove',e=>{const p=curvePick(e),c=copiesAt(p);
+  if(dragging){S.copies=Math.round(c);update()}
+  const q=calc(c);showTip(e,'<div class="r"><span>'+ord(p)+' percentile</span></div><div class="r"><span>Steam copies</span><b>'+int(c)+'</b></div><div class="r"><span>Net after cuts</span><b>'+money(q.tn)+'</b></div>'+(dragging?'':'<div style="opacity:.7;margin-top:2px">Click or drag to select</div>'))});
+['pointerup','pointercancel'].forEach(t=>curve.addEventListener(t,()=>dragging=false));
+curve.addEventListener('pointerleave',hideTip);
+
+/* ---------- waterfall ---------- */
+function drawWF(R){
+  const T=Math.max(R.tg,1),parts=[
+    {n:'You keep',v:Math.max(R.after,0),c:'--accent'},
+    {n:'Stores take',v:R.cuts,c:'--neg'},
+    {n:'Your costs',v:Math.min(S.fixed,R.tn),c:'--ink-3'}].filter(x=>x.v>0);
+  document.getElementById('keep').innerHTML=
+    '<div class="keepbar">'+parts.map(x=>'<i style="flex:'+x.v+';background:var('+x.c+')"></i>').join('')+'</div>'+
+    '<div class="keepkey">'+parts.map(x=>'<div><span class="sw" style="background:var('+x.c+')"></span><span class="k">'+x.n+'</span><b>'+money(x.v)+'</b><em>'+Math.round(x.v/T*100)+'%</em></div>').join('')+'</div>'+
+    (R.after<0?'<p class="hint" style="color:var(--neg);margin-top:8px">Costs are '+money(-R.after)+' more than what the stores pay you.</p>':'');
+  const rows=[
+    {n:'Steam',v:R.plat[0].g,c:C.steam},{n:'Switch',v:R.plat[1].g,c:C.console},{n:'PlayStation',v:R.plat[3].g,c:C.console},
+    {n:'Xbox',v:R.plat[2].g,c:C.console},{n:'iOS + Android',v:R.plat[4].g,c:C.mobile},{n:'Cosmetics',v:R.cg,c:C.cosm}].sort((a,b)=>b.v-a.v);
+  const mx=Math.max(...rows.map(r=>r.v),1);
+  document.getElementById('src').innerHTML=rows.map(r=>'<div class="srow"><span class="sn"><span class="sw" style="background:var('+r.c+')"></span>'+r.n+'</span>'+
+    '<span class="sv">'+money(r.v)+'</span><span class="st"><i style="width:'+(r.v/mx*100)+'%;background:var('+r.c+')"></i></span></div>').join('');
+}
+
+/* ---------- platform table ---------- */
+function drawTable(R){
+  const rows=R.plat.map(x=>({n:x.k,c:x.c,u:x.u,p:x.p,g:x.g,n2:x.n}));
+  rows.push({n:'Cosmetics',c:C.cosm,u:R.buyers*S.items,p:R.avg,g:R.cg,n2:R.cn,cos:1});
+  const mx=Math.max(...rows.map(r=>r.n2),1);
+  let h='<thead><tr><th>Platform</th><th>Units</th><th class="hide-sm">Per unit</th><th>Gross</th><th>Net</th></tr></thead><tbody>';
+  rows.forEach(r=>{h+='<tr><td><span class="nm"><i class="sw" style="background:var('+r.c+')"></i>'+r.n+'</span></td><td>'+int(r.u)+''+'</td><td class="hide-sm">$'+(r.cos?r.p:r.p*R.pf).toFixed(2)+'</td><td>'+money(r.g)+'</td><td>'+money(r.n2)+'</td></tr>'});
+  h+='<tr class="tot"><td>Total</td><td>'+int(R.units)+'</td><td class="hide-sm"></td><td>'+money(R.tg)+'</td><td>'+money(R.tn)+'</td></tr></tbody>';
+  document.getElementById('plat').innerHTML=h;
+}
+
+/* ---------- ladder ---------- */
+function drawLadder(){
+  const sel=TIERS.find(t=>Math.abs(t.copies-S.copies)<1);
+  const rows=TIERS.map(t=>({...t,R:calc(t.copies)}));
+  if(!sel)rows.push({id:'you',name:'Your number',d:ord(pctOf(S.copies))+' percentile',copies:S.copies,tq:pctOf(S.copies)>=75,R:calc(S.copies)});
+  rows.sort((a,b)=>a.copies-b.copies);
+  const mx=Math.max(...rows.map(r=>r.R.tn),1);
+  let h='',div=false;
+  rows.forEach(r=>{
+    if(r.tq&&!div){h+='<div class="divider">Top 25%</div>';div=true}
+    const on=sel?sel.id===r.id:r.id==='you';
+    h+='<div class="lr'+(r.tq?' tq':'')+(on?' sel':'')+'" data-c="'+r.copies+'" tabindex="0" role="button" aria-pressed="'+on+'">'+
+       '<div class="ln">'+r.name+'<small>'+r.d+' · '+int(r.copies)+'</small></div>'+
+       '<div class="lt"><i style="width:'+(r.R.tn/mx*100)+'%"></i></div>'+
+       '<div class="lv">'+money(r.R.tn)+(S.fixed?'<small>'+money(r.R.after)+' after costs</small>':'')+'</div></div>'});
+  const L=document.getElementById('ladder');L.innerHTML=h;
+  L.querySelectorAll('.lr').forEach(n=>{const go=()=>{S.copies=+n.dataset.c;update()};n.onclick=go;n.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}}});
+}
+
+/* ---------- hero ---------- */
+function drawHero(R){
+  const p=pctOf(S.copies),big=document.getElementById('big');
+  big.textContent=full(R.after);big.classList.toggle('neg',R.after<0);
+  document.getElementById('bigSub').textContent=S.fixed?'After store cuts and '+money(S.fixed)+' of your costs.':'After every store’s cut. Add your costs in the dials below.';
+  document.getElementById('tiles').innerHTML=
+    '<div class="tile"><div class="l">Gross</div><div class="v">'+money(R.tg)+'</div></div>'+
+    '<div class="tile"><div class="l">Store cuts</div><div class="v neg">'+money(-R.cuts)+'</div></div>'+
+    '<div class="tile"><div class="l">Steam copies</div><div class="v">'+(S.copies>=1e4?Math.round(S.copies/1e3)+'K':int(S.copies))+'</div></div>';
+  document.getElementById('sbN').textContent=money(R.after);document.getElementById('sbN').classList.toggle('neg',R.after<0);
+  document.getElementById('sbM').textContent=ord(p)+' pct \u00b7 '+int(S.copies)+' copies';
+  document.getElementById('pills').innerHTML='<span class="pill'+(p>=75?' tq':'')+'">'+(p>=75?'Top 25% · ':'')+'<b>'+ord(p)+'</b> percentile</span><span class="pill"><b>'+int(R.units)+'</b> across stores</span>';
+  document.getElementById('ledger').innerHTML=
+    '<dt>Game sales, gross</dt><dd>'+full(R.gross)+'</dd><dt>Cosmetics, gross</dt><dd>'+full(R.cg)+'</dd>'+
+    '<div class="m" style="display:contents"><dt>Store cuts</dt><dd>'+full(-R.cuts)+'</dd>'+(S.fixed?'<dt>Your costs</dt><dd>'+full(-S.fixed)+'</dd>':'')+'</div>'+
+    '<div class="t" style="display:contents"><dt style="border-top:1px solid var(--rule);padding-top:7px">Net</dt><dd style="border-top:1px solid var(--rule);padding-top:7px">'+full(R.after)+'</dd></div>';
+  const J=document.getElementById('jump');
+  J.innerHTML=TIERS.map(t=>'<button type="button" data-c="'+t.copies+'" aria-pressed="'+(Math.abs(t.copies-S.copies)<1)+'">'+t.name+'</button>').join('');
+  J.querySelectorAll('button').forEach(b=>b.onclick=()=>{S.copies=+b.dataset.c;update()});
+}
+
+/* ---------- mix ---------- */
+function drawMix(R){const o=Math.min(100,S.mixOutfit),pk=Math.min(100-o,S.mixPack),b=100-o-pk;
+  const bar=document.getElementById('mixBar');if(!bar)return;
+  const seg=[['Outfits',o,'--ink-2'],['Skin packs',pk,'--ink-3'],['Bundle',b,'--s-cosm']];
+  bar.innerHTML=seg.filter(s=>s[1]>0).map(s=>'<i style="flex:'+s[1]+';background:var('+s[2]+')"></i>').join('');
+  document.getElementById('mixKey').innerHTML=seg.map(s=>'<span><i class="sw" style="background:var('+s[2]+')"></i>'+s[0]+' '+Math.round(s[1])+'%</span>').join('')+'<span>Avg item $'+R.avg.toFixed(2)+'</span>'}
+
+/* ---------- update ---------- */
+function update(){
+  const R=calc(S.copies);
+  pres.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',Object.entries(PRESETS[b.dataset.k]).every(([k,v])=>S[k]===v)));
+  drawHero(R);drawCurve();drawWF(R);drawTable(R);drawLadder();drawMix(R);save();
+}
+try{const t=localStorage.getItem('prRevTab');if(t&&TABS.some(x=>x.id===t))tab=t}catch(e){}
+buildControls();paintAll();update();
+new IntersectionObserver(es=>es.forEach(e=>{const b=document.getElementById('sbar');b.classList.toggle('on',!e.isIntersecting);b.setAttribute('aria-hidden',e.isIntersecting)}),{threshold:0}).observe(document.getElementById('big'));
+new ResizeObserver(()=>{drawCurve()}).observe(document.querySelector('.main'));
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',update);
+new MutationObserver(update).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+</script>
+
+</body>
+</html>
